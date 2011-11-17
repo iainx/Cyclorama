@@ -32,8 +32,8 @@
 		AE7D66D21475632E0099875F /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE7D66D11475632E0099875F /* QTKit.framework */; };
 		AE7D66D5147563910099875F /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE7D66D3147563910099875F /* Quartz.framework */; };
 		AE7D66D6147563910099875F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE7D66D4147563910099875F /* QuartzCore.framework */; };
-		AE7D66DB147563F20099875F /* CycDocument.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE7D66D7147563F20099875F /* CycDocument.xib */; };
-		AE7D66DC147563F20099875F /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE7D66D9147563F20099875F /* MainMenu.xib */; };
+		AE7D66DF147566380099875F /* CycDocument.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE7D66DD147566380099875F /* CycDocument.xib */; };
+		AE7D66E0147566380099875F /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE7D66DE147566380099875F /* MainMenu.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -85,8 +85,8 @@
 		AE7D66D11475632E0099875F /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = System/Library/Frameworks/QTKit.framework; sourceTree = SDKROOT; };
 		AE7D66D3147563910099875F /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
 		AE7D66D4147563910099875F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		AE7D66D8147563F20099875F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = ../../../../Volumes/DISK2S1/Cyclorama/Cyclorama/en.lproj/CycDocument.xib; sourceTree = "<group>"; };
-		AE7D66DA147563F20099875F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = ../../../../Volumes/DISK2S1/Cyclorama/Cyclorama/en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		AE7D66DD147566380099875F /* CycDocument.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CycDocument.xib; sourceTree = "<group>"; };
+		AE7D66DE147566380099875F /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,8 +142,8 @@
 				AE7D66B8147562080099875F /* VideoClipView.m */,
 				AE7D66B9147562080099875F /* VideoLayer.h */,
 				AE7D66BA147562080099875F /* VideoLayer.m */,
-				AE7D66D7147563F20099875F /* CycDocument.xib */,
-				AE7D66D9147563F20099875F /* MainMenu.xib */,
+				AE7D66DD147566380099875F /* CycDocument.xib */,
+				AE7D66DE147566380099875F /* MainMenu.xib */,
 				AE7D6681147561B80099875F /* Cyclorama */,
 				AE7D667A147561B80099875F /* Frameworks */,
 				AE7D6678147561B80099875F /* Products */,
@@ -254,8 +254,8 @@
 			files = (
 				AE7D6686147561B80099875F /* InfoPlist.strings in Resources */,
 				AE7D668C147561B90099875F /* Credits.rtf in Resources */,
-				AE7D66DB147563F20099875F /* CycDocument.xib in Resources */,
-				AE7D66DC147563F20099875F /* MainMenu.xib in Resources */,
+				AE7D66DF147566380099875F /* CycDocument.xib in Resources */,
+				AE7D66E0147566380099875F /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -304,22 +304,6 @@
 				AE7D668B147561B90099875F /* en */,
 			);
 			name = Credits.rtf;
-			sourceTree = "<group>";
-		};
-		AE7D66D7147563F20099875F /* CycDocument.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				AE7D66D8147563F20099875F /* en */,
-			);
-			name = CycDocument.xib;
-			sourceTree = "<group>";
-		};
-		AE7D66D9147563F20099875F /* MainMenu.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				AE7D66DA147563F20099875F /* en */,
-			);
-			name = MainMenu.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
