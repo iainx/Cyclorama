@@ -1,0 +1,306 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		AE7D667C147561B80099875F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE7D667B147561B80099875F /* Cocoa.framework */; };
+		AE7D6686147561B80099875F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AE7D6684147561B80099875F /* InfoPlist.strings */; };
+		AE7D6688147561B80099875F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7D6687147561B80099875F /* main.m */; };
+		AE7D668C147561B90099875F /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = AE7D668A147561B90099875F /* Credits.rtf */; };
+		AE7D668F147561B90099875F /* SFDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7D668E147561B90099875F /* SFDocument.m */; };
+		AE7D6692147561B90099875F /* SFDocument.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE7D6690147561B90099875F /* SFDocument.xib */; };
+		AE7D6695147561B90099875F /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE7D6693147561B90099875F /* MainMenu.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		AE7D6677147561B80099875F /* Cyclorama.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cyclorama.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AE7D667B147561B80099875F /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		AE7D667E147561B80099875F /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		AE7D667F147561B80099875F /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		AE7D6680147561B80099875F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		AE7D6683147561B80099875F /* Cyclorama-Info.plist */ = {isa = PBXFileReference; path = "Cyclorama-Info.plist"; sourceTree = "<group>"; };
+		AE7D6685147561B80099875F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AE7D6687147561B80099875F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		AE7D6689147561B90099875F /* Cyclorama-Prefix.pch */ = {isa = PBXFileReference; path = "Cyclorama-Prefix.pch"; sourceTree = "<group>"; };
+		AE7D668B147561B90099875F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		AE7D668D147561B90099875F /* SFDocument.h */ = {isa = PBXFileReference; path = SFDocument.h; sourceTree = "<group>"; };
+		AE7D668E147561B90099875F /* SFDocument.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFDocument.m; sourceTree = "<group>"; };
+		AE7D6691147561B90099875F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SFDocument.xib; sourceTree = "<group>"; };
+		AE7D6694147561B90099875F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		AE7D6674147561B80099875F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AE7D667C147561B80099875F /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		AE7D666C147561B80099875F = {
+			isa = PBXGroup;
+			children = (
+				AE7D6681147561B80099875F /* Cyclorama */,
+				AE7D667A147561B80099875F /* Frameworks */,
+				AE7D6678147561B80099875F /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		AE7D6678147561B80099875F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AE7D6677147561B80099875F /* Cyclorama.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AE7D667A147561B80099875F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AE7D667B147561B80099875F /* Cocoa.framework */,
+				AE7D667D147561B80099875F /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		AE7D667D147561B80099875F /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AE7D667E147561B80099875F /* AppKit.framework */,
+				AE7D667F147561B80099875F /* CoreData.framework */,
+				AE7D6680147561B80099875F /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		AE7D6681147561B80099875F /* Cyclorama */ = {
+			isa = PBXGroup;
+			children = (
+				AE7D668D147561B90099875F /* SFDocument.h */,
+				AE7D668E147561B90099875F /* SFDocument.m */,
+				AE7D6690147561B90099875F /* SFDocument.xib */,
+				AE7D6693147561B90099875F /* MainMenu.xib */,
+				AE7D6682147561B80099875F /* Supporting Files */,
+			);
+			path = Cyclorama;
+			sourceTree = "<group>";
+		};
+		AE7D6682147561B80099875F /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				AE7D6683147561B80099875F /* Cyclorama-Info.plist */,
+				AE7D6684147561B80099875F /* InfoPlist.strings */,
+				AE7D6687147561B80099875F /* main.m */,
+				AE7D6689147561B90099875F /* Cyclorama-Prefix.pch */,
+				AE7D668A147561B90099875F /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		AE7D6676147561B80099875F /* Cyclorama */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AE7D6698147561B90099875F /* Build configuration list for PBXNativeTarget "Cyclorama" */;
+			buildPhases = (
+				AE7D6673147561B80099875F /* Sources */,
+				AE7D6674147561B80099875F /* Frameworks */,
+				AE7D6675147561B80099875F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Cyclorama;
+			productName = Cyclorama;
+			productReference = AE7D6677147561B80099875F /* Cyclorama.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AE7D666E147561B80099875F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+				ORGANIZATIONNAME = "Sleep(5)";
+			};
+			buildConfigurationList = AE7D6671147561B80099875F /* Build configuration list for PBXProject "Cyclorama" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = AE7D666C147561B80099875F;
+			productRefGroup = AE7D6678147561B80099875F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				AE7D6676147561B80099875F /* Cyclorama */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		AE7D6675147561B80099875F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AE7D6686147561B80099875F /* InfoPlist.strings in Resources */,
+				AE7D668C147561B90099875F /* Credits.rtf in Resources */,
+				AE7D6692147561B90099875F /* SFDocument.xib in Resources */,
+				AE7D6695147561B90099875F /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		AE7D6673147561B80099875F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AE7D6688147561B80099875F /* main.m in Sources */,
+				AE7D668F147561B90099875F /* SFDocument.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		AE7D6684147561B80099875F /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AE7D6685147561B80099875F /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		AE7D668A147561B90099875F /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AE7D668B147561B90099875F /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		AE7D6690147561B90099875F /* SFDocument.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AE7D6691147561B90099875F /* en */,
+			);
+			name = SFDocument.xib;
+			sourceTree = "<group>";
+		};
+		AE7D6693147561B90099875F /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AE7D6694147561B90099875F /* en */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		AE7D6696147561B90099875F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		AE7D6697147561B90099875F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		AE7D6699147561B90099875F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Cyclorama/Cyclorama-Prefix.pch";
+				INFOPLIST_FILE = "Cyclorama/Cyclorama-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		AE7D669A147561B90099875F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Cyclorama/Cyclorama-Prefix.pch";
+				INFOPLIST_FILE = "Cyclorama/Cyclorama-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AE7D6671147561B80099875F /* Build configuration list for PBXProject "Cyclorama" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AE7D6696147561B90099875F /* Debug */,
+				AE7D6697147561B90099875F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AE7D6698147561B90099875F /* Build configuration list for PBXNativeTarget "Cyclorama" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AE7D6699147561B90099875F /* Debug */,
+				AE7D669A147561B90099875F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = AE7D666E147561B80099875F /* Project object */;
+}
