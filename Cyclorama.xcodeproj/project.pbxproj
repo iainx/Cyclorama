@@ -11,9 +11,29 @@
 		AE7D6686147561B80099875F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AE7D6684147561B80099875F /* InfoPlist.strings */; };
 		AE7D6688147561B80099875F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7D6687147561B80099875F /* main.m */; };
 		AE7D668C147561B90099875F /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = AE7D668A147561B90099875F /* Credits.rtf */; };
-		AE7D668F147561B90099875F /* SFDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7D668E147561B90099875F /* SFDocument.m */; };
-		AE7D6692147561B90099875F /* SFDocument.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE7D6690147561B90099875F /* SFDocument.xib */; };
-		AE7D6695147561B90099875F /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE7D6693147561B90099875F /* MainMenu.xib */; };
+		AE7D66BB147562080099875F /* ActorFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7D669C147562080099875F /* ActorFilter.m */; };
+		AE7D66BC147562080099875F /* CycAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7D669E147562080099875F /* CycAppDelegate.m */; };
+		AE7D66BD147562080099875F /* CycDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7D66A0147562080099875F /* CycDocument.m */; };
+		AE7D66BE147562080099875F /* MIDIWatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7D66A2147562080099875F /* MIDIWatcher.m */; };
+		AE7D66BF147562080099875F /* NSString+UUID.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7D66A4147562080099875F /* NSString+UUID.m */; };
+		AE7D66C0147562080099875F /* SharedTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7D66A6147562080099875F /* SharedTypes.m */; };
+		AE7D66C1147562080099875F /* StageView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7D66A8147562080099875F /* StageView.m */; };
+		AE7D66C2147562080099875F /* utils.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7D66AA147562080099875F /* utils.m */; };
+		AE7D66C3147562080099875F /* VideoClip.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7D66AC147562080099875F /* VideoClip.m */; };
+		AE7D66C4147562080099875F /* VideoClipCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7D66AE147562080099875F /* VideoClipCell.m */; };
+		AE7D66C5147562080099875F /* VideoClipCollectionItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7D66B0147562080099875F /* VideoClipCollectionItemView.m */; };
+		AE7D66C6147562080099875F /* VideoClipCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7D66B2147562080099875F /* VideoClipCollectionView.m */; };
+		AE7D66C7147562080099875F /* VideoClipController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7D66B4147562080099875F /* VideoClipController.m */; };
+		AE7D66C8147562080099875F /* VideoClipLoadOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7D66B6147562080099875F /* VideoClipLoadOperation.m */; };
+		AE7D66C9147562080099875F /* VideoClipView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7D66B8147562080099875F /* VideoClipView.m */; };
+		AE7D66CA147562080099875F /* VideoLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7D66BA147562080099875F /* VideoLayer.m */; };
+		AE7D66CE147562FA0099875F /* CycArrayController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7D66CD147562FA0099875F /* CycArrayController.m */; };
+		AE7D66D0147563140099875F /* CoreMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE7D66CF147563140099875F /* CoreMIDI.framework */; };
+		AE7D66D21475632E0099875F /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE7D66D11475632E0099875F /* QTKit.framework */; };
+		AE7D66D5147563910099875F /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE7D66D3147563910099875F /* Quartz.framework */; };
+		AE7D66D6147563910099875F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE7D66D4147563910099875F /* QuartzCore.framework */; };
+		AE7D66DB147563F20099875F /* CycDocument.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE7D66D7147563F20099875F /* CycDocument.xib */; };
+		AE7D66DC147563F20099875F /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE7D66D9147563F20099875F /* MainMenu.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,15 +42,51 @@
 		AE7D667E147561B80099875F /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		AE7D667F147561B80099875F /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		AE7D6680147561B80099875F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		AE7D6683147561B80099875F /* Cyclorama-Info.plist */ = {isa = PBXFileReference; path = "Cyclorama-Info.plist"; sourceTree = "<group>"; };
+		AE7D6683147561B80099875F /* Cyclorama-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Cyclorama-Info.plist"; sourceTree = "<group>"; };
 		AE7D6685147561B80099875F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		AE7D6687147561B80099875F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		AE7D6689147561B90099875F /* Cyclorama-Prefix.pch */ = {isa = PBXFileReference; path = "Cyclorama-Prefix.pch"; sourceTree = "<group>"; };
 		AE7D668B147561B90099875F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
-		AE7D668D147561B90099875F /* SFDocument.h */ = {isa = PBXFileReference; path = SFDocument.h; sourceTree = "<group>"; };
-		AE7D668E147561B90099875F /* SFDocument.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFDocument.m; sourceTree = "<group>"; };
-		AE7D6691147561B90099875F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SFDocument.xib; sourceTree = "<group>"; };
-		AE7D6694147561B90099875F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		AE7D669B147562080099875F /* ActorFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActorFilter.h; sourceTree = "<group>"; };
+		AE7D669C147562080099875F /* ActorFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActorFilter.m; sourceTree = "<group>"; };
+		AE7D669D147562080099875F /* CycAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CycAppDelegate.h; sourceTree = "<group>"; };
+		AE7D669E147562080099875F /* CycAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CycAppDelegate.m; sourceTree = "<group>"; };
+		AE7D669F147562080099875F /* CycDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CycDocument.h; sourceTree = "<group>"; };
+		AE7D66A0147562080099875F /* CycDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CycDocument.m; sourceTree = "<group>"; };
+		AE7D66A1147562080099875F /* MIDIWatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MIDIWatcher.h; sourceTree = "<group>"; };
+		AE7D66A2147562080099875F /* MIDIWatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MIDIWatcher.m; sourceTree = "<group>"; };
+		AE7D66A3147562080099875F /* NSString+UUID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+UUID.h"; sourceTree = "<group>"; };
+		AE7D66A4147562080099875F /* NSString+UUID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+UUID.m"; sourceTree = "<group>"; };
+		AE7D66A5147562080099875F /* SharedTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SharedTypes.h; sourceTree = "<group>"; };
+		AE7D66A6147562080099875F /* SharedTypes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SharedTypes.m; sourceTree = "<group>"; };
+		AE7D66A7147562080099875F /* StageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StageView.h; sourceTree = "<group>"; };
+		AE7D66A8147562080099875F /* StageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StageView.m; sourceTree = "<group>"; };
+		AE7D66A9147562080099875F /* utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = utils.h; sourceTree = "<group>"; };
+		AE7D66AA147562080099875F /* utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = utils.m; sourceTree = "<group>"; };
+		AE7D66AB147562080099875F /* VideoClip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoClip.h; sourceTree = "<group>"; };
+		AE7D66AC147562080099875F /* VideoClip.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoClip.m; sourceTree = "<group>"; };
+		AE7D66AD147562080099875F /* VideoClipCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoClipCell.h; sourceTree = "<group>"; };
+		AE7D66AE147562080099875F /* VideoClipCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoClipCell.m; sourceTree = "<group>"; };
+		AE7D66AF147562080099875F /* VideoClipCollectionItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoClipCollectionItemView.h; sourceTree = "<group>"; };
+		AE7D66B0147562080099875F /* VideoClipCollectionItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoClipCollectionItemView.m; sourceTree = "<group>"; };
+		AE7D66B1147562080099875F /* VideoClipCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoClipCollectionView.h; sourceTree = "<group>"; };
+		AE7D66B2147562080099875F /* VideoClipCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoClipCollectionView.m; sourceTree = "<group>"; };
+		AE7D66B3147562080099875F /* VideoClipController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoClipController.h; sourceTree = "<group>"; };
+		AE7D66B4147562080099875F /* VideoClipController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoClipController.m; sourceTree = "<group>"; };
+		AE7D66B5147562080099875F /* VideoClipLoadOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoClipLoadOperation.h; sourceTree = "<group>"; };
+		AE7D66B6147562080099875F /* VideoClipLoadOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoClipLoadOperation.m; sourceTree = "<group>"; };
+		AE7D66B7147562080099875F /* VideoClipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoClipView.h; sourceTree = "<group>"; };
+		AE7D66B8147562080099875F /* VideoClipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoClipView.m; sourceTree = "<group>"; };
+		AE7D66B9147562080099875F /* VideoLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoLayer.h; sourceTree = "<group>"; };
+		AE7D66BA147562080099875F /* VideoLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoLayer.m; sourceTree = "<group>"; };
+		AE7D66CB1475622F0099875F /* Cyclorama-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Cyclorama-Prefix.pch"; sourceTree = "<group>"; };
+		AE7D66CC147562FA0099875F /* CycArrayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CycArrayController.h; sourceTree = "<group>"; };
+		AE7D66CD147562FA0099875F /* CycArrayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CycArrayController.m; sourceTree = "<group>"; };
+		AE7D66CF147563140099875F /* CoreMIDI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMIDI.framework; path = System/Library/Frameworks/CoreMIDI.framework; sourceTree = SDKROOT; };
+		AE7D66D11475632E0099875F /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = System/Library/Frameworks/QTKit.framework; sourceTree = SDKROOT; };
+		AE7D66D3147563910099875F /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
+		AE7D66D4147563910099875F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		AE7D66D8147563F20099875F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = ../../../../Volumes/DISK2S1/Cyclorama/Cyclorama/en.lproj/CycDocument.xib; sourceTree = "<group>"; };
+		AE7D66DA147563F20099875F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = ../../../../Volumes/DISK2S1/Cyclorama/Cyclorama/en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,6 +94,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE7D66D5147563910099875F /* Quartz.framework in Frameworks */,
+				AE7D66D6147563910099875F /* QuartzCore.framework in Frameworks */,
+				AE7D66D21475632E0099875F /* QTKit.framework in Frameworks */,
+				AE7D66D0147563140099875F /* CoreMIDI.framework in Frameworks */,
 				AE7D667C147561B80099875F /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -48,6 +108,42 @@
 		AE7D666C147561B80099875F = {
 			isa = PBXGroup;
 			children = (
+				AE7D669B147562080099875F /* ActorFilter.h */,
+				AE7D669C147562080099875F /* ActorFilter.m */,
+				AE7D669D147562080099875F /* CycAppDelegate.h */,
+				AE7D669E147562080099875F /* CycAppDelegate.m */,
+				AE7D66CC147562FA0099875F /* CycArrayController.h */,
+				AE7D66CD147562FA0099875F /* CycArrayController.m */,
+				AE7D669F147562080099875F /* CycDocument.h */,
+				AE7D66A0147562080099875F /* CycDocument.m */,
+				AE7D66A1147562080099875F /* MIDIWatcher.h */,
+				AE7D66A2147562080099875F /* MIDIWatcher.m */,
+				AE7D66A3147562080099875F /* NSString+UUID.h */,
+				AE7D66A4147562080099875F /* NSString+UUID.m */,
+				AE7D66A5147562080099875F /* SharedTypes.h */,
+				AE7D66A6147562080099875F /* SharedTypes.m */,
+				AE7D66A7147562080099875F /* StageView.h */,
+				AE7D66A8147562080099875F /* StageView.m */,
+				AE7D66A9147562080099875F /* utils.h */,
+				AE7D66AA147562080099875F /* utils.m */,
+				AE7D66AB147562080099875F /* VideoClip.h */,
+				AE7D66AC147562080099875F /* VideoClip.m */,
+				AE7D66AD147562080099875F /* VideoClipCell.h */,
+				AE7D66AE147562080099875F /* VideoClipCell.m */,
+				AE7D66AF147562080099875F /* VideoClipCollectionItemView.h */,
+				AE7D66B0147562080099875F /* VideoClipCollectionItemView.m */,
+				AE7D66B1147562080099875F /* VideoClipCollectionView.h */,
+				AE7D66B2147562080099875F /* VideoClipCollectionView.m */,
+				AE7D66B3147562080099875F /* VideoClipController.h */,
+				AE7D66B4147562080099875F /* VideoClipController.m */,
+				AE7D66B5147562080099875F /* VideoClipLoadOperation.h */,
+				AE7D66B6147562080099875F /* VideoClipLoadOperation.m */,
+				AE7D66B7147562080099875F /* VideoClipView.h */,
+				AE7D66B8147562080099875F /* VideoClipView.m */,
+				AE7D66B9147562080099875F /* VideoLayer.h */,
+				AE7D66BA147562080099875F /* VideoLayer.m */,
+				AE7D66D7147563F20099875F /* CycDocument.xib */,
+				AE7D66D9147563F20099875F /* MainMenu.xib */,
 				AE7D6681147561B80099875F /* Cyclorama */,
 				AE7D667A147561B80099875F /* Frameworks */,
 				AE7D6678147561B80099875F /* Products */,
@@ -65,6 +161,10 @@
 		AE7D667A147561B80099875F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AE7D66D3147563910099875F /* Quartz.framework */,
+				AE7D66D4147563910099875F /* QuartzCore.framework */,
+				AE7D66D11475632E0099875F /* QTKit.framework */,
+				AE7D66CF147563140099875F /* CoreMIDI.framework */,
 				AE7D667B147561B80099875F /* Cocoa.framework */,
 				AE7D667D147561B80099875F /* Other Frameworks */,
 			);
@@ -84,10 +184,6 @@
 		AE7D6681147561B80099875F /* Cyclorama */ = {
 			isa = PBXGroup;
 			children = (
-				AE7D668D147561B90099875F /* SFDocument.h */,
-				AE7D668E147561B90099875F /* SFDocument.m */,
-				AE7D6690147561B90099875F /* SFDocument.xib */,
-				AE7D6693147561B90099875F /* MainMenu.xib */,
 				AE7D6682147561B80099875F /* Supporting Files */,
 			);
 			path = Cyclorama;
@@ -98,8 +194,8 @@
 			children = (
 				AE7D6683147561B80099875F /* Cyclorama-Info.plist */,
 				AE7D6684147561B80099875F /* InfoPlist.strings */,
+				AE7D66CB1475622F0099875F /* Cyclorama-Prefix.pch */,
 				AE7D6687147561B80099875F /* main.m */,
-				AE7D6689147561B90099875F /* Cyclorama-Prefix.pch */,
 				AE7D668A147561B90099875F /* Credits.rtf */,
 			);
 			name = "Supporting Files";
@@ -158,8 +254,8 @@
 			files = (
 				AE7D6686147561B80099875F /* InfoPlist.strings in Resources */,
 				AE7D668C147561B90099875F /* Credits.rtf in Resources */,
-				AE7D6692147561B90099875F /* SFDocument.xib in Resources */,
-				AE7D6695147561B90099875F /* MainMenu.xib in Resources */,
+				AE7D66DB147563F20099875F /* CycDocument.xib in Resources */,
+				AE7D66DC147563F20099875F /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -171,7 +267,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				AE7D6688147561B80099875F /* main.m in Sources */,
-				AE7D668F147561B90099875F /* SFDocument.m in Sources */,
+				AE7D66BB147562080099875F /* ActorFilter.m in Sources */,
+				AE7D66BC147562080099875F /* CycAppDelegate.m in Sources */,
+				AE7D66BD147562080099875F /* CycDocument.m in Sources */,
+				AE7D66BE147562080099875F /* MIDIWatcher.m in Sources */,
+				AE7D66BF147562080099875F /* NSString+UUID.m in Sources */,
+				AE7D66C0147562080099875F /* SharedTypes.m in Sources */,
+				AE7D66C1147562080099875F /* StageView.m in Sources */,
+				AE7D66C2147562080099875F /* utils.m in Sources */,
+				AE7D66C3147562080099875F /* VideoClip.m in Sources */,
+				AE7D66C4147562080099875F /* VideoClipCell.m in Sources */,
+				AE7D66C5147562080099875F /* VideoClipCollectionItemView.m in Sources */,
+				AE7D66C6147562080099875F /* VideoClipCollectionView.m in Sources */,
+				AE7D66C7147562080099875F /* VideoClipController.m in Sources */,
+				AE7D66C8147562080099875F /* VideoClipLoadOperation.m in Sources */,
+				AE7D66C9147562080099875F /* VideoClipView.m in Sources */,
+				AE7D66CA147562080099875F /* VideoLayer.m in Sources */,
+				AE7D66CE147562FA0099875F /* CycArrayController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -194,18 +306,18 @@
 			name = Credits.rtf;
 			sourceTree = "<group>";
 		};
-		AE7D6690147561B90099875F /* SFDocument.xib */ = {
+		AE7D66D7147563F20099875F /* CycDocument.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				AE7D6691147561B90099875F /* en */,
+				AE7D66D8147563F20099875F /* en */,
 			);
-			name = SFDocument.xib;
+			name = CycDocument.xib;
 			sourceTree = "<group>";
 		};
-		AE7D6693147561B90099875F /* MainMenu.xib */ = {
+		AE7D66D9147563F20099875F /* MainMenu.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				AE7D6694147561B90099875F /* en */,
+				AE7D66DA147563F20099875F /* en */,
 			);
 			name = MainMenu.xib;
 			sourceTree = "<group>";
