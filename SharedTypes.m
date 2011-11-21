@@ -10,3 +10,4 @@
 
 NSString * const FlareVideoClipType = @"FlareVideoClipType";
 NSString * const FlareVideoClipArrayType = @"FlareVideoClipArrayType";
+NSString * const CYCVideoClipReady = @"CYCVideoClipReady";

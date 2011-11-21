@@ -16,11 +16,11 @@
     QTTime duration;
 }
 
-- (id)initWithMovie:(QTMovie *)movie;
+- (id)initWithFilePath:(NSString *)_filePath title:(NSString *)_title;
 
 @property (nonatomic, readwrite, retain) NSString *filePath;
 @property (nonatomic, readwrite, retain) NSString *title;
 @property (readonly) QTMovie *movie;
-@property (readonly) NSImage *thumbnail;
+@property (nonatomic, readwrite, retain) NSImage *thumbnail;
 @property (readonly) QTTime duration;
 @end

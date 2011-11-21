@@ -10,7 +10,6 @@
 
 #import "VideoClipController.h"
 #import "VideoClipCell.h"
-#import "VideoClipLoadOperation.h"
 #import "VideoClip.h"
 
 @implementation VideoClipController
@@ -50,11 +49,9 @@
 
 #pragma mark - Local methods
 
-- (void)movieLoaded:(QTMovie *) movie
+- (void)videoClipReady:(NSNotification *)note
 {
-    VideoClip *clip = [[VideoClip alloc] initWithMovie:movie];
-    [self addObject:clip];
-    [clip release];
+    [self addObject:[note object]];
 }
 
 - (void)queryNotification:(NSNotification *)note
@@ -68,47 +65,43 @@
         NSArray *results = [[note object] results];
         NSUInteger count = [results count];
         
+        NSUInteger limit = 0;
         NSLog(@"Found %lu videos", count);
-
-        NSDictionary *movieAttrs = [NSDictionary dictionaryWithObjectsAndKeys:
-                                    [NSNumber numberWithBool:YES], QTMoviePreferredMutedAttribute,
-                                    [NSNumber numberWithBool:YES], QTMovieLoopsAttribute,
-                                    nil];
 
         for (NSMetadataItem *item in results) {
             NSString *path = [[item valueForAttribute:(NSString *)kMDItemPath] stringByResolvingSymlinksInPath];
+            if ([path hasSuffix:@".flv"]) {
+                continue;
+            }
+            
             NSString *title = [item valueForAttribute:(NSString *)kMDItemTitle];
             
             if (title == nil) {
                 title = [path lastPathComponent];
             }
             
-            // We create a movie here, load it up in a separate thread
-            // and when that is done we add it to the model.
-            NSError *err = nil;
-            QTMovie *movie = [QTMovie movieWithAttributes:movieAttrs error:&err];
-            if (err != noErr) {
-                NSLog(@"Error loading movie: %@", [err localizedDescription]);
-                movie = nil;
+            if (limit <= 12 || limit >= 32) {
+                limit++;
+                continue;
             }
             
-            NSURL *movieURL = [NSURL fileURLWithPath:path];
-            
-            VideoClipLoadOperation *loadOp = [[VideoClipLoadOperation alloc] 
-                                              initWithMovie:movie 
-                                              forURL: movieURL
-                                              completeDelegate:self
-                                              completeSelector:@selector(movieLoaded:)];
-            [clipLoaderQueue addOperation:loadOp];
-            
-            /*
             VideoClip *clip = [[VideoClip alloc] initWithFilePath:path title:title];
             
             if (clip == nil) {
                 continue;
             }
+            
+            /*
+            if (limit < 16) {
+                [self addObject:clip];
+            }
              */
-            //[self addObject:clip];
+            NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+            [nc addObserver:self
+                   selector:@selector(videoClipReady:)
+                       name:CYCVideoClipReady
+                     object:clip];
+            limit++;
         }
     } else if ([[note name] isEqualToString:NSMetadataQueryGatheringProgressNotification]) {
         NSLog(@"progress update");

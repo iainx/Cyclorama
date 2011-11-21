@@ -39,6 +39,21 @@
                  fraction:1.0];
 }
 
+#pragma mark - KVO
+
+- (void)observeValueForKeyPath:(NSString *)keyPath 
+                      ofObject:(id)object
+                        change:(NSDictionary *)change 
+                       context:(void *)context
+{
+    VideoClip *_clip = (VideoClip *)object;
+    
+    NSLog(@"%@ changed for %@: %@", keyPath, [_clip filePath], [change description]);
+    [self setThumbnail:[_clip thumbnail]];
+}
+
+#pragma mark - Accessors
+
 - (void)setClip:(VideoClip *)_clip
 {
     if (clip == _clip) {
@@ -47,40 +62,11 @@
     
     [clip release];
     clip = [_clip retain];
-    
-    NSLog(@"VideoClipView clip set starting thumbnail for: %@", [clip filePath]);
-    
-    if (thumbnail_queue == NULL) {
-        thumbnail_queue = dispatch_queue_create("com.sleepfive.thumbnail", NULL);
-        dispatch_queue_t high = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0);
-        dispatch_set_target_queue(thumbnail_queue, high);
-    }
-    
-    if (main_queue == NULL) {
-        main_queue = dispatch_get_main_queue();
-    }
-    /*
-    dispatch_async(thumbnail_queue, ^{
-        NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-        QTMovie *movie = [clip movie];
-        
-        [QTMovie enterQTKitOnThread];
-        [movie attachToCurrentThread];
-        
-        NSImage *t = [[clip thumbnail] retain];
-        NSLog(@"Got thumbnail for %@", [clip filePath]);
-        
-        [movie detachFromCurrentThread];
-        [QTMovie exitQTKitOnThread];
-        
-        [pool release];
-        
-        dispatch_async(main_queue, ^{
-            [self setThumbnail:t];
-            [t release];
-        });
-    });
-    */
+
+    [clip addObserver:self
+            forKeyPath:@"thumbnail"
+               options:NSKeyValueObservingOptionNew
+               context:NULL];
 }
 
 - (VideoClip *)clip

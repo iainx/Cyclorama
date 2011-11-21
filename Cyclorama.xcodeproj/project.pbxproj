@@ -24,7 +24,6 @@
 		AE7D66C5147562080099875F /* VideoClipCollectionItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7D66B0147562080099875F /* VideoClipCollectionItemView.m */; };
 		AE7D66C6147562080099875F /* VideoClipCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7D66B2147562080099875F /* VideoClipCollectionView.m */; };
 		AE7D66C7147562080099875F /* VideoClipController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7D66B4147562080099875F /* VideoClipController.m */; };
-		AE7D66C8147562080099875F /* VideoClipLoadOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7D66B6147562080099875F /* VideoClipLoadOperation.m */; };
 		AE7D66C9147562080099875F /* VideoClipView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7D66B8147562080099875F /* VideoClipView.m */; };
 		AE7D66CA147562080099875F /* VideoLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7D66BA147562080099875F /* VideoLayer.m */; };
 		AE7D66CE147562FA0099875F /* CycArrayController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7D66CD147562FA0099875F /* CycArrayController.m */; };
@@ -72,8 +71,6 @@
 		AE7D66B2147562080099875F /* VideoClipCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoClipCollectionView.m; sourceTree = "<group>"; };
 		AE7D66B3147562080099875F /* VideoClipController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoClipController.h; sourceTree = "<group>"; };
 		AE7D66B4147562080099875F /* VideoClipController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoClipController.m; sourceTree = "<group>"; };
-		AE7D66B5147562080099875F /* VideoClipLoadOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoClipLoadOperation.h; sourceTree = "<group>"; };
-		AE7D66B6147562080099875F /* VideoClipLoadOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoClipLoadOperation.m; sourceTree = "<group>"; };
 		AE7D66B7147562080099875F /* VideoClipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoClipView.h; sourceTree = "<group>"; };
 		AE7D66B8147562080099875F /* VideoClipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoClipView.m; sourceTree = "<group>"; };
 		AE7D66B9147562080099875F /* VideoLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoLayer.h; sourceTree = "<group>"; };
@@ -136,8 +133,6 @@
 				AE7D66B2147562080099875F /* VideoClipCollectionView.m */,
 				AE7D66B3147562080099875F /* VideoClipController.h */,
 				AE7D66B4147562080099875F /* VideoClipController.m */,
-				AE7D66B5147562080099875F /* VideoClipLoadOperation.h */,
-				AE7D66B6147562080099875F /* VideoClipLoadOperation.m */,
 				AE7D66B7147562080099875F /* VideoClipView.h */,
 				AE7D66B8147562080099875F /* VideoClipView.m */,
 				AE7D66B9147562080099875F /* VideoLayer.h */,
@@ -280,7 +275,6 @@
 				AE7D66C5147562080099875F /* VideoClipCollectionItemView.m in Sources */,
 				AE7D66C6147562080099875F /* VideoClipCollectionView.m in Sources */,
 				AE7D66C7147562080099875F /* VideoClipController.m in Sources */,
-				AE7D66C8147562080099875F /* VideoClipLoadOperation.m in Sources */,
 				AE7D66C9147562080099875F /* VideoClipView.m in Sources */,
 				AE7D66CA147562080099875F /* VideoLayer.m in Sources */,
 				AE7D66CE147562FA0099875F /* CycArrayController.m in Sources */,
@@ -395,6 +389,7 @@
 				AE7D669A147561B90099875F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
