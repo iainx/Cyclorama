@@ -10,7 +10,8 @@
 
 @class CycArrayController;
 
-@interface VideoLayer : QTMovieLayer {    
+@interface VideoLayer : QTMovieLayer { 
+@private
     CycArrayController *filterController;
     NSMutableArray *filters;
     
@@ -18,5 +19,8 @@
 }
 
 @property (readwrite, retain) NSArrayController *videoController;
-@property (readwrite, assign) NSMutableArray *filters; 
+
+- (void)addFilter:(CIFilter *)filter atIndex:(NSUInteger)index;
+- (void)removeFilterAtIndex:(NSUInteger)index;
+
 @end

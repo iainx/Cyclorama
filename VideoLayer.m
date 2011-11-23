@@ -6,28 +6,43 @@
 //  Copyright 2011 Sleep(5). All rights reserved.
 //
 
+#import "ActorFilter.h"
 #import "VideoLayer.h"
 #import "CycArrayController.h"
 
 @implementation VideoLayer
 
-@synthesize filters, videoController;
+@synthesize videoController;
 
 - (id)init
 {
     self = [super init];
+    
+    // array to hold the CIFilters to apply to the layer
     filters = [[NSMutableArray alloc] init];
-    filterController = [[CycArrayController alloc] initWithContent:filters];
+//    filterController = [[CycArrayController alloc] initWithContent:filters];
     
     return self;
 }
 
 - (void)dealloc
 {
-    [filterController release];
+//    [filterController release];
     [filters release];
     
     [super dealloc];
 }
 
+- (void)addFilter:(CIFilter *)filter
+          atIndex:(NSUInteger)index
+{
+    [filters insertObject:filter atIndex:index];
+    [self setFilters:filters];
+}
+
+- (void)removeFilterAtIndex:(NSUInteger)index
+{
+    [filters removeObjectAtIndex:index];
+    [self setFilters:filters];
+}
 @end

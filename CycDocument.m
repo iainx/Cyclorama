@@ -46,11 +46,40 @@
     return @"CycDocument";
 }
 
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    NSLog(@"keypath: %@ - %@", keyPath, [change description]);
+    
+    if ([keyPath isEqualToString:@"selection"]) {
+        //VideoClip *selectedClip = [videoClipController selection];
+        NSArray *selectedObjects = [videoClipController selectedObjects];
+        
+        if ([selectedObjects count] == 0) {
+            return;
+        }
+        
+        VideoClip *selectedClip = [selectedObjects objectAtIndex:0];
+        NSLog(@"Video clip: %@", [selectedClip description]);
+    
+        [stageView setVideoClip:selectedClip];
+    }
+}
+
 - (void)windowControllerDidLoadNib:(NSWindowController *)aController
 {
     [super windowControllerDidLoadNib:aController];
     
     [stageView setLayerController:layerController];
+    /*
+    [stageView bind:@"videoClip"
+           toObject:videoClipController
+        withKeyPath:@"selection"
+            options:nil];
+    */
+    [videoClipController addObserver:self
+                          forKeyPath:@"selection"
+                             options:0
+                             context:NULL];
     
     [layerController setContent:layers];
 }

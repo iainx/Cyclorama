@@ -8,6 +8,7 @@
 
 #import "ActorFilter.h"
 #import "StageView.h"
+#import "VideoClip.h"
 #import "VideoLayer.h"
 
 @implementation StageView
@@ -15,9 +16,6 @@
 - (id)initWithFrame:(NSRect)frame
 {
     self = [super initWithFrame:frame];
-
-    // Array to store the CIFilters to be applied to the video layer.
-    filters = [[NSMutableArray alloc] init];
     
     parentLayer = [CALayer layer];
     [parentLayer setBackgroundColor:CGColorCreateGenericRGB(0.0, 0.0, 0.0, 1.0)];
@@ -25,13 +23,10 @@
     [self setWantsLayer:YES];
     
     /*
-    
     videoLayer = [QTMovieLayer layer];
     [videoLayer setFrame:NSMakeRect(0.0, 0.0, frame.size.width, frame.size.height)];
     [parentLayer addSublayer:videoLayer];
-    
-     */
-    
+    */
     return self;
 }
 
@@ -65,31 +60,40 @@
 {
     [self removeFilterNotifications];
     
-    [filters release];
     [super dealloc];
 }
 
 #pragma mark - Accessors
 
-- (void)setVideo:(QTMovie *)_video
+- (void)setVideoClip:(VideoClip *)_videoClip
 {
-    if (_video == video) {
+    QTMovie *movie;
+    
+    if (_videoClip == videoClip) {
         return;
     }
     
-    // Stop the video otherwise it'll just keep playing on and on and on and on...
-    [video stop];
-    [video gotoBeginning];
-    [video release];
+    movie = [videoClip movie];
     
-    video = [_video retain];
-//    [videoLayer setMovie:video];
-    [video play];
+    // Stop the video otherwise it'll just keep playing on and on and on and on...
+    [movie stop];
+    [movie gotoBeginning];
+    [movie release];
+    
+    videoClip = [_videoClip retain];
+    
+    movie = [videoClip movie];
+    
+    VideoLayer *currentLayer = [[layerController arrangedObjects] objectAtIndex:0];
+    
+    NSLog(@"Playing movie on %p", currentLayer);
+    [currentLayer setMovie:movie];
+    [movie play];
 }
 
-- (QTMovie *)video
+- (VideoClip *)videoClip
 {
-    return video;
+    return videoClip;
 }
 
 - (void)objectAdded:(NSNotification *)note
@@ -99,22 +103,22 @@
     NSNumber *index = [userInfo objectForKey:@"index"];
     CIFilter *filter;
     
+    NSLog(@"Filter added %@", [af filterName]);
     filter = [CIFilter filterWithName:[af filterName]];
     [filter setDefaults];
-    
-    [filters insertObject:filter atIndex:[index unsignedIntegerValue]];
+    [filter setValuesForKeysWithDictionary:[af parameters]];
     
     VideoLayer *currentLayer = [[layerController arrangedObjects] objectAtIndex:0];
-    [currentLayer setFilters:filters];
+    NSLog(@"Setting filter on %p", currentLayer);
+    [currentLayer addFilter:filter atIndex:[index unsignedIntValue]];
 }
 
 - (void)objectRemoved:(NSNotification *)note
 {
     NSNumber *index = [[note userInfo] objectForKey:@"index"];
-    [filters removeObjectAtIndex:[index unsignedIntegerValue]];
 
     VideoLayer *currentLayer = [[layerController arrangedObjects] objectAtIndex:0];
-    [currentLayer setFilters:filters];
+    [currentLayer removeFilterAtIndex:[index unsignedIntValue]];
 }
 
 - (void)setFilterController:(CycArrayController *)_filterController
@@ -130,6 +134,9 @@
     
     [self addFilterNotifications];
 
+    VideoLayer *currentLayer = [[layerController arrangedObjects] objectAtIndex:0];
+
+    int idx = 0;
     for (ActorFilter *af in [filterController arrangedObjects]) {
         CIFilter *filter;
         
@@ -139,11 +146,9 @@
         [filter setDefaults];
         [filter setValuesForKeysWithDictionary:[af parameters]];
         
-        [filters addObject:filter];
+        [currentLayer addFilter:filter atIndex:idx];
+        idx++;
     }
-    
-    VideoLayer *currentLayer = [[layerController arrangedObjects] objectAtIndex:0];
-    [currentLayer setFilters:filters];
 }
 
 - (CycArrayController *)filterController

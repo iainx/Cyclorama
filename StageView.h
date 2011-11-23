@@ -10,19 +10,20 @@
 #import <QTKit/QTKit.h>
 
 @class CycArrayController;
+@class VideoClip;
 
 @interface StageView : NSView {
 @private
     CALayer *parentLayer;
-    QTMovie *video;
+    QTMovieLayer *videoLayer;
+    VideoClip *videoClip;
     
     CycArrayController *layerController;
     
     CycArrayController *filterController;
-    NSMutableArray *filters;
 }
 
-@property (readwrite, retain) QTMovie *video;
+@property (readwrite, retain) VideoClip *videoClip;
 @property (readwrite, assign) IBOutlet CycArrayController *filterController;
 @property (readwrite, assign) IBOutlet CycArrayController *layerController;
 @end
