@@ -61,6 +61,11 @@ static NSOperationQueue *loadThumbnailQueue = nil;
     [super dealloc];
 }
 
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"%@", filePath];
+}
+
 #pragma mark - Notifications
 
 - (void)loadThumbnail
