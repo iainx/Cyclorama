@@ -78,7 +78,6 @@
     // Stop the video otherwise it'll just keep playing on and on and on and on...
     [movie stop];
     [movie gotoBeginning];
-    [movie release];
     
     videoClip = [_videoClip retain];
     
