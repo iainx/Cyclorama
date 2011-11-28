@@ -174,4 +174,14 @@
 {
     return layerController;
 }
+
+- (CIFilter *)filterForCurrentLayerAt:(NSUInteger)index
+{
+    VideoLayer *currentLayer = [[layerController arrangedObjects] objectAtIndex:0];
+    if (!currentLayer) {
+        return nil;
+    }
+    
+    return [currentLayer filterAtIndex:index];
+}
 @end

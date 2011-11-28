@@ -34,7 +34,10 @@ static NSOperationQueue *loadThumbnailQueue = nil;
     [self setTitle:_title];
 
     NSURL *url = [NSURL fileURLWithPath:filePath];
+    
+    // Disabled QTOpenForPlaybackAttribute as it stops some thumbnails working
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:url, QTMovieURLAttribute,
+                          //[NSNumber numberWithBool:YES], QTMovieOpenForPlaybackAttribute,
                           [NSNumber numberWithBool:YES], QTMovieMutedAttribute,
                           [NSNumber numberWithBool:YES], QTMovieOpenAsyncRequiredAttribute, nil];
     NSError *error = nil;
@@ -42,7 +45,10 @@ static NSOperationQueue *loadThumbnailQueue = nil;
     if (error != nil) {
         NSLog(@"Error getting movie: %@", [error localizedDescription]);
     }
-    [movie detachFromCurrentThread];
+    [movie setAttribute:[NSNumber numberWithBool:YES] forKey:QTMovieLoopsAttribute];
+    
+    // FIXME: Don't really know if this is needed
+    //[movie detachFromCurrentThread];
     
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     [nc addObserver:self

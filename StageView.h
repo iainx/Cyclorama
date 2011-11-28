@@ -15,7 +15,6 @@
 @interface StageView : NSView {
 @private
     CALayer *parentLayer;
-    QTMovieLayer *videoLayer;
     VideoClip *videoClip;
     
     CycArrayController *layerController;
@@ -26,4 +25,6 @@
 @property (readwrite, retain) VideoClip *videoClip;
 @property (readwrite, assign) IBOutlet CycArrayController *filterController;
 @property (readwrite, assign) IBOutlet CycArrayController *layerController;
+
+- (CIFilter *)filterForCurrentLayerAt:(NSUInteger)index;
 @end

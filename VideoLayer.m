@@ -45,4 +45,9 @@
     [filters removeObjectAtIndex:index];
     [self setFilters:filters];
 }
+
+- (CIFilter *)filterAtIndex:(NSUInteger)index
+{
+    return [filters objectAtIndex:index];
+}
 @end

@@ -22,5 +22,5 @@
 
 - (void)addFilter:(CIFilter *)filter atIndex:(NSUInteger)index;
 - (void)removeFilterAtIndex:(NSUInteger)index;
-
+- (CIFilter *)filterAtIndex:(NSUInteger)index;
 @end

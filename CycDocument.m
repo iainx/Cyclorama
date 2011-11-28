@@ -20,6 +20,8 @@
 
 @synthesize filters;
 @synthesize filterController;
+@synthesize filterTableView;
+@synthesize filterUIBox;
 @synthesize layers;
 @synthesize layerController;
 @synthesize stageView;
@@ -82,6 +84,12 @@
                              context:NULL];
     
     [layerController setContent:layers];
+    
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc addObserver:self
+           selector:@selector(filterSelectionDidChange:)
+               name:NSTableViewSelectionDidChangeNotification
+             object:filterTableView];
 }
 
 - (NSData *)dataOfType:(NSString *)typeName error:(NSError **)outError
@@ -166,5 +174,29 @@
     NSLog(@"Video selected");
     [self setVideo:_video];
      */
+}
+
+#pragma mark - Notification methods
+
+- (void)filterSelectionDidChange:(NSNotification *)notification
+{
+    NSTableView *tableView = [notification object];
+    NSInteger selectedRow = [tableView selectedRow];
+    
+    if (selectedRow == -1) {
+        // Remove filter view
+        [filterUIBox setContentView:nil];
+        currentFilterView = nil;
+        return;
+    }
+    
+    ActorFilter *selectedFilter = [filters objectAtIndex:selectedRow];
+    
+    NSLog(@"Filter selection did change %ld - %@", selectedRow, [selectedFilter name]);
+    CIFilter *currentFilter = [stageView filterForCurrentLayerAt:selectedRow];
+
+    currentFilterView = [currentFilter viewForUIConfiguration:nil
+                                                 excludedKeys:[NSArray arrayWithObject:@"inputImage"]];
+    [filterUIBox setContentView:currentFilterView];
 }
 @end
