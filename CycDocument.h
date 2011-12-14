@@ -11,6 +11,7 @@
 @class CycArrayController;
 @class StageView;
 @class VideoClipController;
+@class CycFilterUIView;
 
 @interface CycDocument : NSDocument <NSTableViewDelegate> {
 @private
@@ -26,7 +27,7 @@
     NSMutableArray *videos;
     VideoClipController *videoClipController;
     
-    IKFilterUIView *currentFilterView;
+    CycFilterUIView *currentFilterView;
 }
 
 @property (readwrite, retain)NSMutableArray *filters;
@@ -35,6 +36,7 @@
 @property (readwrite, retain)IBOutlet CycArrayController *filterController;
 @property (readwrite, assign)IBOutlet NSTableView *filterTableView;
 @property (readwrite, assign)IBOutlet NSBox *filterUIBox;
+@property (readwrite, assign)IBOutlet NSScrollView *filterScrollView;
 
 @property (readwrite, assign)IBOutlet StageView *stageView;
 @property (readwrite, assign)IBOutlet NSCollectionView *videoClipCollectionView;

@@ -15,6 +15,7 @@
 #import "StageView.h"
 #import "VideoLayer.h"
 #import "VideoClipController.h"
+#import "CycFilterUIView.h"
 
 @implementation CycDocument
 
@@ -22,6 +23,7 @@
 @synthesize filterController;
 @synthesize filterTableView;
 @synthesize filterUIBox;
+@synthesize filterScrollView;
 @synthesize layers;
 @synthesize layerController;
 @synthesize stageView;
@@ -195,8 +197,13 @@
     NSLog(@"Filter selection did change %ld - %@", selectedRow, [selectedFilter name]);
     CIFilter *currentFilter = [stageView filterForCurrentLayerAt:selectedRow];
 
+    /* 
     currentFilterView = [currentFilter viewForUIConfiguration:nil
                                                  excludedKeys:[NSArray arrayWithObject:@"inputImage"]];
     [filterUIBox setContentView:currentFilterView];
+     */
+    currentFilterView = [[CycFilterUIView alloc] initWithFilter:currentFilter];
+//    [filterUIBox setContentView:currentFilterView];
+    [filterScrollView setDocumentView:currentFilterView];
 }
 @end
