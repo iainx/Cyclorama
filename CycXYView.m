@@ -99,6 +99,13 @@
     
 }
 
+- (void)setVector:(CIVector *)vector
+{
+    valueX = [vector X];
+    valueY = [vector Y];
+    [self setNeedsDisplay:YES];
+}
+
 #pragma mark - Accessors
 
 - (void)setValueX:(double)_valueX
@@ -106,7 +113,7 @@
     if (_valueX == valueX) {
         return;
     }
-    
+
     valueX = MAX(minX, MIN(_valueX, maxX));
     [self setNeedsDisplay:YES];
 }

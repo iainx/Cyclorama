@@ -7,9 +7,12 @@
 //
 
 #import "CycParameterXYViewController.h"
+#import "CycParameterXYView.h"
+#import "CycXYView.h"
 
 @implementation CycParameterXYViewController
 @synthesize nameLabel;
+@synthesize paramValue;
 @synthesize valueX;
 @synthesize valueY;
 
@@ -32,6 +35,7 @@
 {
     NSView *view = [super view];
     
+    xyView = [(CycParameterXYView *)view xyView];
     [self bind:@"valueX"
       toObject:view
    withKeyPath:@"xyView.valueX"
@@ -48,5 +52,39 @@
 {
     NSString *paramName = [attrs objectForKey:@"CIAttributeDisplayName"];
     [self setName:paramName];
+
+    //[xyView setVector:defaultVector];
+}
+
+- (void)setValueX:(double)_valueX
+{
+    if (_valueX == valueX) {
+        return;
+    }
+    
+    valueX = _valueX;
+    CIVector *vector = [CIVector vectorWithX:valueX Y:valueY];
+    [self setParamValue:vector];
+}
+
+- (double)valueX
+{
+    return valueX;
+}
+
+- (void)setValueY:(double)_valueY
+{
+    if (_valueY == valueY) {
+        return;
+    }
+    
+    valueY = _valueY;
+    CIVector *vector = [CIVector vectorWithX:valueX Y:valueY];
+    [self setParamValue:vector];
+}
+
+- (double)valueY
+{
+    return valueY;
 }
 @end

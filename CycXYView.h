@@ -17,4 +17,6 @@
 @property (readwrite, assign) double valueX;
 @property (readwrite, assign) double valueY;
 
+- (void)setVector:(CIVector *)vector;
+
 @end

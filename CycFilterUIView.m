@@ -137,7 +137,7 @@ static void *CycFilterUIViewObservationContext = (void *)@"CycFilterUIViewObserv
     CycParameterViewController *controller = (CycParameterViewController *)object;
     
     if (context == &CycFilterUIViewObservationContext) {
-        NSLog(@"%@ changed on param %@", keyPath, [controller paramName]);
+        NSLog(@"%@ changed on param %@ - %@", keyPath, [controller paramName], [change description]);
     } else {
         [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
     }
@@ -154,20 +154,8 @@ static void *CycFilterUIViewObservationContext = (void *)@"CycFilterUIViewObserv
     attrClass = [attrs objectForKey:@"CIAttributeClass"];
     if ([attrClass isEqualToString:@"NSNumber"]) {
         viewController = [[CycParameterLinearViewController alloc] init];
-        [viewController addObserver:self
-                         forKeyPath:@"paramValue"
-                            options:NSKeyValueObservingOptionNew
-                            context:&CycFilterUIViewObservationContext];
     } else if ([attrClass isEqualToString:@"CIVector"]) {
         viewController = [[CycParameterXYViewController alloc] init];
-        [viewController addObserver:self
-                         forKeyPath:@"valueX"
-                            options:NSKeyValueObservingOptionNew
-                            context:&CycFilterUIViewObservationContext];
-        [viewController addObserver:self
-                         forKeyPath:@"valueY"
-                            options:NSKeyValueObservingOptionNew
-                            context:&CycFilterUIViewObservationContext];
     } else {
         NSLog(@"Unknown attrType: %@", attrClass);
         return nil;
@@ -177,6 +165,11 @@ static void *CycFilterUIViewObservationContext = (void *)@"CycFilterUIViewObserv
     view = [viewController view];
     [viewController setAttributes:attrs];
 
+    // Add the observer after we've set the attributes and the values
+    [viewController addObserver:self
+                     forKeyPath:@"paramValue"
+                        options:NSKeyValueObservingOptionNew
+                        context:&CycFilterUIViewObservationContext];
     [view setFrameOrigin:frame.origin];
     return view;
 }

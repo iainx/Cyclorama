@@ -187,23 +187,21 @@
     
     if (selectedRow == -1) {
         // Remove filter view
-        [filterUIBox setContentView:nil];
         currentFilterView = nil;
         return;
     }
     
+    if (currentFilterView) {
+        [currentFilterView removeFromSuperview];
+        currentFilterView = nil;
+    }
     ActorFilter *selectedFilter = [filters objectAtIndex:selectedRow];
     
     NSLog(@"Filter selection did change %ld - %@", selectedRow, [selectedFilter name]);
     CIFilter *currentFilter = [stageView filterForCurrentLayerAt:selectedRow];
+    
+    currentFilterView = [[[CycFilterUIView alloc] initWithFilter:currentFilter] autorelease];
 
-    /* 
-    currentFilterView = [currentFilter viewForUIConfiguration:nil
-                                                 excludedKeys:[NSArray arrayWithObject:@"inputImage"]];
-    [filterUIBox setContentView:currentFilterView];
-     */
-    currentFilterView = [[CycFilterUIView alloc] initWithFilter:currentFilter];
-//    [filterUIBox setContentView:currentFilterView];
     [filterScrollView setDocumentView:currentFilterView];
 }
 @end

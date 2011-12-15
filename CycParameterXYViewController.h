@@ -9,10 +9,16 @@
 #import <Cocoa/Cocoa.h>
 #import "CycParameterViewController.h"
 
-@interface CycParameterXYViewController : CycParameterViewController
+@class CycXYView;
+
+@interface CycParameterXYViewController : CycParameterViewController {
+@private
+    CycXYView *xyView;
+}
 
 @property (readwrite, assign) IBOutlet NSTextField *nameLabel;
 
+@property (readwrite, assign) CIVector *paramValue;
 @property (readwrite, assign) double valueX;
 @property (readwrite, assign) double valueY;
 @end
