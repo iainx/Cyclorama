@@ -92,6 +92,10 @@
            selector:@selector(filterSelectionDidChange:)
                name:NSTableViewSelectionDidChangeNotification
              object:filterTableView];
+    [nc addObserver:self
+           selector:@selector(filterValueDidChange:)
+               name:CycFilterValueChangedNotification
+             object:nil];
 }
 
 - (NSData *)dataOfType:(NSString *)typeName error:(NSError **)outError
@@ -203,5 +207,25 @@
     currentFilterView = [[[CycFilterUIView alloc] initWithFilter:currentFilter] autorelease];
 
     [filterScrollView setDocumentView:currentFilterView];
+}
+
+- (void)filterValueDidChange:(NSNotification *)notification
+{
+    NSDictionary *userInfo = [notification userInfo];
+    
+    NSString *paramName = [userInfo objectForKey:@"paramName"];
+    id value = [userInfo objectForKey:@"value"];
+    
+    NSInteger selectedRow = [filterTableView selectedRow];
+    
+    CIFilter *currentFilter = [stageView filterForCurrentLayerAt:selectedRow];
+    NSString *filterName = [currentFilter name];
+    
+    NSString *keypath = [NSString stringWithFormat:@"filters.%@.%@", filterName, paramName];
+    
+    NSLog(@"Changing %@", keypath);
+    VideoLayer *currentLayer = [layers objectAtIndex:0];
+    
+    [currentLayer setValue:value forKeyPath:keypath];
 }
 @end

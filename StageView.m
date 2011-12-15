@@ -104,6 +104,7 @@
     
     NSLog(@"Filter added %@", [af filterName]);
     filter = [CIFilter filterWithName:[af filterName]];
+    [filter setName:[af filterName]];
     [filter setDefaults];
     [filter setValuesForKeysWithDictionary:[af parameters]];
     
@@ -140,6 +141,7 @@
         CIFilter *filter;
         
         filter = [CIFilter filterWithName:[af filterName]];
+        [filter setName:[af filterName]];
         
         // Set defaults and then anything custom
         [filter setDefaults];
