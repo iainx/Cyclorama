@@ -11,3 +11,4 @@
 NSString * const FlareVideoClipType = @"FlareVideoClipType";
 NSString * const FlareVideoClipArrayType = @"FlareVideoClipArrayType";
 NSString * const CYCVideoClipReady = @"CYCVideoClipReady";
+NSString * const CycFilterValueChangedNotification = @"CycFilterValueChangedNotification";

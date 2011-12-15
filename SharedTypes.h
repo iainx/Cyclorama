@@ -7,6 +7,7 @@
 //
 
 extern NSString * const FlareMIDIMessageNotification;
+extern NSString * const CycFilterValueChangedNotification;
 extern NSString * const CYCVideoClipReady;
 extern NSString * const FlareVideoClipType;
 extern NSString * const FlareVideoClipArrayType;

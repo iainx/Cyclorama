@@ -138,6 +138,16 @@ static void *CycFilterUIViewObservationContext = (void *)@"CycFilterUIViewObserv
     
     if (context == &CycFilterUIViewObservationContext) {
         NSLog(@"%@ changed on param %@ - %@", keyPath, [controller paramName], [change description]);
+        NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
+        
+        [userInfo setObject:[change objectForKey:@"new"] forKey:@"value"];
+        [userInfo setObject:[controller paramName] forKey:@"paramName"];
+        
+        NSNotification *note = [NSNotification notificationWithName:CycFilterValueChangedNotification
+                                                             object:self
+                                                           userInfo:userInfo];
+        NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+        [nc postNotification:note];
     } else {
         [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
     }
