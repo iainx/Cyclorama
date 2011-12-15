@@ -6,6 +6,7 @@
 //  Copyright 2011 Sleep(5). All rights reserved.
 //
 
+#import <Quartz/Quartz.h>
 #import "ActorFilter.h"
 #import "NSString+UUID.h"
 
@@ -15,6 +16,7 @@
 @synthesize name;
 @synthesize parameters;
 @synthesize uniqueID;
+@synthesize filter = _filter;
 
 - (id)initWithName:(NSString *)_name forFilterNamed:(NSString *)_filterName
 {
@@ -61,6 +63,17 @@
     [uniqueID release];
     
     [super dealloc];
+}
+
+#pragma mark - Accessors
+- (CIFilter *)filter
+{
+    if (_filter == nil) {
+        _filter = [[CIFilter filterWithName:[self filterName]] retain];
+        [_filter setName:uniqueID];
+    }
+    
+    return _filter;
 }
 
 - (void)addValue:(id)value forParameter:(NSString *)paramName

@@ -103,8 +103,9 @@
     CIFilter *filter;
     
     NSLog(@"Filter added %@", [af filterName]);
-    filter = [CIFilter filterWithName:[af filterName]];
-    [filter setName:[af filterName]];
+    //filter = [CIFilter filterWithName:[af filterName]];
+    filter = [af filter];
+    
     [filter setDefaults];
     [filter setValuesForKeysWithDictionary:[af parameters]];
     
@@ -140,8 +141,8 @@
     for (ActorFilter *af in [filterController arrangedObjects]) {
         CIFilter *filter;
         
-        filter = [CIFilter filterWithName:[af filterName]];
-        [filter setName:[af filterName]];
+        //filter = [CIFilter filterWithName:[af filterName]];
+        filter = [af filter];
         
         // Set defaults and then anything custom
         [filter setDefaults];
