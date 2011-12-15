@@ -62,6 +62,8 @@
     [name release];
     [uniqueID release];
     
+    [_filter release];
+    
     [super dealloc];
 }
 
