@@ -13,6 +13,8 @@
 @implementation CycParameterXYViewController
 @synthesize nameLabel;
 @synthesize paramValue;
+@synthesize maxX;
+@synthesize maxY;
 @synthesize valueX;
 @synthesize valueY;
 
@@ -48,7 +50,8 @@
     return view;
 }
 
-- (void)setAttributes:(NSDictionary *)attrs
+- (void)setAttributes:(NSDictionary *)attrs 
+            forFilter:(CIFilter *)_filter
 {
     NSString *paramName = [attrs objectForKey:@"CIAttributeDisplayName"];
     [self setName:paramName];
@@ -87,4 +90,36 @@
 {
     return valueY;
 }
+
+- (void)setMaxX:(double)_maxX
+{
+    if (maxX == _maxX) {
+        return;
+    }
+    
+    maxX = _maxX;
+    [xyView setMaxX:maxX];
+}
+
+- (double)maxX
+{
+    return maxX;
+}
+
+- (void)setMaxY:(double)_maxY
+{
+    if (maxY == _maxY) {
+        return;
+    }
+    
+    maxY = _maxY;
+
+    [xyView setMaxY:maxY];
+}
+
+- (double)maxY
+{
+    return maxY;
+}
+
 @end

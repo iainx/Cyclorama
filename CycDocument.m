@@ -203,8 +203,11 @@
     
     NSLog(@"Filter selection did change %ld - %@", selectedRow, [selectedFilter name]);
     CIFilter *currentFilter = [stageView filterForCurrentLayerAt:selectedRow];
+    NSRect stageViewRect = [stageView frame];
     
-    currentFilterView = [[[CycFilterUIView alloc] initWithFilter:currentFilter] autorelease];
+    currentFilterView = [[[CycFilterUIView alloc] initWithFilter:currentFilter 
+                                                  forScreenWidth:stageViewRect.size.width
+                                                    screenHeight:stageViewRect.size.height] autorelease];
 
     [filterScrollView setDocumentView:currentFilterView];
 }

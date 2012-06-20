@@ -12,6 +12,6 @@
 
 @property (copy) NSString *name;
 @property (readwrite, copy) NSString *paramName;
-- (void)setAttributes:(NSDictionary *)attrs;
+- (void)setAttributes:(NSDictionary *)attrs forFilter:(CIFilter *)_filter;
 
 @end

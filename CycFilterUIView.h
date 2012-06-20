@@ -11,9 +11,12 @@
 @interface CycFilterUIView : NSView {
     NSMutableArray *xyParams;
     NSMutableArray *linearParams;
+    double videoWidth;
+    double videoHeight;
 }
 
 @property (readwrite, retain) CIFilter *filter;
 
-- (id)initWithFilter:(CIFilter *)filter;
+- (id)initWithFilter:(CIFilter *)filter forScreenWidth:(double)_width screenHeight:(double)_height;
+
 @end

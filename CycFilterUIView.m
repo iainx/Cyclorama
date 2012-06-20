@@ -21,9 +21,15 @@
 
 @synthesize filter = _filter;
 
-- (id)initWithFrame:(NSRect)frameRect forFilter:(CIFilter *)filter
+- (id)initWithFrame:(NSRect)frameRect 
+          forFilter:(CIFilter *)filter
+     forScreenWidth:(double)_screenWidth
+       screenHeight:(double)_screenHeight
 {
     self = [super initWithFrame:frameRect];
+    
+    videoWidth = _screenWidth;
+    videoHeight = _screenHeight;
     
     _filter = [filter retain];
     
@@ -73,11 +79,13 @@
 
 - (id)initWithFrame:(NSRect)frame
 {
-    [self initWithFrame:frame forFilter:nil];
+    [self initWithFrame:frame forFilter:nil forScreenWidth:100.0 screenHeight:100.0];
     return self;
 }
 
 - (id)initWithFilter:(CIFilter *)filter
+      forScreenWidth:(double)_screenWidth
+        screenHeight:(double)_screenHeight
 {
     NSRect frame = NSZeroRect;
     NSArray *inputKeys = [filter inputKeys];
@@ -111,7 +119,10 @@
     frame.size.width = 800;
 
     NSLog(@"Height is %f", frame.size.height);
-    [self initWithFrame:frame forFilter:filter];
+    [self initWithFrame:frame 
+              forFilter:filter 
+         forScreenWidth:_screenWidth 
+           screenHeight:_screenHeight];
 
     return self;
 }
@@ -158,6 +169,7 @@ static void *CycFilterUIViewObservationContext = (void *)@"CycFilterUIViewObserv
                           inFrame:(NSRect)frame
 {
     CycParameterViewController *viewController;
+    CycParameterXYViewController *xy = nil;
     NSView *view;
     NSString *attrClass;
     
@@ -165,7 +177,10 @@ static void *CycFilterUIViewObservationContext = (void *)@"CycFilterUIViewObserv
     if ([attrClass isEqualToString:@"NSNumber"]) {
         viewController = [[CycParameterLinearViewController alloc] init];
     } else if ([attrClass isEqualToString:@"CIVector"]) {
-        viewController = [[CycParameterXYViewController alloc] init];
+        xy = [[CycParameterXYViewController alloc] init];
+        
+
+        viewController = (CycParameterViewController *)xy;
     } else {
         NSLog(@"Unknown attrType: %@", attrClass);
         return nil;
@@ -173,7 +188,11 @@ static void *CycFilterUIViewObservationContext = (void *)@"CycFilterUIViewObserv
     
     [viewController setParamName:pName];
     view = [viewController view];
-    [viewController setAttributes:attrs];
+    [viewController setAttributes:attrs forFilter:_filter];
+    
+    // if xy is nil these will just return
+    [xy setMaxX:videoWidth];
+    [xy setMaxY:videoHeight];
 
     // Add the observer after we've set the attributes and the values
     [viewController addObserver:self
@@ -183,5 +202,5 @@ static void *CycFilterUIViewObservationContext = (void *)@"CycFilterUIViewObserv
     [view setFrameOrigin:frame.origin];
     return view;
 }
-
+    
 @end

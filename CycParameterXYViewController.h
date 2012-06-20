@@ -21,4 +21,6 @@
 @property (readwrite, assign) CIVector *paramValue;
 @property (readwrite, assign) double valueX;
 @property (readwrite, assign) double valueY;
+@property (readwrite, assign) double maxX;
+@property (readwrite, assign) double maxY;
 @end

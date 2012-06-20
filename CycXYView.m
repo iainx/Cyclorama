@@ -72,6 +72,7 @@
 
 - (void)setValuesFromPoint:(NSPoint)point
 {
+    NSLog(@"maxX,maxY: %fx%f", maxX, maxY);
     CGFloat xRatio = point.x / [self bounds].size.width;
     [self setValueX:xRatio * (maxX - minX)];
     CGFloat yRatio = point.y / [self bounds].size.height;
@@ -136,5 +137,35 @@
 - (double)valueY
 {
     return valueY;
+}
+
+- (void)setMaxX:(double)_maxX
+{
+    if (maxX == _maxX) {
+        return;
+    }
+    
+    maxX = _maxX;
+    NSLog(@"setting %p maxX to %f", self, maxX);
+}
+
+- (double)maxX
+{
+    return maxX;
+}
+
+- (void)setMaxY:(double)_maxY
+{
+    if (maxY == _maxY) {
+        return;
+    }
+    
+    maxY = _maxY;
+    NSLog(@"setting %p maxY to %f", self, maxY);
+}
+
+- (double)maxY
+{
+    return maxY;
 }
 @end

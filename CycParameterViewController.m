@@ -22,7 +22,9 @@
     return self;
 }
 
-- (void)setAttributes:(NSDictionary *)attrs
+- (void)setAttributes:(NSDictionary *)attrs 
+            forFilter:(CIFilter *)_filter
 {
+    NSLog(@"Subclass didn't implement setAttributes:forFilter:");
 }
 @end

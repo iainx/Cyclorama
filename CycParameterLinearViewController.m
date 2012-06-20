@@ -6,6 +6,8 @@
 //  Copyright (c) 2011 Sleep(5). All rights reserved.
 //
 
+#import <Cocoa/Cocoa.h>
+#import <QuartzCore/QuartzCore.h>
 #import "CycParameterLinearViewController.h"
 
 @implementation CycParameterLinearViewController
@@ -32,7 +34,8 @@
     return [self initWithNibName:@"CycParameterLinearViewController" bundle:nil];
 }
 
-- (void)setAttributes:(NSDictionary *)attrs
+- (void)setAttributes:(NSDictionary *)attrs 
+            forFilter:(CIFilter *)_filter
 {
     NSString *displayName = [attrs objectForKey:@"CIAttributeDisplayName"];
     [self setName:displayName];
@@ -43,8 +46,11 @@
     NSNumber *maxValue = [attrs objectForKey:@"CIAttributeSliderMax"];
     [self setMaxParamValue:[maxValue doubleValue]];
     
-    NSNumber *defaultValue = [attrs objectForKey:@"CIAttributeDefault"];
-    [self setParamValue:[defaultValue doubleValue]];
+    //NSNumber *defaultValue = [attrs objectForKey:@"CIAttributeDefault"];
+    NSLog(@"Looking for %@", [self paramName]);
+    NSNumber *value = [_filter valueForKey:[self paramName]];
+    NSLog(@"Setting value to %p: %f", value, [value doubleValue]);
+    [self setParamValue:[value doubleValue]];
 }
 
 @end
