@@ -33,30 +33,60 @@ static NSOperationQueue *loadThumbnailQueue = nil;
     [self setFilePath:_filePath];
     [self setTitle:_title];
 
-    NSURL *url = [NSURL fileURLWithPath:filePath];
-    
-    // Disabled QTOpenForPlaybackAttribute as it stops some thumbnails working
-    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:url, QTMovieURLAttribute,
-                          //[NSNumber numberWithBool:YES], QTMovieOpenForPlaybackAttribute,
-                          [NSNumber numberWithBool:YES], QTMovieMutedAttribute,
-                          [NSNumber numberWithBool:YES], QTMovieOpenAsyncRequiredAttribute, nil];
-    NSError *error = nil;
-    movie = [[QTMovie movieWithAttributes:dict error:&error] retain];
-    if (error != nil) {
-        NSLog(@"Error getting movie: %@", [error localizedDescription]);
-    }
-    [movie setAttribute:[NSNumber numberWithBool:YES] forKey:QTMovieLoopsAttribute];
-    
     // FIXME: Don't really know if this is needed
     //[movie detachFromCurrentThread];
-    
+    /*
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     [nc addObserver:self
            selector:@selector(movieLoadStateChanged:) 
                name:QTMovieLoadStateDidChangeNotification
              object:movie];
-
+     */
     return self;
+}
+
+- (void)openMovie
+{
+    NSURL *url = [NSURL fileURLWithPath:filePath];
+    
+    // Disabled QTOpenForPlaybackAttribute as it stops some thumbnails working
+    // Disabled QTMovieOpenAsyncRequiredAttribute as we need it to open sync.
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:url, QTMovieURLAttribute,
+                          //[NSNumber numberWithBool:YES], QTMovieOpenForPlaybackAttribute,
+                          [NSNumber numberWithBool:YES], QTMovieMutedAttribute,
+                          [NSNumber numberWithBool:YES], QTMovieLoopsAttribute,
+                          //[NSNumber numberWithBool:YES], QTMovieOpenAsyncRequiredAttribute,
+                          nil];
+    NSError *error = nil;
+    movie = [[QTMovie movieWithAttributes:dict error:&error] retain];
+    //movie = [[QTMovie movieWithFile:filePath error:&error] retain];
+    if (error != nil) {
+        NSLog(@"Error getting movie: %@", [error localizedDescription]);
+    }
+    [movie setAttribute:[NSNumber numberWithBool:YES] forKey:QTMovieLoopsAttribute];
+
+    NSMutableDictionary *attributes = [NSMutableDictionary dictionary];
+    
+	// We'll specify a custom size of 95 X 120 for the returned image:
+	NSSize imageSize = NSMakeSize(120, 95);
+	NSValue *sizeValue = [NSValue valueWithSize:imageSize];
+	[attributes setObject:sizeValue forKey:QTMovieFrameImageSize];
+    
+	/* get the current movie time - we'll pass this value to the
+     frameImageAtTime: method below */
+    QTTime time = QTMakeTime(5, 1);
+    //QTTime time = [movie currentTime];
+    
+	/* return an NSImage for the frame at the current time in the QTMovie */
+	NSImage *th = [movie frameImageAtTime:time
+                           withAttributes:attributes
+                                    error:&error];
+    if (error != nil) {
+        NSLog(@"Error making thumbnail: %@", [error localizedDescription]);
+        return;
+    }
+    NSLog(@"Setting thumbnail to %p", th);
+    [self setThumbnail:th];
 }
 
 - (void)dealloc
@@ -74,6 +104,7 @@ static NSOperationQueue *loadThumbnailQueue = nil;
 
 #pragma mark - Notifications
 
+/*
 - (void)loadThumbnail
 {
     NSImage *t;
@@ -118,7 +149,7 @@ static NSOperationQueue *loadThumbnailQueue = nil;
         [self release];
     }
 }
-
+*/
 #pragma mark - Accessors
 
 - (void)setFilePath:(NSString *)path

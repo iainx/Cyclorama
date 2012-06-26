@@ -11,8 +11,7 @@
 @interface VideoClipController : NSArrayController <NSTableViewDelegate,NSTableViewDataSource> {
 @private
     NSMetadataQuery *videoQuery;
-    
-    NSOperationQueue *clipLoaderQueue;
 }
 
+- (void)dequeueVideoItem;
 @end

@@ -23,4 +23,6 @@
 @property (readonly) QTMovie *movie;
 @property (nonatomic, readwrite, retain) NSImage *thumbnail;
 @property (readonly) QTTime duration;
+
+- (void)openMovie;
 @end

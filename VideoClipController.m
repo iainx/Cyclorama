@@ -12,15 +12,17 @@
 #import "VideoClipCell.h"
 #import "VideoClip.h"
 
-@implementation VideoClipController
+@implementation VideoClipController {
+    NSMutableArray *filesForThumbnailing;
+    CFRunLoopObserverRef observerRef;
+}
 
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     self = [super initWithCoder:aDecoder];
     
-    clipLoaderQueue = [[NSOperationQueue alloc] init];
-    
     videoQuery = [[NSMetadataQuery alloc] init];
+    filesForThumbnailing = [[NSMutableArray alloc] init];
     
     // We listen to any notification from the query
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
@@ -35,24 +37,17 @@
     return self;
 }
 
-- (void)awakeFromNib
-{
-}
-
 - (void)dealloc
 {
-    [clipLoaderQueue release];
-    clipLoaderQueue = nil;
+    [self stopIdleLoop];
+    
+    [filesForThumbnailing release];
+    filesForThumbnailing = nil;
     
     [super dealloc];
 }
 
 #pragma mark - Local methods
-
-- (void)videoClipReady:(NSNotification *)note
-{
-    [self addObject:[note object]];
-}
 
 - (void)queryNotification:(NSNotification *)note
 {
@@ -65,7 +60,6 @@
         NSArray *results = [[note object] results];
         NSUInteger count = [results count];
         
-        NSUInteger limit = 0;
         NSLog(@"Found %lu videos", count);
 
         for (NSMetadataItem *item in results) {
@@ -80,32 +74,57 @@
                 title = [path lastPathComponent];
             }
             
-            if (limit <= 12 || limit >= 32) {
-                limit++;
-                continue;
-            }
-            
             VideoClip *clip = [[VideoClip alloc] initWithFilePath:path title:title];
+            [self addObject:clip];
             
-            if (clip == nil) {
-                continue;
-            }
-            
-            /*
-            if (limit < 16) {
-                [self addObject:clip];
-            }
-             */
-            NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-            [nc addObserver:self
-                   selector:@selector(videoClipReady:)
-                       name:CYCVideoClipReady
-                     object:clip];
-            limit++;
+            [filesForThumbnailing addObject:clip];
         }
+        [self startIdleLoop];
     } else if ([[note name] isEqualToString:NSMetadataQueryGatheringProgressNotification]) {
         NSLog(@"progress update");
     }
+}
+
+static void
+dequeueAndThumbnail (CFRunLoopObserverRef ref,
+                     CFRunLoopActivity activity,
+                     void *info)
+{
+    VideoClipController *self = (VideoClipController *)info;
+    
+    NSLog(@"Dequeuing one");
+    [self dequeueVideoItem];
+}
+
+- (void)startIdleLoop
+{
+    int activities = kCFRunLoopBeforeWaiting;
+    
+    CFRunLoopObserverContext ctxt = {0, (void *)(self), NULL, NULL, NULL};
+    observerRef = CFRunLoopObserverCreate(NULL, activities, YES, 0,
+                                          &dequeueAndThumbnail, &ctxt);
+    CFRunLoopAddObserver(CFRunLoopGetCurrent(),
+                         observerRef,
+                         kCFRunLoopCommonModes);
+}
+
+- (void)stopIdleLoop
+{
+    CFRunLoopRemoveObserver(CFRunLoopGetCurrent(),
+                            observerRef, kCFRunLoopCommonModes);
+    CFRelease(observerRef);
+}
+
+- (void)dequeueVideoItem
+{
+    VideoClip *clip = [filesForThumbnailing objectAtIndex:0];
+    
+    [filesForThumbnailing removeObjectAtIndex:0];
+    if ([filesForThumbnailing count] == 0) {
+        [self stopIdleLoop];
+    }
+    
+    [clip openMovie];
 }
 
 #pragma mark - NSTableViewDelegate methods
