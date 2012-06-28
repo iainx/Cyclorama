@@ -50,21 +50,18 @@ static NSOperationQueue *loadThumbnailQueue = nil;
     NSURL *url = [NSURL fileURLWithPath:filePath];
     
     // Disabled QTOpenForPlaybackAttribute as it stops some thumbnails working
-    // Disabled QTMovieOpenAsyncRequiredAttribute as we need it to open sync.
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:url, QTMovieURLAttribute,
                           //[NSNumber numberWithBool:YES], QTMovieOpenForPlaybackAttribute,
                           [NSNumber numberWithBool:YES], QTMovieMutedAttribute,
                           [NSNumber numberWithBool:YES], QTMovieLoopsAttribute,
-                          //[NSNumber numberWithBool:YES], QTMovieOpenAsyncRequiredAttribute,
                           nil];
     NSError *error = nil;
     movie = [[QTMovie movieWithAttributes:dict error:&error] retain];
-    //movie = [[QTMovie movieWithFile:filePath error:&error] retain];
+    
     if (error != nil) {
         NSLog(@"Error getting movie: %@", [error localizedDescription]);
     }
-    [movie setAttribute:[NSNumber numberWithBool:YES] forKey:QTMovieLoopsAttribute];
-
+    
     NSMutableDictionary *attributes = [NSMutableDictionary dictionary];
     
 	// We'll specify a custom size of 95 X 120 for the returned image:
@@ -85,7 +82,7 @@ static NSOperationQueue *loadThumbnailQueue = nil;
         NSLog(@"Error making thumbnail: %@", [error localizedDescription]);
         return;
     }
-    NSLog(@"Setting thumbnail to %p", th);
+    
     [self setThumbnail:th];
 }
 

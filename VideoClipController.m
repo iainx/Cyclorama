@@ -119,11 +119,13 @@ dequeueAndThumbnail (CFRunLoopObserverRef ref,
 {
     VideoClip *clip = [filesForThumbnailing objectAtIndex:0];
     
+    NSLog(@"Dequeuing one");
+    
     [filesForThumbnailing removeObjectAtIndex:0];
     if ([filesForThumbnailing count] == 0) {
         [self stopIdleLoop];
     }
-    
+
     [clip openMovie];
 }
 
