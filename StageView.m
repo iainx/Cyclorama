@@ -6,6 +6,7 @@
 //  Copyright 2011 Sleep(5). All rights reserved.
 //
 
+#import "CycArrayController.h"
 #import "ActorFilter.h"
 #import "StageView.h"
 #import "VideoClip.h"

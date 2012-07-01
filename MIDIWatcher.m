@@ -99,7 +99,7 @@ midiInputCallback (const MIDIPacketList *list,
             
             NSDictionary *userInfo = 
                 [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:type], @"type",[NSNumber numberWithInt:channel], @"channel", [NSNumber numberWithChar:data1], @"data1", [NSNumber numberWithChar:data2], @"data2", nil];
-            [nc postNotificationName:FlareMIDIMessageNotification object:procRef userInfo:userInfo];
+            [nc postNotificationName:FlareMIDIMessageNotification object:(__bridge id)(procRef) userInfo:userInfo];
             
             iByte += size;
         }

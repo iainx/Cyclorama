@@ -15,6 +15,7 @@
 #import "StageView.h"
 #import "VideoLayer.h"
 #import "VideoClipController.h"
+#import "VideoClip.h"
 #import "CycFilterUIView.h"
 
 @implementation CycDocument
@@ -50,7 +51,10 @@
     return @"CycDocument";
 }
 
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+- (void)observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary *)change
+                       context:(void *)context
 {
     NSLog(@"keypath: %@ - %@", keyPath, [change description]);
     
@@ -136,7 +140,7 @@
                   returnCode:(NSInteger)code
                  contextInfo:(void *)contextInfo
 {
-    IKFilterBrowserPanel *filterBrowserPanel = (IKFilterBrowserPanel *)contextInfo;
+    IKFilterBrowserPanel *filterBrowserPanel = (__bridge IKFilterBrowserPanel *)contextInfo;
 
     // There appears to be a bug where NSCancelButton is sent when the OK button is clicked
     if (code == 0) {
@@ -159,7 +163,7 @@
     [filterBrowserPanel beginSheetWithOptions:NULL
                                modalForWindow:[stageView window]
                              modalDelegate:self 
-                               didEndSelector:@selector(addFilterSheetDidEnd:returnCode:contextInfo:) contextInfo:filterBrowserPanel];
+                               didEndSelector:@selector(addFilterSheetDidEnd:returnCode:contextInfo:) contextInfo:(__bridge void *)(filterBrowserPanel)];
 }
 
 - (IBAction)playSet:(id)sender

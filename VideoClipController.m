@@ -90,7 +90,7 @@ dequeueAndThumbnail (CFRunLoopObserverRef ref,
                      CFRunLoopActivity activity,
                      void *info)
 {
-    VideoClipController *self = (VideoClipController *)info;
+    VideoClipController *self = (__bridge VideoClipController *)info;
     
     NSLog(@"Dequeuing one");
     [self dequeueVideoItem];

@@ -15,17 +15,6 @@
 @synthesize filePath, movie, thumbnail, title;
 @synthesize duration;
 
-static NSOperationQueue *loadThumbnailQueue = nil;
-
-+ (void)initialize
-{
-    if (loadThumbnailQueue == nil) {
-        loadThumbnailQueue = [[NSOperationQueue alloc] init];
-        [loadThumbnailQueue setMaxConcurrentOperationCount:1];
-        [loadThumbnailQueue setName:@"Thumbnailer"];
-    }
-}
-
 - (id)initWithFilePath:(NSString *)_filePath title:(NSString *)_title
 {
     self = [super init];
@@ -33,15 +22,6 @@ static NSOperationQueue *loadThumbnailQueue = nil;
     [self setFilePath:_filePath];
     [self setTitle:_title];
 
-    // FIXME: Don't really know if this is needed
-    //[movie detachFromCurrentThread];
-    /*
-    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-    [nc addObserver:self
-           selector:@selector(movieLoadStateChanged:) 
-               name:QTMovieLoadStateDidChangeNotification
-             object:movie];
-     */
     return self;
 }
 
@@ -99,54 +79,6 @@ static NSOperationQueue *loadThumbnailQueue = nil;
     return [NSString stringWithFormat:@"%@", filePath];
 }
 
-#pragma mark - Notifications
-
-/*
-- (void)loadThumbnail
-{
-    NSImage *t;
-    
-    NSLog(@"Loading thumbnail for %@", filePath);
-    
-    [QTMovie enterQTKitOnThread];
-    if ([movie attachToCurrentThread] == NO) {
-        NSLog(@"Error attaching to operation thread");
-    }
-    
-    t = [movie posterImage];
-    
-    
-    if ([movie detachFromCurrentThread] == NO) {
-        NSLog(@"Error detaching from operation thread");
-    }
-    [QTMovie exitQTKitOnThread];
-    
-    NSLog(@"Setting thumbnail %p for %@", t, filePath);
-    [self performSelectorOnMainThread:@selector(setThumbnail:) withObject:t waitUntilDone:YES];
-    NSLog(@"setThumbnail complete for %@", filePath);
-}
-
-- (void)movieLoadStateChanged:(NSNotification *)note
-{
-    QTMovie *m = [note object];
-    
-    NSNumber *state = [m attributeForKey:QTMovieLoadStateAttribute];;
-    NSLog(@"Load state changed to: %ld for %@", [state longValue], filePath);
-    
-    if ([state longValue] > QTMovieLoadStatePlayable) {
-        NSInvocationOperation *op = [[NSInvocationOperation alloc] initWithTarget:self
-                                                                         selector:@selector(loadThumbnail)
-                                                                           object:nil];
-        
-        NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-        [nc postNotificationName:CYCVideoClipReady object:self];
-        
-        [loadThumbnailQueue addOperation:op];
-    } else if ([state longValue] == -1L) {
-        [self release];
-    }
-}
-*/
 #pragma mark - Accessors
 
 - (void)setFilePath:(NSString *)path
