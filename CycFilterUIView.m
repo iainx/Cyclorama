@@ -7,6 +7,8 @@
 //
 
 #import <Quartz/Quartz.h>
+#import "ActorFilter.h"
+#import "FilterParameter.h"
 #import "CycFilterUIView.h"
 #import "CycParameterLinearViewController.h"
 #import "CycParameterXYViewController.h"
@@ -22,7 +24,7 @@
 @synthesize filter = _filter;
 
 - (id)initWithFrame:(NSRect)frameRect 
-          forFilter:(CIFilter *)filter
+          forFilter:(ActorFilter *)filter
      forScreenWidth:(double)_screenWidth
        screenHeight:(double)_screenHeight
 {
@@ -33,17 +35,13 @@
     
     _filter = [filter retain];
     
-    NSDictionary *attributes = [filter attributes];
-    
     double y = 10.0;
     double x = 10.0;
 
-    for (NSString *inputName in xyParams) {
-        NSDictionary *attrs = [attributes objectForKey:inputName];
+    for (FilterParameter *fp in xyParams) {
         NSRect paramFrame = NSMakeRect(x, y, 0.0, 0.0);
-        NSView *attrView = [self viewForParameterNamed:inputName 
-                                        withAttributes:attrs 
-                                               inFrame:paramFrame];
+        NSView *attrView = [self viewForParameter:fp
+                                          inFrame:paramFrame];
         [self addSubview:attrView];
         
         y += [attrView frame].size.height;
@@ -56,12 +54,10 @@
     
     y = 10.0;
 
-    for (NSString *inputName in linearParams) {
-        NSDictionary *attrs = [attributes objectForKey:inputName];
+    for (FilterParameter *fp in linearParams) {
         NSRect paramFrame = NSMakeRect(x, y, 0.0, 0.0);
-        NSView *attrView = [self viewForParameterNamed:inputName 
-                                        withAttributes:attrs
-                                               inFrame:paramFrame];
+        NSView *attrView = [self viewForParameter:fp
+                                          inFrame:paramFrame];
         [self addSubview:attrView];
         
         y += [attrView frame].size.height;
@@ -83,32 +79,32 @@
     return self;
 }
 
-- (id)initWithFilter:(CIFilter *)filter
+- (id)initWithFilter:(ActorFilter *)filter
       forScreenWidth:(double)_screenWidth
         screenHeight:(double)_screenHeight
 {
     NSRect frame = NSZeroRect;
+    NSDictionary *params = [filter parameters];
+    /*
     NSArray *inputKeys = [filter inputKeys];
     NSDictionary *attributes = [filter attributes];
+    */
     
     xyParams = [[NSMutableArray alloc] init];
     linearParams = [[NSMutableArray alloc] init];
     
-    for (NSString *inputName in inputKeys) {
-        if ([inputName isEqualToString:@"inputImage"]) {
-            continue;
-        }
+    NSLog(@"Params is %@", [params description]);
+    for (FilterParameter *fp in [params allValues]) {
+        NSString *attrClass = [fp className];
         
-        NSDictionary *attrs = [attributes objectForKey:inputName];
-        
-        NSString *attrClass = [attrs objectForKey:@"CIAttributeClass"];
-        NSLog(@"AttrType: %@", attrClass);
         if ([attrClass isEqualToString:@"CIVector"]) {
-            [xyParams addObject:inputName];
+            NSLog(@"Adding CIVector");
+            [xyParams addObject:fp];
         } else if ([attrClass isEqualToString:@"NSNumber"]) {
-            [linearParams addObject:inputName];
+            NSLog(@"Adding NSNumber");
+            [linearParams addObject:fp];
         } else {
-            NSLog(@"Unknown class: %@ - %@", attrClass, inputName);
+            NSLog(@"Unknown class: %@ - %@", attrClass, [fp name]);
         }
     }
     
@@ -119,6 +115,7 @@
     frame.size.width = 800;
 
     NSLog(@"Height is %f", frame.size.height);
+    
     [self initWithFrame:frame 
               forFilter:filter 
          forScreenWidth:_screenWidth 
@@ -145,6 +142,7 @@ static void *CycFilterUIViewObservationContext = (void *)@"CycFilterUIViewObserv
                         change:(NSDictionary *)change
                        context:(void *)context
 {
+    /*
     CycParameterViewController *controller = (CycParameterViewController *)object;
     
     if (context == &CycFilterUIViewObservationContext) {
@@ -162,33 +160,32 @@ static void *CycFilterUIViewObservationContext = (void *)@"CycFilterUIViewObserv
     } else {
         [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
     }
+     */
 }
 
-- (NSView *)viewForParameterNamed:(NSString *)pName 
-                   withAttributes:(NSDictionary *)attrs 
-                          inFrame:(NSRect)frame
+- (NSView *)viewForParameter:(FilterParameter *)fp
+                     inFrame:(NSRect)frame
 {
     CycParameterViewController *viewController;
     CycParameterXYViewController *xy = nil;
     NSView *view;
     NSString *attrClass;
     
-    attrClass = [attrs objectForKey:@"CIAttributeClass"];
+    attrClass = [fp className];
     if ([attrClass isEqualToString:@"NSNumber"]) {
         viewController = [[CycParameterLinearViewController alloc] init];
     } else if ([attrClass isEqualToString:@"CIVector"]) {
         xy = [[CycParameterXYViewController alloc] init];
         
-
         viewController = (CycParameterViewController *)xy;
     } else {
         NSLog(@"Unknown attrType: %@", attrClass);
         return nil;
     }
     
-    [viewController setParamName:pName];
+    [viewController setParamName:[fp name]];
     view = [viewController view];
-    [viewController setAttributes:attrs forFilter:_filter];
+    [viewController setParameter:fp forFilter:_filter];
     
     // if xy is nil these will just return
     [xy setMaxX:videoWidth];

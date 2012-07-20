@@ -8,6 +8,7 @@
 
 #import <Quartz/Quartz.h>
 #import "ActorFilter.h"
+#import "FilterParameter.h"
 #import "NSString+UUID.h"
 
 @implementation ActorFilter
@@ -18,10 +19,10 @@
 @synthesize uniqueID;
 @synthesize filter = _filter;
 
-- (id)initWithName:(NSString *)_name forFilterNamed:(NSString *)_filterName
+- (id)initWithName:(NSString *)_name
+    forFilterNamed:(NSString *)_filterName
 {
     self = [super init];
-    parameters = [[NSMutableDictionary alloc] init];
     
     if (_name) {
         name = [_name copy];
@@ -31,6 +32,14 @@
     filterName = [_filterName copy];
     
     uniqueID = [[NSString stringWithUUID] retain];
+    
+    _filter = [[CIFilter filterWithName:[self filterName]] retain];
+    [_filter setName:uniqueID];
+    
+    parameters = [[NSMutableDictionary alloc] init];
+    
+    // Parse the filter details to get the names of the parameters
+    [self fillParametersForFilter:_filter];
     
     return self;
 }
@@ -67,21 +76,49 @@
     [super dealloc];
 }
 
+- (void)fillParametersForFilter:(CIFilter *)f
+{
+    NSArray *inputKeys = [_filter inputKeys];
+    NSDictionary *attributes = [_filter attributes];
+    
+    NSLog(@"HEllo? %@", [inputKeys description]);
+    for (NSString *inputName in inputKeys) {
+        if ([inputName isEqualToString:@"inputImage"]) {
+            continue;
+        }
+        
+        NSDictionary *attrs = [attributes valueForKey:inputName];
+        
+        NSString *className = [attrs objectForKey:@"CIAttributeClass"];
+        FilterParameter *param = [[FilterParameter alloc] initWithName:inputName
+                                                             className:className];
+        
+        [param setMinValue:[attrs objectForKey:@"CIAttributeSliderMin"]];
+        [param setMaxValue:[attrs objectForKey:@"CIAttributeSliderMax"]];
+        [param setDefaultValue:[attrs objectForKey:@"CIAttributeDefault"]];
+        [param setDisplayName:[attrs objectForKey:@"CIAttributeDisplayName"]];
+        
+        NSLog(@"Adding param %@", inputName);
+        [parameters setObject:param
+                       forKey:inputName];
+        
+        /*
+         NSString *attrClass = [attrs objectForKey:@"CIAttributeClass"];
+         NSLog(@"AttrType: %@", attrClass);
+         
+         if ([attrClass isEqualToString:@"CIVector"]) {
+         } else if ([attrClass isEqualToString:@"NSNumber"]) {
+         } else {
+         NSLog(@"Unknown class: %@ - %@", attrClass, inputName);
+         }
+         */
+    }
+}
+
 #pragma mark - Accessors
 - (CIFilter *)filter
 {
-    if (_filter == nil) {
-        _filter = [[CIFilter filterWithName:[self filterName]] retain];
-        [_filter setName:uniqueID];
-    }
-    
     return _filter;
-}
-
-- (void)addValue:(id)value forParameter:(NSString *)paramName
-{
-    [parameters setValue:value
-                  forKey:paramName];
 }
 
 @end

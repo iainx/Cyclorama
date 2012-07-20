@@ -140,7 +140,7 @@
                   returnCode:(NSInteger)code
                  contextInfo:(void *)contextInfo
 {
-    IKFilterBrowserPanel *filterBrowserPanel = (__bridge IKFilterBrowserPanel *)contextInfo;
+    IKFilterBrowserPanel *filterBrowserPanel = (IKFilterBrowserPanel *)contextInfo;
 
     // There appears to be a bug where NSCancelButton is sent when the OK button is clicked
     if (code == 0) {
@@ -163,7 +163,7 @@
     [filterBrowserPanel beginSheetWithOptions:NULL
                                modalForWindow:[stageView window]
                              modalDelegate:self 
-                               didEndSelector:@selector(addFilterSheetDidEnd:returnCode:contextInfo:) contextInfo:(__bridge void *)(filterBrowserPanel)];
+                               didEndSelector:@selector(addFilterSheetDidEnd:returnCode:contextInfo:) contextInfo:(void *)(filterBrowserPanel)];
 }
 
 - (IBAction)playSet:(id)sender
@@ -206,10 +206,10 @@
     ActorFilter *selectedFilter = [filters objectAtIndex:selectedRow];
     
     NSLog(@"Filter selection did change %ld - %@", selectedRow, [selectedFilter name]);
-    CIFilter *currentFilter = [stageView filterForCurrentLayerAt:selectedRow];
+    //CIFilter *currentFilter = [stageView filterForCurrentLayerAt:selectedRow];
     NSRect stageViewRect = [stageView frame];
     
-    currentFilterView = [[[CycFilterUIView alloc] initWithFilter:currentFilter 
+    currentFilterView = [[[CycFilterUIView alloc] initWithFilter:selectedFilter
                                                   forScreenWidth:stageViewRect.size.width
                                                     screenHeight:stageViewRect.size.height] autorelease];
 

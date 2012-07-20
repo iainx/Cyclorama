@@ -7,6 +7,8 @@
 //
 
 #import "CycParameterViewController.h"
+#import "ActorFilter.h"
+#import "FilterParameter.h"
 
 @implementation CycParameterViewController
 @synthesize name;
@@ -22,8 +24,8 @@
     return self;
 }
 
-- (void)setAttributes:(NSDictionary *)attrs 
-            forFilter:(CIFilter *)_filter
+- (void)setParameter:(FilterParameter *)param
+           forFilter:(ActorFilter *)_filter
 {
     NSLog(@"Subclass didn't implement setAttributes:forFilter:");
 }

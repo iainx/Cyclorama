@@ -41,6 +41,7 @@
 		AE7D66D6147563910099875F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE7D66D4147563910099875F /* QuartzCore.framework */; };
 		AE7D66DF147566380099875F /* CycDocument.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE7D66DD147566380099875F /* CycDocument.xib */; };
 		AE7D66E0147566380099875F /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE7D66DE147566380099875F /* MainMenu.xib */; };
+		AEC028B515A24A0A0033BB3C /* FilterParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = AEC028B415A24A0A0033BB3C /* FilterParameter.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -106,6 +107,8 @@
 		AE7D66D4147563910099875F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		AE7D66DD147566380099875F /* CycDocument.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CycDocument.xib; sourceTree = "<group>"; };
 		AE7D66DE147566380099875F /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
+		AEC028B315A24A0A0033BB3C /* FilterParameter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterParameter.h; sourceTree = "<group>"; };
+		AEC028B415A24A0A0033BB3C /* FilterParameter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterParameter.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +153,8 @@
 			children = (
 				AE7D669B147562080099875F /* ActorFilter.h */,
 				AE7D669C147562080099875F /* ActorFilter.m */,
+				AEC028B315A24A0A0033BB3C /* FilterParameter.h */,
+				AEC028B415A24A0A0033BB3C /* FilterParameter.m */,
 				AE7D669D147562080099875F /* CycAppDelegate.h */,
 				AE7D669E147562080099875F /* CycAppDelegate.m */,
 				AE7D66CC147562FA0099875F /* CycArrayController.h */,
@@ -330,6 +335,7 @@
 				AE051C3F149972B900A8FB07 /* CycParameterXYView.m in Sources */,
 				AE051C40149972B900A8FB07 /* CycParameterXYViewController.m in Sources */,
 				AE051C42149972B900A8FB07 /* CycXYView.m in Sources */,
+				AEC028B515A24A0A0033BB3C /* FilterParameter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

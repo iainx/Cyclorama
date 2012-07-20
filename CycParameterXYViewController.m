@@ -9,6 +9,8 @@
 #import "CycParameterXYViewController.h"
 #import "CycParameterXYView.h"
 #import "CycXYView.h"
+#import "ActorFilter.h"
+#import "FilterParameter.h"
 
 @implementation CycParameterXYViewController
 @synthesize nameLabel;
@@ -50,10 +52,10 @@
     return view;
 }
 
-- (void)setAttributes:(NSDictionary *)attrs 
-            forFilter:(CIFilter *)_filter
+- (void)setParameter:(FilterParameter *)param
+           forFilter:(ActorFilter *)_filter
 {
-    NSString *paramName = [attrs objectForKey:@"CIAttributeDisplayName"];
+    NSString *paramName = [param displayName];
     [self setName:paramName];
 
     //[xyView setVector:defaultVector];

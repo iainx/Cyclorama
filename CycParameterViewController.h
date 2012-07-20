@@ -8,10 +8,13 @@
 
 #import <Cocoa/Cocoa.h>
 
+@class ActorFilter;
+@class FilterParameter;
+
 @interface CycParameterViewController : NSViewController
 
 @property (copy) NSString *name;
 @property (readwrite, copy) NSString *paramName;
-- (void)setAttributes:(NSDictionary *)attrs forFilter:(CIFilter *)_filter;
+- (void)setParameter:(FilterParameter *)param forFilter:(ActorFilter *)_filter;
 
 @end

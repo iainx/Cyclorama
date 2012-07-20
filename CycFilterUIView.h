@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 
+@class ActorFilter;
 @interface CycFilterUIView : NSView {
     NSMutableArray *xyParams;
     NSMutableArray *linearParams;
@@ -15,8 +16,8 @@
     double videoHeight;
 }
 
-@property (readwrite, retain) CIFilter *filter;
+@property (readwrite, retain) ActorFilter *filter;
 
-- (id)initWithFilter:(CIFilter *)filter forScreenWidth:(double)_width screenHeight:(double)_height;
+- (id)initWithFilter:(ActorFilter *)filter forScreenWidth:(double)_width screenHeight:(double)_height;
 
 @end

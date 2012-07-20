@@ -27,6 +27,5 @@
 @property (readonly) CIFilter *filter;
 
 - (id)initWithName:(NSString *)_name forFilterNamed:(NSString *)_filterName;
-- (void)addValue:(id)value forParameter:(NSString *)paramName;
 
 @end

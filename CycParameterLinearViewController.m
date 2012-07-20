@@ -9,6 +9,8 @@
 #import <Cocoa/Cocoa.h>
 #import <QuartzCore/QuartzCore.h>
 #import "CycParameterLinearViewController.h"
+#import "ActorFilter.h"
+#import "FilterParameter.h"
 
 @implementation CycParameterLinearViewController
 @synthesize name;
@@ -34,21 +36,19 @@
     return [self initWithNibName:@"CycParameterLinearViewController" bundle:nil];
 }
 
-- (void)setAttributes:(NSDictionary *)attrs 
-            forFilter:(CIFilter *)_filter
+- (void)setParameter:(FilterParameter *)param
+           forFilter:(ActorFilter *)_filter
 {
-    NSString *displayName = [attrs objectForKey:@"CIAttributeDisplayName"];
-    [self setName:displayName];
+    [self setName:[param displayName]];
     
-    NSNumber *minValue = [attrs objectForKey:@"CIAttributeSliderMin"];
+    NSNumber *minValue = [param minValue];
     [self setMinParamValue:[minValue doubleValue]];
     
-    NSNumber *maxValue = [attrs objectForKey:@"CIAttributeSliderMax"];
+    NSNumber *maxValue = [param maxValue];
     [self setMaxParamValue:[maxValue doubleValue]];
     
-    //NSNumber *defaultValue = [attrs objectForKey:@"CIAttributeDefault"];
     NSLog(@"Looking for %@", [self paramName]);
-    NSNumber *value = [_filter valueForKey:[self paramName]];
+    NSNumber *value = [param value];
     NSLog(@"Setting value to %p: %f", value, [value doubleValue]);
     [self setParamValue:[value doubleValue]];
 }
