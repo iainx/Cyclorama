@@ -56,8 +56,6 @@
                         change:(NSDictionary *)change
                        context:(void *)context
 {
-    NSLog(@"keypath: %@ - %@", keyPath, [change description]);
-    
     if ([keyPath isEqualToString:@"selection"]) {
         //VideoClip *selectedClip = [videoClipController selection];
         NSArray *selectedObjects = [videoClipController selectedObjects];

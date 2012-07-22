@@ -41,7 +41,6 @@
 
 - (void)setClip:(VideoClip *)clip
 {
-    NSLog(@"Collection item view %p: clip set. clipView is %p", clip, clipView);
     [clipView setClip:clip];
 }
 

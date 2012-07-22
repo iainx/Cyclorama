@@ -108,8 +108,20 @@
         }
     }
     
-    double xyHeight = [xyParams count] * 130.0 + (([xyParams count] - 1) * 10);
-    double linearHeight = [linearParams count] * 28 + (([linearParams count] - 1) * 10);
+    double xyHeight;
+    double linearHeight;
+    
+    if ([xyParams count] > 0) {
+        xyHeight = [xyParams count] * 130.0 + (([xyParams count] - 1) * 10);
+    } else {
+        xyHeight = 0;
+    }
+    
+    if ([linearParams count] > 0) {
+        linearHeight = [linearParams count] * 28 + (([linearParams count] - 1) * 10);
+    } else {
+        linearHeight = 0.0;
+    }
 
     frame.size.height = MAX(xyHeight, linearHeight) + 20.0;
     frame.size.width = 800;
@@ -142,6 +154,7 @@ static void *CycFilterUIViewObservationContext = (void *)@"CycFilterUIViewObserv
                         change:(NSDictionary *)change
                        context:(void *)context
 {
+    NSLog(@"value changed: %@", [change description]);
     /*
     CycParameterViewController *controller = (CycParameterViewController *)object;
     

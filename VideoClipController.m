@@ -92,7 +92,6 @@ dequeueAndThumbnail (CFRunLoopObserverRef ref,
 {
     VideoClipController *self = (__bridge VideoClipController *)info;
     
-    NSLog(@"Dequeuing one");
     [self dequeueVideoItem];
 }
 
@@ -118,8 +117,6 @@ dequeueAndThumbnail (CFRunLoopObserverRef ref,
 - (void)dequeueVideoItem
 {
     VideoClip *clip = [filesForThumbnailing objectAtIndex:0];
-    
-    NSLog(@"Dequeuing one");
     
     [filesForThumbnailing removeObjectAtIndex:0];
     if ([filesForThumbnailing count] == 0) {

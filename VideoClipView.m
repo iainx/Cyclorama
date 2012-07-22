@@ -48,7 +48,7 @@
 {
     VideoClip *_clip = (VideoClip *)object;
     
-    NSLog(@"%@ changed for %@: %@", keyPath, [_clip filePath], [change description]);
+    //NSLog(@"%@ changed for %@: %@", keyPath, [_clip filePath], [change description]);
     [self setThumbnail:[_clip thumbnail]];
 }
 

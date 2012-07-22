@@ -16,7 +16,6 @@
     NSCollectionViewItem *item = [super newItemForRepresentedObject:object];
     VideoClipCollectionItemView *view = (VideoClipCollectionItemView *)[item view];
 
-    NSLog(@"Created new item");
     [view setClip:(VideoClip *)object];
     
     return item;
