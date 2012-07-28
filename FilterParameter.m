@@ -7,9 +7,11 @@
 //
 
 #import "FilterParameter.h"
+#import "ActorFilter.h"
 
 @implementation FilterParameter
 
+@synthesize filter = _filter;
 @synthesize name = _name;
 @synthesize displayName = _displayName;
 @synthesize value = _value;
@@ -24,8 +26,11 @@
 
 - (id)initWithName:(NSString *)name
          className:(NSString *)className
+         forFilter:(ActorFilter *)filter
 {
     self = [super init];
+    
+    _filter = filter; // Weak reference;
     
     _name = [name retain];
     _className = [className retain];
@@ -55,6 +60,7 @@
 {
     FilterParameter *copy = [[[self class] allocWithZone:zone] init];
 
+    copy->_filter = nil;
     copy->_name = nil;
     copy->_className = nil;
     copy->_displayName = nil;
@@ -65,6 +71,7 @@
     copy->_typeHint = nil;
     copy->_value = nil;
     
+    [copy setFilter:[self filter]];
     [copy setName:[self name]];
     [copy setClassName:[self className]];
     [copy setDisplayName:[self displayName]];

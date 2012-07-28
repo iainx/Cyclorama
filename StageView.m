@@ -102,8 +102,17 @@
                         change:(NSDictionary *)change
                        context:(void *)context
 {
+    FilterParameter *param = (FilterParameter *)object;
+    ActorFilter *af = [param filter];
+    
     NSLog(@"Got change for %@ of object: %@\n%@",
           keyPath, [object description], [change description]);
+    
+    NSString *filterKeyPath = [NSString stringWithFormat:@"filters.%@.%@", [af uniqueID], [param name]];
+    
+    NSLog(@"Keypath: %@", filterKeyPath);
+    VideoLayer *currentLayer = [[layerController arrangedObjects] objectAtIndex:0];
+    [currentLayer setValue:[param value] forKeyPath:filterKeyPath];
 }
 
 - (void)objectAdded:(NSNotification *)note

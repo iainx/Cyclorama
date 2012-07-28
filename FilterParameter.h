@@ -8,8 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
+@class ActorFilter;
 @interface FilterParameter : NSObject <NSCopying>
 
+@property (readwrite, nonatomic, assign) ActorFilter *filter;
 @property (readwrite, nonatomic, strong) id value;
 @property (readwrite, nonatomic, strong) NSString *className;
 
@@ -23,5 +25,6 @@
 @property (readwrite, nonatomic, strong) NSString *typeHint;
 
 - (id)initWithName:(NSString *)name
-         className:(NSString *)className;
+         className:(NSString *)className
+         forFilter:(ActorFilter *)filter;
 @end

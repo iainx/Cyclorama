@@ -91,7 +91,8 @@
         
         NSString *className = [attrs objectForKey:@"CIAttributeClass"];
         FilterParameter *param = [[FilterParameter alloc] initWithName:inputName
-                                                             className:className];
+                                                             className:className
+                                                             forFilter:self];
         
         [param setMinValue:[attrs objectForKey:@"CIAttributeSliderMin"]];
         [param setMaxValue:[attrs objectForKey:@"CIAttributeSliderMax"]];
