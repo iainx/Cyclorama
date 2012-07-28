@@ -143,8 +143,19 @@
 {
     IKFilterBrowserPanel *filterBrowserPanel = (IKFilterBrowserPanel *)contextInfo;
 
-    // There appears to be a bug where NSCancelButton is sent when the OK button is clicked
-    if (code == 0) {
+    // There is a bug between that was fixed in Mountain Lion (10.8)
+    // where the value which the sheet returned was swapped
+    // so clicking Cancel returned NSOKButton and clicking OK returned NSCancelButton
+    // Swap them around if running on
+    if (NSAppKitVersionNumber <= NSAppKitVersionNumber10_7_2) {
+        if (code == NSOKButton) {
+            code = NSCancelButton;
+        } else if (code == NSCancelButton) {
+            code = NSOKButton;
+        }
+    }
+    
+    if (code == NSOKButton) {
         ActorFilter *af = [[ActorFilter alloc] initWithName:nil 
                                              forFilterNamed:[filterBrowserPanel filterName]];
         [filterController addObject:af];
