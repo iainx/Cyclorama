@@ -11,6 +11,7 @@
 #import "StageView.h"
 #import "VideoClip.h"
 #import "VideoLayer.h"
+#import "FilterParameter.h"
 
 @implementation StageView
 
@@ -96,6 +97,15 @@
     return videoClip;
 }
 
+- (void)observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary *)change
+                       context:(void *)context
+{
+    NSLog(@"Got change for %@ of object: %@\n%@",
+          keyPath, [object description], [change description]);
+}
+
 - (void)objectAdded:(NSNotification *)note
 {
     NSDictionary *userInfo = [note userInfo];
@@ -107,8 +117,17 @@
     //filter = [CIFilter filterWithName:[af filterName]];
     filter = [af filter];
     
-    [filter setDefaults];
-    [filter setValuesForKeysWithDictionary:[af parameters]];
+    NSDictionary *params = [af parameters];
+    
+    __block typeof (self)weakSelf = self;
+    [params enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+        FilterParameter *param = (FilterParameter *)obj;
+        
+        [param addObserver:weakSelf
+                forKeyPath:@"value"
+                   options:NSKeyValueObservingOptionNew
+                   context:NULL];
+    }];
     
     VideoLayer *currentLayer = [[layerController arrangedObjects] objectAtIndex:0];
     NSLog(@"Setting filter on %p", currentLayer);
@@ -142,12 +161,20 @@
     for (ActorFilter *af in [filterController arrangedObjects]) {
         CIFilter *filter;
         
+        NSDictionary *params = [af parameters];
+        
+        __block typeof (self)weakSelf = self;
+        [params enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+            FilterParameter *param = (FilterParameter *)obj;
+            
+            [param addObserver:weakSelf
+                    forKeyPath:@"value"
+                       options:NSKeyValueObservingOptionNew
+                       context:NULL];
+        }];
+
         //filter = [CIFilter filterWithName:[af filterName]];
         filter = [af filter];
-        
-        // Set defaults and then anything custom
-        [filter setDefaults];
-        [filter setValuesForKeysWithDictionary:[af parameters]];
         
         [currentLayer addFilter:filter atIndex:idx];
         idx++;

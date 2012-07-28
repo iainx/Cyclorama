@@ -37,11 +37,11 @@
 }
 
 - (void)setParameter:(FilterParameter *)param
-           forFilter:(ActorFilter *)_filter
 {
     [self setName:[param displayName]];
     
     NSNumber *minValue = [param minValue];
+    NSLog(@"Min value: %f", [minValue doubleValue]);
     [self setMinParamValue:[minValue doubleValue]];
     
     NSNumber *maxValue = [param maxValue];
@@ -51,6 +51,8 @@
     NSNumber *value = [param value];
     NSLog(@"Setting value to %p: %f", value, [value doubleValue]);
     [self setParamValue:[value doubleValue]];
+    
+    [super setParameter:param];
 }
 
 @end

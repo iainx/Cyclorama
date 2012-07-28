@@ -56,6 +56,8 @@
                         change:(NSDictionary *)change
                        context:(void *)context
 {
+    NSLog(@"Got keypath: %@", keyPath);
+    
     if ([keyPath isEqualToString:@"selection"]) {
         //VideoClip *selectedClip = [videoClipController selection];
         NSArray *selectedObjects = [videoClipController selectedObjects];
@@ -68,6 +70,7 @@
         NSLog(@"Video clip: %@", [selectedClip description]);
     
         [stageView setVideoClip:selectedClip];
+        return;
     }
 }
 
@@ -145,6 +148,12 @@
         ActorFilter *af = [[ActorFilter alloc] initWithName:nil 
                                              forFilterNamed:[filterBrowserPanel filterName]];
         [filterController addObject:af];
+        
+        NSDictionaryController *fc = [[NSDictionaryController alloc] initWithContent:[af parameters]];
+        [fc addObserver:self
+             forKeyPath:@"arrangedObjects.value"
+                options:NSKeyValueObservingOptionNew
+                context:NULL];
         [af release];
     }
 

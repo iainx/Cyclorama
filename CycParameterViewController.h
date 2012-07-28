@@ -15,6 +15,6 @@
 
 @property (copy) NSString *name;
 @property (readwrite, copy) NSString *paramName;
-- (void)setParameter:(FilterParameter *)param forFilter:(ActorFilter *)_filter;
+@property (readwrite, retain, nonatomic) FilterParameter *parameter;
 
 @end

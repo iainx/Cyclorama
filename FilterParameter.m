@@ -35,6 +35,13 @@
     return self;
 }
 
+- (id)init
+{
+    self =[super init];
+    
+    return self;
+}
+
 - (void)dealloc
 {
     [_name release];
@@ -42,6 +49,33 @@
     [_value release];
     
     [super dealloc];
+}
+
+- (id)copyWithZone:(NSZone *)zone
+{
+    FilterParameter *copy = [[[self class] allocWithZone:zone] init];
+
+    copy->_name = nil;
+    copy->_className = nil;
+    copy->_displayName = nil;
+    copy->_defaultValue = nil;
+    copy->_localizedKey = nil;
+    copy->_maxValue = nil;
+    copy->_minValue = nil;
+    copy->_typeHint = nil;
+    copy->_value = nil;
+    
+    [copy setName:[self name]];
+    [copy setClassName:[self className]];
+    [copy setDisplayName:[self displayName]];
+    [copy setDefaultValue:[self defaultValue]];
+    [copy setLocalizedKey:[self localizedKey]];
+    [copy setMaxValue:[self maxValue]];
+    [copy setMinValue:[self minValue]];
+    [copy setTypeHint:[self typeHint]];
+    [copy setValue:[self value]];
+    
+    return copy;
 }
 
 - (NSString *)description

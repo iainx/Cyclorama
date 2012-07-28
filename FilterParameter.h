@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface FilterParameter : NSObject
+@interface FilterParameter : NSObject <NSCopying>
 
 @property (readwrite, nonatomic, strong) id value;
 @property (readwrite, nonatomic, strong) NSString *className;

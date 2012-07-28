@@ -154,26 +154,14 @@ static void *CycFilterUIViewObservationContext = (void *)@"CycFilterUIViewObserv
                         change:(NSDictionary *)change
                        context:(void *)context
 {
-    NSLog(@"value changed: %@", [change description]);
-    /*
     CycParameterViewController *controller = (CycParameterViewController *)object;
     
     if (context == &CycFilterUIViewObservationContext) {
-        NSLog(@"%@ changed on param %@ - %@", keyPath, [controller paramName], [change description]);
-        NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
-        
-        [userInfo setObject:[change objectForKey:@"new"] forKey:@"value"];
-        [userInfo setObject:[controller paramName] forKey:@"paramName"];
-        
-        NSNotification *note = [NSNotification notificationWithName:CycFilterValueChangedNotification
-                                                             object:self
-                                                           userInfo:userInfo];
-        NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-        [nc postNotification:note];
+        FilterParameter *param = [controller parameter];
+        [param setValue:[change objectForKey:@"new"]];
     } else {
         [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
     }
-     */
 }
 
 - (NSView *)viewForParameter:(FilterParameter *)fp
@@ -198,7 +186,7 @@ static void *CycFilterUIViewObservationContext = (void *)@"CycFilterUIViewObserv
     
     [viewController setParamName:[fp name]];
     view = [viewController view];
-    [viewController setParameter:fp forFilter:_filter];
+    [viewController setParameter:fp];
     
     // if xy is nil these will just return
     [xy setMaxX:videoWidth];

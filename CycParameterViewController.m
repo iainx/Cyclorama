@@ -13,6 +13,7 @@
 @implementation CycParameterViewController
 @synthesize name;
 @synthesize paramName;
+@synthesize parameter;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -24,9 +25,4 @@
     return self;
 }
 
-- (void)setParameter:(FilterParameter *)param
-           forFilter:(ActorFilter *)_filter
-{
-    NSLog(@"Subclass didn't implement setAttributes:forFilter:");
-}
 @end

@@ -53,12 +53,12 @@
 }
 
 - (void)setParameter:(FilterParameter *)param
-           forFilter:(ActorFilter *)_filter
 {
     NSString *paramName = [param displayName];
     [self setName:paramName];
 
     //[xyView setVector:defaultVector];
+    [super setParameter:param];
 }
 
 - (void)setValueX:(double)_valueX
