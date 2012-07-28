@@ -79,12 +79,6 @@
     [super windowControllerDidLoadNib:aController];
     
     [stageView setLayerController:layerController];
-    /*
-    [stageView bind:@"videoClip"
-           toObject:videoClipController
-        withKeyPath:@"selection"
-            options:nil];
-    */
     [videoClipController addObserver:self
                           forKeyPath:@"selection"
                              options:0
@@ -97,10 +91,6 @@
            selector:@selector(filterSelectionDidChange:)
                name:NSTableViewSelectionDidChangeNotification
              object:filterTableView];
-    [nc addObserver:self
-           selector:@selector(filterValueDidChange:)
-               name:CycFilterValueChangedNotification
-             object:nil];
 }
 
 - (NSData *)dataOfType:(NSString *)typeName error:(NSError **)outError
@@ -234,6 +224,7 @@
     [filterScrollView setDocumentView:currentFilterView];
 }
 
+/*
 - (void)filterValueDidChange:(NSNotification *)notification
 {
     NSDictionary *userInfo = [notification userInfo];
@@ -253,4 +244,6 @@
     
     [currentLayer setValue:value forKeyPath:keypath];
 }
+ */
+
 @end
