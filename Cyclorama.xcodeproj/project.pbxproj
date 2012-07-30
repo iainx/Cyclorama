@@ -409,6 +409,7 @@
 		AE7D6699147561B90099875F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Cyclorama/Cyclorama-Prefix.pch";
 				INFOPLIST_FILE = "Cyclorama/Cyclorama-Info.plist";
@@ -420,6 +421,7 @@
 		AE7D669A147561B90099875F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Cyclorama/Cyclorama-Prefix.pch";
 				INFOPLIST_FILE = "Cyclorama/Cyclorama-Info.plist";

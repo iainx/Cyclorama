@@ -18,7 +18,7 @@
     NSArrayController *videoController;
 }
 
-@property (readwrite, retain) NSArrayController *videoController;
+@property (readwrite, strong) NSArrayController *videoController;
 
 - (void)addFilter:(CIFilter *)filter atIndex:(NSUInteger)index;
 - (void)removeFilterAtIndex:(NSUInteger)index;

@@ -33,7 +33,7 @@
     videoWidth = _screenWidth;
     videoHeight = _screenHeight;
     
-    _filter = [filter retain];
+    _filter = filter;
     
     double y = 10.0;
     double x = 10.0;
@@ -65,9 +65,7 @@
     }
     
     // We've finished with these, so we can release them
-    [xyParams release];
     xyParams = nil;
-    [linearParams release];
     linearParams = nil;
     
     return self;
@@ -75,7 +73,7 @@
 
 - (id)initWithFrame:(NSRect)frame
 {
-    [self initWithFrame:frame forFilter:nil forScreenWidth:100.0 screenHeight:100.0];
+    if (!(self = [self initWithFrame:frame forFilter:nil forScreenWidth:100.0 screenHeight:100.0])) return nil;
     return self;
 }
 
@@ -128,10 +126,10 @@
 
     NSLog(@"Height is %f", frame.size.height);
     
-    [self initWithFrame:frame 
+    if (!(self = [self initWithFrame:frame 
               forFilter:filter 
          forScreenWidth:_screenWidth 
-           screenHeight:_screenHeight];
+           screenHeight:_screenHeight])) return nil;
 
     return self;
 }

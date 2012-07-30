@@ -62,7 +62,6 @@
 {
     [self removeFilterNotifications];
     
-    [super dealloc];
 }
 
 #pragma mark - Accessors
@@ -81,13 +80,13 @@
     [movie stop];
     [movie gotoBeginning];
     
-    videoClip = [_videoClip retain];
+    videoClip = _videoClip;
     
     movie = [videoClip movie];
     
     VideoLayer *currentLayer = [[layerController arrangedObjects] objectAtIndex:0];
     
-    NSLog(@"Playing movie on %p", currentLayer);
+    NSLog(@"Playing movie %p on %p", movie, currentLayer);
     [currentLayer setMovie:movie];
     [movie play];
 }
@@ -159,8 +158,7 @@
 
     [self removeFilterNotifications];
     
-    [filterController release];
-    filterController = [_filterController retain];
+    filterController = _filterController;
     
     [self addFilterNotifications];
 
@@ -201,8 +199,7 @@
         return;
     }
     
-    [layerController release];
-    layerController = [_layerController retain];
+    layerController = _layerController;
     
     for (VideoLayer *vl in [layerController arrangedObjects]) {
         [parentLayer addSublayer:vl];

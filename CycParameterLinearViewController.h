@@ -15,7 +15,7 @@
 @property (readwrite, assign) double minParamValue;
 @property (readwrite, assign) double maxParamValue;
 
-@property (assign) IBOutlet NSTextField *nameLabel;
-@property (assign) IBOutlet NSSlider *valueSlider;
+@property (weak) IBOutlet NSTextField *nameLabel;
+@property (weak) IBOutlet NSSlider *valueSlider;
 
 @end

@@ -21,6 +21,6 @@
     dispatch_queue_t main_queue;
 }
 
-@property (readwrite, retain) IBOutlet VideoClip *clip;
-@property (readwrite, retain) NSImage *thumbnail;
+@property (readwrite, strong) IBOutlet VideoClip *clip;
+@property (readwrite, strong) NSImage *thumbnail;
 @end

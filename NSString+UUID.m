@@ -13,10 +13,10 @@
 + (NSString *)stringWithUUID
 {
     CFUUIDRef uuid = CFUUIDCreate(nil);
-    NSString *uuidString = (NSString *)CFUUIDCreateString(nil, uuid);
+    NSString *uuidString = (NSString *)CFBridgingRelease(CFUUIDCreateString(nil, uuid));
     CFRelease(uuid);
     
-    return [uuidString autorelease];
+    return uuidString;
 }
 
 @end

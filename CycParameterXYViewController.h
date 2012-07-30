@@ -16,9 +16,9 @@
     CycXYView *xyView;
 }
 
-@property (readwrite, assign) IBOutlet NSTextField *nameLabel;
+@property (readwrite, weak) IBOutlet NSTextField *nameLabel;
 
-@property (readwrite, assign) CIVector *paramValue;
+@property (readwrite, weak) CIVector *paramValue;
 @property (readwrite, assign) double valueX;
 @property (readwrite, assign) double valueY;
 @property (readwrite, assign) double maxX;

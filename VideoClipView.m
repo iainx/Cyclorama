@@ -22,7 +22,7 @@
                                        centrePoint.y - 10.0,
                                        20.0, 20.0);
 
-    progressIndicator = [[[NSProgressIndicator alloc] initWithFrame:indicatorFrame] autorelease];
+    progressIndicator = [[NSProgressIndicator alloc] initWithFrame:indicatorFrame];
     [progressIndicator setStyle:NSProgressIndicatorSpinningStyle];
     [progressIndicator startAnimation:nil];
     
@@ -60,8 +60,7 @@
         return;
     }
     
-    [clip release];
-    clip = [_clip retain];
+    clip = _clip;
 
     [clip addObserver:self
             forKeyPath:@"thumbnail"
@@ -90,8 +89,7 @@
         return;
     }
     
-    [thumbnail release];
-    thumbnail  = [_thumbnail retain];
+    thumbnail  = _thumbnail;
     
     [progressIndicator stopAnimation:nil];
     [progressIndicator removeFromSuperview];

@@ -16,7 +16,7 @@
     double videoHeight;
 }
 
-@property (readwrite, retain) ActorFilter *filter;
+@property (readwrite, strong) ActorFilter *filter;
 
 - (id)initWithFilter:(ActorFilter *)filter forScreenWidth:(double)_width screenHeight:(double)_height;
 

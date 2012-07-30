@@ -18,10 +18,10 @@
 
 - (id)initWithFilePath:(NSString *)_filePath title:(NSString *)_title;
 
-@property (nonatomic, readwrite, retain) NSString *filePath;
-@property (nonatomic, readwrite, retain) NSString *title;
+@property (nonatomic, readwrite, strong) NSString *filePath;
+@property (nonatomic, readwrite, strong) NSString *title;
 @property (readonly) QTMovie *movie;
-@property (nonatomic, readwrite, retain) NSImage *thumbnail;
+@property (readwrite, strong) NSImage *thumbnail;
 @property (readonly) QTTime duration;
 
 - (void)openMovie;

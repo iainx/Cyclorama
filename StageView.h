@@ -22,9 +22,9 @@
     CycArrayController *filterController;
 }
 
-@property (readwrite, retain) VideoClip *videoClip;
-@property (readwrite, assign) IBOutlet CycArrayController *filterController;
-@property (readwrite, assign) IBOutlet CycArrayController *layerController;
+@property (readwrite, strong) VideoClip *videoClip;
+@property (readwrite, weak) IBOutlet CycArrayController *filterController;
+@property (readwrite, weak) IBOutlet CycArrayController *layerController;
 
 - (CIFilter *)filterForCurrentLayerAt:(NSUInteger)index;
 @end

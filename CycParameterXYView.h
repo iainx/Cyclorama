@@ -11,5 +11,5 @@
 @class CycXYView;
 @interface CycParameterXYView : NSView
 
-@property (readwrite, assign) IBOutlet CycXYView *xyView;
+@property (readwrite, unsafe_unretained) IBOutlet CycXYView *xyView;
 @end

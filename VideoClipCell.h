@@ -15,5 +15,5 @@
 }
 
 @property (readwrite, copy) NSString *subtitle;
-@property (readwrite, retain) NSImage *thumbnail;
+@property (readwrite, strong) NSImage *thumbnail;
 @end

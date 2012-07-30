@@ -16,7 +16,7 @@
     VideoClipView *clipView;
 }
 
-@property (readwrite, retain) VideoClipView *clipView;
+@property (readwrite, strong) VideoClipView *clipView;
 
 - (void)setClip:(VideoClip *)clip;
 @end

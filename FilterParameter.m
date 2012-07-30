@@ -32,8 +32,8 @@
     
     _filter = filter; // Weak reference;
     
-    _name = [name retain];
-    _className = [className retain];
+    _name = name;
+    _className = className;
 
     _value = [[NSClassFromString(className) alloc] init];
     
@@ -47,14 +47,6 @@
     return self;
 }
 
-- (void)dealloc
-{
-    [_name release];
-    [_className release];
-    [_value release];
-    
-    [super dealloc];
-}
 
 - (id)copyWithZone:(NSZone *)zone
 {
@@ -104,8 +96,7 @@
     } else if ([_className isEqualToString:@"CIImage"]) {
     }
     
-    [_defaultValue release];
     
-    _defaultValue = [defaultValue retain];
+    _defaultValue = defaultValue;
 }
 @end

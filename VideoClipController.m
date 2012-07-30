@@ -29,7 +29,7 @@
     [nc addObserver:self selector:@selector(queryNotification:) 
                name:nil object:videoQuery];
     
-    [videoQuery setSortDescriptors:[NSArray arrayWithObject:[[[NSSortDescriptor alloc] initWithKey:(NSString *)kMDItemTitle ascending:YES] autorelease]]];
+    [videoQuery setSortDescriptors:[NSArray arrayWithObject:[[NSSortDescriptor alloc] initWithKey:(NSString *)kMDItemTitle ascending:YES]]];
     
     [videoQuery setPredicate:[NSPredicate predicateWithFormat:@"(kMDItemContentTypeTree == 'public.movie')"]];
     [videoQuery startQuery];
@@ -41,10 +41,8 @@
 {
     [self stopIdleLoop];
     
-    [filesForThumbnailing release];
     filesForThumbnailing = nil;
     
-    [super dealloc];
 }
 
 #pragma mark - Local methods
@@ -99,7 +97,7 @@ dequeueAndThumbnail (CFRunLoopObserverRef ref,
 {
     int activities = kCFRunLoopBeforeWaiting;
     
-    CFRunLoopObserverContext ctxt = {0, (void *)(self), NULL, NULL, NULL};
+    CFRunLoopObserverContext ctxt = {0, (__bridge void *)(self), NULL, NULL, NULL};
     observerRef = CFRunLoopObserverCreate(NULL, activities, YES, 0,
                                           &dequeueAndThumbnail, &ctxt);
     CFRunLoopAddObserver(CFRunLoopGetCurrent(),

@@ -36,10 +36,11 @@
                           [NSNumber numberWithBool:YES], QTMovieLoopsAttribute,
                           nil];
     NSError *error = nil;
-    movie = [[QTMovie movieWithAttributes:dict error:&error] retain];
+    movie = [QTMovie movieWithAttributes:dict error:&error];
     
     if (error != nil) {
-        NSLog(@"Error getting movie: %@", [error localizedDescription]);
+        NSLog(@"Error getting movie from %@: %@", filePath, [error localizedDescription]);
+        return;
     }
     
     NSMutableDictionary *attributes = [NSMutableDictionary dictionary];
@@ -59,20 +60,13 @@
                            withAttributes:attributes
                                     error:&error];
     if (error != nil) {
-        NSLog(@"Error making thumbnail: %@", [error localizedDescription]);
+        NSLog(@"Error making thumbnail for %@: %@", filePath, [error localizedDescription]);
         return;
     }
     
     [self setThumbnail:th];
 }
 
-- (void)dealloc
-{
-    [filePath release];
-    [movie release];
-    [thumbnail release];
-    [super dealloc];
-}
 
 - (NSString *)description
 {
@@ -87,12 +81,8 @@
         return;
     }
     
-    if (filePath) {
-        [filePath release];
-    }
     
     filePath = path;
-    [filePath retain];
 }
 
 - (QTMovie *)movie

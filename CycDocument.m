@@ -36,8 +36,9 @@
 {
     self = [super init];
     if (self) {
+        videos = [[NSMutableArray alloc] init];
         layers = [[NSMutableArray alloc] init];
-        [layers addObject:[[[VideoLayer alloc] init] autorelease]];
+        [layers addObject:[[VideoLayer alloc] init]];
         
         filters = [[NSMutableArray alloc] init];
     }
@@ -95,7 +96,7 @@
 
 - (NSData *)dataOfType:(NSString *)typeName error:(NSError **)outError
 {
-    NSMutableData *data = [[[NSMutableData alloc] init] autorelease];
+    NSMutableData *data = [[NSMutableData alloc] init];
     NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
     
     [archiver encodeObject:videoClipController forKey:@"videos"];
@@ -131,7 +132,7 @@
                   returnCode:(NSInteger)code
                  contextInfo:(void *)contextInfo
 {
-    IKFilterBrowserPanel *filterBrowserPanel = (IKFilterBrowserPanel *)contextInfo;
+    IKFilterBrowserPanel *filterBrowserPanel = (__bridge IKFilterBrowserPanel *)contextInfo;
 
     // There is a bug between that was fixed in Mountain Lion (10.8)
     // where the value which the sheet returned was swapped
@@ -155,19 +156,17 @@
              forKeyPath:@"arrangedObjects.value"
                 options:NSKeyValueObservingOptionNew
                 context:NULL];
-        [af release];
     }
 
     [filterBrowserPanel orderOut:self];
-    [filterBrowserPanel release];
 }
 
 - (IBAction)openAddFilterSheet:(id)sender
 {    
     [CIPlugIn loadAllPlugIns];
     
-    IKFilterBrowserPanel *filterBrowserPanel = [[IKFilterBrowserPanel 
-                                                 filterBrowserPanelWithStyleMask:0] retain];
+    IKFilterBrowserPanel *filterBrowserPanel = [IKFilterBrowserPanel 
+                                                 filterBrowserPanelWithStyleMask:0];
     [filterBrowserPanel beginSheetWithOptions:NULL
                                modalForWindow:[stageView window]
                              modalDelegate:self 
@@ -217,9 +216,9 @@
     //CIFilter *currentFilter = [stageView filterForCurrentLayerAt:selectedRow];
     NSRect stageViewRect = [stageView frame];
     
-    currentFilterView = [[[CycFilterUIView alloc] initWithFilter:selectedFilter
+    currentFilterView = [[CycFilterUIView alloc] initWithFilter:selectedFilter
                                                   forScreenWidth:stageViewRect.size.width
-                                                    screenHeight:stageViewRect.size.height] autorelease];
+                                                    screenHeight:stageViewRect.size.height];
 
     [filterScrollView setDocumentView:currentFilterView];
 }

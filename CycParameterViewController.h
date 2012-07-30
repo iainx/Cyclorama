@@ -15,6 +15,6 @@
 
 @property (copy) NSString *name;
 @property (readwrite, copy) NSString *paramName;
-@property (readwrite, retain, nonatomic) FilterParameter *parameter;
+@property (readwrite, strong, nonatomic) FilterParameter *parameter;
 
 @end

@@ -28,7 +28,7 @@
     self = [super initWithCoder:aDecoder];
     
     NSRect frame = NSMakeRect(5, 20, 155, 69);
-    clipView = [[[VideoClipView alloc] initWithFrame:frame] autorelease];
+    clipView = [[VideoClipView alloc] initWithFrame:frame];
     [self addSubview:clipView];
     
     return self;

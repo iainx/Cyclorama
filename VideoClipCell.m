@@ -38,12 +38,6 @@
     return cell;
 }
 
-- (void)dealloc
-{
-    [thumbnail release];
-    [subtitle release];
-    [super dealloc];
-}
 
 - (NSAttributedString *)attributedSubtitleValue
 {

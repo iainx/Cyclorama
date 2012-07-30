@@ -31,9 +31,9 @@
     }
     filterName = [_filterName copy];
     
-    uniqueID = [[NSString stringWithUUID] retain];
+    uniqueID = [NSString stringWithUUID];
     
-    _filter = [[CIFilter filterWithName:[self filterName]] retain];
+    _filter = [CIFilter filterWithName:[self filterName]];
     [_filter setName:uniqueID];
     
     parameters = [[NSMutableDictionary alloc] init];
@@ -48,10 +48,10 @@
 {
     self = [super init];
     
-    parameters = [[decoder decodeObjectForKey:@"parameters"] retain];
-    filterName = [[decoder decodeObjectForKey:@"filterName"] retain];
-    name = [[decoder decodeObjectForKey:@"name"] retain];
-    uniqueID = [[decoder decodeObjectForKey:@"uniqueID"] retain];
+    parameters = [decoder decodeObjectForKey:@"parameters"];
+    filterName = [decoder decodeObjectForKey:@"filterName"];
+    name = [decoder decodeObjectForKey:@"name"];
+    uniqueID = [decoder decodeObjectForKey:@"uniqueID"];
     
     return self;
 }
@@ -64,17 +64,6 @@
     [coder encodeObject:uniqueID forKey:@"uniqueID"];
 }
 
-- (void)dealloc
-{
-    [parameters release];
-    [filterName release];
-    [name release];
-    [uniqueID release];
-    
-    [_filter release];
-    
-    [super dealloc];
-}
 
 - (void)fillParametersForFilter:(CIFilter *)f
 {

@@ -21,27 +21,27 @@
     NSMutableArray *filters;
     CycArrayController *filterController;
     
-    StageView *stageView;
-    NSCollectionView *videoClipCollectionView;
+    StageView *__weak stageView;
+    NSCollectionView *__weak videoClipCollectionView;
     
-    NSMutableArray *videos;
+    NSMutableArray * videos;
     VideoClipController *videoClipController;
     
     CycFilterUIView *currentFilterView;
 }
 
-@property (readwrite, retain)NSMutableArray *filters;
-@property (readwrite, retain)NSMutableArray *layers;
-@property (readwrite, retain)IBOutlet CycArrayController *layerController;
-@property (readwrite, retain)IBOutlet CycArrayController *filterController;
-@property (readwrite, assign)IBOutlet NSTableView *filterTableView;
-@property (readwrite, assign)IBOutlet NSBox *filterUIBox;
-@property (readwrite, assign)IBOutlet NSScrollView *filterScrollView;
+@property (readwrite, strong)NSMutableArray *filters;
+@property (readwrite, strong)NSMutableArray *layers;
+@property (readwrite, strong)IBOutlet CycArrayController *layerController;
+@property (readwrite, strong)IBOutlet CycArrayController *filterController;
+@property (readwrite, weak)IBOutlet NSTableView *filterTableView;
+@property (readwrite, weak)IBOutlet NSBox *filterUIBox;
+@property (readwrite, weak)IBOutlet NSScrollView *filterScrollView;
 
-@property (readwrite, assign)IBOutlet StageView *stageView;
-@property (readwrite, assign)IBOutlet NSCollectionView *videoClipCollectionView;
-@property (readonly)IBOutlet NSMutableArray *videos;
-@property (readwrite, retain)IBOutlet VideoClipController *videoClipController;
+@property (readwrite, weak)IBOutlet StageView *stageView;
+@property (readwrite, weak)IBOutlet NSCollectionView *videoClipCollectionView;
+@property (readonly, strong)IBOutlet NSMutableArray *videos;
+@property (readwrite, strong)IBOutlet VideoClipController *videoClipController;
 
 - (IBAction)openAddFilterSheet:(id)sender;
 

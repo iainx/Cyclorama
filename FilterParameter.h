@@ -11,7 +11,7 @@
 @class ActorFilter;
 @interface FilterParameter : NSObject <NSCopying>
 
-@property (readwrite, nonatomic, assign) ActorFilter *filter;
+@property (readwrite, nonatomic, weak) ActorFilter *filter;
 @property (readwrite, nonatomic, strong) id value;
 @property (readwrite, nonatomic, strong) NSString *className;
 

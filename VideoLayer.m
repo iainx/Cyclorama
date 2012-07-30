@@ -21,17 +21,10 @@
     // array to hold the CIFilters to apply to the layer
     filters = [[NSMutableArray alloc] init];
 //    filterController = [[CycArrayController alloc] initWithContent:filters];
-    
+
     return self;
 }
 
-- (void)dealloc
-{
-//    [filterController release];
-    [filters release];
-    
-    [super dealloc];
-}
 
 - (void)addFilter:(CIFilter *)filter
           atIndex:(NSUInteger)index
