@@ -30,8 +30,6 @@ midiInputCallback (const MIDIPacketList *list,
             
             iByte = 0;
             while (iByte < nBytes) {
-                size = 0;
-                
                 unsigned char status = packet->data[iByte];
                 if (status < 0xC0) {
                     size = 3;
@@ -49,7 +47,7 @@ midiInputCallback (const MIDIPacketList *list,
                     size = 1;
                 }
                 
-                int data1, data2, channel;
+                int data1 = 0, data2 = 0, channel;
                 type = kOtherMessage;
                 
                 channel = status & 0xF;

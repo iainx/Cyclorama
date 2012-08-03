@@ -11,13 +11,6 @@
 
 
 @interface ActorFilter : NSObject <NSCoding> {
-@private
-    NSMutableDictionary *parameters;
-    NSString *filterName; // Name of the filter plugin
-    NSString *name; // Name of this filter.
-    NSString *uniqueID; // Unique ID to use when identifying this filter
-    
-    CIFilter *filter;
 }
 
 @property (readwrite, copy) NSString *filterName;

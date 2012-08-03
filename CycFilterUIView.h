@@ -10,8 +10,6 @@
 
 @class ActorFilter;
 @interface CycFilterUIView : NSView {
-    NSMutableArray *xyParams;
-    NSMutableArray *linearParams;
     double videoWidth;
     double videoHeight;
 }

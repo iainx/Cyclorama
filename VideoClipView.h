@@ -16,9 +16,6 @@
     
     NSImage *thumbnail;
     VideoClip *clip;
-    
-    dispatch_queue_t thumbnail_queue;
-    dispatch_queue_t main_queue;
 }
 
 @property (readwrite, strong) IBOutlet VideoClip *clip;

@@ -20,7 +20,11 @@
     self = [super initWithFrame:frame];
     
     parentLayer = [CALayer layer];
-    [parentLayer setBackgroundColor:CGColorCreateGenericRGB(0.0, 0.0, 0.0, 1.0)];
+    
+    CGColorRef black = CGColorCreateGenericRGB(0.0, 0.0, 0.0, 1.0);
+    [parentLayer setBackgroundColor:black];
+    CGColorRelease(black);
+    
     [self setLayer:parentLayer];
     [self setWantsLayer:YES];
     

@@ -95,6 +95,7 @@
     return movie;
 }
 
+/*
 - (NSImage *)thumbnail
 {
     if (!thumbnail) {
@@ -103,5 +104,5 @@
     
     return thumbnail;
 }
-
+*/
 @end

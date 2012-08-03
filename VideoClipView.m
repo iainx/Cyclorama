@@ -49,7 +49,14 @@
     VideoClip *_clip = (VideoClip *)object;
     
     //NSLog(@"%@ changed for %@: %@", keyPath, [_clip filePath], [change description]);
-    [self setThumbnail:[_clip thumbnail]];
+    
+    NSImage *t = [_clip thumbnail];
+    if (t == nil) {
+        NSLog(@"Error: Thumbnail not yet ready for %@", [_clip filePath]);
+        return;
+    }
+    
+    [self setThumbnail:t];
 }
 
 #pragma mark - Accessors

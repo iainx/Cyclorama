@@ -14,9 +14,6 @@
 #import "CycParameterXYViewController.h"
 
 @interface CycFilterUIView()
-- (NSView *)viewForParameterNamed:(NSString *)pName 
-                   withAttributes:(NSDictionary *)attrs
-                          inFrame:(NSRect)frame;
 @end
 
 @implementation CycFilterUIView
@@ -27,6 +24,8 @@
           forFilter:(ActorFilter *)filter
      forScreenWidth:(double)_screenWidth
        screenHeight:(double)_screenHeight
+           xyParams:(NSArray *)xyParams
+       linearParams:(NSArray *)linearParams
 {
     self = [super initWithFrame:frameRect];
     
@@ -64,16 +63,17 @@
         y += 10.0;
     }
     
-    // We've finished with these, so we can release them
-    xyParams = nil;
-    linearParams = nil;
-    
     return self;
 }
 
 - (id)initWithFrame:(NSRect)frame
 {
-    if (!(self = [self initWithFrame:frame forFilter:nil forScreenWidth:100.0 screenHeight:100.0])) return nil;
+    if (!(self = [self initWithFrame:frame
+                           forFilter:nil
+                      forScreenWidth:100.0
+                        screenHeight:100.0
+                            xyParams:nil
+                        linearParams:nil])) return nil;
     return self;
 }
 
@@ -88,8 +88,8 @@
     NSDictionary *attributes = [filter attributes];
     */
     
-    xyParams = [[NSMutableArray alloc] init];
-    linearParams = [[NSMutableArray alloc] init];
+    NSMutableArray *xyParams = [[NSMutableArray alloc] init];
+    NSMutableArray *linearParams = [[NSMutableArray alloc] init];
     
     NSLog(@"Params is %@", [params description]);
     for (FilterParameter *fp in [params allValues]) {
@@ -127,9 +127,11 @@
     NSLog(@"Height is %f", frame.size.height);
     
     if (!(self = [self initWithFrame:frame 
-              forFilter:filter 
-         forScreenWidth:_screenWidth 
-           screenHeight:_screenHeight])) return nil;
+                           forFilter:filter
+                      forScreenWidth:_screenWidth
+                        screenHeight:_screenHeight
+                            xyParams:xyParams
+                        linearParams:linearParams])) return nil;
 
     return self;
 }
