@@ -67,7 +67,7 @@
             return;
         }
         
-        VideoClip *selectedClip = [selectedObjects objectAtIndex:0];
+        VideoClip *selectedClip = selectedObjects[0];
         NSLog(@"Video clip: %@", [selectedClip description]);
     
         [stageView setVideoClip:selectedClip];
@@ -210,7 +210,7 @@
         [currentFilterView removeFromSuperview];
         currentFilterView = nil;
     }
-    ActorFilter *selectedFilter = [filters objectAtIndex:selectedRow];
+    ActorFilter *selectedFilter = filters[selectedRow];
     
     NSLog(@"Filter selection did change %ld - %@", selectedRow, [selectedFilter name]);
     //CIFilter *currentFilter = [stageView filterForCurrentLayerAt:selectedRow];
@@ -222,27 +222,5 @@
 
     [filterScrollView setDocumentView:currentFilterView];
 }
-
-/*
-- (void)filterValueDidChange:(NSNotification *)notification
-{
-    NSDictionary *userInfo = [notification userInfo];
-    
-    NSString *paramName = [userInfo objectForKey:@"paramName"];
-    id value = [userInfo objectForKey:@"value"];
-    
-    NSInteger selectedRow = [filterTableView selectedRow];
-    
-    CIFilter *currentFilter = [stageView filterForCurrentLayerAt:selectedRow];
-    NSString *filterName = [currentFilter name];
-    
-    NSString *keypath = [NSString stringWithFormat:@"filters.%@.%@", filterName, paramName];
-    
-    NSLog(@"Changing %@", keypath);
-    VideoLayer *currentLayer = [layers objectAtIndex:0];
-    
-    [currentLayer setValue:value forKeyPath:keypath];
-}
- */
 
 @end

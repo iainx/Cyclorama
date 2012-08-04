@@ -78,19 +78,18 @@
         
         NSDictionary *attrs = [attributes valueForKey:inputName];
         
-        NSString *className = [attrs objectForKey:@"CIAttributeClass"];
+        NSString *className = attrs[@"CIAttributeClass"];
         FilterParameter *param = [[FilterParameter alloc] initWithName:inputName
                                                              className:className
                                                              forFilter:self];
         
-        [param setMinValue:[attrs objectForKey:@"CIAttributeSliderMin"]];
-        [param setMaxValue:[attrs objectForKey:@"CIAttributeSliderMax"]];
-        [param setDefaultValue:[attrs objectForKey:@"CIAttributeDefault"]];
-        [param setDisplayName:[attrs objectForKey:@"CIAttributeDisplayName"]];
+        [param setMinValue:attrs[@"CIAttributeSliderMin"]];
+        [param setMaxValue:attrs[@"CIAttributeSliderMax"]];
+        [param setDefaultValue:attrs[@"CIAttributeDefault"]];
+        [param setDisplayName:attrs[@"CIAttributeDisplayName"]];
         
         NSLog(@"Adding param %@", inputName);
-        [parameters setObject:param
-                       forKey:inputName];
+        parameters[inputName] = param;
         
         /*
          NSString *attrClass = [attrs objectForKey:@"CIAttributeClass"];

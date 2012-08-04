@@ -88,7 +88,7 @@
     
     movie = [videoClip movie];
     
-    VideoLayer *currentLayer = [[layerController arrangedObjects] objectAtIndex:0];
+    VideoLayer *currentLayer = [layerController arrangedObjects][0];
     
     NSLog(@"Playing movie %p on %p", movie, currentLayer);
     [currentLayer setMovie:movie];
@@ -114,15 +114,15 @@
     NSString *filterKeyPath = [NSString stringWithFormat:@"filters.%@.%@", [af uniqueID], [param name]];
     
     NSLog(@"Keypath: %@", filterKeyPath);
-    VideoLayer *currentLayer = [[layerController arrangedObjects] objectAtIndex:0];
+    VideoLayer *currentLayer = [layerController arrangedObjects][0];
     [currentLayer setValue:[param value] forKeyPath:filterKeyPath];
 }
 
 - (void)objectAdded:(NSNotification *)note
 {
     NSDictionary *userInfo = [note userInfo];
-    ActorFilter *af = [userInfo objectForKey:@"object"];
-    NSNumber *index = [userInfo objectForKey:@"index"];
+    ActorFilter *af = userInfo[@"object"];
+    NSNumber *index = userInfo[@"index"];
     CIFilter *filter;
     
     NSLog(@"Filter added %@", [af filterName]);
@@ -141,16 +141,16 @@
                    context:NULL];
     }];
     
-    VideoLayer *currentLayer = [[layerController arrangedObjects] objectAtIndex:0];
+    VideoLayer *currentLayer = [layerController arrangedObjects][0];
     NSLog(@"Setting filter on %p", currentLayer);
     [currentLayer addFilter:filter atIndex:[index unsignedIntValue]];
 }
 
 - (void)objectRemoved:(NSNotification *)note
 {
-    NSNumber *index = [[note userInfo] objectForKey:@"index"];
+    NSNumber *index = [note userInfo][@"index"];
 
-    VideoLayer *currentLayer = [[layerController arrangedObjects] objectAtIndex:0];
+    VideoLayer *currentLayer = [layerController arrangedObjects][0];
     [currentLayer removeFilterAtIndex:[index unsignedIntValue]];
 }
 
@@ -166,7 +166,7 @@
     
     [self addFilterNotifications];
 
-    VideoLayer *currentLayer = [[layerController arrangedObjects] objectAtIndex:0];
+    VideoLayer *currentLayer = [layerController arrangedObjects][0];
 
     int idx = 0;
     for (ActorFilter *af in [filterController arrangedObjects]) {
@@ -218,7 +218,7 @@
 
 - (CIFilter *)filterForCurrentLayerAt:(NSUInteger)index
 {
-    VideoLayer *currentLayer = [[layerController arrangedObjects] objectAtIndex:0];
+    VideoLayer *currentLayer = [layerController arrangedObjects][0];
     if (!currentLayer) {
         return nil;
     }

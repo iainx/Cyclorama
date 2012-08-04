@@ -271,7 +271,7 @@
 		AE7D666E147561B80099875F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0420;
+				LastUpgradeCheck = 0440;
 				ORGANIZATIONNAME = "Sleep(5)";
 			};
 			buildConfigurationList = AE7D6671147561B80099875F /* Build configuration list for PBXProject "Cyclorama" */;
@@ -410,6 +410,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
+				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Cyclorama/Cyclorama-Prefix.pch";
 				INFOPLIST_FILE = "Cyclorama/Cyclorama-Info.plist";
@@ -422,6 +423,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
+				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Cyclorama/Cyclorama-Prefix.pch";
 				INFOPLIST_FILE = "Cyclorama/Cyclorama-Info.plist";

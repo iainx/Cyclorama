@@ -45,8 +45,7 @@
     
     if (subtitle) {
         NSColor *textColour = [self isHighlighted] ? [NSColor lightGrayColor] : [NSColor grayColor];
-        NSDictionary *attrs = [NSDictionary dictionaryWithObjectsAndKeys:textColour,
-                               NSForegroundColorAttributeName, nil];
+        NSDictionary *attrs = @{NSForegroundColorAttributeName: textColour};
         astr = [[NSAttributedString alloc] initWithString:subtitle attributes:attrs];
     }
     

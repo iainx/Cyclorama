@@ -41,6 +41,6 @@
 
 - (CIFilter *)filterAtIndex:(NSUInteger)index
 {
-    return [filters objectAtIndex:index];
+    return filters[index];
 }
 @end

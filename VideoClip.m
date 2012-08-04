@@ -30,11 +30,10 @@
     NSURL *url = [NSURL fileURLWithPath:filePath];
     
     // Disabled QTOpenForPlaybackAttribute as it stops some thumbnails working
-    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:url, QTMovieURLAttribute,
+    NSDictionary *dict = @{QTMovieURLAttribute: url,
                           //[NSNumber numberWithBool:YES], QTMovieOpenForPlaybackAttribute,
-                          [NSNumber numberWithBool:YES], QTMovieMutedAttribute,
-                          [NSNumber numberWithBool:YES], QTMovieLoopsAttribute,
-                          nil];
+                          QTMovieMutedAttribute: @YES,
+                          QTMovieLoopsAttribute: @YES};
     NSError *error = nil;
     movie = [QTMovie movieWithAttributes:dict error:&error];
     
@@ -48,7 +47,7 @@
 	// We'll specify a custom size of 95 X 120 for the returned image:
 	NSSize imageSize = NSMakeSize(120, 95);
 	NSValue *sizeValue = [NSValue valueWithSize:imageSize];
-	[attributes setObject:sizeValue forKey:QTMovieFrameImageSize];
+	attributes[QTMovieFrameImageSize] = sizeValue;
     
 	/* get the current movie time - we'll pass this value to the
      frameImageAtTime: method below */

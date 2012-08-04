@@ -29,7 +29,7 @@
     [nc addObserver:self selector:@selector(queryNotification:) 
                name:nil object:videoQuery];
     
-    [videoQuery setSortDescriptors:[NSArray arrayWithObject:[[NSSortDescriptor alloc] initWithKey:(NSString *)kMDItemTitle ascending:YES]]];
+    [videoQuery setSortDescriptors:@[[[NSSortDescriptor alloc] initWithKey:(NSString *)kMDItemTitle ascending:YES]]];
     
     [videoQuery setPredicate:[NSPredicate predicateWithFormat:@"(kMDItemContentTypeTree == 'public.movie')"]];
     [videoQuery startQuery];
@@ -121,7 +121,7 @@ dequeueAndThumbnail (CFRunLoopObserverRef ref,
 
 - (void)dequeueVideoItem
 {
-    VideoClip *clip = [filesForThumbnailing objectAtIndex:0];
+    VideoClip *clip = filesForThumbnailing[0];
     
     [filesForThumbnailing removeObjectAtIndex:0];
     if ([filesForThumbnailing count] == 0) {
@@ -155,7 +155,7 @@ dequeueAndThumbnail (CFRunLoopObserverRef ref,
 objectValueForTableColumn:(NSTableColumn *)tableColumn
             row:(NSInteger)row
 {
-    VideoClip *clip = [[self arrangedObjects] objectAtIndex:row];
+    VideoClip *clip = [self arrangedObjects][row];
     return [clip title];
 }
 
@@ -164,7 +164,7 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
    forTableColumn:(NSTableColumn *)tableColumn
               row:(NSInteger)row
 {
-    VideoClip *clip = [[self arrangedObjects] objectAtIndex:row];
+    VideoClip *clip = [self arrangedObjects][row];
     VideoClipCell *vcCell = (VideoClipCell *)cell;
     
     [vcCell setImage:[clip thumbnail]];
@@ -184,11 +184,11 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
     NSLog(@"writeRows");
     for (NSNumber *number in rows) {
         NSUInteger row = [number unsignedIntValue];
-        VideoClip *clip = [[self arrangedObjects] objectAtIndex:row];
+        VideoClip *clip = [self arrangedObjects][row];
         [filePaths addObject:[clip filePath]];
     }
     
-    [pboard declareTypes:[NSArray arrayWithObject:FlareVideoClipArrayType] owner:nil];
+    [pboard declareTypes:@[FlareVideoClipArrayType] owner:nil];
     
     data = [NSKeyedArchiver archivedDataWithRootObject:filePaths];
     [pboard setData:data forType:FlareVideoClipArrayType];

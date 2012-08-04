@@ -171,7 +171,7 @@ static void *CycFilterUIViewObservationContext = (void *)@"CycFilterUIViewObserv
     
     if (context == &CycFilterUIViewObservationContext) {
         FilterParameter *param = [controller parameter];
-        [param setValue:[change objectForKey:@"new"]];
+        [param setValue:change[@"new"]];
     } else {
         [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
     }

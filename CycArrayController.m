@@ -14,7 +14,7 @@
 {
     [super insertObject:object atArrangedObjectIndex:index];
     
-    NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:object, @"object", [NSNumber numberWithUnsignedInteger:index], @"index", nil];
+    NSDictionary *userInfo = @{@"object": object, @"index": @(index)};
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     [nc postNotificationName:@"ObjectAdded"
                       object:self
@@ -25,7 +25,7 @@
 {
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     
-    NSDictionary *userInfo = [NSDictionary dictionaryWithObject:[NSNumber numberWithUnsignedInteger:index] forKey:@"index"];
+    NSDictionary *userInfo = @{@"index": @(index)};
     [nc postNotificationName:@"ObjectRemoved"
                       object:self
                     userInfo:userInfo];
