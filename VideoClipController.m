@@ -57,6 +57,7 @@
         NSLog(@"query finished");
         NSArray *results = [[note object] results];
         NSUInteger count = [results count];
+        int limit = 0;
         
         NSLog(@"Found %lu videos", count);
 
@@ -76,6 +77,12 @@
             [self addObject:clip];
             
             [filesForThumbnailing addObject:clip];
+            
+            limit++;
+            
+            if (limit > 50) {
+                break;
+            }
         }
         [self startIdleLoop];
     } else if ([[note name] isEqualToString:NSMetadataQueryGatheringProgressNotification]) {
