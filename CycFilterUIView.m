@@ -13,10 +13,9 @@
 #import "CycParameterLinearViewController.h"
 #import "CycParameterXYViewController.h"
 
-@interface CycFilterUIView()
-@end
-
-@implementation CycFilterUIView
+@implementation CycFilterUIView {
+    NSMutableArray *_viewControllers;
+}
 
 @synthesize filter = _filter;
 
@@ -33,16 +32,23 @@
     videoHeight = _screenHeight;
     
     _filter = filter;
+    _viewControllers = [[NSMutableArray alloc] initWithCapacity:[xyParams count] + [linearParams count]];
     
     double y = 10.0;
     double x = 10.0;
 
     for (FilterParameter *fp in xyParams) {
         NSRect paramFrame = NSMakeRect(x, y, 0.0, 0.0);
-        NSView *attrView = [self viewForParameter:fp
-                                          inFrame:paramFrame];
+        NSView *attrView;
+        
+        CycParameterViewController *attrController = [self viewControllerForParameter:fp
+                                                                              inFrame:paramFrame];
+        
+        attrView = [attrController view];
+        [attrView setFrameOrigin:paramFrame.origin];
         [self addSubview:attrView];
         
+        [_viewControllers addObject:attrController];
         y += [attrView frame].size.height;
         y += 10.0;
     }
@@ -55,9 +61,16 @@
 
     for (FilterParameter *fp in linearParams) {
         NSRect paramFrame = NSMakeRect(x, y, 0.0, 0.0);
-        NSView *attrView = [self viewForParameter:fp
-                                          inFrame:paramFrame];
+        NSView *attrView;
+        
+        CycParameterViewController *attrController = [self viewControllerForParameter:fp
+                                                                              inFrame:paramFrame];
+        
+        attrView = [attrController view];
+        [attrView setFrameOrigin:paramFrame.origin];
         [self addSubview:attrView];
+        
+        [_viewControllers addObject:attrController];
         
         y += [attrView frame].size.height;
         y += 10.0;
@@ -164,12 +177,11 @@ static void *CycFilterUIViewObservationContext = (void *)@"CycFilterUIViewObserv
     }
 }
 
-- (NSView *)viewForParameter:(FilterParameter *)fp
-                     inFrame:(NSRect)frame
+- (CycParameterViewController *)viewControllerForParameter:(FilterParameter *)fp
+                                                   inFrame:(NSRect)frame
 {
     CycParameterViewController *viewController;
     CycParameterXYViewController *xy = nil;
-    NSView *view;
     NSString *attrClass;
     
     attrClass = [fp className];
@@ -185,7 +197,6 @@ static void *CycFilterUIViewObservationContext = (void *)@"CycFilterUIViewObserv
     }
     
     [viewController setParamName:[fp name]];
-    view = [viewController view];
     [viewController setParameter:fp];
     
     // if xy is nil these will just return
@@ -197,8 +208,7 @@ static void *CycFilterUIViewObservationContext = (void *)@"CycFilterUIViewObserv
                      forKeyPath:@"paramValue"
                         options:NSKeyValueObservingOptionNew
                         context:&CycFilterUIViewObservationContext];
-    [view setFrameOrigin:frame.origin];
-    return view;
+    return viewController;
 }
     
 @end
