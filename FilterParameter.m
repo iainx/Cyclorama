@@ -11,19 +11,6 @@
 
 @implementation FilterParameter
 
-@synthesize filter = _filter;
-@synthesize name = _name;
-@synthesize displayName = _displayName;
-@synthesize value = _value;
-@synthesize localizedKey = _localizedKey;
-
-@synthesize className = _className;
-@synthesize defaultValue = _defaultValue;
-@synthesize minValue = _minValue;
-@synthesize maxValue = _maxValue;
-@synthesize typeHint = _typeHint;
-
-
 - (id)initWithName:(NSString *)name
          className:(NSString *)className
          forFilter:(ActorFilter *)filter
@@ -42,7 +29,7 @@
 
 - (id)init
 {
-    self =[super init];
+    self = [super init];
     
     return self;
 }

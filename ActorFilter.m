@@ -13,30 +13,24 @@
 
 @implementation ActorFilter
 
-@synthesize filterName;
-@synthesize name;
-@synthesize parameters;
-@synthesize uniqueID;
-@synthesize filter = _filter;
-
-- (id)initWithName:(NSString *)_name
-    forFilterNamed:(NSString *)_filterName
+- (id)initWithName:(NSString *)name
+    forFilterNamed:(NSString *)filterName
 {
     self = [super init];
     
     if (_name) {
-        name = [_name copy];
+        _name = [_name copy];
     } else {
-        name = [_filterName copy];
+        _name = [filterName copy];
     }
-    filterName = [_filterName copy];
+    _filterName = [filterName copy];
     
-    uniqueID = [NSString stringWithUUID];
+    _uniqueID = [NSString stringWithUUID];
     
-    _filter = [CIFilter filterWithName:[self filterName]];
-    [_filter setName:uniqueID];
+    _filter = [CIFilter filterWithName:filterName];
+    [_filter setName:_uniqueID];
     
-    parameters = [[NSMutableDictionary alloc] init];
+    _parameters = [[NSMutableDictionary alloc] init];
     
     // Parse the filter details to get the names of the parameters
     [self fillParametersForFilter:_filter];
@@ -48,20 +42,20 @@
 {
     self = [super init];
     
-    parameters = [decoder decodeObjectForKey:@"parameters"];
-    filterName = [decoder decodeObjectForKey:@"filterName"];
-    name = [decoder decodeObjectForKey:@"name"];
-    uniqueID = [decoder decodeObjectForKey:@"uniqueID"];
+    _parameters = [decoder decodeObjectForKey:@"parameters"];
+    _filterName = [decoder decodeObjectForKey:@"filterName"];
+    _name = [decoder decodeObjectForKey:@"name"];
+    _uniqueID = [decoder decodeObjectForKey:@"uniqueID"];
     
     return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)coder
 {
-    [coder encodeObject:parameters forKey:@"parameters"];
-    [coder encodeObject:filterName forKey:@"filterName"];
-    [coder encodeObject:name forKey:@"name"];
-    [coder encodeObject:uniqueID forKey:@"uniqueID"];
+    [coder encodeObject:_parameters forKey:@"parameters"];
+    [coder encodeObject:_filterName forKey:@"filterName"];
+    [coder encodeObject:_name forKey:@"name"];
+    [coder encodeObject:_uniqueID forKey:@"uniqueID"];
 }
 
 
@@ -91,7 +85,7 @@
         [param setDisplayName:attrs[@"CIAttributeDisplayName"]];
         
         NSLog(@"Adding param %@", inputName);
-        parameters[inputName] = param;
+        _parameters[inputName] = param;
         
         /*
          NSString *attrClass = [attrs objectForKey:@"CIAttributeClass"];
@@ -104,12 +98,6 @@
          }
          */
     }
-}
-
-#pragma mark - Accessors
-- (CIFilter *)filter
-{
-    return _filter;
 }
 
 @end

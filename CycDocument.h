@@ -14,20 +14,6 @@
 @class CycFilterUIView;
 
 @interface CycDocument : NSDocument <NSTableViewDelegate> {
-@private
-    NSMutableArray *layers;
-    CycArrayController *layerController;
-    
-    NSMutableArray *filters;
-    CycArrayController *filterController;
-    
-    StageView *__weak stageView;
-    NSCollectionView *__weak videoClipCollectionView;
-    
-    NSMutableArray * videos;
-    VideoClipController *videoClipController;
-    
-    CycFilterUIView *currentFilterView;
 }
 
 @property (readwrite, strong)NSMutableArray *filters;

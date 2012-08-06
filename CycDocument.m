@@ -18,30 +18,21 @@
 #import "VideoClip.h"
 #import "CycFilterUIView.h"
 
-@implementation CycDocument
-
-@synthesize filters;
-@synthesize filterController;
-@synthesize filterTableView;
-@synthesize filterUIBox;
-@synthesize filterScrollView;
-@synthesize layers;
-@synthesize layerController;
-@synthesize stageView;
-@synthesize videos;
-@synthesize videoClipController;
-@synthesize videoClipCollectionView;
+@implementation CycDocument {
+    CycFilterUIView *_currentFilterView;
+}
 
 - (id)init
 {
     self = [super init];
     if (self) {
-        videos = [[NSMutableArray alloc] init];
-        layers = [[NSMutableArray alloc] init];
-        [layers addObject:[[VideoLayer alloc] init]];
+        _videos = [[NSMutableArray alloc] init];
+        _layers = [[NSMutableArray alloc] init];
+        [_layers addObject:[[VideoLayer alloc] init]];
         
-        filters = [[NSMutableArray alloc] init];
+        _filters = [[NSMutableArray alloc] init];
     }
+    
     return self;
 }
 
@@ -61,7 +52,7 @@
     
     if ([keyPath isEqualToString:@"selection"]) {
         //VideoClip *selectedClip = [videoClipController selection];
-        NSArray *selectedObjects = [videoClipController selectedObjects];
+        NSArray *selectedObjects = [_videoClipController selectedObjects];
         
         if ([selectedObjects count] == 0) {
             return;
@@ -70,7 +61,7 @@
         VideoClip *selectedClip = selectedObjects[0];
         NSLog(@"Video clip: %@", [selectedClip description]);
     
-        [stageView setVideoClip:selectedClip];
+        [_stageView setVideoClip:selectedClip];
         return;
     }
 }
@@ -79,19 +70,19 @@
 {
     [super windowControllerDidLoadNib:aController];
     
-    [stageView setLayerController:layerController];
-    [videoClipController addObserver:self
-                          forKeyPath:@"selection"
-                             options:0
-                             context:NULL];
+    [_stageView setLayerController:_layerController];
+    [_videoClipController addObserver:self
+                           forKeyPath:@"selection"
+                              options:0
+                              context:NULL];
     
-    [layerController setContent:layers];
+    [_layerController setContent:_layers];
     
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     [nc addObserver:self
            selector:@selector(filterSelectionDidChange:)
                name:NSTableViewSelectionDidChangeNotification
-             object:filterTableView];
+             object:_filterTableView];
 }
 
 - (NSData *)dataOfType:(NSString *)typeName error:(NSError **)outError
@@ -99,8 +90,8 @@
     NSMutableData *data = [[NSMutableData alloc] init];
     NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
     
-    [archiver encodeObject:videoClipController forKey:@"videos"];
-    [archiver encodeObject:filters forKey:@"filters"];
+    [archiver encodeObject:_videoClipController forKey:@"videos"];
+    [archiver encodeObject:_filters forKey:@"filters"];
     [archiver finishEncoding];
     
     return data;
@@ -149,7 +140,7 @@
     if (code == NSOKButton) {
         ActorFilter *af = [[ActorFilter alloc] initWithName:nil 
                                              forFilterNamed:[filterBrowserPanel filterName]];
-        [filterController addObject:af];
+        [_filterController addObject:af];
         
         NSDictionaryController *fc = [[NSDictionaryController alloc] initWithContent:[af parameters]];
         [fc addObserver:self
@@ -168,9 +159,10 @@
     IKFilterBrowserPanel *filterBrowserPanel = [IKFilterBrowserPanel 
                                                  filterBrowserPanelWithStyleMask:0];
     [filterBrowserPanel beginSheetWithOptions:NULL
-                               modalForWindow:[stageView window]
+                               modalForWindow:[_stageView window]
                              modalDelegate:self 
-                               didEndSelector:@selector(addFilterSheetDidEnd:returnCode:contextInfo:) contextInfo:(void *)(filterBrowserPanel)];
+                               didEndSelector:@selector(addFilterSheetDidEnd:returnCode:contextInfo:)
+                                  contextInfo:(void *)(filterBrowserPanel)];
 }
 
 - (IBAction)playSet:(id)sender
@@ -202,25 +194,25 @@
     
     if (selectedRow == -1) {
         // Remove filter view
-        currentFilterView = nil;
+        _currentFilterView = nil;
         return;
     }
     
-    if (currentFilterView) {
-        [currentFilterView removeFromSuperview];
-        currentFilterView = nil;
+    if (_currentFilterView) {
+        [_currentFilterView removeFromSuperview];
+        _currentFilterView = nil;
     }
-    ActorFilter *selectedFilter = filters[selectedRow];
+    ActorFilter *selectedFilter = _filters[selectedRow];
     
     NSLog(@"Filter selection did change %ld - %@", selectedRow, [selectedFilter name]);
     //CIFilter *currentFilter = [stageView filterForCurrentLayerAt:selectedRow];
-    NSRect stageViewRect = [stageView frame];
+    NSRect stageViewRect = [_stageView frame];
     
-    currentFilterView = [[CycFilterUIView alloc] initWithFilter:selectedFilter
+    _currentFilterView = [[CycFilterUIView alloc] initWithFilter:selectedFilter
                                                   forScreenWidth:stageViewRect.size.width
                                                     screenHeight:stageViewRect.size.height];
 
-    [filterScrollView setDocumentView:currentFilterView];
+    [_filterScrollView setDocumentView:_currentFilterView];
 }
 
 @end
