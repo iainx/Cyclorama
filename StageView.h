@@ -13,16 +13,9 @@
 @class VideoClip;
 
 @interface StageView : NSView {
-@private
-    CALayer *parentLayer;
-    VideoClip *videoClip;
-    
-    CycArrayController *layerController;
-    
-    CycArrayController *filterController;
 }
 
-@property (readwrite, strong) VideoClip *videoClip;
+@property (readwrite, strong, nonatomic) VideoClip *videoClip;
 @property (readwrite, weak) IBOutlet CycArrayController *filterController;
 @property (readwrite, weak) IBOutlet CycArrayController *layerController;
 

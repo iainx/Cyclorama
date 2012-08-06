@@ -13,7 +13,13 @@
 #import "VideoLayer.h"
 #import "FilterParameter.h"
 
-@implementation StageView
+@implementation StageView {
+    CALayer *parentLayer;
+}
+
+@synthesize videoClip = _videoClip;
+@synthesize filterController = _filterController;
+@synthesize layerController = _layerController;
 
 - (id)initWithFrame:(NSRect)frame
 {
@@ -42,10 +48,10 @@
     
     [nc removeObserver:self
                   name:@"ObjectAdded"
-                object:filterController];
+                object:_filterController];
     [nc removeObserver:self
                   name:@"ObjectRemoved"
-                object:filterController];
+                object:_filterController];
 }
 
 - (void)addFilterNotifications
@@ -55,11 +61,11 @@
     [nc addObserver:self
            selector:@selector(objectAdded:)
                name:@"ObjectAdded"
-             object:filterController];
+             object:_filterController];
     [nc addObserver:self
            selector:@selector(objectRemoved:)
                name:@"ObjectRemoved"
-             object:filterController];
+             object:_filterController];
 }
 
 - (void)dealloc
@@ -70,11 +76,11 @@
 
 #pragma mark - Accessors
 
-- (void)setVideoClip:(VideoClip *)_videoClip
+- (void)setVideoClip:(VideoClip *)videoClip
 {
     QTMovie *movie;
     
-    if (_videoClip == videoClip) {
+    if (videoClip == _videoClip) {
         return;
     }
     
@@ -84,11 +90,11 @@
     [movie stop];
     [movie gotoBeginning];
     
-    videoClip = _videoClip;
+    _videoClip = videoClip;
     
     movie = [videoClip movie];
     
-    VideoLayer *currentLayer = [layerController arrangedObjects][0];
+    VideoLayer *currentLayer = [_layerController arrangedObjects][0];
     
     NSLog(@"Playing movie %p on %p", movie, currentLayer);
     [currentLayer setMovie:movie];
@@ -97,7 +103,7 @@
 
 - (VideoClip *)videoClip
 {
-    return videoClip;
+    return _videoClip;
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath
@@ -114,7 +120,7 @@
     NSString *filterKeyPath = [NSString stringWithFormat:@"filters.%@.%@", [af uniqueID], [param name]];
     
     NSLog(@"Keypath: %@", filterKeyPath);
-    VideoLayer *currentLayer = [layerController arrangedObjects][0];
+    VideoLayer *currentLayer = [_layerController arrangedObjects][0];
     [currentLayer setValue:[param value] forKeyPath:filterKeyPath];
 }
 
@@ -141,7 +147,7 @@
                    context:NULL];
     }];
     
-    VideoLayer *currentLayer = [layerController arrangedObjects][0];
+    VideoLayer *currentLayer = [_layerController arrangedObjects][0];
     NSLog(@"Setting filter on %p", currentLayer);
     [currentLayer addFilter:filter atIndex:[index unsignedIntValue]];
 }
@@ -150,11 +156,11 @@
 {
     NSNumber *index = [note userInfo][@"index"];
 
-    VideoLayer *currentLayer = [layerController arrangedObjects][0];
+    VideoLayer *currentLayer = [_layerController arrangedObjects][0];
     [currentLayer removeFilterAtIndex:[index unsignedIntValue]];
 }
 
-- (void)setFilterController:(CycArrayController *)_filterController
+- (void)setFilterController:(CycArrayController *)filterController
 {
     if (_filterController == filterController) {
         return;
@@ -162,14 +168,14 @@
 
     [self removeFilterNotifications];
     
-    filterController = _filterController;
+    _filterController = filterController;
     
     [self addFilterNotifications];
 
-    VideoLayer *currentLayer = [layerController arrangedObjects][0];
+    VideoLayer *currentLayer = [_layerController arrangedObjects][0];
 
     int idx = 0;
-    for (ActorFilter *af in [filterController arrangedObjects]) {
+    for (ActorFilter *af in [_filterController arrangedObjects]) {
         CIFilter *filter;
         
         NSDictionary *params = [af parameters];
@@ -194,18 +200,18 @@
 
 - (CycArrayController *)filterController
 {
-    return filterController;
+    return _filterController;
 }
 
-- (void)setLayerController:(CycArrayController *)_layerController
+- (void)setLayerController:(CycArrayController *)layerController
 {
-    if (_layerController == layerController) {
+    if (layerController == _layerController) {
         return;
     }
     
-    layerController = _layerController;
+    _layerController = layerController;
     
-    for (VideoLayer *vl in [layerController arrangedObjects]) {
+    for (VideoLayer *vl in [_layerController arrangedObjects]) {
         [parentLayer addSublayer:vl];
         [vl setFrame:NSRectToCGRect([self bounds])];
     }
@@ -213,12 +219,12 @@
 
 - (CycArrayController *)layerController
 {
-    return layerController;
+    return _layerController;
 }
 
 - (CIFilter *)filterForCurrentLayerAt:(NSUInteger)index
 {
-    VideoLayer *currentLayer = [layerController arrangedObjects][0];
+    VideoLayer *currentLayer = [_layerController arrangedObjects][0];
     if (!currentLayer) {
         return nil;
     }
