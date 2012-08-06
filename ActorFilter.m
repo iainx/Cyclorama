@@ -70,6 +70,8 @@
     NSArray *inputKeys = [_filter inputKeys];
     NSDictionary *attributes = [_filter attributes];
     
+    [self setName:attributes [kCIAttributeFilterDisplayName]];
+    
     NSLog(@"HEllo? %@", [inputKeys description]);
     for (NSString *inputName in inputKeys) {
         if ([inputName isEqualToString:@"inputImage"]) {
