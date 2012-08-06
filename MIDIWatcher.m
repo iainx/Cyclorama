@@ -117,7 +117,7 @@ midiInputCallback (const MIDIPacketList *list,
     
     OSStatus result;
     
-    result = MIDIClientCreate(CFSTR("Flare client"), NULL, NULL, &midiClient);
+    result = MIDIClientCreate(CFSTR("Cyclorama client"), NULL, NULL, &midiClient);
     if (result != noErr) {
         NSLog(@"Error creating MIDI client: %s - %s",
               GetMacOSStatusErrorString(result), 
