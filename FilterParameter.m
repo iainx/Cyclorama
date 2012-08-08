@@ -74,15 +74,16 @@
     if (defaultValue == _defaultValue) {
         return;
     }
-    
+
     if ([_className isEqualToString:@"CIVector"]) {
-        // defaultValue is a string and we generate it from that
-        
+        NSLog(@"CIVector %@", [defaultValue description]);
     } else if ([_className isEqualToString:@"CIColor"]) {
+        NSLog(@"CIColor default value: %@", [defaultValue description]);
     } else if ([_className isEqualToString:@"NSAffineTransform"]) {
+        NSLog(@"NSAffineTransform default value: %@", [defaultValue description]);
     } else if ([_className isEqualToString:@"CIImage"]) {
+        NSLog(@"CIImage default value: %@", [defaultValue description]);
     }
-    
     
     _defaultValue = defaultValue;
 }
