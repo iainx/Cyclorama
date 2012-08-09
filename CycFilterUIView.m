@@ -149,6 +149,13 @@
     return self;
 }
 
+- (void)dealloc
+{
+    for (CycParameterViewController *cvc in _viewControllers) {
+        [cvc removeObserver:self forKeyPath:@"paramValue"];
+    }
+}
+
 - (void)drawRect:(NSRect)dirtyRect
 {
     // Drawing code here.
