@@ -28,6 +28,7 @@
     _uniqueID = [NSString stringWithUUID];
     
     _filter = [CIFilter filterWithName:filterName];
+    [_filter setDefaults];
     [_filter setName:_uniqueID];
     
     _parameters = [[NSMutableDictionary alloc] init];
