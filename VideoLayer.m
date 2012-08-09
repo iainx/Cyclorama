@@ -20,7 +20,6 @@
     
     // array to hold the CIFilters to apply to the layer
     filters = [[NSMutableArray alloc] init];
-//    filterController = [[CycArrayController alloc] initWithContent:filters];
 
     return self;
 }

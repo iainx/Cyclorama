@@ -58,6 +58,15 @@
     [coder encodeObject:_uniqueID forKey:@"uniqueID"];
 }
 
+- (void)observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary *)change
+                       context:(void *)context
+{
+    FilterParameter *param = (FilterParameter *)object;
+    
+    [[self filter] setValue:[param value] forKey:[param name]];
+}
 
 - (void)fillParametersForFilter:(CIFilter *)f
 {
@@ -86,6 +95,11 @@
         
         NSLog(@"Adding param %@", inputName);
         _parameters[inputName] = param;
+        
+        [param addObserver:self
+                forKeyPath:@"value"
+                   options:NSKeyValueObservingOptionNew
+                   context:NULL];
         
         /*
          NSString *attrClass = [attrs objectForKey:@"CIAttributeClass"];
