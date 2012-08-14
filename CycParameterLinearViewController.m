@@ -21,19 +21,9 @@
 @synthesize nameLabel;
 @synthesize valueSlider;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Initialization code here.
-    }
-    
-    return self;
-}
-
 - (id)init
 {
-    return [self initWithNibName:@"CycParameterLinearViewController" bundle:nil];
+    return [super initWithNibName:@"CycParameterLinearViewController" bundle:nil];
 }
 
 - (void)setParameter:(FilterParameter *)param

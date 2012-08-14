@@ -10,6 +10,7 @@
 #import "ActorFilter.h"
 #import "FilterParameter.h"
 #import "CycFilterUIView.h"
+#import "CycParameterColourViewController.h"
 #import "CycParameterLinearViewController.h"
 #import "CycParameterXYViewController.h"
 
@@ -96,23 +97,19 @@
 {
     NSRect frame = NSZeroRect;
     NSDictionary *params = [filter parameters];
-    /*
-    NSArray *inputKeys = [filter inputKeys];
-    NSDictionary *attributes = [filter attributes];
-    */
     
     NSMutableArray *xyParams = [[NSMutableArray alloc] init];
     NSMutableArray *linearParams = [[NSMutableArray alloc] init];
     
-    NSLog(@"Params is %@", [params description]);
+    // We sort the parameters into columns based on their sizes
     for (FilterParameter *fp in [params allValues]) {
         NSString *attrClass = [fp className];
         
         if ([attrClass isEqualToString:@"CIVector"]) {
             NSLog(@"Adding CIVector");
             [xyParams addObject:fp];
-        } else if ([attrClass isEqualToString:@"NSNumber"]) {
-            NSLog(@"Adding NSNumber");
+        } else if ([attrClass isEqualToString:@"NSNumber"] ||
+                   [attrClass isEqualToString:@"CIColor"]) {
             [linearParams addObject:fp];
         } else {
             NSLog(@"Unknown class: %@ - %@", attrClass, [fp name]);
@@ -198,6 +195,8 @@ static void *CycFilterUIViewObservationContext = (void *)@"CycFilterUIViewObserv
         xy = [[CycParameterXYViewController alloc] init];
         
         viewController = (CycParameterViewController *)xy;
+    } else if ([attrClass isEqualToString:@"CIColor"]){
+        viewController = [[CycParameterColourViewController alloc] init];
     } else {
         NSLog(@"Unknown attrType: %@", attrClass);
         return nil;

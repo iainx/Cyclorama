@@ -78,7 +78,7 @@
     if ([_className isEqualToString:@"CIVector"]) {
         NSLog(@"CIVector %@", [defaultValue description]);
     } else if ([_className isEqualToString:@"CIColor"]) {
-        NSLog(@"CIColor default value: %@", [defaultValue description]);
+        NSLog(@"CIColor default value: %@ %@", [defaultValue description], [self description]);
     } else if ([_className isEqualToString:@"NSAffineTransform"]) {
         NSLog(@"NSAffineTransform default value: %@", [defaultValue description]);
     } else if ([_className isEqualToString:@"CIImage"]) {
@@ -86,5 +86,8 @@
     }
     
     _defaultValue = defaultValue;
+    
+    // Set up the value from the default
+    [self setValue:defaultValue];
 }
 @end
