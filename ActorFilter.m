@@ -59,6 +59,15 @@
     [coder encodeObject:_uniqueID forKey:@"uniqueID"];
 }
 
+- (void)dealloc
+{
+    [_parameters enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+        NSLog(@"Removing observer for %@: %@", key, [obj description]);
+        [obj removeObserver:self
+                 forKeyPath:@"value"];
+    }];
+}
+
 - (void)observeValueForKeyPath:(NSString *)keyPath
                       ofObject:(id)object
                         change:(NSDictionary *)change
@@ -95,7 +104,7 @@
         [param setDisplayName:attrs[@"CIAttributeDisplayName"]];
         
         NSLog(@"Adding param %@", inputName);
-        _parameters[inputName] = param;
+        [self parameters][inputName] = param;
         
         [param addObserver:self
                 forKeyPath:@"value"

@@ -155,7 +155,15 @@
 - (void)objectRemoved:(NSNotification *)note
 {
     NSNumber *index = [note userInfo][@"index"];
+    ActorFilter *af = [note userInfo][@"object"];
 
+    NSDictionary *params = [af parameters];
+    
+    [params enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+        [obj removeObserver:self
+                 forKeyPath:@"value"];
+    }];
+    
     VideoLayer *currentLayer = [_layerController arrangedObjects][0];
     [currentLayer removeFilterAtIndex:[index unsignedIntValue]];
 }

@@ -185,7 +185,7 @@
      */
 }
 
-#pragma mark - Notification methods
+#pragma mark - Filter table methods
 
 - (void)filterSelectionDidChange:(NSNotification *)notification
 {
@@ -215,4 +215,14 @@
     [_filterScrollView setDocumentView:_currentFilterView];
 }
 
+- (IBAction)removeSelectedFilter:(id)sender
+{
+    if (_currentFilterView) {
+        [_currentFilterView removeFromSuperview];
+        _currentFilterView = nil;
+    }
+    
+    NSUInteger selectedRow = [_filterController selectionIndex];
+    [_filterController removeObjectAtArrangedObjectIndex:selectedRow];
+}
 @end

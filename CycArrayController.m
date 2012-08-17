@@ -24,8 +24,9 @@
 - (void)removeObjectAtArrangedObjectIndex:(NSUInteger)index
 {
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    id object = [self content][index];
     
-    NSDictionary *userInfo = @{@"index": @(index)};
+    NSDictionary *userInfo = @{@"object":object, @"index": @(index)};
     [nc postNotificationName:@"ObjectRemoved"
                       object:self
                     userInfo:userInfo];

@@ -30,5 +30,6 @@
 @property (readwrite, strong)IBOutlet VideoClipController *videoClipController;
 
 - (IBAction)openAddFilterSheet:(id)sender;
+- (IBAction)removeSelectedFilter:(id)sender;
 
 @end
