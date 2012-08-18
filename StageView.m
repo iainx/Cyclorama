@@ -137,11 +137,10 @@
     
     NSDictionary *params = [af parameters];
     
-    __block typeof (self)weakSelf = self;
     [params enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
         FilterParameter *param = (FilterParameter *)obj;
         
-        [param addObserver:weakSelf
+        [param addObserver:self
                 forKeyPath:@"value"
                    options:NSKeyValueObservingOptionNew
                    context:NULL];
