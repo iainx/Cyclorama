@@ -132,7 +132,6 @@
     CIFilter *filter;
     
     NSLog(@"Filter added %@", [af filterName]);
-    //filter = [CIFilter filterWithName:[af filterName]];
     filter = [af filter];
     
     NSDictionary *params = [af parameters];
@@ -196,7 +195,6 @@
                        context:NULL];
         }];
 
-        //filter = [CIFilter filterWithName:[af filterName]];
         filter = [af filter];
         
         [currentLayer addFilter:filter atIndex:idx];
