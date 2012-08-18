@@ -10,7 +10,9 @@
 #import "VideoLayer.h"
 #import "CycArrayController.h"
 
-@implementation VideoLayer
+@implementation VideoLayer {
+    NSMutableArray *filters;
+}
 
 @synthesize videoController;
 

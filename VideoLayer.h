@@ -10,13 +10,7 @@
 
 @class CycArrayController;
 
-@interface VideoLayer : QTMovieLayer { 
-@private
-    CycArrayController *filterController;
-    NSMutableArray *filters;
-    
-    NSArrayController *videoController;
-}
+@interface VideoLayer : QTMovieLayer
 
 @property (readwrite, strong) NSArrayController *videoController;
 
