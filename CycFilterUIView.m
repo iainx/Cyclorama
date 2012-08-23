@@ -16,6 +16,8 @@
 
 @implementation CycFilterUIView {
     NSMutableArray *_viewControllers;
+    double _videoWidth;
+    double _videoHeight;
 }
 
 @synthesize filter = _filter;
@@ -29,8 +31,8 @@
 {
     self = [super initWithFrame:frameRect];
     
-    videoWidth = _screenWidth;
-    videoHeight = _screenHeight;
+    _videoWidth = _screenWidth;
+    _videoHeight = _screenHeight;
     
     _filter = filter;
     _viewControllers = [[NSMutableArray alloc] initWithCapacity:[xyParams count] + [linearParams count]];
@@ -205,9 +207,11 @@ static void *CycFilterUIViewObservationContext = (void *)@"CycFilterUIViewObserv
     [viewController setParamName:[fp name]];
     [viewController setParameter:fp];
     
-    // if xy is nil these will just return
-    [xy setMaxX:videoWidth];
-    [xy setMaxY:videoHeight];
+    if (xy) {
+        NSLog(@"xy size: %fx%f", _videoWidth, _videoHeight);
+        [xy setMaxX:_videoWidth];
+        [xy setMaxY:_videoHeight];
+    }
 
     // Add the observer after we've set the attributes and the values
     [viewController addObserver:self

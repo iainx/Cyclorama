@@ -146,7 +146,6 @@
     }
     
     maxX = _maxX;
-    NSLog(@"setting %p maxX to %f", self, maxX);
 }
 
 - (double)maxX
@@ -161,7 +160,6 @@
     }
     
     maxY = _maxY;
-    NSLog(@"setting %p maxY to %f", self, maxY);
 }
 
 - (double)maxY

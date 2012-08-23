@@ -49,6 +49,9 @@
    withKeyPath:@"xyView.valueY"
        options:nil];
     
+    [xyView setMaxX:maxX];
+    [xyView setMaxY:maxY];
+    
     return view;
 }
 

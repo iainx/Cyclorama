@@ -9,10 +9,7 @@
 #import <Cocoa/Cocoa.h>
 
 @class ActorFilter;
-@interface CycFilterUIView : NSView {
-    double videoWidth;
-    double videoHeight;
-}
+@interface CycFilterUIView : NSView
 
 @property (readwrite, strong) ActorFilter *filter;
 
