@@ -45,6 +45,8 @@
         
         [filterModel addObject:item];
     }
+    
+    return self;
 }
 
 @end
