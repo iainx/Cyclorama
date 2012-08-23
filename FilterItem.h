@@ -11,11 +11,12 @@
 
 @interface FilterItem : NSObject
 
+@property (readwrite, strong) CIFilter *filter;
 @property (readwrite, strong) NSString *filterName;
 @property (readwrite, strong) NSString *localizedName;
-@property (readwrite, strong) NSImage *thumbnail;
+@property (readwrite, strong) CIImage *thumbnail;
 @property (readwrite, strong) NSString *localizedDescription;
 
-- (id)initFromFilter(CIFilter *)filter;
+- (id)initFromFilter:(CIFilter *)filter withImage:(CIImage *)image;
 
 @end

@@ -21,8 +21,6 @@
     
     if (_name) {
         _name = [_name copy];
-    } else {
-        _name = [filterName copy];
     }
     _filterName = [filterName copy];
     
@@ -42,7 +40,9 @@
 
 - (id)initWithFilterItem:(FilterItem *)filterItem
 {
-
+    self = [self initWithName:[filterItem localizedName]
+               forFilterNamed:[filterItem filterName]];
+    return self;
 }
 
 - (id)initWithCoder:(NSCoder *)decoder
@@ -89,9 +89,10 @@
     NSArray *inputKeys = [_filter inputKeys];
     NSDictionary *attributes = [_filter attributes];
     
-    [self setName:attributes [kCIAttributeFilterDisplayName]];
+    if (_name == nil) {
+        [self setName:attributes [kCIAttributeFilterDisplayName]];
+    }
     
-    NSLog(@"HEllo? %@", [inputKeys description]);
     for (NSString *inputName in inputKeys) {
         if ([inputName isEqualToString:@"inputImage"]) {
             continue;

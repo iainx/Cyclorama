@@ -16,6 +16,8 @@
 		AE051C41149972B900A8FB07 /* CycParameterXYViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE051C38149972B900A8FB07 /* CycParameterXYViewController.xib */; };
 		AE051C42149972B900A8FB07 /* CycXYView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE051C3A149972B900A8FB07 /* CycXYView.m */; };
 		AE1B441B15E6A1F200E20A6F /* FilterItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1B441A15E6A1F200E20A6F /* FilterItem.m */; };
+		AE48C43E15E6D26B00733AAC /* FilterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AE48C43D15E6D26B00733AAC /* FilterModel.m */; };
+		AE48C44215E6DF4E00733AAC /* Images in Resources */ = {isa = PBXBuildFile; fileRef = AE48C44115E6DF4E00733AAC /* Images */; };
 		AE7D667C147561B80099875F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE7D667B147561B80099875F /* Cocoa.framework */; };
 		AE7D6686147561B80099875F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AE7D6684147561B80099875F /* InfoPlist.strings */; };
 		AE7D6688147561B80099875F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7D6687147561B80099875F /* main.m */; };
@@ -64,6 +66,9 @@
 		AE051C3A149972B900A8FB07 /* CycXYView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CycXYView.m; sourceTree = "<group>"; };
 		AE1B441915E6A1F200E20A6F /* FilterItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterItem.h; sourceTree = "<group>"; };
 		AE1B441A15E6A1F200E20A6F /* FilterItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterItem.m; sourceTree = "<group>"; };
+		AE48C43C15E6D26B00733AAC /* FilterModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterModel.h; sourceTree = "<group>"; };
+		AE48C43D15E6D26B00733AAC /* FilterModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterModel.m; sourceTree = "<group>"; };
+		AE48C44115E6DF4E00733AAC /* Images */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Images; path = Resources/Images; sourceTree = "<group>"; };
 		AE7D6677147561B80099875F /* Cyclorama.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cyclorama.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE7D667B147561B80099875F /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		AE7D667E147561B80099875F /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -159,6 +164,14 @@
 			name = FilterUIView;
 			sourceTree = "<group>";
 		};
+		AE48C44015E6DF2400733AAC /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				AE48C44115E6DF4E00733AAC /* Images */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		AE7D666C147561B80099875F = {
 			isa = PBXGroup;
 			children = (
@@ -168,6 +181,8 @@
 				AE1B441A15E6A1F200E20A6F /* FilterItem.m */,
 				AEC028B315A24A0A0033BB3C /* FilterParameter.h */,
 				AEC028B415A24A0A0033BB3C /* FilterParameter.m */,
+				AE48C43C15E6D26B00733AAC /* FilterModel.h */,
+				AE48C43D15E6D26B00733AAC /* FilterModel.m */,
 				AE7D669D147562080099875F /* CycAppDelegate.h */,
 				AE7D669E147562080099875F /* CycAppDelegate.m */,
 				AE7D66CC147562FA0099875F /* CycArrayController.h */,
@@ -204,6 +219,7 @@
 				AE7D6681147561B80099875F /* Cyclorama */,
 				AE7D667A147561B80099875F /* Frameworks */,
 				AE7D6678147561B80099875F /* Products */,
+				AE48C44015E6DF2400733AAC /* Resources */,
 			);
 			sourceTree = "<group>";
 		};
@@ -316,6 +332,7 @@
 				AE051C3D149972B900A8FB07 /* CycParameterLinearViewController.xib in Resources */,
 				AE051C41149972B900A8FB07 /* CycParameterXYViewController.xib in Resources */,
 				AEAD5F5F15D9BF7900562A6B /* CycParameterColourViewController.xib in Resources */,
+				AE48C44215E6DF4E00733AAC /* Images in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -352,6 +369,7 @@
 				AEC028B515A24A0A0033BB3C /* FilterParameter.m in Sources */,
 				AEAD5F5E15D9BF7900562A6B /* CycParameterColourViewController.m in Sources */,
 				AE1B441B15E6A1F200E20A6F /* FilterItem.m in Sources */,
+				AE48C43E15E6D26B00733AAC /* FilterModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -21,4 +21,5 @@
 
 - (id)initWithName:(NSString *)_name forFilterNamed:(NSString *)_filterName;
 - (id)initWithFilterItem:(FilterItem *)filterItem;
+
 @end
