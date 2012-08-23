@@ -9,9 +9,9 @@
 #import <Foundation/Foundation.h>
 #import <Cocoa/Cocoa.h>
 
+@class FilterItem;
 
-@interface ActorFilter : NSObject <NSCoding> {
-}
+@interface ActorFilter : NSObject <NSCoding>
 
 @property (readwrite, copy) NSString *filterName;
 @property (readwrite, copy) NSString *name;
@@ -20,5 +20,5 @@
 @property (readonly) CIFilter *filter;
 
 - (id)initWithName:(NSString *)_name forFilterNamed:(NSString *)_filterName;
-
+- (id)initWithFilterItem:(FilterItem *)filterItem;
 @end

@@ -15,6 +15,7 @@
 		AE051C40149972B900A8FB07 /* CycParameterXYViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE051C37149972B900A8FB07 /* CycParameterXYViewController.m */; };
 		AE051C41149972B900A8FB07 /* CycParameterXYViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE051C38149972B900A8FB07 /* CycParameterXYViewController.xib */; };
 		AE051C42149972B900A8FB07 /* CycXYView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE051C3A149972B900A8FB07 /* CycXYView.m */; };
+		AE1B441B15E6A1F200E20A6F /* FilterItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1B441A15E6A1F200E20A6F /* FilterItem.m */; };
 		AE7D667C147561B80099875F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE7D667B147561B80099875F /* Cocoa.framework */; };
 		AE7D6686147561B80099875F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AE7D6684147561B80099875F /* InfoPlist.strings */; };
 		AE7D6688147561B80099875F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7D6687147561B80099875F /* main.m */; };
@@ -61,6 +62,8 @@
 		AE051C38149972B900A8FB07 /* CycParameterXYViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CycParameterXYViewController.xib; sourceTree = "<group>"; };
 		AE051C39149972B900A8FB07 /* CycXYView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CycXYView.h; sourceTree = "<group>"; };
 		AE051C3A149972B900A8FB07 /* CycXYView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CycXYView.m; sourceTree = "<group>"; };
+		AE1B441915E6A1F200E20A6F /* FilterItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterItem.h; sourceTree = "<group>"; };
+		AE1B441A15E6A1F200E20A6F /* FilterItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterItem.m; sourceTree = "<group>"; };
 		AE7D6677147561B80099875F /* Cyclorama.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cyclorama.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE7D667B147561B80099875F /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		AE7D667E147561B80099875F /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -161,6 +164,8 @@
 			children = (
 				AE7D669B147562080099875F /* ActorFilter.h */,
 				AE7D669C147562080099875F /* ActorFilter.m */,
+				AE1B441915E6A1F200E20A6F /* FilterItem.h */,
+				AE1B441A15E6A1F200E20A6F /* FilterItem.m */,
 				AEC028B315A24A0A0033BB3C /* FilterParameter.h */,
 				AEC028B415A24A0A0033BB3C /* FilterParameter.m */,
 				AE7D669D147562080099875F /* CycAppDelegate.h */,
@@ -346,6 +351,7 @@
 				AE051C42149972B900A8FB07 /* CycXYView.m in Sources */,
 				AEC028B515A24A0A0033BB3C /* FilterParameter.m in Sources */,
 				AEAD5F5E15D9BF7900562A6B /* CycParameterColourViewController.m in Sources */,
+				AE1B441B15E6A1F200E20A6F /* FilterItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

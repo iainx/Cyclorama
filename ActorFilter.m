@@ -8,6 +8,7 @@
 
 #import <Quartz/Quartz.h>
 #import "ActorFilter.h"
+#import "FilterItem.h"
 #import "FilterParameter.h"
 #import "NSString+UUID.h"
 
@@ -37,6 +38,11 @@
     [self fillParametersForFilter:_filter];
     
     return self;
+}
+
+- (id)initWithFilterItem:(FilterItem *)filterItem
+{
+
 }
 
 - (id)initWithCoder:(NSCoder *)decoder
