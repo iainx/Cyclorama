@@ -30,7 +30,7 @@
 
 - (id)initWithFilterItem:(FilterItem *)filterItem
 {
-    self = [super initWithFrame:NSMakeRect(0.0, 0.0, 74.0, 64.0)];
+    self = [super initWithFrame:NSMakeRect(0.0, 0.0, 74.0, 53.0)];
     
     _filterItem = filterItem;
     
@@ -123,7 +123,7 @@
 
 - (void)viewDidMoveToWindow
 {
-    NSTrackingArea *area = [[NSTrackingArea alloc] initWithRect:NSMakeRect(2.0, 12.0, 70.0, 50.0)
+    NSTrackingArea *area = [[NSTrackingArea alloc] initWithRect:NSMakeRect(2.0, 12.0, 70.0, 39.0)
                                                         options:NSTrackingActiveInActiveApp | NSTrackingMouseMoved | NSTrackingMouseEnteredAndExited
                                                           owner:self
                                                        userInfo:nil];
