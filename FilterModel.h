@@ -8,6 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-@interface FilterModel : NSObject
+@interface FilterModel : NSArrayController
 
 @end

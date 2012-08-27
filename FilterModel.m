@@ -11,24 +11,23 @@
 #import <Quartz/Quartz.h>
 
 @implementation FilterModel {
-    NSMutableArray *filterModel;
+    NSMutableArray *_filterModel;
 }
 
 - (id)init
 {
     self = [super init];
     
-    filterModel = [[NSMutableArray alloc] init];
+    _filterModel = [[NSMutableArray alloc] init];
+    [self setContent:_filterModel];
     
     [CIPlugIn loadAllPlugIns];
     
-    NSImage *exampleImage = [NSImage imageNamed:@"example-image.png"];
-    CGImageRef imageRef = [exampleImage CGImageForProposedRect:NULL
-                                                       context:NULL
-                                                         hints:NULL];
-    CIImage *image = [CIImage imageWithCGImage:imageRef];
+    NSString *filepath = [[NSBundle mainBundle] pathForResource:@"example-image" ofType:@"png" inDirectory:@"Images"];
+    CIImage *image = [CIImage imageWithContentsOfURL:[NSURL fileURLWithPath:filepath]];
     
-    NSArray *allFilters = [CIFilter filterNamesInCategories:nil];
+    NSArray *allFilters = [CIFilter filterNamesInCategory:kCICategoryBlur];
+    NSLog(@"Ohooooo");
     for (NSString *filterName in allFilters) {
         CIFilter *filter = [CIFilter filterWithName:filterName];
         NSArray *inputKeys = [filter inputKeys];
@@ -42,8 +41,8 @@
         
         FilterItem *item = [[FilterItem alloc] initFromFilter:filter withImage:image];
         
-        
-        [filterModel addObject:item];
+        NSLog(@"Created %@", filterName);
+        [_filterModel addObject:item];
     }
     
     return self;

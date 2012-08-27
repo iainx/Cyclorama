@@ -28,7 +28,7 @@
     _filterName = attributes[kCIAttributeFilterName];
     _localizedName = attributes[kCIAttributeFilterDisplayName];
     _localizedDescription = attributes[kCIAttributeDescription];
-    
+
     return self;
 }
 

@@ -12,6 +12,7 @@
 @class StageView;
 @class VideoClipController;
 @class CycFilterUIView;
+@class FilterItemView;
 
 @interface CycDocument : NSDocument <NSTableViewDelegate> {
 }

@@ -14,6 +14,7 @@
 @property (readwrite, strong) CIFilter *filter;
 @property (readwrite, strong) NSString *filterName;
 @property (readwrite, strong) NSString *localizedName;
+@property (readwrite, strong) NSString *categoryName;
 @property (readwrite, strong) CIImage *thumbnail;
 @property (readwrite, strong) NSString *localizedDescription;
 

@@ -17,9 +17,13 @@
 #import "VideoClipController.h"
 #import "VideoClip.h"
 #import "CycFilterUIView.h"
+#import "FilterModel.h"
+#import "FilterItemView.h"
 
 @implementation CycDocument {
     CycFilterUIView *_currentFilterView;
+    FilterModel *_filterModel;
+    FilterItemView *_itemView;
 }
 
 - (id)init
@@ -31,6 +35,8 @@
         [_layers addObject:[[VideoLayer alloc] init]];
         
         _filters = [[NSMutableArray alloc] init];
+        
+        _filterModel = [[FilterModel alloc] init];
     }
     
     return self;
@@ -83,6 +89,10 @@
            selector:@selector(filterSelectionDidChange:)
                name:NSTableViewSelectionDidChangeNotification
              object:_filterTableView];
+    
+    _itemView = [[FilterItemView alloc] initWithFilterItem:[_filterModel arrangedObjects][4]];
+    [_itemView setFrameOrigin:NSMakePoint(500.0, 300.0)];
+    [[_stageView superview] addSubview:_itemView];
 }
 
 - (NSData *)dataOfType:(NSString *)typeName error:(NSError **)outError
