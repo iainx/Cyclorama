@@ -47,6 +47,7 @@
 		AEAD5F5E15D9BF7900562A6B /* CycParameterColourViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEAD5F5C15D9BF7900562A6B /* CycParameterColourViewController.m */; };
 		AEAD5F5F15D9BF7900562A6B /* CycParameterColourViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEAD5F5D15D9BF7900562A6B /* CycParameterColourViewController.xib */; };
 		AEB910E415EABC7C00DEE626 /* Resources in Resources */ = {isa = PBXBuildFile; fileRef = AEB910E315EABC7C00DEE626 /* Resources */; };
+		AEB9524D15ED4FFE00C00019 /* CursorLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB9524C15ED4FFE00C00019 /* CursorLayer.m */; };
 		AEC028B515A24A0A0033BB3C /* FilterParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = AEC028B415A24A0A0033BB3C /* FilterParameter.m */; };
 /* End PBXBuildFile section */
 
@@ -123,6 +124,8 @@
 		AEAD5F5C15D9BF7900562A6B /* CycParameterColourViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CycParameterColourViewController.m; sourceTree = "<group>"; };
 		AEAD5F5D15D9BF7900562A6B /* CycParameterColourViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CycParameterColourViewController.xib; sourceTree = "<group>"; };
 		AEB910E315EABC7C00DEE626 /* Resources */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Resources; sourceTree = "<group>"; };
+		AEB9524B15ED4FFE00C00019 /* CursorLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CursorLayer.h; sourceTree = "<group>"; };
+		AEB9524C15ED4FFE00C00019 /* CursorLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CursorLayer.m; sourceTree = "<group>"; };
 		AEC028B315A24A0A0033BB3C /* FilterParameter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterParameter.h; sourceTree = "<group>"; };
 		AEC028B415A24A0A0033BB3C /* FilterParameter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterParameter.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -176,6 +179,8 @@
 				AE1B441A15E6A1F200E20A6F /* FilterItem.m */,
 				AE5DB0B115E9734D00C4C720 /* FilterItemView.h */,
 				AE5DB0B215E9734D00C4C720 /* FilterItemView.m */,
+				AEB9524B15ED4FFE00C00019 /* CursorLayer.h */,
+				AEB9524C15ED4FFE00C00019 /* CursorLayer.m */,
 				AEC028B315A24A0A0033BB3C /* FilterParameter.h */,
 				AEC028B415A24A0A0033BB3C /* FilterParameter.m */,
 				AE48C43C15E6D26B00733AAC /* FilterModel.h */,
@@ -368,6 +373,7 @@
 				AE1B441B15E6A1F200E20A6F /* FilterItem.m in Sources */,
 				AE48C43E15E6D26B00733AAC /* FilterModel.m in Sources */,
 				AE5DB0B315E9734D00C4C720 /* FilterItemView.m in Sources */,
+				AEB9524D15ED4FFE00C00019 /* CursorLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

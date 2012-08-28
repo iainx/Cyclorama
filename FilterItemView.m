@@ -9,11 +9,13 @@
 #import <Quartz/Quartz.h>
 #import "FilterItemView.h"
 #import "FilterItem.h"
+#import "CursorLayer.h"
 
 @implementation FilterItemView {
+    CALayer *_imageLayer;
+    CATextLayer *_labelLayer;
+    CursorLayer *_cursorLayer;
     FilterItem *_filterItem;
-    BOOL _showCursor;
-    float _cursorX;
 }
 
 - (id)initWithFrame:(NSRect)frame
@@ -23,102 +25,80 @@
         // Initialization code here.
     }
     
-    _showCursor = NO;
-    _cursorX = 0.0;
+    CALayer *rootLayer = [CALayer layer];
+    
+    // Debugging
+    //[rootLayer setBackgroundColor:[[NSColor redColor] CGColor]];
+    
+    [self setLayer:rootLayer];
+    [self setWantsLayer:YES];
+    
+    _imageLayer = [CALayer layer];
+    [_imageLayer setFrame:CGRectMake(2.0, 12.0, 69.0, 39.0)];
+    [_imageLayer setCornerRadius:5.0];
+    [_imageLayer setMasksToBounds:YES];
+    [rootLayer addSublayer:_imageLayer];
+    
+    _labelLayer = [CATextLayer layer];
+    [_labelLayer setFrame:CGRectMake(2.0, 2.0, 70.0, 11.0)];
+    [_labelLayer setFontSize:11.0];
+    [_labelLayer setAlignmentMode:kCAAlignmentCenter];
+    [rootLayer addSublayer:_labelLayer];
+    
+    _cursorLayer = [[CursorLayer alloc] init];
+    [_cursorLayer setFrame:CGRectMake(2.0, 12.0, 69.0, 39.0)];
+    [rootLayer addSublayer:_cursorLayer];
+    
     return self;
 }
 
 - (id)initWithFilterItem:(FilterItem *)filterItem
 {
-    self = [super initWithFrame:NSMakeRect(0.0, 0.0, 74.0, 53.0)];
+    self = [self initWithFrame:NSMakeRect(0.0, 0.0, 74.0, 53.0)];
     
     _filterItem = filterItem;
+    
+    [_imageLayer setContents:[_filterItem thumbnail]];
+    [_imageLayer setFilters:@[ [_filterItem filter] ]];
+
+    [_labelLayer setString:[_filterItem localizedName]];
     
     return self;
 }
 
-- (void)drawRect:(NSRect)dirtyRect
+- (void)setFilterToNormalizedValue:(CGFloat)normalizedValue
 {
-    if (_filterItem == nil) {
-        return;
-    }
+    CGFloat filterValue;
     
-    CGFloat imageX = 2.0;
-    CGFloat imageY = 12.0;
-    CGFloat imageW = 69.0;
-    CGFloat imageH = 39.0;
+    filterValue = [_filterItem convertNormalizedValueToPreviewValue:normalizedValue];
     
-    NSRect imageRect = NSMakeRect(imageX, imageY, imageW, imageH);
-    NSGraphicsContext *context = [NSGraphicsContext currentContext];
-    CIContext *ciContext = [context CIContext];
-    CGContextRef cgContext = [context graphicsPort];
-    
-    CGContextSetRGBFillColor (cgContext, 0, 0, 0, 1);
-    
-    CGContextSaveGState(cgContext);
-    
-    // Set up a clippath
-    CGMutablePathRef clipPath = CGPathCreateMutable();
-    CGFloat radius = 7.5;
-    
-    CGPathMoveToPoint(clipPath, NULL, imageX, imageY + radius);
-    CGPathAddLineToPoint(clipPath, NULL, imageX, imageY + imageH - radius);
-    CGPathAddArc(clipPath, NULL, imageX + radius, imageY + imageH - radius, radius, M_PI, M_PI / 2, true);
-    CGPathAddLineToPoint(clipPath, NULL, imageX + imageW - radius, imageY + imageH);
-    CGPathAddArc(clipPath, NULL, imageX + imageW - radius, imageY + imageH - radius, radius, M_PI / 2, 0.0, true);
-    CGPathAddLineToPoint(clipPath, NULL, imageX + imageW, imageY + radius);
-    CGPathAddArc(clipPath, NULL, imageX + imageW - radius, imageY + radius, radius, 0.0, - M_PI / 2, true);
-    CGPathAddLineToPoint(clipPath, NULL, imageX + radius, imageY);
-    CGPathAddArc(clipPath, NULL, imageX + radius, imageY + radius, radius, - M_PI / 2, M_PI, true);
-    
-    CGContextAddPath(cgContext, clipPath);
-    CGContextClip(cgContext);
-    
-    [ciContext drawImage:[_filterItem thumbnail]
-             inRect:imageRect
-           fromRect:NSMakeRect(0.0, 0.0, 70.0, 50.0)];
-    
-    if (_showCursor) {
-        CGContextStrokeRect(cgContext, NSMakeRect(_cursorX - 0.5, imageY, 0.5, imageH));
-    }
-    CGContextRestoreGState(cgContext);
-    
-    // Draw the title
-    CGContextSelectFont (cgContext,
-                         "Helvetica",
-                         0.9,
-                         kCGEncodingMacRoman);
-    
-    CGContextSetTextDrawingMode(cgContext, kCGTextInvisible);
-    const char *name = [[_filterItem localizedName] cStringUsingEncoding:NSUTF8StringEncoding];
-    CGContextShowTextAtPoint (cgContext, 0.0, 0.0, name, strlen(name));
-    CGPoint textEnd = CGContextGetTextPosition(cgContext);
-    
-    CGFloat textWidth = textEnd.x;
-    CGFloat textOffset = (74 - textWidth) / 2;
-    
-    CGContextSetTextDrawingMode (cgContext, kCGTextFill);
-    CGContextShowTextAtPoint (cgContext, textOffset, 2.0, name, strlen(name));
+    NSString *keyPath = [NSString stringWithFormat:@"filters.%@.%@",
+                         [_filterItem filterName],
+                         [_filterItem previewKey]];
+    [_imageLayer setValue:@(filterValue) forKeyPath:keyPath];
 }
 
 - (void)mouseEntered:(NSEvent *)theEvent
 {
-    _showCursor = YES;
-    [self setNeedsDisplay:YES];
+    [_cursorLayer setShowCursor:YES];
 }
 
 - (void)mouseExited:(NSEvent *)theEvent
 {
-    _showCursor = NO;
-    [self setNeedsDisplay:YES];
+    [_cursorLayer setShowCursor:NO];
+    
+    [self setFilterToNormalizedValue:0.1];
 }
 
 - (void)mouseMoved:(NSEvent *)theEvent
 {
     NSPoint locationInView = [self convertPoint:[theEvent locationInWindow] fromView:nil];
+    CGFloat normalizedValue;
     
-    _cursorX = locationInView.x;
-    [self setNeedsDisplay:YES];
+    [_cursorLayer setCursorPosition:locationInView.x];
+    
+    normalizedValue = (locationInView.x - 2.0) / 68.0;
+    [self setFilterToNormalizedValue:normalizedValue];
 }
 
 - (void)viewDidMoveToWindow
@@ -127,6 +107,7 @@
                                                         options:NSTrackingActiveInActiveApp | NSTrackingMouseMoved | NSTrackingMouseEnteredAndExited
                                                           owner:self
                                                        userInfo:nil];
+    
     [self addTrackingArea:area];
 }
 
