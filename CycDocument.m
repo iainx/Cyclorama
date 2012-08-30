@@ -18,11 +18,10 @@
 #import "VideoClip.h"
 #import "CycFilterUIView.h"
 #import "FilterModel.h"
-#import "FilterItemView.h"
+#import "FilterBrowserView.h"
 
 @implementation CycDocument {
     CycFilterUIView *_currentFilterView;
-    FilterModel *_filterModel;
     FilterItemView *_itemView;
 }
 
@@ -35,8 +34,6 @@
         [_layers addObject:[[VideoLayer alloc] init]];
         
         _filters = [[NSMutableArray alloc] init];
-        
-        _filterModel = [[FilterModel alloc] init];
     }
     
     return self;
@@ -54,8 +51,6 @@
                         change:(NSDictionary *)change
                        context:(void *)context
 {
-    NSLog(@"Got keypath: %@", keyPath);
-    
     if ([keyPath isEqualToString:@"selection"]) {
         //VideoClip *selectedClip = [videoClipController selection];
         NSArray *selectedObjects = [_videoClipController selectedObjects];
@@ -90,9 +85,16 @@
                name:NSTableViewSelectionDidChangeNotification
              object:_filterTableView];
     
+    /*
     _itemView = [[FilterItemView alloc] initWithFilterItem:[_filterModel arrangedObjects][4]];
     [_itemView setFrameOrigin:NSMakePoint(500.0, 300.0)];
     [[_stageView superview] addSubview:_itemView];
+     */
+/*
+FilterBrowserView *testBrowser = [[FilterBrowserView alloc] initWithFilterModel:_filterModel];
+[testBrowser setFrameOrigin:NSMakePoint(500.0, 200.0)];
+[[_stageView superview] addSubview:testBrowser];
+ */
 }
 
 - (NSData *)dataOfType:(NSString *)typeName error:(NSError **)outError

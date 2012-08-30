@@ -75,6 +75,7 @@
     NSString *keyPath = [NSString stringWithFormat:@"filters.%@.%@",
                          [_filterItem filterName],
                          [_filterItem previewKey]];
+    NSLog(@"Setting %@", keyPath);
     [_imageLayer setValue:@(filterValue) forKeyPath:keyPath];
 }
 
@@ -103,7 +104,7 @@
 
 - (void)viewDidMoveToWindow
 {
-    NSTrackingArea *area = [[NSTrackingArea alloc] initWithRect:NSMakeRect(2.0, 12.0, 70.0, 39.0)
+    NSTrackingArea *area = [[NSTrackingArea alloc] initWithRect:[self bounds]
                                                         options:NSTrackingActiveInActiveApp | NSTrackingMouseMoved | NSTrackingMouseEnteredAndExited
                                                           owner:self
                                                        userInfo:nil];

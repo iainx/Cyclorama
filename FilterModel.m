@@ -10,40 +10,57 @@
 #import "FilterModel.h"
 #import <Quartz/Quartz.h>
 
-@implementation FilterModel {
-    NSMutableArray *_filterModel;
-}
+@implementation FilterModel
 
 - (id)init
 {
     self = [super init];
     
-    _filterModel = [[NSMutableArray alloc] init];
-    [self setContent:_filterModel];
+    _categories = [[NSMutableDictionary alloc] init];
     
     [CIPlugIn loadAllPlugIns];
     
     NSString *filepath = [[NSBundle mainBundle] pathForResource:@"example-image" ofType:@"png" inDirectory:@"Images"];
     NSImage *image = [[NSImage alloc] initWithContentsOfURL:[NSURL fileURLWithPath:filepath]];
     
-    NSArray *allFilters = [CIFilter filterNamesInCategory:kCICategoryBlur];
-
-    for (NSString *filterName in allFilters) {
-        CIFilter *filter = [CIFilter filterWithName:filterName];
-        NSArray *inputKeys = [filter inputKeys];
+    NSArray *filterCategories = @[
+        kCICategoryBlur,
+        kCICategoryDistortionEffect,
+        kCICategoryColorEffect,
+        kCICategoryColorAdjustment,
+        kCICategoryHalftoneEffect,
+        kCICategorySharpen,
+        kCICategoryStylize,
+        kCICategoryTileEffect
+    ];
+    for (NSString *filterCategory in filterCategories) {
+        NSArray *allFilters = [CIFilter filterNamesInCategory:filterCategory];
+        NSMutableArray *filterArray = [[NSMutableArray alloc] init];
         
-        NSUInteger inputImageKey = [inputKeys indexOfObject:kCIInputImageKey];
-        if (inputImageKey == NSNotFound) {
-            continue;
+        for (NSString *filterName in allFilters) {
+            CIFilter *filter = [CIFilter filterWithName:filterName];
+            NSArray *inputKeys = [filter inputKeys];
+            
+            NSUInteger inputImageKey = [inputKeys indexOfObject:kCIInputImageKey];
+            if (inputImageKey == NSNotFound) {
+                continue;
+            }
+            
+            [filter setDefaults];
+            
+            FilterItem *item = [[FilterItem alloc] initFromFilter:filter withImage:image];
+            
+            [self findPreviewParameter:inputKeys forFilterItem:item];
+            NSLog(@"Created %@", filterName);
+            [filterArray addObject:item];
         }
         
-        [filter setDefaults];
-        
-        FilterItem *item = [[FilterItem alloc] initFromFilter:filter withImage:image];
-        
-        [self findPreviewParameter:inputKeys forFilterItem:item];
-        NSLog(@"Created %@", filterName);
-        [_filterModel addObject:item];
+        // Only add to the category dictionary if we have a filter
+        if ([filterArray count] > 0) {
+            // Cast to mutable dictionary here because although we know that is what
+            // it is, we've only advertised to the outside world that it's a immutable one
+            ((NSMutableDictionary *)_categories)[filterCategory] = filterArray;
+        }
     }
     
     return self;

@@ -8,19 +8,32 @@
 
 #import "CycAppDelegate.h"
 #import "VideoClipController.h"
+#import "FilterModel.h"
+#import "FilterBrowserView.h"
+#import "FilterBrowserWindowController.h"
 
-@implementation CycAppDelegate
+@implementation CycAppDelegate {
+    FilterModel *_filterModel;
+    FilterBrowserWindowController *_filterBrowserController;
+}
 
 - (id)init
 {
     self = [super init];
     if (self) {
     }
-    
+
+    _filterModel = [[FilterModel alloc] init];
+
     return self;
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)notification
 {
+    _filterBrowserController = [[FilterBrowserWindowController alloc] init];
+    FilterBrowserView *filterBrowser = [[FilterBrowserView alloc] initWithFilterModel:_filterModel];
+    
+    [_filterBrowserController showWindow:self];
+    [[_filterBrowserController scrollView] setDocumentView:filterBrowser];
 }
 @end

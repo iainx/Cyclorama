@@ -48,6 +48,9 @@
 		AEAD5F5F15D9BF7900562A6B /* CycParameterColourViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEAD5F5D15D9BF7900562A6B /* CycParameterColourViewController.xib */; };
 		AEB910E415EABC7C00DEE626 /* Resources in Resources */ = {isa = PBXBuildFile; fileRef = AEB910E315EABC7C00DEE626 /* Resources */; };
 		AEB9524D15ED4FFE00C00019 /* CursorLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB9524C15ED4FFE00C00019 /* CursorLayer.m */; };
+		AEB9525415ED74D000C00019 /* FilterBrowserView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB9525315ED74D000C00019 /* FilterBrowserView.m */; };
+		AEB9525815ED9D8200C00019 /* FilterBrowserWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB9525615ED9D8200C00019 /* FilterBrowserWindowController.m */; };
+		AEB9525915ED9D8200C00019 /* FilterBrowserWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEB9525715ED9D8200C00019 /* FilterBrowserWindowController.xib */; };
 		AEC028B515A24A0A0033BB3C /* FilterParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = AEC028B415A24A0A0033BB3C /* FilterParameter.m */; };
 /* End PBXBuildFile section */
 
@@ -126,6 +129,11 @@
 		AEB910E315EABC7C00DEE626 /* Resources */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Resources; sourceTree = "<group>"; };
 		AEB9524B15ED4FFE00C00019 /* CursorLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CursorLayer.h; sourceTree = "<group>"; };
 		AEB9524C15ED4FFE00C00019 /* CursorLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CursorLayer.m; sourceTree = "<group>"; };
+		AEB9525215ED74D000C00019 /* FilterBrowserView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterBrowserView.h; sourceTree = "<group>"; };
+		AEB9525315ED74D000C00019 /* FilterBrowserView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterBrowserView.m; sourceTree = "<group>"; };
+		AEB9525515ED9D8200C00019 /* FilterBrowserWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterBrowserWindowController.h; sourceTree = "<group>"; };
+		AEB9525615ED9D8200C00019 /* FilterBrowserWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterBrowserWindowController.m; sourceTree = "<group>"; };
+		AEB9525715ED9D8200C00019 /* FilterBrowserWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FilterBrowserWindowController.xib; sourceTree = "<group>"; };
 		AEC028B315A24A0A0033BB3C /* FilterParameter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterParameter.h; sourceTree = "<group>"; };
 		AEC028B415A24A0A0033BB3C /* FilterParameter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterParameter.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -175,14 +183,10 @@
 			children = (
 				AE7D669B147562080099875F /* ActorFilter.h */,
 				AE7D669C147562080099875F /* ActorFilter.m */,
-				AE1B441915E6A1F200E20A6F /* FilterItem.h */,
-				AE1B441A15E6A1F200E20A6F /* FilterItem.m */,
-				AE5DB0B115E9734D00C4C720 /* FilterItemView.h */,
-				AE5DB0B215E9734D00C4C720 /* FilterItemView.m */,
-				AEB9524B15ED4FFE00C00019 /* CursorLayer.h */,
-				AEB9524C15ED4FFE00C00019 /* CursorLayer.m */,
 				AEC028B315A24A0A0033BB3C /* FilterParameter.h */,
 				AEC028B415A24A0A0033BB3C /* FilterParameter.m */,
+				AE1B441915E6A1F200E20A6F /* FilterItem.h */,
+				AE1B441A15E6A1F200E20A6F /* FilterItem.m */,
 				AE48C43C15E6D26B00733AAC /* FilterModel.h */,
 				AE48C43D15E6D26B00733AAC /* FilterModel.m */,
 				AE7D669D147562080099875F /* CycAppDelegate.h */,
@@ -215,6 +219,7 @@
 				AE7D66B8147562080099875F /* VideoClipView.m */,
 				AE7D66B9147562080099875F /* VideoLayer.h */,
 				AE7D66BA147562080099875F /* VideoLayer.m */,
+				AEB9525115ED72FF00C00019 /* FilterBrowser */,
 				AE7D66DD147566380099875F /* CycDocument.xib */,
 				AE7D66DE147566380099875F /* MainMenu.xib */,
 				AE051C081498EA0500A8FB07 /* FilterUIView */,
@@ -276,6 +281,22 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		AEB9525115ED72FF00C00019 /* FilterBrowser */ = {
+			isa = PBXGroup;
+			children = (
+				AE5DB0B115E9734D00C4C720 /* FilterItemView.h */,
+				AE5DB0B215E9734D00C4C720 /* FilterItemView.m */,
+				AEB9524B15ED4FFE00C00019 /* CursorLayer.h */,
+				AEB9524C15ED4FFE00C00019 /* CursorLayer.m */,
+				AEB9525515ED9D8200C00019 /* FilterBrowserWindowController.h */,
+				AEB9525615ED9D8200C00019 /* FilterBrowserWindowController.m */,
+				AEB9525715ED9D8200C00019 /* FilterBrowserWindowController.xib */,
+				AEB9525215ED74D000C00019 /* FilterBrowserView.h */,
+				AEB9525315ED74D000C00019 /* FilterBrowserView.m */,
+			);
+			name = FilterBrowser;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -335,6 +356,7 @@
 				AE051C41149972B900A8FB07 /* CycParameterXYViewController.xib in Resources */,
 				AEAD5F5F15D9BF7900562A6B /* CycParameterColourViewController.xib in Resources */,
 				AEB910E415EABC7C00DEE626 /* Resources in Resources */,
+				AEB9525915ED9D8200C00019 /* FilterBrowserWindowController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -374,6 +396,8 @@
 				AE48C43E15E6D26B00733AAC /* FilterModel.m in Sources */,
 				AE5DB0B315E9734D00C4C720 /* FilterItemView.m in Sources */,
 				AEB9524D15ED4FFE00C00019 /* CursorLayer.m in Sources */,
+				AEB9525415ED74D000C00019 /* FilterBrowserView.m in Sources */,
+				AEB9525815ED9D8200C00019 /* FilterBrowserWindowController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

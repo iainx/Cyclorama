@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface FilterModel : NSArrayController
+@interface FilterModel : NSObject
 
+@property (readonly, strong) NSDictionary *categories;
 @end
