@@ -20,7 +20,7 @@
     
     [CIPlugIn loadAllPlugIns];
     
-    NSString *filepath = [[NSBundle mainBundle] pathForResource:@"example-image" ofType:@"png" inDirectory:@"Images"];
+    NSString *filepath = [[NSBundle mainBundle] pathForResource:@"example-image" ofType:@"png" inDirectory:@"Resources/Images"];
     NSImage *image = [[NSImage alloc] initWithContentsOfURL:[NSURL fileURLWithPath:filepath]];
     
     NSArray *filterCategories = @[
