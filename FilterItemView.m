@@ -45,10 +45,6 @@
     [_labelLayer setAlignmentMode:kCAAlignmentCenter];
     [rootLayer addSublayer:_labelLayer];
     
-    _cursorLayer = [[CursorLayer alloc] init];
-    [_cursorLayer setFrame:CGRectMake(2.0, 12.0, 69.0, 39.0)];
-    [rootLayer addSublayer:_cursorLayer];
-    
     return self;
 }
 
@@ -62,6 +58,12 @@
     [_imageLayer setFilters:@[ [_filterItem filter] ]];
 
     [_labelLayer setString:[_filterItem localizedName]];
+
+    if ([filterItem previewKey]) {
+        _cursorLayer = [[CursorLayer alloc] init];
+        [_cursorLayer setFrame:CGRectMake(2.0, 12.0, 69.0, 39.0)];
+        [[self layer] addSublayer:_cursorLayer];
+    }
     
     return self;
 }
@@ -104,12 +106,14 @@
 
 - (void)viewDidMoveToWindow
 {
-    NSTrackingArea *area = [[NSTrackingArea alloc] initWithRect:[self bounds]
-                                                        options:NSTrackingActiveInActiveApp | NSTrackingMouseMoved | NSTrackingMouseEnteredAndExited
-                                                          owner:self
-                                                       userInfo:nil];
-    
-    [self addTrackingArea:area];
+    if ([_filterItem previewKey]) {
+        NSTrackingArea *area = [[NSTrackingArea alloc] initWithRect:[self bounds]
+                                                            options:NSTrackingActiveInActiveApp | NSTrackingMouseMoved | NSTrackingMouseEnteredAndExited
+                                                              owner:self
+                                                           userInfo:nil];
+        
+        [self addTrackingArea:area];
+    }
 }
 
 @end
