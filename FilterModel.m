@@ -43,10 +43,12 @@
         @"CIColorCube", // Requires color
         @"CIStretchCrop", // Doesn't work
         @"CIDroste", // Don't know what it does but it doesn't work
-    
-        // FIXME: Could we hardcode hacks to make this work in FilterItem and FilterItemView?
-        @"CIHoleDistortion" // Default value is 150pixels which is too big for our image.
+        @"CITriangleTile", // Doesn't work?
+        @"CISixfoldReflectedTile" // Doesn't work?
     ];
+    
+    // This is a list of filters we don't need a preview key for
+    NSArray *whiteList = @[ @"CIColorInvert", @"CIComicEffect", @"CIFalseColor", @"CIHoleDistortion" ];
     
     for (NSString *filterCategory in filterCategories) {
         NSArray *allFilters = [CIFilter filterNamesInCategory:filterCategory];
@@ -70,7 +72,12 @@
             
             FilterItem *item = [[FilterItem alloc] initFromFilter:filter withImage:image];
             
-            if ([self findPreviewParameter:inputKeys forFilterItem:item]) {
+            if ([filterName isEqualToString:@"CIHoleDistortion"]) {
+                [filter setValue:[CIVector vectorWithX:30.0 Y:19.0] forKey:kCIInputCenterKey];
+                [filter setValue:@(10.0) forKey:kCIInputRadiusKey];
+            }
+            
+            if ([whiteList containsObject:filterName] || [self findPreviewParameter:inputKeys forFilterItem:item]) {
                 [filterArray addObject:item];
             }
         }
@@ -91,6 +98,18 @@
 {
     CIFilter *filter = [filterItem filter];
     NSDictionary *attrs = [filter attributes];
+    NSString *filterName = [filterItem filterName];
+    NSArray *angleFilters = @[ @"CIKaleidoscope" ];
+    
+    if ([angleFilters containsObject:filterName]) {
+        NSDictionary *filterAttrs = [attrs valueForKey:kCIInputAngleKey];
+        
+        NSNumber *maxPreviewValue = [filterAttrs valueForKey:kCIAttributeSliderMax];
+        NSNumber *minPreviewValue = [filterAttrs valueForKey:kCIAttributeSliderMin];
+        
+        [filterItem setPreviewKey:kCIInputAngleKey withMinValue:minPreviewValue maxValue:maxPreviewValue];
+        return YES;
+    }
     
     for (NSString *key in inputKeys) {
         if ([key isEqualToString:kCIInputImageKey]) {
