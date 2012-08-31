@@ -11,10 +11,7 @@
 #import "FilterItemView.h"
 #import "FilterModel.h"
 
-@implementation FilterBrowserView {
-    CGFloat intrinsicWidth;
-    CGFloat intrinsicHeight;
-}
+@implementation FilterBrowserView
 
 - (id)initWithFrame:(NSRect)frame
 {
@@ -23,7 +20,6 @@
         // Initialization code here.
     }
     
-    NSLog(@"Init with frame %@", NSStringFromRect(frame));
     return self;
 }
 
@@ -36,32 +32,20 @@
     return self;
 }
 
-- (void)awakeFromNib
-{
-    NSLog(@"Awake! %p", self);
-}
-
 - (BOOL)isFlipped
 {
     return YES;
 }
-/*
-- (NSSize)intrinsicContentSize
-{
-    return NSMakeSize(intrinsicWidth, intrinsicHeight);
-}
-*/
+
 - (void)setModel:(FilterModel *)model
 {
     
     if (model == _model) {
-        NSLog(@"Model %p == _model %p", model, _model);
         return;
     }
     
     _model = model;
     
-    NSLog(@"Hello?");
     NSDictionary *categories = [model categories];
     
     NSUInteger categoryCount = [categories count];
@@ -82,19 +66,13 @@
     frameHeight = 10 + (20.0 * categoryCount) + (53.0 * rowCount) + (2 * (rowCount - 1));
     frameWidth = 10 + (74.0 * 3) + (2 * 2);
     
-    //[self setFrame:NSMakeRect(0.0, 0.0, frameWidth, frameHeight)];
-    intrinsicWidth = frameWidth;
-    intrinsicHeight = frameHeight;
     [self setFrameSize:NSMakeSize(frameWidth, frameHeight)];
-    
-    NSLog(@"Size of %p frame is %@", self, NSStringFromRect([self bounds]));
-    //[self invalidateIntrinsicContentSize];
     
     __block int yOffset = 5;
     
     [categories enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
         NSArray *categoryArray = (NSArray *) obj;
-        int column = 0;
+        int column = 0, i = 0;
         
         // FIXME: Draw label
         yOffset += 20;
@@ -109,8 +87,9 @@
             
             [self addSubview:itemView];
             
+            i++;
             column++;
-            if (column > 2) {
+            if (column > 2 && i < [categoryArray count]) {
                 column = 0;
                 yOffset += 53.0 + 2.0;
             }
