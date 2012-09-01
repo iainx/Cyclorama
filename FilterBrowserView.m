@@ -6,6 +6,7 @@
 //  Copyright (c) 2012 Sleep(5). All rights reserved.
 //
 
+#import <Quartz/Quartz.h>
 #import "FilterBrowserView.h"
 #import "FilterItem.h"
 #import "FilterItemView.h"
@@ -74,7 +75,16 @@
         NSArray *categoryArray = (NSArray *) obj;
         int column = 0, i = 0;
         
-        // FIXME: Draw label
+        NSTextField *label = [[NSTextField alloc] initWithFrame:NSMakeRect(10.0, yOffset, frameWidth - 20, 20.0)];
+        [label setStringValue:[CIFilter localizedNameForCategory:key]];
+        [label setBezeled:NO];
+        [label setBordered:NO];
+        [label setDrawsBackground:NO];
+        [label setEditable:NO];
+        [label setTextColor:[NSColor whiteColor]];
+        
+        [self addSubview:label];
+        
         yOffset += 20;
         
         for (FilterItem *item in categoryArray) {
