@@ -41,8 +41,9 @@
     
     _labelLayer = [CATextLayer layer];
     [_labelLayer setFrame:CGRectMake(2.0, 2.0, 70.0, 11.0)];
-    [_labelLayer setFontSize:11.0];
+    [_labelLayer setFontSize:9.0];
     [_labelLayer setAlignmentMode:kCAAlignmentCenter];
+    [_labelLayer setTruncationMode:kCATruncationEnd];
     [rootLayer addSublayer:_labelLayer];
     
     return self;
