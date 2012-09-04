@@ -7,22 +7,17 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <QTKit/QTKit.h>
+#import <AVFoundation/AVFoundation.h>
 
-@interface VideoClip : NSObject {
-@private
-    QTMovie *movie;
-    NSImage *thumbnail;
-    QTTime duration;
-}
-
-- (id)initWithFilePath:(NSString *)_filePath title:(NSString *)_title;
+@interface VideoClip : NSObject
 
 @property (nonatomic, readwrite, strong) NSString *filePath;
 @property (nonatomic, readwrite, strong) NSString *title;
-@property (readonly) QTMovie *movie;
+@property (readonly, strong, nonatomic) AVURLAsset *asset;
 @property (readwrite, strong) NSImage *thumbnail;
-@property (readonly) QTTime duration;
+@property (readonly) CMTime duration;
 
+- (id)initWithFilePath:(NSString *)filePath title:(NSString *)title;
 - (void)openMovie;
+
 @end

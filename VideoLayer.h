@@ -6,11 +6,11 @@
 //  Copyright 2011 Sleep(5). All rights reserved.
 //
 
-#import <QTKit/QTKit.h>
+#import <AVFoundation/AVFoundation.h>
 
 @class CycArrayController;
 
-@interface VideoLayer : QTMovieLayer
+@interface VideoLayer : AVPlayerLayer
 
 @property (readwrite, strong) NSArrayController *videoController;
 

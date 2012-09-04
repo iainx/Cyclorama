@@ -1,107 +1,98 @@
 //
 //  VideoClip.m
-//  Flare
+//  Cyclorama
 //
 //  Created by iain on 09/06/2011.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Copyright 2011 Sleep(5). All rights reserved.
 //
 
 #import "VideoClip.h"
-#import <QTKit/QTKit.h>
-
 
 @implementation VideoClip
 
-@synthesize filePath, movie, thumbnail, title;
-@synthesize duration;
+@synthesize asset = _asset;
 
-- (id)initWithFilePath:(NSString *)_filePath title:(NSString *)_title
+- (id)initWithFilePath:(NSString *)filePath
+                 title:(NSString *)title
 {
     self = [super init];
     
-    [self setFilePath:_filePath];
-    [self setTitle:_title];
+    [self setFilePath:filePath];
+    [self setTitle:title];
 
     return self;
 }
 
 - (void)openMovie
 {
-    NSURL *url = [NSURL fileURLWithPath:filePath];
+    NSURL *url = [NSURL fileURLWithPath:[self filePath]];
     
-    // Disabled QTOpenForPlaybackAttribute as it stops some thumbnails working
-    NSDictionary *dict = @{QTMovieURLAttribute: url,
-                          //[NSNumber numberWithBool:YES], QTMovieOpenForPlaybackAttribute,
-                          QTMovieMutedAttribute: @YES,
-                          QTMovieLoopsAttribute: @YES};
-    NSError *error = nil;
-    movie = [QTMovie movieWithAttributes:dict error:&error];
-    
-    if (error != nil) {
-        NSLog(@"Error getting movie from %@: %@", filePath, [error localizedDescription]);
-        return;
-    }
-    
-    NSMutableDictionary *attributes = [NSMutableDictionary dictionary];
-    
-	// We'll specify a custom size of 95 X 120 for the returned image:
-	NSSize imageSize = NSMakeSize(120, 95);
-	NSValue *sizeValue = [NSValue valueWithSize:imageSize];
-	attributes[QTMovieFrameImageSize] = sizeValue;
-    
-	/* get the current movie time - we'll pass this value to the
-     frameImageAtTime: method below */
-    QTTime time = QTMakeTime(5, 1);
-    //QTTime time = [movie currentTime];
-    
-	/* return an NSImage for the frame at the current time in the QTMovie */
-	NSImage *th = [movie frameImageAtTime:time
-                           withAttributes:attributes
-                                    error:&error];
-    if (error != nil) {
-        NSLog(@"Error making thumbnail for %@: %@", filePath, [error localizedDescription]);
-        return;
-    }
-    
-    [self setThumbnail:th];
+    _asset = [AVURLAsset URLAssetWithURL:url
+                                 options:nil];
+
+    NSArray *keys = @[ @"tracks", @"duration" ];
+    [_asset loadValuesAsynchronouslyForKeys:keys
+                          completionHandler:^{
+                              NSError *error = nil;
+                              AVKeyValueStatus status = [[self asset] statusOfValueForKey:@"tracks"
+                                                                                    error:&error];
+                              switch (status) {
+                                  case AVKeyValueStatusLoaded:
+                                      // Now we can get the thumbnail
+                                      if ([[self asset] tracksWithMediaCharacteristic:AVMediaTypeVideo]) {
+                                          AVAssetImageGenerator *gen = [AVAssetImageGenerator assetImageGeneratorWithAsset:[self asset]];
+                                          
+                                          [gen setMaximumSize:CGSizeMake(150, 150)];
+                                          CMTime frameTime = CMTimeMakeWithSeconds(5.0, 600);
+                                          CMTime actualTime;
+                                          
+                                          CGImageRef t = [gen copyCGImageAtTime:frameTime
+                                                                     actualTime:&actualTime
+                                                                          error:&error];
+                                          NSImage *tn = [[NSImage alloc] initWithCGImage:t
+                                                                                    size:NSZeroSize];
+                                          [self setThumbnail:tn];
+                                      }
+                                      break;
+                                      
+                                  case AVKeyValueStatusFailed:
+                                      // Error out
+                                      NSLog(@"Error loading %@: %@", [self filePath], [error localizedDescription]);
+                                      break;
+                                      
+                                  default:
+                                      break;
+                              }
+                              
+                          }];
 }
 
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"%@", filePath];
+    return [NSString stringWithFormat:@"%@", [self filePath]];
 }
 
 #pragma mark - Accessors
 
 - (void)setFilePath:(NSString *)path
 {
-    if (path == filePath) {
+    if (path == _filePath) {
         return;
     }
     
     
-    filePath = path;
+    _filePath = path;
 }
 
-- (QTMovie *)movie
+- (AVAsset *)asset
 {
-    if (movie == nil) {
-        NSLog(@"Loading movie for %@", filePath);
-        
-         NSLog(@"Got movie for %@ - %p", filePath, movie);
-    }
-    return movie;
-}
-
-/*
-- (NSImage *)thumbnail
-{
-    if (!thumbnail) {
-        NSLog(@"Thumbnail not ready yet for %@", filePath);
+    if (_asset == nil) {
+        NSLog(@"No movie for %@", [self filePath]);
+        return nil;
     }
     
-    return thumbnail;
+    return _asset;
 }
-*/
+
 @end

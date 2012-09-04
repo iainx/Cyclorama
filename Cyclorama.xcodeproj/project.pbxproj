@@ -39,7 +39,6 @@
 		AE7D66CA147562080099875F /* VideoLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7D66BA147562080099875F /* VideoLayer.m */; };
 		AE7D66CE147562FA0099875F /* CycArrayController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7D66CD147562FA0099875F /* CycArrayController.m */; };
 		AE7D66D0147563140099875F /* CoreMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE7D66CF147563140099875F /* CoreMIDI.framework */; };
-		AE7D66D21475632E0099875F /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE7D66D11475632E0099875F /* QTKit.framework */; };
 		AE7D66D5147563910099875F /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE7D66D3147563910099875F /* Quartz.framework */; };
 		AE7D66D6147563910099875F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE7D66D4147563910099875F /* QuartzCore.framework */; };
 		AE7D66DF147566380099875F /* CycDocument.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE7D66DD147566380099875F /* CycDocument.xib */; };
@@ -52,6 +51,8 @@
 		AEB9525815ED9D8200C00019 /* FilterBrowserWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB9525615ED9D8200C00019 /* FilterBrowserWindowController.m */; };
 		AEB9525915ED9D8200C00019 /* FilterBrowserWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEB9525715ED9D8200C00019 /* FilterBrowserWindowController.xib */; };
 		AEC028B515A24A0A0033BB3C /* FilterParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = AEC028B415A24A0A0033BB3C /* FilterParameter.m */; };
+		AEDE0C0015F53F6A0058578E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEDE0BFF15F53F6A0058578E /* AVFoundation.framework */; };
+		AEDE0C0215F562BD0058578E /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEDE0C0115F562BD0058578E /* CoreMedia.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -118,7 +119,6 @@
 		AE7D66CC147562FA0099875F /* CycArrayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CycArrayController.h; sourceTree = "<group>"; };
 		AE7D66CD147562FA0099875F /* CycArrayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CycArrayController.m; sourceTree = "<group>"; };
 		AE7D66CF147563140099875F /* CoreMIDI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMIDI.framework; path = System/Library/Frameworks/CoreMIDI.framework; sourceTree = SDKROOT; };
-		AE7D66D11475632E0099875F /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = System/Library/Frameworks/QTKit.framework; sourceTree = SDKROOT; };
 		AE7D66D3147563910099875F /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
 		AE7D66D4147563910099875F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		AE7D66DD147566380099875F /* CycDocument.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CycDocument.xib; sourceTree = "<group>"; };
@@ -136,6 +136,8 @@
 		AEB9525715ED9D8200C00019 /* FilterBrowserWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FilterBrowserWindowController.xib; sourceTree = "<group>"; };
 		AEC028B315A24A0A0033BB3C /* FilterParameter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterParameter.h; sourceTree = "<group>"; };
 		AEC028B415A24A0A0033BB3C /* FilterParameter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterParameter.m; sourceTree = "<group>"; };
+		AEDE0BFF15F53F6A0058578E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		AEDE0C0115F562BD0058578E /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,9 +145,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AEDE0C0215F562BD0058578E /* CoreMedia.framework in Frameworks */,
+				AEDE0C0015F53F6A0058578E /* AVFoundation.framework in Frameworks */,
 				AE7D66D5147563910099875F /* Quartz.framework in Frameworks */,
 				AE7D66D6147563910099875F /* QuartzCore.framework in Frameworks */,
-				AE7D66D21475632E0099875F /* QTKit.framework in Frameworks */,
 				AE7D66D0147563140099875F /* CoreMIDI.framework in Frameworks */,
 				AE7D667C147561B80099875F /* Cocoa.framework in Frameworks */,
 			);
@@ -219,9 +222,9 @@
 				AE7D66B8147562080099875F /* VideoClipView.m */,
 				AE7D66B9147562080099875F /* VideoLayer.h */,
 				AE7D66BA147562080099875F /* VideoLayer.m */,
-				AEB9525115ED72FF00C00019 /* FilterBrowser */,
 				AE7D66DD147566380099875F /* CycDocument.xib */,
 				AE7D66DE147566380099875F /* MainMenu.xib */,
+				AEB9525115ED72FF00C00019 /* FilterBrowser */,
 				AE051C081498EA0500A8FB07 /* FilterUIView */,
 				AE7D6681147561B80099875F /* Cyclorama */,
 				AE7D667A147561B80099875F /* Frameworks */,
@@ -241,9 +244,10 @@
 		AE7D667A147561B80099875F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AEDE0C0115F562BD0058578E /* CoreMedia.framework */,
+				AEDE0BFF15F53F6A0058578E /* AVFoundation.framework */,
 				AE7D66D3147563910099875F /* Quartz.framework */,
 				AE7D66D4147563910099875F /* QuartzCore.framework */,
-				AE7D66D11475632E0099875F /* QTKit.framework */,
 				AE7D66CF147563140099875F /* CoreMIDI.framework */,
 				AE7D667B147561B80099875F /* Cocoa.framework */,
 				AE7D667D147561B80099875F /* Other Frameworks */,

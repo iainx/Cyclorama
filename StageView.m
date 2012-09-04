@@ -78,27 +78,36 @@
 
 - (void)setVideoClip:(VideoClip *)videoClip
 {
-    QTMovie *movie;
+    AVAsset *asset;
     
     if (videoClip == _videoClip) {
         return;
     }
     
-    movie = [videoClip movie];
+    // Get the current player and stop it
+    VideoLayer *currentLayer = [_layerController arrangedObjects][0];
+    [[currentLayer player] pause];
     
-    // Stop the video otherwise it'll just keep playing on and on and on and on...
-    [movie stop];
-    [movie gotoBeginning];
+    //movie = [videoClip movie];
+    asset = [videoClip asset];
     
+    AVPlayerItem *item = [AVPlayerItem playerItemWithAsset:asset];
+    AVPlayer *player = [AVPlayer playerWithPlayerItem:item];
+    [player setActionAtItemEnd:AVPlayerActionAtItemEndNone];
+
+    // Set it up to loop continually
+    __weak AVPlayer *weak_player = player;
+    [[NSNotificationCenter defaultCenter] addObserverForName:AVPlayerItemDidPlayToEndTimeNotification
+                                                      object:item
+                                                       queue:nil
+                                                  usingBlock:^(NSNotification *note) {
+                                                      [weak_player seekToTime:kCMTimeZero];
+                                                  }];
+
     _videoClip = videoClip;
     
-    movie = [videoClip movie];
-    
-    VideoLayer *currentLayer = [_layerController arrangedObjects][0];
-    
-    NSLog(@"Playing movie %p on %p", movie, currentLayer);
-    [currentLayer setMovie:movie];
-    [movie play];
+    [currentLayer setPlayer:player];
+    [player play];
 }
 
 - (VideoClip *)videoClip
