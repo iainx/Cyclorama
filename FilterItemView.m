@@ -105,6 +105,16 @@
     [self setFilterToNormalizedValue:normalizedValue];
 }
 
+- (void)mouseDragged:(NSEvent *)theEvent
+{
+    NSLog(@"Mouse dragging on %@", [_filterItem localizedName]);
+}
+
+- (BOOL)mouseDownCanMoveWindow
+{
+    return NO;
+}
+
 - (void)viewDidMoveToWindow
 {
     if ([_filterItem previewKey]) {
