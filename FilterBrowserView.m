@@ -38,9 +38,11 @@
     return YES;
 }
 
+#define BROWSER_GUTTER_SIZE 5
+#define BROWSER_SPACING_SIZE 2
+#define BROWSER_ITEMS_PER_ROW 3
 - (void)setModel:(FilterModel *)model
 {
-    
     if (model == _model) {
         return;
     }
@@ -48,32 +50,23 @@
     _model = model;
     
     NSDictionary *categories = [model categories];
-    
-    NSUInteger categoryCount = [categories count];
-    __block NSInteger rowCount = 0;
     float frameHeight;
     float frameWidth;
-    
+    __block NSInteger rowCount = 0;
+    __block int yOffset = BROWSER_GUTTER_SIZE;
+
+    frameWidth = (BROWSER_GUTTER_SIZE * 2) + (74.0 * BROWSER_ITEMS_PER_ROW) + (2 * BROWSER_SPACING_SIZE);
+
+    // Layout the subviews and calculate the size of the view
     [categories enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
         NSArray *categoryArray = (NSArray *) obj;
         NSUInteger c = [categoryArray count];
-        rowCount += (c / 3);
+        int column = 0, i = 0;
         
-        if (c % 3 > 0) {
+        rowCount += (c / BROWSER_ITEMS_PER_ROW);
+        if (c % BROWSER_ITEMS_PER_ROW > 0) {
             rowCount++;
         }
-    }];
-    
-    frameHeight = 10 + (20.0 * categoryCount) + (53.0 * rowCount) + (2 * (rowCount - 1));
-    frameWidth = 10 + (74.0 * 3) + (2 * 2);
-    
-    [self setFrameSize:NSMakeSize(frameWidth, frameHeight)];
-    
-    __block int yOffset = 5;
-    
-    [categories enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-        NSArray *categoryArray = (NSArray *) obj;
-        int column = 0, i = 0;
         
         NSTextField *label = [[NSTextField alloc] initWithFrame:NSMakeRect(10.0, yOffset, frameWidth - 20, 20.0)];
         [label setStringValue:[CIFilter localizedNameForCategory:key]];
@@ -91,7 +84,7 @@
             FilterItemView *itemView = [[FilterItemView alloc] initWithFilterItem:item];
             int x;
             
-            x = 5 + (column * 74.0) + ((column - 1) * 2);
+            x = BROWSER_GUTTER_SIZE + (column * 74.0) + ((column - 1) * BROWSER_SPACING_SIZE);
             
             [itemView setFrameOrigin:NSMakePoint(x, yOffset)];
             
@@ -99,14 +92,19 @@
             
             i++;
             column++;
-            if (column > 2 && i < [categoryArray count]) {
+            if (column >= BROWSER_ITEMS_PER_ROW && i < [categoryArray count]) {
                 column = 0;
-                yOffset += 53.0 + 2.0;
+                yOffset += 53.0 + BROWSER_SPACING_SIZE;
             }
         }
         
         yOffset += 53.0;
     }];
+    
+    // yOffset still needs the bottom gutter added to it
+    frameHeight = yOffset + BROWSER_GUTTER_SIZE;
+    
+    [self setFrameSize:NSMakeSize(frameWidth, frameHeight)];
 }
 
 - (void)drawRect:(NSRect)dirtyRect
