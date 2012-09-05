@@ -84,7 +84,6 @@
         return;
     }
     
-    // Get the current player and stop it
     VideoLayer *currentLayer = [_layerController arrangedObjects][0];
     [[currentLayer player] pause];
     
