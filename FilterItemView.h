@@ -9,7 +9,7 @@
 #import <Cocoa/Cocoa.h>
 
 @class FilterItem;
-@interface FilterItemView : NSView
+@interface FilterItemView : NSView <NSDraggingSource>
 
 - (id)initWithFilterItem:(FilterItem *)filterItem;
 @end

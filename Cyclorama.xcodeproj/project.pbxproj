@@ -53,6 +53,7 @@
 		AEC028B515A24A0A0033BB3C /* FilterParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = AEC028B415A24A0A0033BB3C /* FilterParameter.m */; };
 		AEDE0C0015F53F6A0058578E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEDE0BFF15F53F6A0058578E /* AVFoundation.framework */; };
 		AEDE0C0215F562BD0058578E /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEDE0C0115F562BD0058578E /* CoreMedia.framework */; };
+		AEDE0C0515F79A780058578E /* CALayer+Images.m in Sources */ = {isa = PBXBuildFile; fileRef = AEDE0C0415F79A780058578E /* CALayer+Images.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -138,6 +139,8 @@
 		AEC028B415A24A0A0033BB3C /* FilterParameter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterParameter.m; sourceTree = "<group>"; };
 		AEDE0BFF15F53F6A0058578E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		AEDE0C0115F562BD0058578E /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		AEDE0C0315F79A780058578E /* CALayer+Images.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+Images.h"; sourceTree = "<group>"; };
+		AEDE0C0415F79A780058578E /* CALayer+Images.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CALayer+Images.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -198,6 +201,8 @@
 				AE7D66CD147562FA0099875F /* CycArrayController.m */,
 				AE7D669F147562080099875F /* CycDocument.h */,
 				AE7D66A0147562080099875F /* CycDocument.m */,
+				AEDE0C0315F79A780058578E /* CALayer+Images.h */,
+				AEDE0C0415F79A780058578E /* CALayer+Images.m */,
 				AE7D66A1147562080099875F /* MIDIWatcher.h */,
 				AE7D66A2147562080099875F /* MIDIWatcher.m */,
 				AE7D66A3147562080099875F /* NSString+UUID.h */,
@@ -402,6 +407,7 @@
 				AEB9524D15ED4FFE00C00019 /* CursorLayer.m in Sources */,
 				AEB9525415ED74D000C00019 /* FilterBrowserView.m in Sources */,
 				AEB9525815ED9D8200C00019 /* FilterBrowserWindowController.m in Sources */,
+				AEDE0C0515F79A780058578E /* CALayer+Images.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

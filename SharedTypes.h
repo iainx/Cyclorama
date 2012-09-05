@@ -11,6 +11,7 @@ extern NSString * const CycFilterValueChangedNotification;
 extern NSString * const CYCVideoClipReady;
 extern NSString * const FlareVideoClipType;
 extern NSString * const FlareVideoClipArrayType;
+extern NSString * const CycFilterPasteboardType;
 
 typedef enum {
     kNoteOff,

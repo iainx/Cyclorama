@@ -10,20 +10,21 @@
 #import "FilterItemView.h"
 #import "FilterItem.h"
 #import "CursorLayer.h"
+#import "CALayer+Images.h"
 
 @implementation FilterItemView {
     CALayer *_imageLayer;
     CATextLayer *_labelLayer;
     CursorLayer *_cursorLayer;
     FilterItem *_filterItem;
+    BOOL _isDragging;
 }
 
 - (id)initWithFrame:(NSRect)frame
 {
     self = [super initWithFrame:frame];
-    if (self) {
-        // Initialization code here.
-    }
+    
+    _isDragging = NO;
     
     CALayer *rootLayer = [CALayer layer];
     
@@ -78,9 +79,10 @@
     NSString *keyPath = [NSString stringWithFormat:@"filters.%@.%@",
                          [_filterItem filterName],
                          [_filterItem previewKey]];
-    NSLog(@"Setting %@", keyPath);
     [_imageLayer setValue:@(filterValue) forKeyPath:keyPath];
 }
+
+#pragma mark - Mouse methods
 
 - (void)mouseEntered:(NSEvent *)theEvent
 {
@@ -105,15 +107,49 @@
     [self setFilterToNormalizedValue:normalizedValue];
 }
 
+- (void)mouseDown:(NSEvent *)theEvent
+{
+    NSLog(@"Mouse down on %@", [_filterItem localizedName]);
+}
+
+- (void)mouseUp:(NSEvent *)theEvent
+{
+    NSLog(@"Mouse up on %@", [_filterItem localizedName]);
+    _isDragging = NO;
+}
+
 - (void)mouseDragged:(NSEvent *)theEvent
 {
     NSLog(@"Mouse dragging on %@", [_filterItem localizedName]);
+    if (_isDragging == NO) {
+        NSPasteboard *pb = [NSPasteboard generalPasteboard];
+        NSArray *pbTypes = @[ CycFilterPasteboardType ];
+        [pb declareTypes:pbTypes owner:nil];
+        
+        // We just put the filter name on the pasteboard
+        [pb setData:[[_filterItem filterName] dataUsingEncoding:NSUTF8StringEncoding]
+            forType:CycFilterPasteboardType];
+        
+        // Start the drag
+        NSImage *layerImage = [[self layer] createImageForLayer];
+        [self dragImage:layerImage
+                     at:NSMakePoint(0.0, 0.0)
+                 offset:NSZeroSize
+                  event:theEvent
+             pasteboard:pb
+                 source:self
+              slideBack:YES];
+        
+        _isDragging = YES;
+    }
 }
 
 - (BOOL)mouseDownCanMoveWindow
 {
     return NO;
 }
+
+#pragma mark - Tracking area methods
 
 - (void)viewDidMoveToWindow
 {
@@ -125,6 +161,25 @@
         
         [self addTrackingArea:area];
     }
+}
+
+#pragma mark - Drag methods
+
+- (NSDragOperation)draggingSession:(NSDraggingSession *)session sourceOperationMaskForDraggingContext:(NSDraggingContext)context
+{
+    switch (context) {
+        case NSDraggingContextOutsideApplication:
+            return NSDragOperationNone;
+            
+        case NSDraggingContextWithinApplication:
+        default:
+            return NSDragOperationPrivate;
+    }
+}
+
+- (BOOL)ignoreModifierKeysForDraggingSession:(NSDraggingSession *)session
+{
+    return YES;
 }
 
 @end
