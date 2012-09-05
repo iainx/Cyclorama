@@ -108,6 +108,9 @@
         NSNumber *minPreviewValue = [filterAttrs valueForKey:kCIAttributeSliderMin];
         
         [filterItem setPreviewKey:kCIInputAngleKey withMinValue:minPreviewValue maxValue:maxPreviewValue];
+        
+        CIVector *center = [CIVector vectorWithX:34.0 Y:18];
+        [filter setValue:center forKey:kCIInputCenterKey];
         return YES;
     }
     
