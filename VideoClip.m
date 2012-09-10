@@ -30,6 +30,8 @@
     _asset = [AVURLAsset URLAssetWithURL:url
                                  options:nil];
 
+    // FIXME: Should we be using a weak ref self here?
+    
     NSArray *keys = @[ @"tracks", @"duration" ];
     [_asset loadValuesAsynchronouslyForKeys:keys
                           completionHandler:^{

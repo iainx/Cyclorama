@@ -85,4 +85,9 @@
 {
     return 57.0;
 }
+
+- (void)listViewSelectionDidChange:(NSNotification *)aNotification
+{
+    NSLog(@"Selection changed");
+}
 @end

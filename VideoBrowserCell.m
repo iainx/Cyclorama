@@ -32,7 +32,12 @@
 
 - (void)drawRect:(NSRect)dirtyRect
 {
-    // Drawing code here.
+    if ([self isSelected]) {
+        NSColor *selectionColour = [NSColor colorWithCalibratedRed:0.4 green:0.4 blue:0.4 alpha:0.7];
+        [selectionColour set];
+        
+        NSRectFill(dirtyRect);
+    }
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath

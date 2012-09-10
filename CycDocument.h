@@ -12,25 +12,13 @@
 @class StageView;
 @class VideoClipController;
 @class CycFilterUIView;
-@class FilterItemView;
 
-@interface CycDocument : NSDocument <NSTableViewDelegate> {
-}
+@interface CycDocument : NSDocument
 
-@property (readwrite, strong)NSMutableArray *filters;
 @property (readwrite, strong)NSMutableArray *layers;
 @property (readwrite, strong)IBOutlet CycArrayController *layerController;
 @property (readwrite, strong)IBOutlet CycArrayController *filterController;
-@property (readwrite, weak)IBOutlet NSTableView *filterTableView;
-@property (readwrite, weak)IBOutlet NSBox *filterUIBox;
-@property (readwrite, weak)IBOutlet NSScrollView *filterScrollView;
 
 @property (readwrite, weak)IBOutlet StageView *stageView;
-@property (readwrite, weak)IBOutlet NSCollectionView *videoClipCollectionView;
-@property (readonly, strong)IBOutlet NSMutableArray *videos;
-@property (readwrite, strong)IBOutlet VideoClipController *videoClipController;
-
-- (IBAction)openAddFilterSheet:(id)sender;
-- (IBAction)removeSelectedFilter:(id)sender;
 
 @end

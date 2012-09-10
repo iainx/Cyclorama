@@ -401,6 +401,7 @@
 			isa = PBXGroup;
 			children = (
 				AE8ACBE615FE67B600063F7B /* Classes */,
+				AE8ACD4215FEAEF200063F7B /* Deprecated */,
 				AE8ACBE715FE67D500063F7B /* External Sources */,
 				AE7D6682147561B80099875F /* Supporting Files */,
 			);
@@ -498,16 +499,8 @@
 				AE7D66AA147562080099875F /* utils.m */,
 				AE7D66AB147562080099875F /* VideoClip.h */,
 				AE7D66AC147562080099875F /* VideoClip.m */,
-				AE7D66AD147562080099875F /* VideoClipCell.h */,
-				AE7D66AE147562080099875F /* VideoClipCell.m */,
-				AE7D66AF147562080099875F /* VideoClipCollectionItemView.h */,
-				AE7D66B0147562080099875F /* VideoClipCollectionItemView.m */,
-				AE7D66B1147562080099875F /* VideoClipCollectionView.h */,
-				AE7D66B2147562080099875F /* VideoClipCollectionView.m */,
 				AE7D66B3147562080099875F /* VideoClipController.h */,
 				AE7D66B4147562080099875F /* VideoClipController.m */,
-				AE7D66B7147562080099875F /* VideoClipView.h */,
-				AE7D66B8147562080099875F /* VideoClipView.m */,
 				AE7D66B9147562080099875F /* VideoLayer.h */,
 				AE7D66BA147562080099875F /* VideoLayer.m */,
 				AE8ACBBA15FD0D0200063F7B /* SLFBlackWindow.h */,
@@ -770,6 +763,22 @@
 				AE8ACC3415FE6ABE00063F7B /* BGHUDTextFieldCell.m */,
 			);
 			name = BGHUDTextFieldCell;
+			sourceTree = "<group>";
+		};
+		AE8ACD4215FEAEF200063F7B /* Deprecated */ = {
+			isa = PBXGroup;
+			children = (
+				AE7D66AD147562080099875F /* VideoClipCell.h */,
+				AE7D66AE147562080099875F /* VideoClipCell.m */,
+				AE7D66AF147562080099875F /* VideoClipCollectionItemView.h */,
+				AE7D66B0147562080099875F /* VideoClipCollectionItemView.m */,
+				AE7D66B7147562080099875F /* VideoClipView.h */,
+				AE7D66B8147562080099875F /* VideoClipView.m */,
+				AE7D66B1147562080099875F /* VideoClipCollectionView.h */,
+				AE7D66B2147562080099875F /* VideoClipCollectionView.m */,
+			);
+			name = Deprecated;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		AEB9525115ED72FF00C00019 /* FilterBrowser */ = {
