@@ -70,7 +70,7 @@
             NSString *title = [item valueForAttribute:(NSString *)kMDItemTitle];
             
             if (title == nil) {
-                title = [path lastPathComponent];
+                title = [[path lastPathComponent] stringByDeletingPathExtension];
             }
             
             VideoClip *clip = [[VideoClip alloc] initWithFilePath:path title:title];
