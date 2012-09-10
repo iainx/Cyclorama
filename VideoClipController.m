@@ -47,6 +47,8 @@
 
 #pragma mark - Local methods
 
+#define VIDEO_LIMIT 50
+
 - (void)queryNotification:(NSNotification *)note
 {
     if ([[note name] isEqualToString:NSMetadataQueryDidStartGatheringNotification]) {
@@ -79,10 +81,12 @@
             [filesForThumbnailing addObject:clip];
             
             limit++;
-            
-            if (limit > 50) {
+
+#if VIDEO_LIMIT > 0
+            if (limit > VIDEO_LIMIT) {
                 break;
             }
+#endif
         }
         [self startIdleLoop];
     } else if ([[note name] isEqualToString:NSMetadataQueryGatheringProgressNotification]) {
