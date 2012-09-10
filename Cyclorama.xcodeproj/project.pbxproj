@@ -43,6 +43,15 @@
 		AE7D66D6147563910099875F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE7D66D4147563910099875F /* QuartzCore.framework */; };
 		AE7D66DF147566380099875F /* CycDocument.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE7D66DD147566380099875F /* CycDocument.xib */; };
 		AE7D66E0147566380099875F /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE7D66DE147566380099875F /* MainMenu.xib */; };
+		AE8ACBBC15FD0D0200063F7B /* SLFBlackWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8ACBBB15FD0D0200063F7B /* SLFBlackWindow.m */; };
+		AE8ACBC115FD3AD700063F7B /* VideoBrowserWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8ACBBF15FD3AD700063F7B /* VideoBrowserWindowController.m */; };
+		AE8ACBC215FD3AD700063F7B /* VideoBrowserWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE8ACBC015FD3AD700063F7B /* VideoBrowserWindowController.xib */; };
+		AE8ACBD815FE146400063F7B /* PXListView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8ACBCA15FE136D00063F7B /* PXListView.m */; };
+		AE8ACBDA15FE146400063F7B /* PXListView+UserInteraction.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8ACBCE15FE136D00063F7B /* PXListView+UserInteraction.m */; };
+		AE8ACBDB15FE146400063F7B /* PXListViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8ACBD115FE136D00063F7B /* PXListViewCell.m */; };
+		AE8ACBDC15FE146400063F7B /* PXListDocumentView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8ACBD415FE136D00063F7B /* PXListDocumentView.m */; };
+		AE8ACBDF15FE476300063F7B /* VideoBrowserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8ACBDE15FE476300063F7B /* VideoBrowserCell.m */; };
+		AE8ACBE115FE49A300063F7B /* VideoBrowserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE8ACBE015FE49A300063F7B /* VideoBrowserCell.xib */; };
 		AEAD5F5E15D9BF7900562A6B /* CycParameterColourViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEAD5F5C15D9BF7900562A6B /* CycParameterColourViewController.m */; };
 		AEAD5F5F15D9BF7900562A6B /* CycParameterColourViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEAD5F5D15D9BF7900562A6B /* CycParameterColourViewController.xib */; };
 		AEB910E415EABC7C00DEE626 /* Resources in Resources */ = {isa = PBXBuildFile; fileRef = AEB910E315EABC7C00DEE626 /* Resources */; };
@@ -124,6 +133,26 @@
 		AE7D66D4147563910099875F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		AE7D66DD147566380099875F /* CycDocument.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CycDocument.xib; sourceTree = "<group>"; };
 		AE7D66DE147566380099875F /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
+		AE8ACBBA15FD0D0200063F7B /* SLFBlackWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLFBlackWindow.h; sourceTree = "<group>"; };
+		AE8ACBBB15FD0D0200063F7B /* SLFBlackWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLFBlackWindow.m; sourceTree = "<group>"; };
+		AE8ACBBE15FD3AD700063F7B /* VideoBrowserWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoBrowserWindowController.h; sourceTree = "<group>"; };
+		AE8ACBBF15FD3AD700063F7B /* VideoBrowserWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoBrowserWindowController.m; sourceTree = "<group>"; };
+		AE8ACBC015FD3AD700063F7B /* VideoBrowserWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoBrowserWindowController.xib; sourceTree = "<group>"; };
+		AE8ACBC915FE136D00063F7B /* PXListView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PXListView.h; sourceTree = "<group>"; };
+		AE8ACBCA15FE136D00063F7B /* PXListView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PXListView.m; sourceTree = "<group>"; };
+		AE8ACBCB15FE136D00063F7B /* PXListView+Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PXListView+Private.h"; sourceTree = "<group>"; };
+		AE8ACBCC15FE136D00063F7B /* PXListViewDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PXListViewDelegate.h; sourceTree = "<group>"; };
+		AE8ACBCD15FE136D00063F7B /* PXListView+UserInteraction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PXListView+UserInteraction.h"; sourceTree = "<group>"; };
+		AE8ACBCE15FE136D00063F7B /* PXListView+UserInteraction.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "PXListView+UserInteraction.m"; sourceTree = "<group>"; };
+		AE8ACBCF15FE136D00063F7B /* PXListViewDropHighlight.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PXListViewDropHighlight.h; sourceTree = "<group>"; };
+		AE8ACBD015FE136D00063F7B /* PXListViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PXListViewCell.h; sourceTree = "<group>"; };
+		AE8ACBD115FE136D00063F7B /* PXListViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PXListViewCell.m; sourceTree = "<group>"; };
+		AE8ACBD215FE136D00063F7B /* PXListViewCell+Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PXListViewCell+Private.h"; sourceTree = "<group>"; };
+		AE8ACBD315FE136D00063F7B /* PXListDocumentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PXListDocumentView.h; sourceTree = "<group>"; };
+		AE8ACBD415FE136D00063F7B /* PXListDocumentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PXListDocumentView.m; sourceTree = "<group>"; };
+		AE8ACBDD15FE476300063F7B /* VideoBrowserCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoBrowserCell.h; sourceTree = "<group>"; };
+		AE8ACBDE15FE476300063F7B /* VideoBrowserCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoBrowserCell.m; sourceTree = "<group>"; };
+		AE8ACBE015FE49A300063F7B /* VideoBrowserCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoBrowserCell.xib; sourceTree = "<group>"; };
 		AEAD5F5B15D9BF7900562A6B /* CycParameterColourViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CycParameterColourViewController.h; sourceTree = "<group>"; };
 		AEAD5F5C15D9BF7900562A6B /* CycParameterColourViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CycParameterColourViewController.m; sourceTree = "<group>"; };
 		AEAD5F5D15D9BF7900562A6B /* CycParameterColourViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CycParameterColourViewController.xib; sourceTree = "<group>"; };
@@ -227,10 +256,14 @@
 				AE7D66B8147562080099875F /* VideoClipView.m */,
 				AE7D66B9147562080099875F /* VideoLayer.h */,
 				AE7D66BA147562080099875F /* VideoLayer.m */,
+				AE8ACBBA15FD0D0200063F7B /* SLFBlackWindow.h */,
+				AE8ACBBB15FD0D0200063F7B /* SLFBlackWindow.m */,
 				AE7D66DD147566380099875F /* CycDocument.xib */,
 				AE7D66DE147566380099875F /* MainMenu.xib */,
+				AE8ACBC815FE133700063F7B /* Video Browser */,
 				AEB9525115ED72FF00C00019 /* FilterBrowser */,
 				AE051C081498EA0500A8FB07 /* FilterUIView */,
+				AE8ACBD515FE137F00063F7B /* PXListView */,
 				AE7D6681147561B80099875F /* Cyclorama */,
 				AE7D667A147561B80099875F /* Frameworks */,
 				AE7D6678147561B80099875F /* Products */,
@@ -288,6 +321,54 @@
 				AE7D668A147561B90099875F /* Credits.rtf */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		AE8ACBC815FE133700063F7B /* Video Browser */ = {
+			isa = PBXGroup;
+			children = (
+				AE8ACBBE15FD3AD700063F7B /* VideoBrowserWindowController.h */,
+				AE8ACBBF15FD3AD700063F7B /* VideoBrowserWindowController.m */,
+				AE8ACBC015FD3AD700063F7B /* VideoBrowserWindowController.xib */,
+				AE8ACBDD15FE476300063F7B /* VideoBrowserCell.h */,
+				AE8ACBDE15FE476300063F7B /* VideoBrowserCell.m */,
+				AE8ACBE015FE49A300063F7B /* VideoBrowserCell.xib */,
+			);
+			name = "Video Browser";
+			sourceTree = "<group>";
+		};
+		AE8ACBD515FE137F00063F7B /* PXListView */ = {
+			isa = PBXGroup;
+			children = (
+				AE8ACBC915FE136D00063F7B /* PXListView.h */,
+				AE8ACBCA15FE136D00063F7B /* PXListView.m */,
+				AE8ACBCB15FE136D00063F7B /* PXListView+Private.h */,
+				AE8ACBCC15FE136D00063F7B /* PXListViewDelegate.h */,
+				AE8ACBCD15FE136D00063F7B /* PXListView+UserInteraction.h */,
+				AE8ACBCE15FE136D00063F7B /* PXListView+UserInteraction.m */,
+				AE8ACBD615FE139600063F7B /* Cells */,
+				AE8ACBD715FE139E00063F7B /* Misc */,
+			);
+			name = PXListView;
+			sourceTree = "<group>";
+		};
+		AE8ACBD615FE139600063F7B /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				AE8ACBCF15FE136D00063F7B /* PXListViewDropHighlight.h */,
+				AE8ACBD015FE136D00063F7B /* PXListViewCell.h */,
+				AE8ACBD115FE136D00063F7B /* PXListViewCell.m */,
+				AE8ACBD215FE136D00063F7B /* PXListViewCell+Private.h */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
+		AE8ACBD715FE139E00063F7B /* Misc */ = {
+			isa = PBXGroup;
+			children = (
+				AE8ACBD315FE136D00063F7B /* PXListDocumentView.h */,
+				AE8ACBD415FE136D00063F7B /* PXListDocumentView.m */,
+			);
+			name = Misc;
 			sourceTree = "<group>";
 		};
 		AEB9525115ED72FF00C00019 /* FilterBrowser */ = {
@@ -366,6 +447,8 @@
 				AEAD5F5F15D9BF7900562A6B /* CycParameterColourViewController.xib in Resources */,
 				AEB910E415EABC7C00DEE626 /* Resources in Resources */,
 				AEB9525915ED9D8200C00019 /* FilterBrowserWindowController.xib in Resources */,
+				AE8ACBC215FD3AD700063F7B /* VideoBrowserWindowController.xib in Resources */,
+				AE8ACBE115FE49A300063F7B /* VideoBrowserCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -376,6 +459,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE8ACBD815FE146400063F7B /* PXListView.m in Sources */,
+				AE8ACBDA15FE146400063F7B /* PXListView+UserInteraction.m in Sources */,
+				AE8ACBDB15FE146400063F7B /* PXListViewCell.m in Sources */,
+				AE8ACBDC15FE146400063F7B /* PXListDocumentView.m in Sources */,
 				AE7D6688147561B80099875F /* main.m in Sources */,
 				AE7D66BB147562080099875F /* ActorFilter.m in Sources */,
 				AE7D66BC147562080099875F /* CycAppDelegate.m in Sources */,
@@ -408,6 +495,9 @@
 				AEB9525415ED74D000C00019 /* FilterBrowserView.m in Sources */,
 				AEB9525815ED9D8200C00019 /* FilterBrowserWindowController.m in Sources */,
 				AEDE0C0515F79A780058578E /* CALayer+Images.m in Sources */,
+				AE8ACBBC15FD0D0200063F7B /* SLFBlackWindow.m in Sources */,
+				AE8ACBC115FD3AD700063F7B /* VideoBrowserWindowController.m in Sources */,
+				AE8ACBDF15FE476300063F7B /* VideoBrowserCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

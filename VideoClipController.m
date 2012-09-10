@@ -17,9 +17,9 @@
     CFRunLoopObserverRef observerRef;
 }
 
-- (id)initWithCoder:(NSCoder *)aDecoder
+- (id)initWithContent:(id)content
 {
-    self = [super initWithCoder:aDecoder];
+    self = [super initWithContent:content];
     
     videoQuery = [[NSMetadataQuery alloc] init];
     filesForThumbnailing = [[NSMutableArray alloc] init];

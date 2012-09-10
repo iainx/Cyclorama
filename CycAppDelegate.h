@@ -10,7 +10,8 @@
 
 @class VideoClipController;
 
-@interface CycAppDelegate : NSObject <NSApplicationDelegate> {
-}
+@interface CycAppDelegate : NSObject <NSApplicationDelegate>
+
+@property (readonly, strong) VideoClipController *clipController;
 
 @end

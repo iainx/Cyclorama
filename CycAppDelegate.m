@@ -11,10 +11,14 @@
 #import "FilterModel.h"
 #import "FilterBrowserView.h"
 #import "FilterBrowserWindowController.h"
+#import "VideoBrowserWindowController.h"
 
 @implementation CycAppDelegate {
     FilterModel *_filterModel;
+    NSMutableArray *_videoModel;
+    
     FilterBrowserWindowController *_filterBrowserController;
+    VideoBrowserWindowController *_videoBrowserController;
 }
 
 - (id)init
@@ -24,6 +28,9 @@
     }
 
     _filterModel = [[FilterModel alloc] init];
+    _videoModel = [[NSMutableArray alloc] init];
+    
+    _clipController = [[VideoClipController alloc] initWithContent:_videoModel];
 
     return self;
 }
@@ -35,5 +42,9 @@
     
     [_filterBrowserController showWindow:self];
     [[_filterBrowserController scrollView] setDocumentView:filterBrowser];
+    
+    _videoBrowserController = [[VideoBrowserWindowController alloc] init];
+    [_videoBrowserController setClipController:_clipController];
+    [_videoBrowserController showWindow:self];
 }
 @end
