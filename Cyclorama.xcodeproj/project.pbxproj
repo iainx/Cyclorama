@@ -52,6 +52,65 @@
 		AE8ACBDC15FE146400063F7B /* PXListDocumentView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8ACBD415FE136D00063F7B /* PXListDocumentView.m */; };
 		AE8ACBDF15FE476300063F7B /* VideoBrowserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8ACBDE15FE476300063F7B /* VideoBrowserCell.m */; };
 		AE8ACBE115FE49A300063F7B /* VideoBrowserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE8ACBE015FE49A300063F7B /* VideoBrowserCell.xib */; };
+		AE8ACBF315FE6A8C00063F7B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE7D667B147561B80099875F /* Cocoa.framework */; };
+		AE8ACBF915FE6A8C00063F7B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AE8ACBF715FE6A8C00063F7B /* InfoPlist.strings */; };
+		AE8ACC3C15FE6ABE00063F7B /* BGHUDBox.h in Headers */ = {isa = PBXBuildFile; fileRef = AE8ACC0115FE6ABE00063F7B /* BGHUDBox.h */; };
+		AE8ACC3D15FE6ABE00063F7B /* BGHUDBox.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8ACC0215FE6ABE00063F7B /* BGHUDBox.m */; };
+		AE8ACC3E15FE6ABE00063F7B /* BGHUDView.h in Headers */ = {isa = PBXBuildFile; fileRef = AE8ACC0315FE6ABE00063F7B /* BGHUDView.h */; };
+		AE8ACC3F15FE6ABE00063F7B /* BGHUDView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8ACC0415FE6ABE00063F7B /* BGHUDView.m */; };
+		AE8ACC4015FE6ABE00063F7B /* BGHUDComboBoxCell.h in Headers */ = {isa = PBXBuildFile; fileRef = AE8ACC0515FE6ABE00063F7B /* BGHUDComboBoxCell.h */; };
+		AE8ACC4115FE6ABE00063F7B /* BGHUDComboBoxCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8ACC0615FE6ABE00063F7B /* BGHUDComboBoxCell.m */; };
+		AE8ACC4215FE6ABE00063F7B /* README.textile in Resources */ = {isa = PBXBuildFile; fileRef = AE8ACC0715FE6ABE00063F7B /* README.textile */; };
+		AE8ACC4315FE6ABE00063F7B /* BGHUDAppKit.h in Headers */ = {isa = PBXBuildFile; fileRef = AE8ACC0815FE6ABE00063F7B /* BGHUDAppKit.h */; };
+		AE8ACC4415FE6ABE00063F7B /* BGGradientTheme.h in Headers */ = {isa = PBXBuildFile; fileRef = AE8ACC0915FE6ABE00063F7B /* BGGradientTheme.h */; };
+		AE8ACC4515FE6ABE00063F7B /* BGGradientTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8ACC0A15FE6ABE00063F7B /* BGGradientTheme.m */; };
+		AE8ACC4615FE6ABE00063F7B /* BGTheme.h in Headers */ = {isa = PBXBuildFile; fileRef = AE8ACC0B15FE6ABE00063F7B /* BGTheme.h */; };
+		AE8ACC4715FE6ABE00063F7B /* BGTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8ACC0C15FE6ABE00063F7B /* BGTheme.m */; };
+		AE8ACC4815FE6ABE00063F7B /* BGThemeManager.h in Headers */ = {isa = PBXBuildFile; fileRef = AE8ACC0D15FE6ABE00063F7B /* BGThemeManager.h */; };
+		AE8ACC4915FE6ABE00063F7B /* BGThemeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8ACC0E15FE6ABE00063F7B /* BGThemeManager.m */; };
+		AE8ACC4A15FE6ABE00063F7B /* BGHUDButtonCell.h in Headers */ = {isa = PBXBuildFile; fileRef = AE8ACC0F15FE6ABE00063F7B /* BGHUDButtonCell.h */; };
+		AE8ACC4B15FE6ABE00063F7B /* BGHUDButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8ACC1015FE6ABE00063F7B /* BGHUDButtonCell.m */; };
+		AE8ACC4C15FE6ABE00063F7B /* BGHUDColorWell.h in Headers */ = {isa = PBXBuildFile; fileRef = AE8ACC1115FE6ABE00063F7B /* BGHUDColorWell.h */; };
+		AE8ACC4D15FE6ABE00063F7B /* BGHUDColorWell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8ACC1215FE6ABE00063F7B /* BGHUDColorWell.m */; };
+		AE8ACC4E15FE6ABE00063F7B /* BGHUDLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = AE8ACC1315FE6ABE00063F7B /* BGHUDLabel.h */; };
+		AE8ACC4F15FE6ABE00063F7B /* BGHUDLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8ACC1415FE6ABE00063F7B /* BGHUDLabel.m */; };
+		AE8ACC5015FE6ABE00063F7B /* BGHUDOutlineView.h in Headers */ = {isa = PBXBuildFile; fileRef = AE8ACC1515FE6ABE00063F7B /* BGHUDOutlineView.h */; };
+		AE8ACC5115FE6ABE00063F7B /* BGHUDOutlineView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8ACC1615FE6ABE00063F7B /* BGHUDOutlineView.m */; };
+		AE8ACC5215FE6ABE00063F7B /* BGHUDPopUpButtonCell.h in Headers */ = {isa = PBXBuildFile; fileRef = AE8ACC1715FE6ABE00063F7B /* BGHUDPopUpButtonCell.h */; };
+		AE8ACC5315FE6ABE00063F7B /* BGHUDPopUpButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8ACC1815FE6ABE00063F7B /* BGHUDPopUpButtonCell.m */; };
+		AE8ACC5415FE6ABE00063F7B /* BGHUDProgressIndicator.h in Headers */ = {isa = PBXBuildFile; fileRef = AE8ACC1915FE6ABE00063F7B /* BGHUDProgressIndicator.h */; };
+		AE8ACC5515FE6ABE00063F7B /* BGHUDProgressIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8ACC1A15FE6ABE00063F7B /* BGHUDProgressIndicator.m */; };
+		AE8ACC5615FE6ABE00063F7B /* BGHUDScroller.h in Headers */ = {isa = PBXBuildFile; fileRef = AE8ACC1B15FE6ABE00063F7B /* BGHUDScroller.h */; };
+		AE8ACC5715FE6ABE00063F7B /* BGHUDScroller.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8ACC1C15FE6ABE00063F7B /* BGHUDScroller.m */; };
+		AE8ACC5815FE6ABE00063F7B /* BGHUDScrollView.h in Headers */ = {isa = PBXBuildFile; fileRef = AE8ACC1D15FE6ABE00063F7B /* BGHUDScrollView.h */; };
+		AE8ACC5915FE6ABE00063F7B /* BGHUDScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8ACC1E15FE6ABE00063F7B /* BGHUDScrollView.m */; };
+		AE8ACC5A15FE6ABE00063F7B /* BGHUDSearchFieldCell.h in Headers */ = {isa = PBXBuildFile; fileRef = AE8ACC1F15FE6ABE00063F7B /* BGHUDSearchFieldCell.h */; };
+		AE8ACC5B15FE6ABE00063F7B /* BGHUDSearchFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8ACC2015FE6ABE00063F7B /* BGHUDSearchFieldCell.m */; };
+		AE8ACC5C15FE6ABE00063F7B /* BGHUDSecureTextFieldCell.h in Headers */ = {isa = PBXBuildFile; fileRef = AE8ACC2115FE6ABE00063F7B /* BGHUDSecureTextFieldCell.h */; };
+		AE8ACC5D15FE6ABE00063F7B /* BGHUDSecureTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8ACC2215FE6ABE00063F7B /* BGHUDSecureTextFieldCell.m */; };
+		AE8ACC5E15FE6ABE00063F7B /* BGHUDSegmentedCell.h in Headers */ = {isa = PBXBuildFile; fileRef = AE8ACC2315FE6ABE00063F7B /* BGHUDSegmentedCell.h */; };
+		AE8ACC5F15FE6ABE00063F7B /* BGHUDSegmentedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8ACC2415FE6ABE00063F7B /* BGHUDSegmentedCell.m */; };
+		AE8ACC6015FE6ABE00063F7B /* BGHUDSliderCell.h in Headers */ = {isa = PBXBuildFile; fileRef = AE8ACC2515FE6ABE00063F7B /* BGHUDSliderCell.h */; };
+		AE8ACC6115FE6ABE00063F7B /* BGHUDSliderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8ACC2615FE6ABE00063F7B /* BGHUDSliderCell.m */; };
+		AE8ACC6215FE6ABE00063F7B /* BGHUDStepperCell.h in Headers */ = {isa = PBXBuildFile; fileRef = AE8ACC2715FE6ABE00063F7B /* BGHUDStepperCell.h */; };
+		AE8ACC6315FE6ABE00063F7B /* BGHUDStepperCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8ACC2815FE6ABE00063F7B /* BGHUDStepperCell.m */; };
+		AE8ACC6415FE6ABE00063F7B /* BGHUDTableView.h in Headers */ = {isa = PBXBuildFile; fileRef = AE8ACC2915FE6ABE00063F7B /* BGHUDTableView.h */; };
+		AE8ACC6515FE6ABE00063F7B /* BGHUDTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8ACC2A15FE6ABE00063F7B /* BGHUDTableView.m */; };
+		AE8ACC6615FE6ABE00063F7B /* BGHUDTableViewHeaderCell.h in Headers */ = {isa = PBXBuildFile; fileRef = AE8ACC2B15FE6ABE00063F7B /* BGHUDTableViewHeaderCell.h */; };
+		AE8ACC6715FE6ABE00063F7B /* BGHUDTableViewHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8ACC2C15FE6ABE00063F7B /* BGHUDTableViewHeaderCell.m */; };
+		AE8ACC6815FE6ABE00063F7B /* BGHUDTableCornerView.h in Headers */ = {isa = PBXBuildFile; fileRef = AE8ACC2D15FE6ABE00063F7B /* BGHUDTableCornerView.h */; };
+		AE8ACC6915FE6ABE00063F7B /* BGHUDTableCornerView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8ACC2E15FE6ABE00063F7B /* BGHUDTableCornerView.m */; };
+		AE8ACC6A15FE6ABE00063F7B /* BGHUDTabViewItem.h in Headers */ = {isa = PBXBuildFile; fileRef = AE8ACC2F15FE6ABE00063F7B /* BGHUDTabViewItem.h */; };
+		AE8ACC6B15FE6ABE00063F7B /* BGHUDTabViewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8ACC3015FE6ABE00063F7B /* BGHUDTabViewItem.m */; };
+		AE8ACC6C15FE6ABE00063F7B /* BGHUDTabView.h in Headers */ = {isa = PBXBuildFile; fileRef = AE8ACC3115FE6ABE00063F7B /* BGHUDTabView.h */; };
+		AE8ACC6D15FE6ABE00063F7B /* BGHUDTabView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8ACC3215FE6ABE00063F7B /* BGHUDTabView.m */; };
+		AE8ACC6E15FE6ABE00063F7B /* BGHUDTextFieldCell.h in Headers */ = {isa = PBXBuildFile; fileRef = AE8ACC3315FE6ABE00063F7B /* BGHUDTextFieldCell.h */; };
+		AE8ACC6F15FE6ABE00063F7B /* BGHUDTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8ACC3415FE6ABE00063F7B /* BGHUDTextFieldCell.m */; };
+		AE8ACC7415FE6ABE00063F7B /* BGHUDGeometry.h in Headers */ = {isa = PBXBuildFile; fileRef = AE8ACC3915FE6ABE00063F7B /* BGHUDGeometry.h */; };
+		AE8ACC7515FE6ABE00063F7B /* BGHUDCommon.h in Headers */ = {isa = PBXBuildFile; fileRef = AE8ACC3A15FE6ABE00063F7B /* BGHUDCommon.h */; };
+		AE8ACC7615FE6ABE00063F7B /* BGHUDCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8ACC3B15FE6ABE00063F7B /* BGHUDCommon.m */; };
+		AE8ACC8D15FE6CC200063F7B /* BGHUDAppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE8ACBF215FE6A8C00063F7B /* BGHUDAppKit.framework */; };
+		AE8ACC8F15FE6CF500063F7B /* BGHUDAppKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = AE8ACBF215FE6A8C00063F7B /* BGHUDAppKit.framework */; };
 		AEAD5F5E15D9BF7900562A6B /* CycParameterColourViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEAD5F5C15D9BF7900562A6B /* CycParameterColourViewController.m */; };
 		AEAD5F5F15D9BF7900562A6B /* CycParameterColourViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEAD5F5D15D9BF7900562A6B /* CycParameterColourViewController.xib */; };
 		AEB910E415EABC7C00DEE626 /* Resources in Resources */ = {isa = PBXBuildFile; fileRef = AEB910E315EABC7C00DEE626 /* Resources */; };
@@ -64,6 +123,19 @@
 		AEDE0C0215F562BD0058578E /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEDE0C0115F562BD0058578E /* CoreMedia.framework */; };
 		AEDE0C0515F79A780058578E /* CALayer+Images.m in Sources */ = {isa = PBXBuildFile; fileRef = AEDE0C0415F79A780058578E /* CALayer+Images.m */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		AE8ACC8E15FE6CD800063F7B /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				AE8ACC8F15FE6CF500063F7B /* BGHUDAppKit.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		AE051C2D149972B900A8FB07 /* CycFilterUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CycFilterUIView.h; sourceTree = "<group>"; };
@@ -153,6 +225,65 @@
 		AE8ACBDD15FE476300063F7B /* VideoBrowserCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoBrowserCell.h; sourceTree = "<group>"; };
 		AE8ACBDE15FE476300063F7B /* VideoBrowserCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoBrowserCell.m; sourceTree = "<group>"; };
 		AE8ACBE015FE49A300063F7B /* VideoBrowserCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoBrowserCell.xib; sourceTree = "<group>"; };
+		AE8ACBF215FE6A8C00063F7B /* BGHUDAppKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BGHUDAppKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AE8ACBF615FE6A8C00063F7B /* BGHUDAppKit-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BGHUDAppKit-Info.plist"; sourceTree = "<group>"; };
+		AE8ACBF815FE6A8C00063F7B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AE8ACBFA15FE6A8C00063F7B /* BGHUDAppKit-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BGHUDAppKit-Prefix.pch"; sourceTree = "<group>"; };
+		AE8ACC0115FE6ABE00063F7B /* BGHUDBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGHUDBox.h; sourceTree = "<group>"; };
+		AE8ACC0215FE6ABE00063F7B /* BGHUDBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGHUDBox.m; sourceTree = "<group>"; };
+		AE8ACC0315FE6ABE00063F7B /* BGHUDView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGHUDView.h; sourceTree = "<group>"; };
+		AE8ACC0415FE6ABE00063F7B /* BGHUDView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGHUDView.m; sourceTree = "<group>"; };
+		AE8ACC0515FE6ABE00063F7B /* BGHUDComboBoxCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGHUDComboBoxCell.h; sourceTree = "<group>"; };
+		AE8ACC0615FE6ABE00063F7B /* BGHUDComboBoxCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGHUDComboBoxCell.m; sourceTree = "<group>"; };
+		AE8ACC0715FE6ABE00063F7B /* README.textile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.textile; sourceTree = "<group>"; };
+		AE8ACC0815FE6ABE00063F7B /* BGHUDAppKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGHUDAppKit.h; sourceTree = "<group>"; };
+		AE8ACC0915FE6ABE00063F7B /* BGGradientTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGGradientTheme.h; sourceTree = "<group>"; };
+		AE8ACC0A15FE6ABE00063F7B /* BGGradientTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGGradientTheme.m; sourceTree = "<group>"; };
+		AE8ACC0B15FE6ABE00063F7B /* BGTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGTheme.h; sourceTree = "<group>"; };
+		AE8ACC0C15FE6ABE00063F7B /* BGTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGTheme.m; sourceTree = "<group>"; };
+		AE8ACC0D15FE6ABE00063F7B /* BGThemeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGThemeManager.h; sourceTree = "<group>"; };
+		AE8ACC0E15FE6ABE00063F7B /* BGThemeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGThemeManager.m; sourceTree = "<group>"; };
+		AE8ACC0F15FE6ABE00063F7B /* BGHUDButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGHUDButtonCell.h; sourceTree = "<group>"; };
+		AE8ACC1015FE6ABE00063F7B /* BGHUDButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGHUDButtonCell.m; sourceTree = "<group>"; };
+		AE8ACC1115FE6ABE00063F7B /* BGHUDColorWell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGHUDColorWell.h; sourceTree = "<group>"; };
+		AE8ACC1215FE6ABE00063F7B /* BGHUDColorWell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGHUDColorWell.m; sourceTree = "<group>"; };
+		AE8ACC1315FE6ABE00063F7B /* BGHUDLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGHUDLabel.h; sourceTree = "<group>"; };
+		AE8ACC1415FE6ABE00063F7B /* BGHUDLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGHUDLabel.m; sourceTree = "<group>"; };
+		AE8ACC1515FE6ABE00063F7B /* BGHUDOutlineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGHUDOutlineView.h; sourceTree = "<group>"; };
+		AE8ACC1615FE6ABE00063F7B /* BGHUDOutlineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGHUDOutlineView.m; sourceTree = "<group>"; };
+		AE8ACC1715FE6ABE00063F7B /* BGHUDPopUpButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGHUDPopUpButtonCell.h; sourceTree = "<group>"; };
+		AE8ACC1815FE6ABE00063F7B /* BGHUDPopUpButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGHUDPopUpButtonCell.m; sourceTree = "<group>"; };
+		AE8ACC1915FE6ABE00063F7B /* BGHUDProgressIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGHUDProgressIndicator.h; sourceTree = "<group>"; };
+		AE8ACC1A15FE6ABE00063F7B /* BGHUDProgressIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGHUDProgressIndicator.m; sourceTree = "<group>"; };
+		AE8ACC1B15FE6ABE00063F7B /* BGHUDScroller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGHUDScroller.h; sourceTree = "<group>"; };
+		AE8ACC1C15FE6ABE00063F7B /* BGHUDScroller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGHUDScroller.m; sourceTree = "<group>"; };
+		AE8ACC1D15FE6ABE00063F7B /* BGHUDScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGHUDScrollView.h; sourceTree = "<group>"; };
+		AE8ACC1E15FE6ABE00063F7B /* BGHUDScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGHUDScrollView.m; sourceTree = "<group>"; };
+		AE8ACC1F15FE6ABE00063F7B /* BGHUDSearchFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGHUDSearchFieldCell.h; sourceTree = "<group>"; };
+		AE8ACC2015FE6ABE00063F7B /* BGHUDSearchFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGHUDSearchFieldCell.m; sourceTree = "<group>"; };
+		AE8ACC2115FE6ABE00063F7B /* BGHUDSecureTextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGHUDSecureTextFieldCell.h; sourceTree = "<group>"; };
+		AE8ACC2215FE6ABE00063F7B /* BGHUDSecureTextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGHUDSecureTextFieldCell.m; sourceTree = "<group>"; };
+		AE8ACC2315FE6ABE00063F7B /* BGHUDSegmentedCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGHUDSegmentedCell.h; sourceTree = "<group>"; };
+		AE8ACC2415FE6ABE00063F7B /* BGHUDSegmentedCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGHUDSegmentedCell.m; sourceTree = "<group>"; };
+		AE8ACC2515FE6ABE00063F7B /* BGHUDSliderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGHUDSliderCell.h; sourceTree = "<group>"; };
+		AE8ACC2615FE6ABE00063F7B /* BGHUDSliderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGHUDSliderCell.m; sourceTree = "<group>"; };
+		AE8ACC2715FE6ABE00063F7B /* BGHUDStepperCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGHUDStepperCell.h; sourceTree = "<group>"; };
+		AE8ACC2815FE6ABE00063F7B /* BGHUDStepperCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGHUDStepperCell.m; sourceTree = "<group>"; };
+		AE8ACC2915FE6ABE00063F7B /* BGHUDTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGHUDTableView.h; sourceTree = "<group>"; };
+		AE8ACC2A15FE6ABE00063F7B /* BGHUDTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGHUDTableView.m; sourceTree = "<group>"; };
+		AE8ACC2B15FE6ABE00063F7B /* BGHUDTableViewHeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGHUDTableViewHeaderCell.h; sourceTree = "<group>"; };
+		AE8ACC2C15FE6ABE00063F7B /* BGHUDTableViewHeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGHUDTableViewHeaderCell.m; sourceTree = "<group>"; };
+		AE8ACC2D15FE6ABE00063F7B /* BGHUDTableCornerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGHUDTableCornerView.h; sourceTree = "<group>"; };
+		AE8ACC2E15FE6ABE00063F7B /* BGHUDTableCornerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGHUDTableCornerView.m; sourceTree = "<group>"; };
+		AE8ACC2F15FE6ABE00063F7B /* BGHUDTabViewItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGHUDTabViewItem.h; sourceTree = "<group>"; };
+		AE8ACC3015FE6ABE00063F7B /* BGHUDTabViewItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGHUDTabViewItem.m; sourceTree = "<group>"; };
+		AE8ACC3115FE6ABE00063F7B /* BGHUDTabView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGHUDTabView.h; sourceTree = "<group>"; };
+		AE8ACC3215FE6ABE00063F7B /* BGHUDTabView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGHUDTabView.m; sourceTree = "<group>"; };
+		AE8ACC3315FE6ABE00063F7B /* BGHUDTextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGHUDTextFieldCell.h; sourceTree = "<group>"; };
+		AE8ACC3415FE6ABE00063F7B /* BGHUDTextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGHUDTextFieldCell.m; sourceTree = "<group>"; };
+		AE8ACC3915FE6ABE00063F7B /* BGHUDGeometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGHUDGeometry.h; sourceTree = "<group>"; };
+		AE8ACC3A15FE6ABE00063F7B /* BGHUDCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGHUDCommon.h; sourceTree = "<group>"; };
+		AE8ACC3B15FE6ABE00063F7B /* BGHUDCommon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGHUDCommon.m; sourceTree = "<group>"; };
 		AEAD5F5B15D9BF7900562A6B /* CycParameterColourViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CycParameterColourViewController.h; sourceTree = "<group>"; };
 		AEAD5F5C15D9BF7900562A6B /* CycParameterColourViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CycParameterColourViewController.m; sourceTree = "<group>"; };
 		AEAD5F5D15D9BF7900562A6B /* CycParameterColourViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CycParameterColourViewController.xib; sourceTree = "<group>"; };
@@ -182,7 +313,16 @@
 				AE7D66D5147563910099875F /* Quartz.framework in Frameworks */,
 				AE7D66D6147563910099875F /* QuartzCore.framework in Frameworks */,
 				AE7D66D0147563140099875F /* CoreMIDI.framework in Frameworks */,
+				AE8ACC8D15FE6CC200063F7B /* BGHUDAppKit.framework in Frameworks */,
 				AE7D667C147561B80099875F /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AE8ACBEE15FE6A8C00063F7B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AE8ACBF315FE6A8C00063F7B /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -216,55 +356,8 @@
 		AE7D666C147561B80099875F = {
 			isa = PBXGroup;
 			children = (
-				AE7D669B147562080099875F /* ActorFilter.h */,
-				AE7D669C147562080099875F /* ActorFilter.m */,
-				AEC028B315A24A0A0033BB3C /* FilterParameter.h */,
-				AEC028B415A24A0A0033BB3C /* FilterParameter.m */,
-				AE1B441915E6A1F200E20A6F /* FilterItem.h */,
-				AE1B441A15E6A1F200E20A6F /* FilterItem.m */,
-				AE48C43C15E6D26B00733AAC /* FilterModel.h */,
-				AE48C43D15E6D26B00733AAC /* FilterModel.m */,
-				AE7D669D147562080099875F /* CycAppDelegate.h */,
-				AE7D669E147562080099875F /* CycAppDelegate.m */,
-				AE7D66CC147562FA0099875F /* CycArrayController.h */,
-				AE7D66CD147562FA0099875F /* CycArrayController.m */,
-				AE7D669F147562080099875F /* CycDocument.h */,
-				AE7D66A0147562080099875F /* CycDocument.m */,
-				AEDE0C0315F79A780058578E /* CALayer+Images.h */,
-				AEDE0C0415F79A780058578E /* CALayer+Images.m */,
-				AE7D66A1147562080099875F /* MIDIWatcher.h */,
-				AE7D66A2147562080099875F /* MIDIWatcher.m */,
-				AE7D66A3147562080099875F /* NSString+UUID.h */,
-				AE7D66A4147562080099875F /* NSString+UUID.m */,
-				AE7D66A5147562080099875F /* SharedTypes.h */,
-				AE7D66A6147562080099875F /* SharedTypes.m */,
-				AE7D66A7147562080099875F /* StageView.h */,
-				AE7D66A8147562080099875F /* StageView.m */,
-				AE7D66A9147562080099875F /* utils.h */,
-				AE7D66AA147562080099875F /* utils.m */,
-				AE7D66AB147562080099875F /* VideoClip.h */,
-				AE7D66AC147562080099875F /* VideoClip.m */,
-				AE7D66AD147562080099875F /* VideoClipCell.h */,
-				AE7D66AE147562080099875F /* VideoClipCell.m */,
-				AE7D66AF147562080099875F /* VideoClipCollectionItemView.h */,
-				AE7D66B0147562080099875F /* VideoClipCollectionItemView.m */,
-				AE7D66B1147562080099875F /* VideoClipCollectionView.h */,
-				AE7D66B2147562080099875F /* VideoClipCollectionView.m */,
-				AE7D66B3147562080099875F /* VideoClipController.h */,
-				AE7D66B4147562080099875F /* VideoClipController.m */,
-				AE7D66B7147562080099875F /* VideoClipView.h */,
-				AE7D66B8147562080099875F /* VideoClipView.m */,
-				AE7D66B9147562080099875F /* VideoLayer.h */,
-				AE7D66BA147562080099875F /* VideoLayer.m */,
-				AE8ACBBA15FD0D0200063F7B /* SLFBlackWindow.h */,
-				AE8ACBBB15FD0D0200063F7B /* SLFBlackWindow.m */,
-				AE7D66DD147566380099875F /* CycDocument.xib */,
-				AE7D66DE147566380099875F /* MainMenu.xib */,
-				AE8ACBC815FE133700063F7B /* Video Browser */,
-				AEB9525115ED72FF00C00019 /* FilterBrowser */,
-				AE051C081498EA0500A8FB07 /* FilterUIView */,
-				AE8ACBD515FE137F00063F7B /* PXListView */,
 				AE7D6681147561B80099875F /* Cyclorama */,
+				AE8ACBF415FE6A8C00063F7B /* BGHUDAppKit */,
 				AE7D667A147561B80099875F /* Frameworks */,
 				AE7D6678147561B80099875F /* Products */,
 				AEB910E315EABC7C00DEE626 /* Resources */,
@@ -275,6 +368,7 @@
 			isa = PBXGroup;
 			children = (
 				AE7D6677147561B80099875F /* Cyclorama.app */,
+				AE8ACBF215FE6A8C00063F7B /* BGHUDAppKit.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -306,6 +400,8 @@
 		AE7D6681147561B80099875F /* Cyclorama */ = {
 			isa = PBXGroup;
 			children = (
+				AE8ACBE615FE67B600063F7B /* Classes */,
+				AE8ACBE715FE67D500063F7B /* External Sources */,
 				AE7D6682147561B80099875F /* Supporting Files */,
 			);
 			path = Cyclorama;
@@ -371,6 +467,311 @@
 			name = Misc;
 			sourceTree = "<group>";
 		};
+		AE8ACBE615FE67B600063F7B /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				AE7D669B147562080099875F /* ActorFilter.h */,
+				AE7D669C147562080099875F /* ActorFilter.m */,
+				AEC028B315A24A0A0033BB3C /* FilterParameter.h */,
+				AEC028B415A24A0A0033BB3C /* FilterParameter.m */,
+				AE1B441915E6A1F200E20A6F /* FilterItem.h */,
+				AE1B441A15E6A1F200E20A6F /* FilterItem.m */,
+				AE48C43C15E6D26B00733AAC /* FilterModel.h */,
+				AE48C43D15E6D26B00733AAC /* FilterModel.m */,
+				AE7D669D147562080099875F /* CycAppDelegate.h */,
+				AE7D669E147562080099875F /* CycAppDelegate.m */,
+				AE7D66CC147562FA0099875F /* CycArrayController.h */,
+				AE7D66CD147562FA0099875F /* CycArrayController.m */,
+				AE7D669F147562080099875F /* CycDocument.h */,
+				AE7D66A0147562080099875F /* CycDocument.m */,
+				AEDE0C0315F79A780058578E /* CALayer+Images.h */,
+				AEDE0C0415F79A780058578E /* CALayer+Images.m */,
+				AE7D66A1147562080099875F /* MIDIWatcher.h */,
+				AE7D66A2147562080099875F /* MIDIWatcher.m */,
+				AE7D66A3147562080099875F /* NSString+UUID.h */,
+				AE7D66A4147562080099875F /* NSString+UUID.m */,
+				AE7D66A5147562080099875F /* SharedTypes.h */,
+				AE7D66A6147562080099875F /* SharedTypes.m */,
+				AE7D66A7147562080099875F /* StageView.h */,
+				AE7D66A8147562080099875F /* StageView.m */,
+				AE7D66A9147562080099875F /* utils.h */,
+				AE7D66AA147562080099875F /* utils.m */,
+				AE7D66AB147562080099875F /* VideoClip.h */,
+				AE7D66AC147562080099875F /* VideoClip.m */,
+				AE7D66AD147562080099875F /* VideoClipCell.h */,
+				AE7D66AE147562080099875F /* VideoClipCell.m */,
+				AE7D66AF147562080099875F /* VideoClipCollectionItemView.h */,
+				AE7D66B0147562080099875F /* VideoClipCollectionItemView.m */,
+				AE7D66B1147562080099875F /* VideoClipCollectionView.h */,
+				AE7D66B2147562080099875F /* VideoClipCollectionView.m */,
+				AE7D66B3147562080099875F /* VideoClipController.h */,
+				AE7D66B4147562080099875F /* VideoClipController.m */,
+				AE7D66B7147562080099875F /* VideoClipView.h */,
+				AE7D66B8147562080099875F /* VideoClipView.m */,
+				AE7D66B9147562080099875F /* VideoLayer.h */,
+				AE7D66BA147562080099875F /* VideoLayer.m */,
+				AE8ACBBA15FD0D0200063F7B /* SLFBlackWindow.h */,
+				AE8ACBBB15FD0D0200063F7B /* SLFBlackWindow.m */,
+				AE7D66DD147566380099875F /* CycDocument.xib */,
+				AE7D66DE147566380099875F /* MainMenu.xib */,
+				AE8ACBC815FE133700063F7B /* Video Browser */,
+				AEB9525115ED72FF00C00019 /* FilterBrowser */,
+				AE051C081498EA0500A8FB07 /* FilterUIView */,
+			);
+			name = Classes;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		AE8ACBE715FE67D500063F7B /* External Sources */ = {
+			isa = PBXGroup;
+			children = (
+				AE8ACBD515FE137F00063F7B /* PXListView */,
+			);
+			name = "External Sources";
+			path = ..;
+			sourceTree = "<group>";
+		};
+		AE8ACBF415FE6A8C00063F7B /* BGHUDAppKit */ = {
+			isa = PBXGroup;
+			children = (
+				AE8ACC7715FE6AD900063F7B /* BGHUDBox */,
+				AE8ACC7815FE6AE700063F7B /* BGHUDView */,
+				AE8ACC7915FE6AF200063F7B /* BGHUDComboBoxCell */,
+				AE8ACC7A15FE6AFF00063F7B /* Readme */,
+				AE8ACC0815FE6ABE00063F7B /* BGHUDAppKit.h */,
+				AE8ACC7B15FE6B1700063F7B /* Theming */,
+				AE8ACC7C15FE6B2400063F7B /* BGHUDButtonCell */,
+				AE8ACC7D15FE6B3900063F7B /* BGHUDColorWell */,
+				AE8ACC7E15FE6B4300063F7B /* BGHUDLabel */,
+				AE8ACC7F15FE6B5700063F7B /* BGHUDOutlineView */,
+				AE8ACC8015FE6B6400063F7B /* BGHUDPopUpButtonCell */,
+				AE8ACC8115FE6B7200063F7B /* BGHUDProgressIndicator */,
+				AE8ACC8215FE6B7F00063F7B /* BGHUDScroller */,
+				AE8ACC8315FE6B8C00063F7B /* BGHUDScrollView */,
+				AE8ACC8415FE6B9900063F7B /* BGHUDSearchFieldCell */,
+				AE8ACC8515FE6BA700063F7B /* BGHUDSecureTextFieldCell */,
+				AE8ACC8615FE6BB500063F7B /* BGHUDSegmentedCell */,
+				AE8ACC8715FE6BC200063F7B /* BGHUDSliderCell */,
+				AE8ACC8815FE6BCE00063F7B /* BGHUDStepperCell */,
+				AE8ACC8915FE6BDD00063F7B /* BGHUDTableView */,
+				AE8ACC8A15FE6BE900063F7B /* BGHUDTabView */,
+				AE8ACC8B15FE6BF400063F7B /* BGHUDTextFieldCell */,
+				AE8ACC3915FE6ABE00063F7B /* BGHUDGeometry.h */,
+				AE8ACC3A15FE6ABE00063F7B /* BGHUDCommon.h */,
+				AE8ACC3B15FE6ABE00063F7B /* BGHUDCommon.m */,
+				AE8ACBF515FE6A8C00063F7B /* Supporting Files */,
+			);
+			path = BGHUDAppKit;
+			sourceTree = "<group>";
+		};
+		AE8ACBF515FE6A8C00063F7B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				AE8ACBF615FE6A8C00063F7B /* BGHUDAppKit-Info.plist */,
+				AE8ACBF715FE6A8C00063F7B /* InfoPlist.strings */,
+				AE8ACBFA15FE6A8C00063F7B /* BGHUDAppKit-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		AE8ACC7715FE6AD900063F7B /* BGHUDBox */ = {
+			isa = PBXGroup;
+			children = (
+				AE8ACC0115FE6ABE00063F7B /* BGHUDBox.h */,
+				AE8ACC0215FE6ABE00063F7B /* BGHUDBox.m */,
+			);
+			name = BGHUDBox;
+			sourceTree = "<group>";
+		};
+		AE8ACC7815FE6AE700063F7B /* BGHUDView */ = {
+			isa = PBXGroup;
+			children = (
+				AE8ACC0315FE6ABE00063F7B /* BGHUDView.h */,
+				AE8ACC0415FE6ABE00063F7B /* BGHUDView.m */,
+			);
+			name = BGHUDView;
+			sourceTree = "<group>";
+		};
+		AE8ACC7915FE6AF200063F7B /* BGHUDComboBoxCell */ = {
+			isa = PBXGroup;
+			children = (
+				AE8ACC0515FE6ABE00063F7B /* BGHUDComboBoxCell.h */,
+				AE8ACC0615FE6ABE00063F7B /* BGHUDComboBoxCell.m */,
+			);
+			name = BGHUDComboBoxCell;
+			sourceTree = "<group>";
+		};
+		AE8ACC7A15FE6AFF00063F7B /* Readme */ = {
+			isa = PBXGroup;
+			children = (
+				AE8ACC0715FE6ABE00063F7B /* README.textile */,
+			);
+			name = Readme;
+			sourceTree = "<group>";
+		};
+		AE8ACC7B15FE6B1700063F7B /* Theming */ = {
+			isa = PBXGroup;
+			children = (
+				AE8ACC0915FE6ABE00063F7B /* BGGradientTheme.h */,
+				AE8ACC0A15FE6ABE00063F7B /* BGGradientTheme.m */,
+				AE8ACC0B15FE6ABE00063F7B /* BGTheme.h */,
+				AE8ACC0C15FE6ABE00063F7B /* BGTheme.m */,
+				AE8ACC0D15FE6ABE00063F7B /* BGThemeManager.h */,
+				AE8ACC0E15FE6ABE00063F7B /* BGThemeManager.m */,
+			);
+			name = Theming;
+			sourceTree = "<group>";
+		};
+		AE8ACC7C15FE6B2400063F7B /* BGHUDButtonCell */ = {
+			isa = PBXGroup;
+			children = (
+				AE8ACC0F15FE6ABE00063F7B /* BGHUDButtonCell.h */,
+				AE8ACC1015FE6ABE00063F7B /* BGHUDButtonCell.m */,
+			);
+			name = BGHUDButtonCell;
+			sourceTree = "<group>";
+		};
+		AE8ACC7D15FE6B3900063F7B /* BGHUDColorWell */ = {
+			isa = PBXGroup;
+			children = (
+				AE8ACC1115FE6ABE00063F7B /* BGHUDColorWell.h */,
+				AE8ACC1215FE6ABE00063F7B /* BGHUDColorWell.m */,
+			);
+			name = BGHUDColorWell;
+			sourceTree = "<group>";
+		};
+		AE8ACC7E15FE6B4300063F7B /* BGHUDLabel */ = {
+			isa = PBXGroup;
+			children = (
+				AE8ACC1315FE6ABE00063F7B /* BGHUDLabel.h */,
+				AE8ACC1415FE6ABE00063F7B /* BGHUDLabel.m */,
+			);
+			name = BGHUDLabel;
+			sourceTree = "<group>";
+		};
+		AE8ACC7F15FE6B5700063F7B /* BGHUDOutlineView */ = {
+			isa = PBXGroup;
+			children = (
+				AE8ACC1515FE6ABE00063F7B /* BGHUDOutlineView.h */,
+				AE8ACC1615FE6ABE00063F7B /* BGHUDOutlineView.m */,
+			);
+			name = BGHUDOutlineView;
+			sourceTree = "<group>";
+		};
+		AE8ACC8015FE6B6400063F7B /* BGHUDPopUpButtonCell */ = {
+			isa = PBXGroup;
+			children = (
+				AE8ACC1715FE6ABE00063F7B /* BGHUDPopUpButtonCell.h */,
+				AE8ACC1815FE6ABE00063F7B /* BGHUDPopUpButtonCell.m */,
+			);
+			name = BGHUDPopUpButtonCell;
+			sourceTree = "<group>";
+		};
+		AE8ACC8115FE6B7200063F7B /* BGHUDProgressIndicator */ = {
+			isa = PBXGroup;
+			children = (
+				AE8ACC1915FE6ABE00063F7B /* BGHUDProgressIndicator.h */,
+				AE8ACC1A15FE6ABE00063F7B /* BGHUDProgressIndicator.m */,
+			);
+			name = BGHUDProgressIndicator;
+			sourceTree = "<group>";
+		};
+		AE8ACC8215FE6B7F00063F7B /* BGHUDScroller */ = {
+			isa = PBXGroup;
+			children = (
+				AE8ACC1B15FE6ABE00063F7B /* BGHUDScroller.h */,
+				AE8ACC1C15FE6ABE00063F7B /* BGHUDScroller.m */,
+			);
+			name = BGHUDScroller;
+			sourceTree = "<group>";
+		};
+		AE8ACC8315FE6B8C00063F7B /* BGHUDScrollView */ = {
+			isa = PBXGroup;
+			children = (
+				AE8ACC1D15FE6ABE00063F7B /* BGHUDScrollView.h */,
+				AE8ACC1E15FE6ABE00063F7B /* BGHUDScrollView.m */,
+			);
+			name = BGHUDScrollView;
+			sourceTree = "<group>";
+		};
+		AE8ACC8415FE6B9900063F7B /* BGHUDSearchFieldCell */ = {
+			isa = PBXGroup;
+			children = (
+				AE8ACC1F15FE6ABE00063F7B /* BGHUDSearchFieldCell.h */,
+				AE8ACC2015FE6ABE00063F7B /* BGHUDSearchFieldCell.m */,
+			);
+			name = BGHUDSearchFieldCell;
+			sourceTree = "<group>";
+		};
+		AE8ACC8515FE6BA700063F7B /* BGHUDSecureTextFieldCell */ = {
+			isa = PBXGroup;
+			children = (
+				AE8ACC2115FE6ABE00063F7B /* BGHUDSecureTextFieldCell.h */,
+				AE8ACC2215FE6ABE00063F7B /* BGHUDSecureTextFieldCell.m */,
+			);
+			name = BGHUDSecureTextFieldCell;
+			sourceTree = "<group>";
+		};
+		AE8ACC8615FE6BB500063F7B /* BGHUDSegmentedCell */ = {
+			isa = PBXGroup;
+			children = (
+				AE8ACC2315FE6ABE00063F7B /* BGHUDSegmentedCell.h */,
+				AE8ACC2415FE6ABE00063F7B /* BGHUDSegmentedCell.m */,
+			);
+			name = BGHUDSegmentedCell;
+			sourceTree = "<group>";
+		};
+		AE8ACC8715FE6BC200063F7B /* BGHUDSliderCell */ = {
+			isa = PBXGroup;
+			children = (
+				AE8ACC2515FE6ABE00063F7B /* BGHUDSliderCell.h */,
+				AE8ACC2615FE6ABE00063F7B /* BGHUDSliderCell.m */,
+			);
+			name = BGHUDSliderCell;
+			sourceTree = "<group>";
+		};
+		AE8ACC8815FE6BCE00063F7B /* BGHUDStepperCell */ = {
+			isa = PBXGroup;
+			children = (
+				AE8ACC2715FE6ABE00063F7B /* BGHUDStepperCell.h */,
+				AE8ACC2815FE6ABE00063F7B /* BGHUDStepperCell.m */,
+			);
+			name = BGHUDStepperCell;
+			sourceTree = "<group>";
+		};
+		AE8ACC8915FE6BDD00063F7B /* BGHUDTableView */ = {
+			isa = PBXGroup;
+			children = (
+				AE8ACC2915FE6ABE00063F7B /* BGHUDTableView.h */,
+				AE8ACC2A15FE6ABE00063F7B /* BGHUDTableView.m */,
+				AE8ACC2B15FE6ABE00063F7B /* BGHUDTableViewHeaderCell.h */,
+				AE8ACC2C15FE6ABE00063F7B /* BGHUDTableViewHeaderCell.m */,
+				AE8ACC2D15FE6ABE00063F7B /* BGHUDTableCornerView.h */,
+				AE8ACC2E15FE6ABE00063F7B /* BGHUDTableCornerView.m */,
+			);
+			name = BGHUDTableView;
+			sourceTree = "<group>";
+		};
+		AE8ACC8A15FE6BE900063F7B /* BGHUDTabView */ = {
+			isa = PBXGroup;
+			children = (
+				AE8ACC2F15FE6ABE00063F7B /* BGHUDTabViewItem.h */,
+				AE8ACC3015FE6ABE00063F7B /* BGHUDTabViewItem.m */,
+				AE8ACC3115FE6ABE00063F7B /* BGHUDTabView.h */,
+				AE8ACC3215FE6ABE00063F7B /* BGHUDTabView.m */,
+			);
+			name = BGHUDTabView;
+			sourceTree = "<group>";
+		};
+		AE8ACC8B15FE6BF400063F7B /* BGHUDTextFieldCell */ = {
+			isa = PBXGroup;
+			children = (
+				AE8ACC3315FE6ABE00063F7B /* BGHUDTextFieldCell.h */,
+				AE8ACC3415FE6ABE00063F7B /* BGHUDTextFieldCell.m */,
+			);
+			name = BGHUDTextFieldCell;
+			sourceTree = "<group>";
+		};
 		AEB9525115ED72FF00C00019 /* FilterBrowser */ = {
 			isa = PBXGroup;
 			children = (
@@ -389,6 +790,44 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		AE8ACBEF15FE6A8C00063F7B /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AE8ACC3C15FE6ABE00063F7B /* BGHUDBox.h in Headers */,
+				AE8ACC3E15FE6ABE00063F7B /* BGHUDView.h in Headers */,
+				AE8ACC4015FE6ABE00063F7B /* BGHUDComboBoxCell.h in Headers */,
+				AE8ACC4315FE6ABE00063F7B /* BGHUDAppKit.h in Headers */,
+				AE8ACC4415FE6ABE00063F7B /* BGGradientTheme.h in Headers */,
+				AE8ACC4615FE6ABE00063F7B /* BGTheme.h in Headers */,
+				AE8ACC4815FE6ABE00063F7B /* BGThemeManager.h in Headers */,
+				AE8ACC4A15FE6ABE00063F7B /* BGHUDButtonCell.h in Headers */,
+				AE8ACC4C15FE6ABE00063F7B /* BGHUDColorWell.h in Headers */,
+				AE8ACC4E15FE6ABE00063F7B /* BGHUDLabel.h in Headers */,
+				AE8ACC5015FE6ABE00063F7B /* BGHUDOutlineView.h in Headers */,
+				AE8ACC5215FE6ABE00063F7B /* BGHUDPopUpButtonCell.h in Headers */,
+				AE8ACC5415FE6ABE00063F7B /* BGHUDProgressIndicator.h in Headers */,
+				AE8ACC5615FE6ABE00063F7B /* BGHUDScroller.h in Headers */,
+				AE8ACC5815FE6ABE00063F7B /* BGHUDScrollView.h in Headers */,
+				AE8ACC5A15FE6ABE00063F7B /* BGHUDSearchFieldCell.h in Headers */,
+				AE8ACC5C15FE6ABE00063F7B /* BGHUDSecureTextFieldCell.h in Headers */,
+				AE8ACC5E15FE6ABE00063F7B /* BGHUDSegmentedCell.h in Headers */,
+				AE8ACC6015FE6ABE00063F7B /* BGHUDSliderCell.h in Headers */,
+				AE8ACC6215FE6ABE00063F7B /* BGHUDStepperCell.h in Headers */,
+				AE8ACC6415FE6ABE00063F7B /* BGHUDTableView.h in Headers */,
+				AE8ACC6615FE6ABE00063F7B /* BGHUDTableViewHeaderCell.h in Headers */,
+				AE8ACC6815FE6ABE00063F7B /* BGHUDTableCornerView.h in Headers */,
+				AE8ACC6A15FE6ABE00063F7B /* BGHUDTabViewItem.h in Headers */,
+				AE8ACC6C15FE6ABE00063F7B /* BGHUDTabView.h in Headers */,
+				AE8ACC6E15FE6ABE00063F7B /* BGHUDTextFieldCell.h in Headers */,
+				AE8ACC7415FE6ABE00063F7B /* BGHUDGeometry.h in Headers */,
+				AE8ACC7515FE6ABE00063F7B /* BGHUDCommon.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
 		AE7D6676147561B80099875F /* Cyclorama */ = {
 			isa = PBXNativeTarget;
@@ -397,6 +836,7 @@
 				AE7D6673147561B80099875F /* Sources */,
 				AE7D6674147561B80099875F /* Frameworks */,
 				AE7D6675147561B80099875F /* Resources */,
+				AE8ACC8E15FE6CD800063F7B /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -406,6 +846,24 @@
 			productName = Cyclorama;
 			productReference = AE7D6677147561B80099875F /* Cyclorama.app */;
 			productType = "com.apple.product-type.application";
+		};
+		AE8ACBF115FE6A8C00063F7B /* BGHUDAppKit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AE8ACBFE15FE6A8C00063F7B /* Build configuration list for PBXNativeTarget "BGHUDAppKit" */;
+			buildPhases = (
+				AE8ACBED15FE6A8C00063F7B /* Sources */,
+				AE8ACBEE15FE6A8C00063F7B /* Frameworks */,
+				AE8ACBEF15FE6A8C00063F7B /* Headers */,
+				AE8ACBF015FE6A8C00063F7B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BGHUDAppKit;
+			productName = BGHUDAppKit;
+			productReference = AE8ACBF215FE6A8C00063F7B /* BGHUDAppKit.framework */;
+			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
 
@@ -429,6 +887,7 @@
 			projectRoot = "";
 			targets = (
 				AE7D6676147561B80099875F /* Cyclorama */,
+				AE8ACBF115FE6A8C00063F7B /* BGHUDAppKit */,
 			);
 		};
 /* End PBXProject section */
@@ -449,6 +908,15 @@
 				AEB9525915ED9D8200C00019 /* FilterBrowserWindowController.xib in Resources */,
 				AE8ACBC215FD3AD700063F7B /* VideoBrowserWindowController.xib in Resources */,
 				AE8ACBE115FE49A300063F7B /* VideoBrowserCell.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AE8ACBF015FE6A8C00063F7B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AE8ACBF915FE6A8C00063F7B /* InfoPlist.strings in Resources */,
+				AE8ACC4215FE6ABE00063F7B /* README.textile in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -501,6 +969,39 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		AE8ACBED15FE6A8C00063F7B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AE8ACC3D15FE6ABE00063F7B /* BGHUDBox.m in Sources */,
+				AE8ACC3F15FE6ABE00063F7B /* BGHUDView.m in Sources */,
+				AE8ACC4115FE6ABE00063F7B /* BGHUDComboBoxCell.m in Sources */,
+				AE8ACC4515FE6ABE00063F7B /* BGGradientTheme.m in Sources */,
+				AE8ACC4715FE6ABE00063F7B /* BGTheme.m in Sources */,
+				AE8ACC4915FE6ABE00063F7B /* BGThemeManager.m in Sources */,
+				AE8ACC4B15FE6ABE00063F7B /* BGHUDButtonCell.m in Sources */,
+				AE8ACC4D15FE6ABE00063F7B /* BGHUDColorWell.m in Sources */,
+				AE8ACC4F15FE6ABE00063F7B /* BGHUDLabel.m in Sources */,
+				AE8ACC5115FE6ABE00063F7B /* BGHUDOutlineView.m in Sources */,
+				AE8ACC5315FE6ABE00063F7B /* BGHUDPopUpButtonCell.m in Sources */,
+				AE8ACC5515FE6ABE00063F7B /* BGHUDProgressIndicator.m in Sources */,
+				AE8ACC5715FE6ABE00063F7B /* BGHUDScroller.m in Sources */,
+				AE8ACC5915FE6ABE00063F7B /* BGHUDScrollView.m in Sources */,
+				AE8ACC5B15FE6ABE00063F7B /* BGHUDSearchFieldCell.m in Sources */,
+				AE8ACC5D15FE6ABE00063F7B /* BGHUDSecureTextFieldCell.m in Sources */,
+				AE8ACC5F15FE6ABE00063F7B /* BGHUDSegmentedCell.m in Sources */,
+				AE8ACC6115FE6ABE00063F7B /* BGHUDSliderCell.m in Sources */,
+				AE8ACC6315FE6ABE00063F7B /* BGHUDStepperCell.m in Sources */,
+				AE8ACC6515FE6ABE00063F7B /* BGHUDTableView.m in Sources */,
+				AE8ACC6715FE6ABE00063F7B /* BGHUDTableViewHeaderCell.m in Sources */,
+				AE8ACC6915FE6ABE00063F7B /* BGHUDTableCornerView.m in Sources */,
+				AE8ACC6B15FE6ABE00063F7B /* BGHUDTabViewItem.m in Sources */,
+				AE8ACC6D15FE6ABE00063F7B /* BGHUDTabView.m in Sources */,
+				AE8ACC6F15FE6ABE00063F7B /* BGHUDTextFieldCell.m in Sources */,
+				AE8ACC7615FE6ABE00063F7B /* BGHUDCommon.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
@@ -518,6 +1019,14 @@
 				AE7D668B147561B90099875F /* en */,
 			);
 			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		AE8ACBF715FE6A8C00063F7B /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AE8ACBF815FE6A8C00063F7B /* en */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -594,6 +1103,46 @@
 			};
 			name = Release;
 		};
+		AE8ACBFF15FE6A8C00063F7B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_VERSION = A;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "BGHUDAppKit/BGHUDAppKit-Prefix.pch";
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				INFOPLIST_FILE = "BGHUDAppKit/BGHUDAppKit-Info.plist";
+				INSTALL_PATH = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Debug;
+		};
+		AE8ACC0015FE6A8C00063F7B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_VERSION = A;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "BGHUDAppKit/BGHUDAppKit-Prefix.pch";
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				INFOPLIST_FILE = "BGHUDAppKit/BGHUDAppKit-Info.plist";
+				INSTALL_PATH = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -614,6 +1163,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		AE8ACBFE15FE6A8C00063F7B /* Build configuration list for PBXNativeTarget "BGHUDAppKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AE8ACBFF15FE6A8C00063F7B /* Debug */,
+				AE8ACC0015FE6A8C00063F7B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
