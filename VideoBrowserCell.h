@@ -8,10 +8,12 @@
 
 #import "PXListViewCell.h"
 
+@class VideoClip;
 @interface VideoBrowserCell : PXListViewCell
 
 @property (readwrite, weak) IBOutlet NSTextField *title;
 @property (readwrite, weak) IBOutlet NSTextField *details;
 @property (readwrite, weak) IBOutlet NSImageView *imageView;
+@property (readwrite, strong) VideoClip *clip;
 
 @end

@@ -75,9 +75,7 @@
                                      reusableIdentifier:@"VideoBrowserCell"];
     }
     
-    [[cell title] setStringValue:[clip title]];
-    [[cell details] setStringValue:@""];
-    [[cell imageView] setImage:[clip thumbnail]];
+    [cell setClip:clip];
     
     return cell;
 }
