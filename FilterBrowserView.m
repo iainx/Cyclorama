@@ -41,6 +41,9 @@
 #define BROWSER_GUTTER_SIZE 5
 #define BROWSER_SPACING_SIZE 2
 #define BROWSER_ITEMS_PER_ROW 3
+#define BROWSER_CATEGORY_GAP 25
+#define BROWSER_LABEL_HEIGHT 20
+
 - (void)setModel:(FilterModel *)model
 {
     if (model == _model) {
@@ -68,7 +71,10 @@
             rowCount++;
         }
         
-        NSTextField *label = [[NSTextField alloc] initWithFrame:NSMakeRect(10.0, yOffset, frameWidth - 20, 20.0)];
+        NSTextField *label = [[NSTextField alloc] initWithFrame:NSMakeRect(BROWSER_GUTTER_SIZE * 2,
+                                                                           yOffset + (BROWSER_CATEGORY_GAP - BROWSER_LABEL_HEIGHT),
+                                                                           frameWidth - (BROWSER_GUTTER_SIZE * 4),
+                                                                           BROWSER_LABEL_HEIGHT)];
         [label setStringValue:[CIFilter localizedNameForCategory:key]];
         [label setBezeled:NO];
         [label setBordered:NO];
@@ -78,7 +84,7 @@
         
         [self addSubview:label];
         
-        yOffset += 20;
+        yOffset += BROWSER_CATEGORY_GAP;
         
         for (FilterItem *item in categoryArray) {
             FilterItemView *itemView = [[FilterItemView alloc] initWithFilterItem:item];
