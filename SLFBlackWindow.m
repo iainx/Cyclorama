@@ -54,7 +54,7 @@
     
 	NSImage *bg = [[NSImage alloc] initWithSize:[self frame].size];
 
-    NSColor *borderStartColor = [NSColor colorWithDeviceRed:0.1 green:0.1 blue:0.1 alpha:1.0];
+    NSColor *borderStartColor = [NSColor colorWithDeviceRed:0.2 green:0.2 blue:0.2 alpha:1.0];
     
     // FIXME: Use whiteColor because I don't know how to change the title text colour to white
     // and it is too dark to use the nice dark colour.
@@ -77,7 +77,7 @@
     [styledGradient drawInRect:NSMakeRect(0, [bg size].height - titleBarHeight,
                                           width, titleBarHeight)
                          angle:90];
-    
+
 	// draw the line between title and content
     [[NSColor blackColor] setFill];
 	NSRectFill(NSMakeRect(0, [bg size].height - titleBarHeight, [bg size].width, 1.0));
