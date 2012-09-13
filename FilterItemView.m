@@ -11,6 +11,7 @@
 #import "FilterItem.h"
 #import "CursorLayer.h"
 #import "CALayer+Images.h"
+#import "utils.h"
 
 @implementation FilterItemView {
     CALayer *_imageLayer;
@@ -33,6 +34,15 @@
     
     [self setLayer:rootLayer];
     [self setWantsLayer:YES];
+    
+    CALayer *bgLayer = [CALayer layer];
+    [bgLayer setFrame:CGRectMake(2.0, 12.0, 69.0, 39.0)];
+    [bgLayer setCornerRadius:5.0];
+    [bgLayer setMasksToBounds:YES];
+    
+    CGColorRef blackColor = CGColorCreateFromNSColor([NSColor blackColor]);
+    [bgLayer setBackgroundColor:blackColor];
+    [rootLayer addSublayer:bgLayer];
     
     _imageLayer = [CALayer layer];
     [_imageLayer setFrame:CGRectMake(2.0, 12.0, 69.0, 39.0)];
