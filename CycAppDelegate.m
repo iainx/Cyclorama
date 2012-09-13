@@ -14,7 +14,6 @@
 #import "VideoBrowserWindowController.h"
 
 @implementation CycAppDelegate {
-    FilterModel *_filterModel;
     NSMutableArray *_videoModel;
     
     FilterBrowserWindowController *_filterBrowserController;
@@ -37,6 +36,7 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)notification
 {
+    /*
     _filterBrowserController = [[FilterBrowserWindowController alloc] init];
     FilterBrowserView *filterBrowser = [[FilterBrowserView alloc] initWithFilterModel:_filterModel];
     
@@ -46,5 +46,6 @@
     _videoBrowserController = [[VideoBrowserWindowController alloc] init];
     [_videoBrowserController setClipController:_clipController];
     [_videoBrowserController showWindow:self];
+     */
 }
 @end

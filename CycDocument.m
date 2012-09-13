@@ -20,7 +20,9 @@
 #import "FilterModel.h"
 #import "FilterBrowserView.h"
 
-@implementation CycDocument
+@implementation CycDocument {
+    FilterBrowserView *_filterBrowserView;
+}
 
 - (id)init
 {
@@ -53,6 +55,10 @@
     
     [_stageView setLayerController:_layerController];
     [_layerController setContent:_layers];
+    
+    FilterModel *model = [[NSApp delegate] filterModel];
+    _filterBrowserView = [[FilterBrowserView alloc] initWithFilterModel:model];
+    [_filterScrollView setDocumentView:_filterBrowserView];
 }
 
 - (NSData *)dataOfType:(NSString *)typeName error:(NSError **)outError

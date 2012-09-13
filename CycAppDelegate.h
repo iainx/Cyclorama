@@ -9,9 +9,11 @@
 #import <Foundation/Foundation.h>
 
 @class VideoClipController;
+@class FilterModel;
 
 @interface CycAppDelegate : NSObject <NSApplicationDelegate>
 
 @property (readonly, strong) VideoClipController *clipController;
+@property (readonly, strong) FilterModel *filterModel;
 
 @end

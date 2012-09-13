@@ -20,5 +20,6 @@
 @property (readwrite, strong)IBOutlet CycArrayController *filterController;
 
 @property (readwrite, weak)IBOutlet StageView *stageView;
+@property (readwrite, weak)IBOutlet NSScrollView *filterScrollView;
 
 @end
