@@ -1180,6 +1180,7 @@
 				AE8ACC0015FE6A8C00063F7B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
