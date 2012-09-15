@@ -51,7 +51,7 @@
     [rootLayer addSublayer:_imageLayer];
     
     _labelLayer = [CATextLayer layer];
-    [_labelLayer setFrame:CGRectMake(1.5, 1.5, 70.5, 11.0)];
+    [_labelLayer setFrame:CGRectMake(2.0, 2.0, 70.5, 11.0)];
     [_labelLayer setFontSize:9.0];
     [_labelLayer setContentsScale:[[NSScreen mainScreen] backingScaleFactor]];
     
