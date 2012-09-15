@@ -54,12 +54,12 @@
     
 	NSImage *bg = [[NSImage alloc] initWithSize:[self frame].size];
 
-    NSColor *borderStartColor = [NSColor colorWithDeviceRed:0.2 green:0.2 blue:0.2 alpha:1.0];
+    NSColor *borderStartColor = [NSColor colorWithDeviceRed:0.4 green:0.4 blue:0.4 alpha:1.0];
     
     // FIXME: Use whiteColor because I don't know how to change the title text colour to white
     // and it is too dark to use the nice dark colour.
-    //NSColor *borderEndColor = [NSColor colorWithDeviceRed:0.26 green:0.26 blue:0.26 alpha:1.0];
-    NSColor *borderEndColor = [NSColor whiteColor];
+    NSColor *borderEndColor = [NSColor colorWithDeviceRed:0.52 green:0.52 blue:0.52 alpha:1.0];
+    //NSColor *borderEndColor = [NSColor whiteColor];
     
     NSGradient *styledGradient = [[NSGradient alloc] initWithColorsAndLocations:borderStartColor, 0.0,
                                   borderEndColor, 1.0, nil];
