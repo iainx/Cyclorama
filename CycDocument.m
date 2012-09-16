@@ -18,11 +18,9 @@
 #import "VideoClip.h"
 #import "CycFilterUIView.h"
 #import "FilterModel.h"
-#import "FilterBrowserView.h"
+#import "FilterBrowserBox.h"
 
-@implementation CycDocument {
-    FilterBrowserView *_filterBrowserView;
-}
+@implementation CycDocument
 
 - (id)init
 {
@@ -57,8 +55,7 @@
     [_layerController setContent:_layers];
     
     FilterModel *model = [[NSApp delegate] filterModel];
-    _filterBrowserView = [[FilterBrowserView alloc] initWithFilterModel:model];
-    [_filterScrollView setDocumentView:_filterBrowserView];
+    [_filterBrowserBox setFilterModel:model];
 }
 
 - (NSData *)dataOfType:(NSString *)typeName error:(NSError **)outError

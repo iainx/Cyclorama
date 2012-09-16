@@ -12,6 +12,7 @@
 @class StageView;
 @class VideoClipController;
 @class CycFilterUIView;
+@class FilterBrowserBox;
 
 @interface CycDocument : NSDocument
 
@@ -21,5 +22,7 @@
 
 @property (readwrite, weak)IBOutlet StageView *stageView;
 @property (readwrite, weak)IBOutlet NSScrollView *filterScrollView;
+
+@property (readwrite, weak)IBOutlet FilterBrowserBox *filterBrowserBox;
 
 @end

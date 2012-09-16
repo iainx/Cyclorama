@@ -145,4 +145,41 @@
     
     [NSGraphicsContext restoreGraphicsState];
 }
+
+- (void)setChildFrame:(NSRect)boxBounds
+{
+    NSView *childView = [self contentView];
+    CGFloat toolbarHeight;
+    
+    if (childView == nil) {
+        return;
+    }
+    
+    NSRect childFrame;
+    NSSize contentMargins = [self contentViewMargins];
+
+    if ([self hasToolbar]) {
+        toolbarHeight = SLF_BOX_TITLEBAR_HEIGHT + 1;
+    } else {
+        toolbarHeight = 3.0;
+    }
+    
+    childFrame = NSMakeRect(3.0 + contentMargins.width, toolbarHeight + contentMargins.height,
+                            boxBounds.size.width - (3.0 * 2) - (contentMargins.width * 2),
+                            boxBounds.size.height - (toolbarHeight + SLF_BOX_TITLEBAR_HEIGHT + (contentMargins.height * 2)));
+    
+    [childView setFrame:childFrame];
+}
+
+- (void)setContentView:(NSView *)aView
+{
+    [super setContentView:aView];
+    [self setChildFrame:[self bounds]];
+}
+
+- (void)setFrame:(NSRect)frameRect
+{
+    [super setFrame:frameRect];
+    [self setChildFrame:[self bounds]];
+}
 @end

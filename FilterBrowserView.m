@@ -52,6 +52,10 @@
     
     _model = model;
     
+    if (_model == nil) {
+        return;
+    }
+    
     NSDictionary *categories = [model categories];
     float frameHeight;
     float frameWidth;
@@ -109,6 +113,8 @@
     
     // yOffset still needs the bottom gutter added to it
     frameHeight = yOffset + BROWSER_GUTTER_SIZE;
+    
+    NSLog(@"Size: %fx%f", frameWidth, frameHeight);
     
     [self setFrameSize:NSMakeSize(frameWidth, frameHeight)];
 }
