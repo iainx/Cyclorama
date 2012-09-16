@@ -122,6 +122,9 @@
 		AEDE0C0015F53F6A0058578E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEDE0BFF15F53F6A0058578E /* AVFoundation.framework */; };
 		AEDE0C0215F562BD0058578E /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEDE0C0115F562BD0058578E /* CoreMedia.framework */; };
 		AEDE0C0515F79A780058578E /* CALayer+Images.m in Sources */ = {isa = PBXBuildFile; fileRef = AEDE0C0415F79A780058578E /* CALayer+Images.m */; };
+		AEFE46B81605064C006E4122 /* VideoPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFE46B71605064C006E4122 /* VideoPlayerView.m */; };
+		AEFE46BB16050671006E4122 /* VideoPlayerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEFE46BA16050671006E4122 /* VideoPlayerView.xib */; };
+		AEFE46BE16052A7F006E4122 /* SLFBox.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFE46BD16052A7F006E4122 /* SLFBox.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -301,6 +304,11 @@
 		AEDE0C0115F562BD0058578E /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		AEDE0C0315F79A780058578E /* CALayer+Images.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+Images.h"; sourceTree = "<group>"; };
 		AEDE0C0415F79A780058578E /* CALayer+Images.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CALayer+Images.m"; sourceTree = "<group>"; };
+		AEFE46B61605064C006E4122 /* VideoPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoPlayerView.h; sourceTree = "<group>"; };
+		AEFE46B71605064C006E4122 /* VideoPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoPlayerView.m; sourceTree = "<group>"; };
+		AEFE46BA16050671006E4122 /* VideoPlayerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoPlayerView.xib; sourceTree = "<group>"; };
+		AEFE46BC16052A7F006E4122 /* SLFBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLFBox.h; sourceTree = "<group>"; };
+		AEFE46BD16052A7F006E4122 /* SLFBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLFBox.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -503,10 +511,10 @@
 				AE7D66B4147562080099875F /* VideoClipController.m */,
 				AE7D66B9147562080099875F /* VideoLayer.h */,
 				AE7D66BA147562080099875F /* VideoLayer.m */,
-				AE8ACBBA15FD0D0200063F7B /* SLFBlackWindow.h */,
-				AE8ACBBB15FD0D0200063F7B /* SLFBlackWindow.m */,
+				AEFE46BF16052C9C006E4122 /* SLFKit */,
 				AE7D66DD147566380099875F /* CycDocument.xib */,
 				AE7D66DE147566380099875F /* MainMenu.xib */,
+				AEFE46B91605065D006E4122 /* VideoPlayerView */,
 				AE8ACBC815FE133700063F7B /* Video Browser */,
 				AEB9525115ED72FF00C00019 /* FilterBrowser */,
 				AE051C081498EA0500A8FB07 /* FilterUIView */,
@@ -797,6 +805,27 @@
 			name = FilterBrowser;
 			sourceTree = "<group>";
 		};
+		AEFE46B91605065D006E4122 /* VideoPlayerView */ = {
+			isa = PBXGroup;
+			children = (
+				AEFE46B61605064C006E4122 /* VideoPlayerView.h */,
+				AEFE46B71605064C006E4122 /* VideoPlayerView.m */,
+				AEFE46BA16050671006E4122 /* VideoPlayerView.xib */,
+			);
+			name = VideoPlayerView;
+			sourceTree = "<group>";
+		};
+		AEFE46BF16052C9C006E4122 /* SLFKit */ = {
+			isa = PBXGroup;
+			children = (
+				AE8ACBBA15FD0D0200063F7B /* SLFBlackWindow.h */,
+				AE8ACBBB15FD0D0200063F7B /* SLFBlackWindow.m */,
+				AEFE46BC16052A7F006E4122 /* SLFBox.h */,
+				AEFE46BD16052A7F006E4122 /* SLFBox.m */,
+			);
+			name = SLFKit;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -917,6 +946,7 @@
 				AEB9525915ED9D8200C00019 /* FilterBrowserWindowController.xib in Resources */,
 				AE8ACBC215FD3AD700063F7B /* VideoBrowserWindowController.xib in Resources */,
 				AE8ACBE115FE49A300063F7B /* VideoBrowserCell.xib in Resources */,
+				AEFE46BB16050671006E4122 /* VideoPlayerView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -975,6 +1005,8 @@
 				AE8ACBBC15FD0D0200063F7B /* SLFBlackWindow.m in Sources */,
 				AE8ACBC115FD3AD700063F7B /* VideoBrowserWindowController.m in Sources */,
 				AE8ACBDF15FE476300063F7B /* VideoBrowserCell.m in Sources */,
+				AEFE46B81605064C006E4122 /* VideoPlayerView.m in Sources */,
+				AEFE46BE16052A7F006E4122 /* SLFBox.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
