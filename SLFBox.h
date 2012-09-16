@@ -8,8 +8,12 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface SLFBox : NSBox
+@interface SLFBox : NSView
 
-@property (readwrite) BOOL hasToolbar;
+@property (readwrite, copy) NSString *title;
+@property (readwrite, strong, nonatomic) NSView *contentView;
+@property (readwrite) NSSize contentViewMargins;
+@property (readwrite, nonatomic) BOOL hasToolbar;
+@property (readwrite, nonatomic) BOOL hasCloseButton;
 
 @end

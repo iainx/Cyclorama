@@ -10,10 +10,18 @@
 
 @implementation VideoBrowserBox
 
+- (void)doInit
+{
+    [self setTitle:@"Video Browser"];
+    [self setHasToolbar:NO];
+    [self setHasCloseButton:NO];
+}
+
 - (id)initWithFrame:(NSRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
+        [self doInit];
     }
     
     return self;
@@ -23,7 +31,7 @@
 {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        [self setHasToolbar:NO];
+        [self doInit];
     }
     
     return self;

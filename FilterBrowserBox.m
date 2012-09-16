@@ -14,11 +14,27 @@
     FilterBrowserView *_filterBrowserView;
 }
 
+- (void)doInit
+{
+    [self setHasToolbar:NO];
+    [self setHasCloseButton:YES];
+    [self setTitle:@"Filter Browser"];
+    
+    _scrollView = [[NSScrollView alloc] initWithFrame:NSZeroRect];
+    [_scrollView setDrawsBackground:NO];
+    [_scrollView setHasVerticalScroller:YES];
+    
+    [self setContentView:_scrollView];
+    
+    _filterBrowserView = [[FilterBrowserView alloc] initWithFilterModel:nil];
+    [_scrollView setDocumentView:_filterBrowserView];
+}
+
 - (id)initWithFrame:(NSRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code here.
+        [self doInit];
     }
 
     return self;
@@ -28,16 +44,7 @@
 {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        [self setHasToolbar:NO];
-
-        _scrollView = [[NSScrollView alloc] initWithFrame:NSZeroRect];
-        [_scrollView setDrawsBackground:NO];
-        [_scrollView setHasVerticalScroller:YES];
-        
-        [self setContentView:_scrollView];
-        
-        _filterBrowserView = [[FilterBrowserView alloc] initWithFilterModel:nil];
-        [_scrollView setDocumentView:_filterBrowserView];
+        [self doInit];
     }
     
     return self;
@@ -47,4 +54,5 @@
 {
     [_filterBrowserView setModel:model];
 }
+
 @end
