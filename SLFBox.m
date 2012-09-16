@@ -61,26 +61,38 @@
     
     [roundedPath setClip];
     
-    [self drawTitlebarInRect:[self bounds]];
+    [self drawTitlebarInRect:dirtyRect];
     
     if ([self hasToolbar]) {
-        [self drawToolbarInRect:[self bounds]];
+        [self drawToolbarInRect:dirtyRect];
     }
     [NSGraphicsContext restoreGraphicsState];
 }
 
 #define SLF_BOX_TITLEBAR_HEIGHT 22.0
 
-- (void)drawTitlebarInRect:(NSRect)frame
+- (void)drawTitlebarInRect:(NSRect)dirtyRect
 {
+    NSRect bounds = [self bounds];
+    NSRect titlebarRect = bounds;
+    NSRect intersection;
+    
+    titlebarRect.size.height = SLF_BOX_TITLEBAR_HEIGHT;
+    titlebarRect.origin.y = bounds.size.height - SLF_BOX_TITLEBAR_HEIGHT;
+    
+    intersection = NSIntersectionRect(dirtyRect, titlebarRect);
+    if (NSIsEmptyRect(intersection)) {
+        return;
+    }
+    
+    [NSGraphicsContext saveGraphicsState];
+    
+    [NSBezierPath clipRect:intersection];
+    
     NSColor *endColour = [NSColor colorWithCalibratedRed:0.242 green:0.242 blue:0.242 alpha:1.0];
     NSColor *startColour = [NSColor colorWithCalibratedRed:0.117 green:0.117 blue:0.117 alpha:1.0];
     NSGradient *gradient = [[NSGradient alloc] initWithColorsAndLocations:startColour, 0.5, endColour, 1.0, nil];
-    
-    NSRect titlebarRect = frame;
-    titlebarRect.size.height = SLF_BOX_TITLEBAR_HEIGHT;
-    titlebarRect.origin.y = frame.size.height - SLF_BOX_TITLEBAR_HEIGHT;
-    
+
     [gradient drawInRect:titlebarRect angle:90.0];
     
     NSRect titleRect = NSInsetRect(titlebarRect, 10.0, 4.0);
@@ -91,26 +103,46 @@
     
     // Draw the divider line
     [[NSColor blackColor] setFill];
-    NSRectFill(NSMakeRect(0, frame.size.height - SLF_BOX_TITLEBAR_HEIGHT, frame.size.width, 1.0));
+    NSRectFill(NSMakeRect(0, bounds.size.height - SLF_BOX_TITLEBAR_HEIGHT, bounds.size.width, 1.0));
+    
+    [NSGraphicsContext restoreGraphicsState];
 }
 
 #define SLF_BOX_TOOLBAR_HEIGHT 25.0
 
-- (void)drawToolbarInRect:(NSRect)frame
+- (void)drawToolbarInRect:(NSRect)dirtyRect
 {
+    NSRect bounds = [self bounds];
+    NSRect toolbarRect = bounds;
+    NSRect intersection;
+    
+    // The toolbar is from 0 -> 23 (24 high), the white line is at 24 and the black line is 25.
+    // Meaning that the rectangle we need to clip against is 0 -> 25 (26 high)
+    toolbarRect.size.height = SLF_BOX_TOOLBAR_HEIGHT + 1;
+
+    intersection = NSIntersectionRect(dirtyRect, toolbarRect);
+    if (NSIsEmptyRect(intersection)) {
+        return;
+    }
+    
+    [NSGraphicsContext saveGraphicsState];
+    
+    [NSBezierPath clipRect:intersection];
+    
     NSColor *endColour = [NSColor colorWithCalibratedRed:0.195 green:0.195 blue:0.195 alpha:1.0];
     NSColor *startColour = [NSColor colorWithCalibratedRed:0.14 green:0.14 blue:0.14 alpha:1.0];
     NSGradient *gradient = [[NSGradient alloc] initWithColorsAndLocations:startColour, 0.0, endColour, 1.0, nil];
-    
-    NSRect toolbarRect = frame;
-    toolbarRect.size.height = SLF_BOX_TOOLBAR_HEIGHT - 1;
-    
+
+    // Reduce the toolbar to draw at 0 -> 23 (24 high)
+    toolbarRect.size.height -= 2;
     [gradient drawInRect:toolbarRect angle:90.0];
     
     [[NSColor blackColor] setFill];
-    NSRectFill(NSMakeRect(0, SLF_BOX_TOOLBAR_HEIGHT, frame.size.width, 1.0));
+    NSRectFill(NSMakeRect(0, SLF_BOX_TOOLBAR_HEIGHT, bounds.size.width, 1.0));
     
     [[NSColor colorWithCalibratedRed:0.261 green:0.261 blue:0.261 alpha:1.0] setFill];
-    NSRectFill(NSMakeRect(0, SLF_BOX_TOOLBAR_HEIGHT - 1, frame.size.width, 1.0));
+    NSRectFill(NSMakeRect(0, SLF_BOX_TOOLBAR_HEIGHT - 1, bounds.size.width, 1.0));
+    
+    [NSGraphicsContext restoreGraphicsState];
 }
 @end
