@@ -9,10 +9,15 @@
 #import <Quartz/Quartz.h>
 #import "FilterBrowserView.h"
 #import "FilterItem.h"
-#import "FilterItemView.h"
+//#import "FilterItemView.h"
+#import "FilterItemLayer.h"
 #import "FilterModel.h"
+#import "utils.h"
 
-@implementation FilterBrowserView
+@implementation FilterBrowserView {
+    NSMutableArray *_filterItemLayers;
+    FilterItemLayer *_currentLayer;
+}
 
 - (id)initWithFrame:(NSRect)frame
 {
@@ -28,6 +33,8 @@
 {
     self = [super initWithFrame:NSZeroRect];
     
+    _filterItemLayers = [[NSMutableArray alloc] init];
+    [self setWantsLayer:YES];
     [self setModel:model];
     
     return self;
@@ -75,6 +82,7 @@
             rowCount++;
         }
         
+        /*
         NSTextField *label = [[NSTextField alloc] initWithFrame:NSMakeRect(BROWSER_GUTTER_SIZE * 2,
                                                                            yOffset + (BROWSER_CATEGORY_GAP - BROWSER_LABEL_HEIGHT),
                                                                            frameWidth - (BROWSER_GUTTER_SIZE * 4),
@@ -87,27 +95,53 @@
         [label setTextColor:[NSColor whiteColor]];
         
         [self addSubview:label];
+         */
+        CATextLayer *label = [CATextLayer layer];
+        [label setFrame:NSMakeRect(BROWSER_GUTTER_SIZE * 2,
+                                   yOffset + (BROWSER_CATEGORY_GAP - BROWSER_LABEL_HEIGHT),
+                                   frameWidth - (BROWSER_GUTTER_SIZE * 4),
+                                   BROWSER_LABEL_HEIGHT)];
+        [label setString:[CIFilter localizedNameForCategory:key]];
+        [label setForegroundColor:CGColorCreateFromNSColor([NSColor whiteColor])];
+        [label setFontSize:12.0];
+        [label setContentsScale:[[NSScreen mainScreen] backingScaleFactor]];
+
+        [[self layer] addSublayer:label];
         
         yOffset += BROWSER_CATEGORY_GAP;
-        
+
         for (FilterItem *item in categoryArray) {
-            FilterItemView *itemView = [[FilterItemView alloc] initWithFilterItem:item];
+            //FilterItemView *itemView = [[FilterItemView alloc] initWithFilterItem:item];
+            FilterItemLayer *itemLayer = [[FilterItemLayer alloc] initWithFilterItem:item];
+            NSTrackingArea *area;
             int x;
             
             x = BROWSER_GUTTER_SIZE + (column * 74.0) + ((column - 1) * BROWSER_SPACING_SIZE);
             
-            [itemView setFrameOrigin:NSMakePoint(x, yOffset)];
-            
-            [self addSubview:itemView];
+            //[itemView setFrameOrigin:NSMakePoint(x, yOffset)];
+            [itemLayer setPosition:NSMakePoint(x, yOffset)];
+            //[self addSubview:itemView];
+            [[self layer] addSublayer:itemLayer];
             
             i++;
             column++;
+            
+            // Don't need a tracking area if there's no previewKey
+            if ([item previewKey]) {
+                [_filterItemLayers addObject:itemLayer];
+                area = [[NSTrackingArea alloc] initWithRect:[itemLayer frame]
+                                                    options:NSTrackingMouseEnteredAndExited | NSTrackingMouseMoved | NSTrackingActiveInKeyWindow
+                                                      owner:self
+                                                   userInfo:nil];
+                [self addTrackingArea:area];
+            }
+            
             if (column >= BROWSER_ITEMS_PER_ROW && i < [categoryArray count]) {
                 column = 0;
                 yOffset += 53.0 + BROWSER_SPACING_SIZE;
             }
         }
-        
+
         yOffset += 53.0;
     }];
     
@@ -119,14 +153,67 @@
     [self setFrameSize:NSMakeSize(frameWidth, frameHeight)];
 }
 
-- (void)drawRect:(NSRect)dirtyRect
+#pragma mark - Tracking Area methods
+- (FilterItemLayer *)findLayerForPoint:(NSPoint)locationInView
 {
-    /*
-    CGContextRef cgContext = [[NSGraphicsContext currentContext] graphicsPort];
+    for (FilterItemLayer *layer in _filterItemLayers) {
+        if ([layer hitTest:locationInView] != nil) {
+            return layer;
+        }
+    }
     
-    CGContextSetRGBFillColor(cgContext, 1, 0, 0, 1);
-    CGContextFillRect(cgContext, dirtyRect);
-     */
+    return nil;
+}
+
+- (NSPoint)locationInLayer:(FilterItemLayer *)layer fromLocationInView:(NSPoint)pointInView
+{
+    NSPoint layerOrigin = [layer position];
+    
+    NSPoint locationInLayer;
+    locationInLayer.x = pointInView.x - layerOrigin.x;
+    locationInLayer.y = pointInView.y - layerOrigin.y;
+    
+    return locationInLayer;
+}
+
+- (void)mouseEntered:(NSEvent *)theEvent
+{
+    NSPoint pointInView = [self convertPoint:[theEvent locationInWindow] fromView:nil];
+    FilterItemLayer *layer = [self findLayerForPoint:pointInView];
+    
+    if (layer == nil) {
+        return;
+    }
+    
+    _currentLayer = layer;
+    NSPoint locationInLayer = [self locationInLayer:layer fromLocationInView:pointInView];
+    [layer mouseEntered:locationInLayer];
+}
+
+- (void)mouseExited:(NSEvent *)theEvent
+{
+    if (_currentLayer == nil) {
+        return;
+    }
+    
+    NSPoint pointInView = [self convertPoint:[theEvent locationInWindow] fromView:nil];
+    
+    NSPoint locationInLayer = [self locationInLayer:_currentLayer fromLocationInView:pointInView];
+    [_currentLayer mouseExited:locationInLayer];
+    _currentLayer = nil;
+}
+
+- (void)mouseMoved:(NSEvent *)theEvent
+{
+    NSPoint pointInView = [self convertPoint:[theEvent locationInWindow] fromView:nil];
+    FilterItemLayer *layer = [self findLayerForPoint:pointInView];
+    
+    if (layer == nil) {
+        return;
+    }
+    
+    NSPoint locationInLayer = [self locationInLayer:layer fromLocationInView:pointInView];
+    [layer mouseMoved:locationInLayer];
 }
 
 @end

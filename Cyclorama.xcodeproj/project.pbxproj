@@ -125,6 +125,7 @@
 		AEDE0C0015F53F6A0058578E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEDE0BFF15F53F6A0058578E /* AVFoundation.framework */; };
 		AEDE0C0215F562BD0058578E /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEDE0C0115F562BD0058578E /* CoreMedia.framework */; };
 		AEDE0C0515F79A780058578E /* CALayer+Images.m in Sources */ = {isa = PBXBuildFile; fileRef = AEDE0C0415F79A780058578E /* CALayer+Images.m */; };
+		AEE0228F160789D8009F4A9F /* FilterItemLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE0228E160789D8009F4A9F /* FilterItemLayer.m */; };
 		AEFE46B81605064C006E4122 /* VideoPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFE46B71605064C006E4122 /* VideoPlayerView.m */; };
 		AEFE46BB16050671006E4122 /* VideoPlayerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEFE46BA16050671006E4122 /* VideoPlayerView.xib */; };
 		AEFE46BE16052A7F006E4122 /* SLFBox.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFE46BD16052A7F006E4122 /* SLFBox.m */; };
@@ -313,6 +314,8 @@
 		AEDE0C0115F562BD0058578E /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		AEDE0C0315F79A780058578E /* CALayer+Images.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+Images.h"; sourceTree = "<group>"; };
 		AEDE0C0415F79A780058578E /* CALayer+Images.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CALayer+Images.m"; sourceTree = "<group>"; };
+		AEE0228D160789D8009F4A9F /* FilterItemLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterItemLayer.h; sourceTree = "<group>"; };
+		AEE0228E160789D8009F4A9F /* FilterItemLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterItemLayer.m; sourceTree = "<group>"; };
 		AEFE46B61605064C006E4122 /* VideoPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoPlayerView.h; sourceTree = "<group>"; };
 		AEFE46B71605064C006E4122 /* VideoPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoPlayerView.m; sourceTree = "<group>"; };
 		AEFE46BA16050671006E4122 /* VideoPlayerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoPlayerView.xib; sourceTree = "<group>"; };
@@ -807,6 +810,8 @@
 			children = (
 				AE5DB0B115E9734D00C4C720 /* FilterItemView.h */,
 				AE5DB0B215E9734D00C4C720 /* FilterItemView.m */,
+				AEE0228D160789D8009F4A9F /* FilterItemLayer.h */,
+				AEE0228E160789D8009F4A9F /* FilterItemLayer.m */,
 				AEB9524B15ED4FFE00C00019 /* CursorLayer.h */,
 				AEB9524C15ED4FFE00C00019 /* CursorLayer.m */,
 				AEB9525515ED9D8200C00019 /* FilterBrowserWindowController.h */,
@@ -1025,6 +1030,7 @@
 				AE6861031606174C009C9694 /* FilterBrowserBox.m in Sources */,
 				AE0FDBF2160642BA0000BB9F /* VideoBrowserBox.m in Sources */,
 				AE0FDBF7160655960000BB9F /* NSBezierPath+MCAdditions.m in Sources */,
+				AEE0228F160789D8009F4A9F /* FilterItemLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
