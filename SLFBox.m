@@ -51,7 +51,6 @@
 {
     NSRect bounds = [self bounds];
     
-    NSLog(@"Bounds in add button: %@", NSStringFromRect(bounds));
     NSRect closeButtonRect = NSMakeRect(4.0, (bounds.size.height - SLF_BOX_TITLEBAR_HEIGHT) + 1.0,
                                         CLOSE_BUTTON_SIZE, CLOSE_BUTTON_SIZE);
 
@@ -65,7 +64,6 @@
 
 - (void)drawRect:(NSRect)dirtyRect
 {
-    NSLog(@"Bounds in drawRect: %@", NSStringFromRect([self bounds]));
     NSRect frame = NSInsetRect([self bounds], 2,2);
     
     NSShadow *shadow = [[NSShadow alloc] init];
