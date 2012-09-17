@@ -79,8 +79,8 @@
 
     [NSGraphicsContext saveGraphicsState];
     [shadow set];
-        
-    NSColor *boxBGColour = [NSColor colorWithCalibratedRed:0.16 green:0.16 blue:0.16 alpha:1.0];
+
+    NSColor *boxBGColour = [NSColor colorWithCalibratedWhite:0.16 alpha:1.0];
     
     [boxBGColour setFill];
     [roundedPath fill];
@@ -121,8 +121,8 @@
     
     [NSBezierPath clipRect:intersection];
     
-    NSColor *endColour = [NSColor colorWithCalibratedRed:0.242 green:0.242 blue:0.242 alpha:1.0];
-    NSColor *startColour = [NSColor colorWithCalibratedRed:0.117 green:0.117 blue:0.117 alpha:1.0];
+    NSColor *endColour = [NSColor colorWithCalibratedWhite:0.242 alpha:1.0];
+    NSColor *startColour = [NSColor colorWithCalibratedWhite:0.117 alpha:1.0];
     NSGradient *gradient = [[NSGradient alloc] initWithColorsAndLocations:startColour, 0.5, endColour, 1.0, nil];
 
     [gradient drawInRect:titlebarRect angle:90.0];
@@ -167,8 +167,8 @@
     
     [NSBezierPath clipRect:intersection];
     
-    NSColor *endColour = [NSColor colorWithCalibratedRed:0.195 green:0.195 blue:0.195 alpha:1.0];
-    NSColor *startColour = [NSColor colorWithCalibratedRed:0.14 green:0.14 blue:0.14 alpha:1.0];
+    NSColor *endColour = [NSColor colorWithCalibratedWhite:0.195 alpha:1.0];
+    NSColor *startColour = [NSColor colorWithCalibratedWhite:0.14 alpha:1.0];
     NSGradient *gradient = [[NSGradient alloc] initWithColorsAndLocations:startColour, 0.0, endColour, 1.0, nil];
 
     // Reduce the toolbar to draw at 0 -> 23 (24 high)
@@ -178,11 +178,13 @@
     [[NSColor blackColor] setFill];
     NSRectFill(NSMakeRect(0, SLF_BOX_TOOLBAR_HEIGHT, bounds.size.width, 1.0));
     
-    [[NSColor colorWithCalibratedRed:0.261 green:0.261 blue:0.261 alpha:1.0] setFill];
+    [NSColor colorWithCalibratedWhite:0.261 alpha:1.0];
     NSRectFill(NSMakeRect(0, SLF_BOX_TOOLBAR_HEIGHT - 1, bounds.size.width, 1.0));
     
     [NSGraphicsContext restoreGraphicsState];
 }
+
+#pragma mark - Accessors
 
 - (void)setChildFrame
 {
@@ -228,8 +230,11 @@
 - (void)setFrame:(NSRect)frameRect
 {
     [super setFrame:frameRect];
+    
+    // Readjust the child layout
     [self setChildFrame];
     
+    // Now reposition the close button
     if ([self hasCloseButton]) {
         NSRect closeButtonRect = NSMakeRect(4.0, ([self bounds].size.height - SLF_BOX_TITLEBAR_HEIGHT) + 1.0,
                                             CLOSE_BUTTON_SIZE, CLOSE_BUTTON_SIZE);
@@ -297,27 +302,34 @@
 
     // Draw the main circle w/ gradient & border on top of it
     NSBezierPath *circle = [NSBezierPath bezierPathWithOvalInRect:drawingRect];
-    NSGradient *gradient = [[NSGradient alloc] initWithStartingColor:SNRWindowButtonGradientBottomColor endingColor:SNRWindowButtonGradientTopColor];
+    NSGradient *gradient = [[NSGradient alloc] initWithStartingColor:SNRWindowButtonGradientBottomColor
+                                                         endingColor:SNRWindowButtonGradientTopColor];
     [gradient drawInBezierPath:circle angle:270.f];
     [SNRWindowButtonBorderColor set];
     [circle stroke];
     
     // Draw the cross
     NSBezierPath *cross = [NSBezierPath bezierPath];
+    
     CGFloat boxDimension = floor(drawingRect.size.width * cos(45.f)) - SNRWindowButtonCrossInset;
     CGFloat origin = round((drawingRect.size.width - boxDimension) / 2.f);
+    
     NSRect boxRect = NSMakeRect(1.f + origin, origin, boxDimension, boxDimension);
+    
     NSPoint bottomLeft = NSMakePoint(boxRect.origin.x, NSMaxY(boxRect));
     NSPoint topRight = NSMakePoint(NSMaxX(boxRect), boxRect.origin.y);
     NSPoint bottomRight = NSMakePoint(topRight.x, bottomLeft.y);
     NSPoint topLeft = NSMakePoint(bottomLeft.x, topRight.y);
+    
     [cross moveToPoint:bottomLeft];
     [cross lineToPoint:topRight];
     [cross moveToPoint:bottomRight];
     [cross lineToPoint:topLeft];
+    
     [SNRWindowButtonCrossColor set];
     [cross setLineWidth:2.f];
     [cross stroke];
+    
     // Draw the inner shadow
     NSShadow *shadow = [[NSShadow alloc] init];
     [shadow setShadowColor:SNRWindowButtonInnerShadowColor];
@@ -325,6 +337,7 @@
     [shadow setShadowOffset:SNRWindowButtonInnerShadowOffset];
     NSRect shadowRect = drawingRect;
     shadowRect.size.height = origin;
+    
     [NSGraphicsContext saveGraphicsState];
     [NSBezierPath clipRect:shadowRect];
     
