@@ -22,9 +22,7 @@
 - (void)doInit
 {
     _hasToolbar = YES;
-    _hasCloseButton = YES;
-    
-    [self addCloseButton];
+    _hasCloseButton = NO;
 }
 
 - (id)initWithFrame:(NSRect)frame
