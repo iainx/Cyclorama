@@ -113,7 +113,6 @@
         for (FilterItem *item in categoryArray) {
             //FilterItemView *itemView = [[FilterItemView alloc] initWithFilterItem:item];
             FilterItemLayer *itemLayer = [[FilterItemLayer alloc] initWithFilterItem:item];
-            NSTrackingArea *area;
             int x;
             
             x = BROWSER_GUTTER_SIZE + (column * 74.0) + ((column - 1) * BROWSER_SPACING_SIZE);
@@ -126,15 +125,7 @@
             i++;
             column++;
             
-            // Don't need a tracking area if there's no previewKey
-            if ([item previewKey]) {
-                [_filterItemLayers addObject:itemLayer];
-                area = [[NSTrackingArea alloc] initWithRect:[itemLayer frame]
-                                                    options:NSTrackingMouseEnteredAndExited | NSTrackingMouseMoved | NSTrackingActiveInKeyWindow
-                                                      owner:self
-                                                   userInfo:nil];
-                [self addTrackingArea:area];
-            }
+            [_filterItemLayers addObject:itemLayer];
             
             if (column >= BROWSER_ITEMS_PER_ROW && i < [categoryArray count]) {
                 column = 0;
@@ -148,9 +139,14 @@
     // yOffset still needs the bottom gutter added to it
     frameHeight = yOffset + BROWSER_GUTTER_SIZE;
     
-    NSLog(@"Size: %fx%f", frameWidth, frameHeight);
-    
     [self setFrameSize:NSMakeSize(frameWidth, frameHeight)];
+    
+    NSTrackingArea *area;
+    area = [[NSTrackingArea alloc] initWithRect:[self frame]
+                                        options:NSTrackingMouseEnteredAndExited | NSTrackingMouseMoved | NSTrackingActiveInKeyWindow
+                                          owner:self
+                                       userInfo:nil];
+    [self addTrackingArea:area];
 }
 
 #pragma mark - Tracking Area methods
@@ -196,10 +192,8 @@
         return;
     }
     
-    NSPoint pointInView = [self convertPoint:[theEvent locationInWindow] fromView:nil];
-    
-    NSPoint locationInLayer = [self locationInLayer:_currentLayer fromLocationInView:pointInView];
-    [_currentLayer mouseExited:locationInLayer];
+    // We don't need a point for mouseExited really as it's outside the layer
+    [_currentLayer mouseExited:NSZeroPoint];
     _currentLayer = nil;
 }
 
@@ -207,12 +201,26 @@
 {
     NSPoint pointInView = [self convertPoint:[theEvent locationInWindow] fromView:nil];
     FilterItemLayer *layer = [self findLayerForPoint:pointInView];
+    NSPoint locationInLayer;
     
-    if (layer == nil) {
+    if (layer == nil || layer != _currentLayer) {
+        // We've left the _currentLayer so tell it about exit
+        if (_currentLayer) {
+            [_currentLayer mouseExited:NSZeroPoint];
+            _currentLayer = nil;
+        }
+        
+        // We've entered this new layer
+        if (layer) {
+            locationInLayer = [self locationInLayer:layer fromLocationInView:pointInView];
+            [layer mouseEntered:locationInLayer];
+            _currentLayer = layer;
+        }
+        
         return;
     }
     
-    NSPoint locationInLayer = [self locationInLayer:layer fromLocationInView:pointInView];
+    locationInLayer = [self locationInLayer:layer fromLocationInView:pointInView];
     [layer mouseMoved:locationInLayer];
 }
 

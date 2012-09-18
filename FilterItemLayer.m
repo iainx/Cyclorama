@@ -85,11 +85,19 @@
 
 - (void)mouseEntered:(NSPoint)locationInLayer
 {
+    if ([_filterItem previewKey] == nil) {
+        return;
+    }
+    
     [_cursorLayer setShowCursor:YES];
 }
 
 - (void)mouseExited:(NSPoint)locationInLayer
 {
+    if ([_filterItem previewKey] == nil) {
+        return;
+    }
+    
     [_cursorLayer setShowCursor:NO];
     
     [self setFilterToNormalizedValue:0.1];
@@ -108,6 +116,10 @@
 - (void)mouseMoved:(NSPoint)locationInLayer
 {
     CGFloat normalizedValue;
+ 
+    if ([_filterItem previewKey] == nil) {
+        return;
+    }
     
     [_cursorLayer setCursorPosition:locationInLayer.x];
     
