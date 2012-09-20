@@ -13,6 +13,7 @@
 @class VideoClipController;
 @class CycFilterUIView;
 @class FilterBrowserBox;
+@class VideoBrowserBox;
 
 @interface CycDocument : NSDocument
 
@@ -24,5 +25,6 @@
 @property (readwrite, weak)IBOutlet NSScrollView *filterScrollView;
 
 @property (readwrite, weak)IBOutlet FilterBrowserBox *filterBrowserBox;
+@property (readwrite, weak)IBOutlet VideoBrowserBox *videoBrowserBox;
 
 @end

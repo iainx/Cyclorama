@@ -7,14 +7,28 @@
 //
 
 #import "VideoBrowserBox.h"
+#import "VideoBrowserView.h"
 
-@implementation VideoBrowserBox
+@implementation VideoBrowserBox {
+    NSScrollView *_scrollView;
+    VideoBrowserView *_videoBrowserView;
+}
 
 - (void)doInit
 {
     [self setTitle:@"Video Browser"];
     [self setHasToolbar:NO];
     [self setHasCloseButton:NO];
+    
+    _scrollView = [[NSScrollView alloc] initWithFrame:NSZeroRect];
+    [_scrollView setDrawsBackground:NO];
+    [_scrollView setHasVerticalScroller:YES];
+    
+    [self setContentView:_scrollView];
+    
+    _videoBrowserView = [[VideoBrowserView alloc] initWithVideoClipController:nil
+                                                                        width:[_scrollView frame].size.width];
+    [_scrollView setDocumentView:_videoBrowserView];
 }
 
 - (id)initWithFrame:(NSRect)frame
@@ -35,5 +49,10 @@
     }
     
     return self;
+}
+
+- (void)setClipController:(VideoClipController *)clipController
+{
+    [_videoBrowserView setVideoClipController:clipController];
 }
 @end

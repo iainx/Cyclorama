@@ -7,8 +7,9 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "CycArrayController.h"
 
-@interface VideoClipController : NSArrayController <NSTableViewDelegate,NSTableViewDataSource> {
+@interface VideoClipController : CycArrayController <NSTableViewDelegate,NSTableViewDataSource> {
 @private
     NSMetadataQuery *videoQuery;
 }

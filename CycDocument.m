@@ -19,6 +19,7 @@
 #import "CycFilterUIView.h"
 #import "FilterModel.h"
 #import "FilterBrowserBox.h"
+#import "VideoBrowserBox.h"
 
 @implementation CycDocument
 
@@ -56,6 +57,9 @@
     
     FilterModel *model = [[NSApp delegate] filterModel];
     [_filterBrowserBox setFilterModel:model];
+    
+    VideoClipController *clipController = [[NSApp delegate] clipController];
+    [_videoBrowserBox setClipController:clipController];
 }
 
 - (NSData *)dataOfType:(NSString *)typeName error:(NSError **)outError

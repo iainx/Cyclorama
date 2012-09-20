@@ -8,6 +8,9 @@
 
 #import "SLFBox.h"
 
+@class VideoClipController;
 @interface VideoBrowserBox : SLFBox
+
+- (void)setClipController:(VideoClipController *)clipController;
 
 @end
