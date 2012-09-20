@@ -8,7 +8,9 @@
 
 #import "VideoClip.h"
 
-@implementation VideoClip
+@implementation VideoClip {
+    BOOL needThumbnailWhenValueLoaded;
+}
 
 @synthesize asset = _asset;
 
@@ -20,6 +22,8 @@
     [self setFilePath:filePath];
     [self setTitle:title];
 
+    //[self openMovie];
+    
     return self;
 }
 
@@ -35,6 +39,10 @@
     NSArray *keys = @[ @"tracks", @"duration" ];
     [_asset loadValuesAsynchronouslyForKeys:keys
                           completionHandler:^{
+                              if (needThumbnailWhenValueLoaded == NO) {
+                                  return;
+                              }
+                              
                               NSError *error = nil;
                               AVKeyValueStatus status = [[self asset] statusOfValueForKey:@"tracks"
                                                                                     error:&error];
@@ -97,4 +105,46 @@
     return _asset;
 }
 
+- (BOOL)requestThumbnail
+{
+    if (_thumbnail) {
+        return YES;
+    }
+
+    if ([self asset]) {
+        needThumbnailWhenValueLoaded = YES;
+        return NO;
+    }
+    
+    NSError *error = nil;
+    AVKeyValueStatus status = [[self asset] statusOfValueForKey:@"tracks"
+                                                          error:&error];
+    
+    if (status != AVKeyValueStatusLoaded) {
+        // Load the thumbnail whenever the tracks value is loaded
+        needThumbnailWhenValueLoaded = YES;
+        return NO;
+    }
+    
+    if ([[self asset] tracksWithMediaCharacteristic:AVMediaTypeVideo]) {
+        AVAssetImageGenerator *gen = [AVAssetImageGenerator assetImageGeneratorWithAsset:[self asset]];
+        
+        [gen setMaximumSize:CGSizeMake(150, 150)];
+        CMTime frameTime = CMTimeMakeWithSeconds(5.0, 600);
+        CMTime actualTime;
+        
+        CGImageRef t = [gen copyCGImageAtTime:frameTime
+                                   actualTime:&actualTime
+                                        error:&error];
+        NSImage *tn = [[NSImage alloc] initWithCGImage:t
+                                                  size:NSZeroSize];
+        [self setThumbnail:tn];
+        return YES;
+    }
+    
+    // We have no thumbnail
+    // FIXME: should return a status to say whether we're waiting for the thumbnail
+    // or we can't provide a thumbnail
+    return NO;
+}
 @end

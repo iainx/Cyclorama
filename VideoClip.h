@@ -19,5 +19,6 @@
 
 - (id)initWithFilePath:(NSString *)filePath title:(NSString *)title;
 - (void)openMovie;
+- (BOOL)requestThumbnail;
 
 @end

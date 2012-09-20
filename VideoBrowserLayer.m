@@ -26,13 +26,15 @@
         return nil;
     }
     
+    [self setClip:clip];
+    /*
     _clip = clip;
     [clip addObserver:self
            forKeyPath:@"thumbnail"
               options:NSKeyValueObservingOptionNew
               context:NULL];
     _isObserving = YES;
-    
+    */
     [self setBounds:CGRectMake(0.0, 0.0, 150.0, 150.0)];
     [self setAnchorPoint:CGPointMake(0, 0)];
     
@@ -99,8 +101,9 @@
     [_labelLayer setString:[clip title]];
     //[_details setStringValue:@""];
     
-    NSImage *thumbnail = [clip thumbnail];
-    if (thumbnail) {
+    BOOL haveThumbnail = [clip requestThumbnail];
+    if (haveThumbnail) {
+        NSImage *thumbnail = [clip thumbnail];
         [_imageLayer setContents:thumbnail];
         _isObserving = NO;
     } else {
