@@ -11,11 +11,19 @@
 #import "VideoClipController.h"
 #import "VideoClip.h"
 
-@implementation VideoBrowserView
+@implementation VideoBrowserView {
+    int itemsPerRow;
+}
+
+#define BROWSER_GUTTER_SIZE 10
+#define BROWSER_SPACING_SIZE 10
 
 - (void)doInit
 {
     [self setWantsLayer:YES];
+    
+    CGFloat width = [self frame].size.width;
+    itemsPerRow = (width - BROWSER_GUTTER_SIZE) / (150 + BROWSER_SPACING_SIZE);
 }
 
 - (id)initWithFrame:(NSRect)frame
@@ -57,17 +65,22 @@
     // Drawing code here.
 }
 
-#define BROWSER_GUTTER_SIZE 10
-#define BROWSER_SPACING_SIZE 10
-
-- (void)layoutForWidth:(CGFloat)width
+- (void)layoutFromIndex:(NSUInteger)index
+               forWidth:(CGFloat)width
 {
     NSArray *sublayers = [[self layer] sublayers];
+    NSUInteger i;
+    NSUInteger row, col;
 
-    float x = BROWSER_GUTTER_SIZE;
-    float y = BROWSER_GUTTER_SIZE;
+    row = index / itemsPerRow;
+    col = index % itemsPerRow;
+    
+    float x = BROWSER_GUTTER_SIZE + (col * (150 + BROWSER_SPACING_SIZE));
+    float y = BROWSER_GUTTER_SIZE + (row * (150 + BROWSER_SPACING_SIZE));
 
-    for (VideoBrowserLayer *clipLayer in sublayers) {
+    for (i = index; i  < [sublayers count]; i++) {
+        VideoBrowserLayer *clipLayer = sublayers[i];
+        
         if (x + [clipLayer bounds].size.width >= width - BROWSER_GUTTER_SIZE) {
             x = BROWSER_GUTTER_SIZE;
             y += (BROWSER_SPACING_SIZE + [clipLayer bounds].size.height);
@@ -83,10 +96,13 @@
 {
     NSDictionary *userInfo = [note userInfo];
     VideoClip *clip = userInfo[@"object"];
+    NSNumber *indexNumber = userInfo[@"index"];
+    
     VideoBrowserLayer *clipLayer = [[VideoBrowserLayer alloc] initWithClip:clip];
     
     [[self layer] addSublayer:clipLayer];
-    [self layoutForWidth:[self bounds].size.width];
+    [self layoutFromIndex:[indexNumber unsignedIntegerValue]
+                 forWidth:[self bounds].size.width];
 }
 
 - (void)videoClipRemoved:(NSNotification *)note
@@ -119,8 +135,8 @@
         VideoBrowserLayer *clipLayer = [[VideoBrowserLayer alloc] initWithClip:clip];
         
         [[self layer] addSublayer:clipLayer];
-        [self layoutForWidth:[self bounds].size.width];
     }
+    [self layoutFromIndex:0 forWidth:[self bounds].size.width];
 }
 
 - (void)setFrame:(NSRect)frameRect
@@ -128,6 +144,6 @@
     [super setFrame:frameRect];
     
     // Relayout
-    [self layoutForWidth:frameRect.size.width];
+    [self layoutFromIndex:0 forWidth:frameRect.size.width];
 }
 @end
