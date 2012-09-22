@@ -8,9 +8,7 @@
 
 #import "SLFBlackWindow.h"
 
-@implementation SLFBlackWindow {
-    float titleBarHeight;
-}
+@implementation SLFBlackWindow
 
 - (id)initWithContentRect:(NSRect)contentRect
                 styleMask:(NSUInteger)styleMask
@@ -47,41 +45,43 @@
 
 - (NSColor *)styledBackground
 {
+    CGFloat titleBarHeight = 0;
+    
 	// delta between frame and content done this way to future proof
-	if (!titleBarHeight) {
+	if ([self styleMask] & ~NSFullScreenWindowMask) {
 		titleBarHeight = [self frame].size.height - [[self contentView] frame].size.height;
 	}
     
 	NSImage *bg = [[NSImage alloc] initWithSize:[self frame].size];
-
     NSColor *borderStartColor = [NSColor colorWithDeviceRed:0.4 green:0.4 blue:0.4 alpha:1.0];
-    
-    // FIXME: Use whiteColor because I don't know how to change the title text colour to white
-    // and it is too dark to use the nice dark colour.
-    NSColor *borderEndColor = [NSColor colorWithDeviceRed:0.52 green:0.52 blue:0.52 alpha:1.0];
-    //NSColor *borderEndColor = [NSColor whiteColor];
-    
-    NSGradient *styledGradient = [[NSGradient alloc] initWithColorsAndLocations:borderStartColor, 0.0,
-                                  borderEndColor, 1.0, nil];
-	// Set min width of temporary pattern image to prevent flickering at small widths
-	float minWidth = 300.0;
-	float width = MAX (minWidth, [self frame].size.width);
-	
-	// Begin drawing into our main image
+
+    // Begin drawing into our main image
 	[bg lockFocus];
-	
+
 	// Composite current background color into bg
 	[borderStartColor set];
-	NSRectFill(NSMakeRect(0, 0, [bg size].width, [bg size].height - 22));
-    
-    [styledGradient drawInRect:NSMakeRect(0, [bg size].height - titleBarHeight,
-                                          width, titleBarHeight)
-                         angle:90];
+	NSRectFill(NSMakeRect(0, 0, [bg size].width, [bg size].height - titleBarHeight));
 
-	// draw the line between title and content
-    [[NSColor blackColor] setFill];
-	NSRectFill(NSMakeRect(0, [bg size].height - titleBarHeight, [bg size].width, 1.0));
-	
+    if (titleBarHeight > 0) {
+        // FIXME: Use whiteColor because I don't know how to change the title text colour to white
+        // and it is too dark to use the nice dark colour.
+        NSColor *borderEndColor = [NSColor colorWithDeviceRed:0.52 green:0.52 blue:0.52 alpha:1.0];
+        //NSColor *borderEndColor = [NSColor whiteColor];
+        
+        NSGradient *styledGradient = [[NSGradient alloc] initWithColorsAndLocations:borderStartColor, 0.0,
+                                      borderEndColor, 1.0, nil];
+        // Set min width of temporary pattern image to prevent flickering at small widths
+        float minWidth = 300.0;
+        float width = MAX (minWidth, [self frame].size.width);
+        
+        [styledGradient drawInRect:NSMakeRect(0, [bg size].height - titleBarHeight,
+                                              width, titleBarHeight)
+                             angle:90];
+        
+        // draw the line between title and content
+        [[NSColor blackColor] setFill];
+        NSRectFill(NSMakeRect(0, [bg size].height - titleBarHeight, [bg size].width, 1.0));
+    }
 	[bg unlockFocus];
 	
 	return [NSColor colorWithPatternImage:bg];
