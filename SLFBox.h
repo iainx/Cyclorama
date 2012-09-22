@@ -7,6 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "SLFBoxDelegate.h"
 
 @interface SLFBox : NSView
 
@@ -15,5 +16,7 @@
 @property (readwrite) NSSize contentViewMargins;
 @property (readwrite, nonatomic) BOOL hasToolbar;
 @property (readwrite, nonatomic) BOOL hasCloseButton;
+
+@property (readwrite, weak) id<SLFBoxDelegate> delegate;
 
 @end

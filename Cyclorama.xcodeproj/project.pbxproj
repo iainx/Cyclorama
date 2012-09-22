@@ -220,6 +220,7 @@
 		AE7D66D4147563910099875F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		AE7D66DD147566380099875F /* CycDocument.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CycDocument.xib; sourceTree = "<group>"; };
 		AE7D66DE147566380099875F /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
+		AE86852C160DEE2000A5A3E1 /* SLFBoxDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SLFBoxDelegate.h; sourceTree = "<group>"; };
 		AE8ACBBA15FD0D0200063F7B /* SLFBlackWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLFBlackWindow.h; sourceTree = "<group>"; };
 		AE8ACBBB15FD0D0200063F7B /* SLFBlackWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLFBlackWindow.m; sourceTree = "<group>"; };
 		AE8ACBBE15FD3AD700063F7B /* VideoBrowserWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoBrowserWindowController.h; sourceTree = "<group>"; };
@@ -852,6 +853,7 @@
 				AE8ACBBB15FD0D0200063F7B /* SLFBlackWindow.m */,
 				AEFE46BC16052A7F006E4122 /* SLFBox.h */,
 				AEFE46BD16052A7F006E4122 /* SLFBox.m */,
+				AE86852C160DEE2000A5A3E1 /* SLFBoxDelegate.h */,
 			);
 			name = SLFKit;
 			sourceTree = "<group>";

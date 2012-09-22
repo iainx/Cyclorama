@@ -13,6 +13,7 @@
 @end
 
 @implementation SLFBox {
+    BOOL _isClosed;
     NSButton *_closeButton;
 }
 
@@ -23,6 +24,7 @@
 {
     _hasToolbar = YES;
     _hasCloseButton = NO;
+    _isClosed = NO;
 }
 
 - (id)initWithFrame:(NSRect)frame
@@ -45,6 +47,48 @@
     return self;
 }
 
+- (void)closeAction:(id)sender
+{
+    BOOL shouldContinue = YES;
+    
+    if (_delegate == nil) {
+        return;
+    }
+    
+    if (_isClosed) {
+        if ([_delegate respondsToSelector:@selector(boxWillOpen)]) {
+            shouldContinue = [_delegate boxWillOpen];
+        }
+        
+        if (shouldContinue == NO) {
+            return;
+        }
+        
+        // FIXME: Do whatever is needed to open the box
+        
+        _isClosed = NO;
+        
+        if ([_delegate respondsToSelector:@selector(boxDidOpen)]) {
+            [_delegate boxDidOpen];
+        }
+    } else {
+        if ([_delegate respondsToSelector:@selector(boxWillClose)]) {
+            shouldContinue = [_delegate boxWillClose];
+        }
+        
+        if (shouldContinue == NO) {
+            return;
+        }
+        
+        // FIXME: Do whatever is needed to close the box
+        _isClosed = YES;
+        
+        if ([_delegate respondsToSelector:@selector(boxDidClose)]) {
+            [_delegate boxDidClose];
+        }
+    }
+}
+
 - (void)addCloseButton
 {
     NSRect bounds = [self bounds];
@@ -56,6 +100,8 @@
     [_closeButton setCell:[[_SLFCloseButtonCell alloc] init]];
     [_closeButton setButtonType:NSMomentaryChangeButton];
     [_closeButton setAutoresizingMask:NSViewMaxXMargin | NSViewMinYMargin];
+    [_closeButton setTarget:self];
+    [_closeButton setAction:@selector(closeAction:)];
     
     [self addSubview:_closeButton];
 }
