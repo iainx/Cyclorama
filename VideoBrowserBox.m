@@ -28,6 +28,7 @@
     
     _videoBrowserView = [[VideoBrowserView alloc] initWithVideoClipController:nil
                                                                         width:[_scrollView frame].size.width];
+    [_videoBrowserView setAutoresizingMask:NSViewWidthSizable];
     [_scrollView setDocumentView:_videoBrowserView];
 }
 
