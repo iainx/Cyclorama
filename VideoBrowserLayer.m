@@ -27,14 +27,11 @@
     }
     
     [self setClip:clip];
-    /*
-    _clip = clip;
-    [clip addObserver:self
-           forKeyPath:@"thumbnail"
-              options:NSKeyValueObservingOptionNew
-              context:NULL];
-    _isObserving = YES;
-    */
+    
+    // Disable the implicit animations whenever the position changes
+    NSDictionary *actions = @{@"position": [NSNull null]};
+    [self setActions:actions];
+    
     [self setBounds:CGRectMake(0.0, 0.0, 150.0, 150.0)];
     [self setAnchorPoint:CGPointMake(0, 0)];
     
