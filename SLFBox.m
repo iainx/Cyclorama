@@ -253,7 +253,7 @@
     [[NSColor blackColor] setFill];
     NSRectFill(NSMakeRect(0, SLF_BOX_TOOLBAR_HEIGHT, bounds.size.width, 1.0));
     
-    [NSColor colorWithCalibratedWhite:0.261 alpha:1.0];
+    [[NSColor colorWithCalibratedWhite:0.261 alpha:1.0] setFill];
     NSRectFill(NSMakeRect(0, SLF_BOX_TOOLBAR_HEIGHT - 1, bounds.size.width, 1.0));
     
     [NSGraphicsContext restoreGraphicsState];
