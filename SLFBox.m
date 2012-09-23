@@ -6,6 +6,7 @@
 //  Copyright (c) 2012 Sleep(5). All rights reserved.
 //
 
+#import <QuartzCore/QuartzCore.h>
 #import "SLFBox.h"
 #import "NSBezierPath+MCAdditions.h"
 
@@ -15,12 +16,13 @@
 @implementation SLFBox {
     BOOL _isClosed;
     NSButton *_closeButton;
+    NSRect _oldFrame;
 }
 
 #define SLF_BOX_TITLEBAR_HEIGHT 22.0
 #define CLOSE_BUTTON_SIZE (SLF_BOX_TITLEBAR_HEIGHT - 4.0)
 
-- (void)doInit
+- (void)doSLFBoxInit
 {
     _hasToolbar = YES;
     _hasCloseButton = NO;
@@ -31,7 +33,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        [self doInit];
+        [self doSLFBoxInit];
     }
 
     return self;
@@ -41,7 +43,7 @@
 {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        [self doInit];
+        [self doSLFBoxInit];
     }
     
     return self;
@@ -50,10 +52,6 @@
 - (void)closeAction:(id)sender
 {
     BOOL shouldContinue = YES;
-    
-    if (_delegate == nil) {
-        return;
-    }
     
     if (_isClosed) {
         if ([_delegate respondsToSelector:@selector(boxWillOpen)]) {
@@ -64,7 +62,8 @@
             return;
         }
         
-        // FIXME: Do whatever is needed to open the box
+        [_contentView setHidden:NO];
+        [[self animator] setFrame:_oldFrame];
         
         _isClosed = NO;
         
@@ -80,7 +79,16 @@
             return;
         }
         
-        // FIXME: Do whatever is needed to close the box
+        NSRect newFrame = [self frame];
+        _oldFrame = newFrame;
+        newFrame.origin.x = newFrame.origin.x + newFrame.size.width - SLF_BOX_TITLEBAR_HEIGHT;
+        newFrame.size.width = SLF_BOX_TITLEBAR_HEIGHT;
+        
+        [[self animator] setFrame:newFrame];
+        
+        // Hide the contents
+        [[_contentView animator ]setHidden:YES];
+        
         _isClosed = YES;
         
         if ([_delegate respondsToSelector:@selector(boxDidClose)]) {
@@ -93,7 +101,7 @@
 {
     NSRect bounds = [self bounds];
     
-    NSRect closeButtonRect = NSMakeRect(4.0, (bounds.size.height - SLF_BOX_TITLEBAR_HEIGHT) + 1.0,
+    NSRect closeButtonRect = NSMakeRect(2.0, (bounds.size.height - SLF_BOX_TITLEBAR_HEIGHT),
                                         CLOSE_BUTTON_SIZE, CLOSE_BUTTON_SIZE);
 
     _closeButton = [[NSButton alloc] initWithFrame:closeButtonRect];
@@ -137,7 +145,7 @@
     
     [roundedPath setClip];
     
-    [self drawTitlebarInRect:dirtyRect];
+    [self drawTopTitlebarInRect:dirtyRect];
     
     if ([self hasToolbar]) {
         [self drawToolbarInRect:dirtyRect];
@@ -145,7 +153,7 @@
     [NSGraphicsContext restoreGraphicsState];
 }
 
-- (void)drawTitlebarInRect:(NSRect)dirtyRect
+- (void)drawTopTitlebarInRect:(NSRect)dirtyRect
 {
     NSRect bounds = [self bounds];
     NSRect titlebarRect = bounds;
@@ -179,12 +187,37 @@
     NSString *title = [self title];
     NSDictionary *attributes = @{ NSForegroundColorAttributeName : [NSColor whiteColor] };
     
+    [NSGraphicsContext saveGraphicsState];
+    
     [title drawInRect:titleRect withAttributes:attributes];
+    [NSGraphicsContext restoreGraphicsState];
     
     // Draw the divider line
     [[NSColor blackColor] setFill];
-    NSRectFill(NSMakeRect(0, bounds.size.height - SLF_BOX_TITLEBAR_HEIGHT, bounds.size.width, 1.0));
+    NSRectFill(NSMakeRect(0, titlebarRect.origin.y, bounds.size.width, 1.0));
     
+    [NSGraphicsContext restoreGraphicsState];
+    
+    // Outside the clipping
+    
+    [NSGraphicsContext saveGraphicsState];
+    if (bounds.size.width == 22 && [_contentView isHidden]) {
+        NSAffineTransform *tr = [NSAffineTransform transform];
+        float dx, dy;
+        
+        titleRect = NSMakeRect(6.0, 4.0, bounds.size.height - 26.0, 14.0);
+        dx = NSMidX(titleRect);
+        dy = NSMidY(titleRect);
+
+        [tr translateXBy:dy yBy:dx];
+        [tr rotateByDegrees:90.0];
+        [tr translateXBy:-dx yBy:-dy];
+        [tr concat];
+        
+        attributes = @{ NSForegroundColorAttributeName: [NSColor colorWithCalibratedWhite:0.34 alpha:1.0] };
+        [title drawInRect:titleRect withAttributes:attributes];
+    }
+
     [NSGraphicsContext restoreGraphicsState];
 }
 
@@ -278,7 +311,7 @@
     
     // Now reposition the close button
     if ([self hasCloseButton]) {
-        NSRect closeButtonRect = NSMakeRect(4.0, ([self bounds].size.height - SLF_BOX_TITLEBAR_HEIGHT) + 1.0,
+        NSRect closeButtonRect = NSMakeRect(2.0, ([self bounds].size.height - SLF_BOX_TITLEBAR_HEIGHT),
                                             CLOSE_BUTTON_SIZE, CLOSE_BUTTON_SIZE);
         [_closeButton setFrame:closeButtonRect];
     }
@@ -311,6 +344,7 @@
     [self setChildFrame];
     [self setNeedsDisplay:YES];
 }
+
 @end
 
 #pragma mark - _SLFCloseButtonCell
