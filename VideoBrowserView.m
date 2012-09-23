@@ -12,18 +12,21 @@
 #import "VideoClip.h"
 
 @implementation VideoBrowserView {
+    NSTrackingArea *trackingArea;
     int itemsPerRow;
 }
 
 #define BROWSER_GUTTER_SIZE 10
 #define BROWSER_SPACING_SIZE 10
 
-- (void)doInit
+- (void)doVideoBrowserViewInit
 {
     [self setWantsLayer:YES];
     
     CGFloat width = [self frame].size.width;
     itemsPerRow = (width - BROWSER_GUTTER_SIZE) / (150 + BROWSER_SPACING_SIZE);
+
+    [self createTrackingArea];
 }
 
 - (id)initWithFrame:(NSRect)frame
@@ -33,7 +36,7 @@
         return nil;
     }
     
-    [self doInit];
+    [self doVideoBrowserViewInit];
     
     return self;
 }
@@ -49,7 +52,7 @@
         return nil;
     }
     
-    [self doInit];
+    [self doVideoBrowserViewInit];
     [self setVideoClipController:controller];
     
     return self;
@@ -145,5 +148,55 @@
     
     // Relayout
     [self layoutFromIndex:0 forWidth:frameRect.size.width];
+}
+
+#pragma mark - Tracking Areas
+
+- (void)mouseDown:(NSEvent *)theEvent
+{
+    
+}
+
+- (void)mouseUp:(NSEvent *)theEvent
+{
+    
+}
+
+- (void)mouseEntered:(NSEvent *)theEvent
+{
+    
+}
+
+- (void)mouseExited:(NSEvent *)theEvent
+{
+    
+}
+
+- (void)mouseMoved:(NSEvent *)theEvent
+{
+    
+}
+
+- (void)mouseDragged:(NSEvent *)theEvent
+{
+    
+}
+
+- (void)createTrackingArea
+{
+    NSLog(@"Create tracking area");
+    trackingArea = [[NSTrackingArea alloc] initWithRect:[self frame]
+                                                options:NSTrackingMouseEnteredAndExited | NSTrackingMouseMoved |NSTrackingActiveInKeyWindow
+                                                  owner:self
+                                               userInfo:nil];
+    [self addTrackingArea:trackingArea];
+}
+
+- (void)updateTrackingAreas
+{
+    [self removeTrackingArea:trackingArea];
+    [self createTrackingArea];
+    
+    [super updateTrackingAreas];
 }
 @end
