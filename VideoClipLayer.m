@@ -6,10 +6,10 @@
 //  Copyright (c) 2012 Sleep(5). All rights reserved.
 //
 
-#import "VideoBrowserLayer.h"
+#import "VideoClipLayer.h"
 #import "VideoClip.h"
 
-@implementation VideoBrowserLayer {
+@implementation VideoClipLayer {
     CALayer *_imageLayer;
     CATextLayer *_labelLayer;
     

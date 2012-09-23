@@ -7,7 +7,7 @@
 //
 
 #import "VideoBrowserView.h"
-#import "VideoBrowserLayer.h"
+#import "VideoClipLayer.h"
 #import "VideoClipController.h"
 #import "VideoClip.h"
 
@@ -82,7 +82,7 @@
     float y = BROWSER_GUTTER_SIZE + (row * (150 + BROWSER_SPACING_SIZE));
 
     for (i = index; i  < [sublayers count]; i++) {
-        VideoBrowserLayer *clipLayer = sublayers[i];
+        VideoClipLayer *clipLayer = sublayers[i];
         
         if (x + [clipLayer bounds].size.width >= width - BROWSER_GUTTER_SIZE) {
             x = BROWSER_GUTTER_SIZE;
@@ -101,7 +101,7 @@
     VideoClip *clip = userInfo[@"object"];
     NSNumber *indexNumber = userInfo[@"index"];
     
-    VideoBrowserLayer *clipLayer = [[VideoBrowserLayer alloc] initWithClip:clip];
+    VideoClipLayer *clipLayer = [[VideoClipLayer alloc] initWithClip:clip];
     
     [[self layer] addSublayer:clipLayer];
     [self layoutFromIndex:[indexNumber unsignedIntegerValue]
@@ -135,7 +135,7 @@
     NSArray *clips = [videoClipController arrangedObjects];
     
     for (VideoClip *clip in clips) {
-        VideoBrowserLayer *clipLayer = [[VideoBrowserLayer alloc] initWithClip:clip];
+        VideoClipLayer *clipLayer = [[VideoClipLayer alloc] initWithClip:clip];
         
         [[self layer] addSublayer:clipLayer];
     }

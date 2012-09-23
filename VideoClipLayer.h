@@ -10,7 +10,7 @@
 
 @class VideoClip;
 
-@interface VideoBrowserLayer : CALayer
+@interface VideoClipLayer : CALayer
 
 @property (readwrite, strong) VideoClip *clip;
 
