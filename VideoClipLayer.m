@@ -48,8 +48,6 @@
     [_labelLayer setPosition:CGPointMake(0.0, 132.0)];
     [_labelLayer setFontSize:11.0];
     [_labelLayer setContentsScale:[[NSScreen mainScreen] backingScaleFactor]];
-    //[_labelLayer setBackgroundColor:CGColorCreateGenericRGB(1.0, 0.0, 0.0, 1.0)];
-    //[_labelLayer setForegroundColor:CGColorCreateGenericRGB(1.0, 1.0, 1.0, 1.0)];
     [_labelLayer setString:[clip title]];
     
     [_labelLayer setAlignmentMode:kCAAlignmentCenter];
@@ -71,6 +69,8 @@
     NSImage *thumbnail = [_clip thumbnail];
     
     if (thumbnail) {
+        // Observation can happen on any thread and the UI needs updated on
+        // the main thread.
         dispatch_async(dispatch_get_main_queue(), ^{
             [_imageLayer setContents:thumbnail];
         });
