@@ -17,4 +17,10 @@
 - (id)initWithClip:(VideoClip *)clip;
 - (void)setSizeForWidth:(CGFloat)width;
 
+- (void)mouseEntered;
+- (void)mouseExited;
+- (void)mouseMoved:(CGPoint)pointInLayer;
+- (void)mouseDown:(CGPoint)pointInLayer;
+- (void)mouseUp:(CGPoint)pointInLayer;
+
 @end

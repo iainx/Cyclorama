@@ -13,6 +13,7 @@
 
 @implementation VideoBrowserView {
     NSTrackingArea *trackingArea;
+    VideoClipLayer *currentLayer;
     CGFloat tileWidth;
     int itemsPerRow;
 }
@@ -225,7 +226,18 @@
     *row = maybeRow;
     *column = maybeCol;
     
-    return [_videoClipController arrangedObjects][index];
+    return [[self layer] sublayers][index];
+}
+
+- (CGPoint)point:(CGPoint)p inLayer:(CALayer *)layer
+{
+    CGPoint locationInLayer;
+    CGPoint layerPosition = [layer position];
+    
+    locationInLayer.x = p.x - layerPosition.x;
+    locationInLayer.y = p.y - layerPosition.y;
+
+    return locationInLayer;
 }
 
 - (void)mouseDown:(NSEvent *)theEvent
@@ -236,30 +248,83 @@
     VideoClipLayer *layer = [self findLayerForLocationInView:locationInView
                                                        atRow:&row
                                                     atColumn:&column];
-    
-    if (layer) {
-        NSLog(@"Mouse down in %p (%ld,%ld)", layer, row, column);
+    if (!layer) {
+        return;
     }
+
+    CGPoint pointInLayer = [self point:locationInView inLayer:layer];
+    [layer mouseDown:pointInLayer];
 }
 
 - (void)mouseUp:(NSEvent *)theEvent
 {
-    NSLog(@"Mouse up");
+    NSPoint locationInView = [self convertPoint:[theEvent locationInWindow] fromView:nil];
+    NSInteger row, column;
+    
+    VideoClipLayer *layer = [self findLayerForLocationInView:locationInView
+                                                       atRow:&row
+                                                    atColumn:&column];
+    if (!layer) {
+        return;
+    }
+    
+    CGPoint pointInLayer = [self point:locationInView inLayer:layer];
+    [layer mouseUp:pointInLayer];
 }
 
 - (void)mouseEntered:(NSEvent *)theEvent
 {
-    NSLog(@"Mouse entered");
+    NSPoint locationInView = [self convertPoint:[theEvent locationInWindow]
+                                       fromView:nil];
+    NSInteger row, column;
+    VideoClipLayer *layer = [self findLayerForLocationInView:locationInView
+                                                       atRow:&row
+                                                    atColumn:&column];
+    
+    if (layer == nil) {
+        return;
+    }
+    
+    // Check in case we've entered a layer
+    [layer mouseEntered];
+    currentLayer = layer;
+    
+    CGPoint locationInLayer;
+    [layer mouseMoved:locationInLayer];
 }
 
 - (void)mouseExited:(NSEvent *)theEvent
 {
-    NSLog(@"Mouse exited");
+    if (currentLayer) {
+        [currentLayer mouseExited];
+        currentLayer = nil;
+    }
 }
 
 - (void)mouseMoved:(NSEvent *)theEvent
 {
-    NSLog(@"Mouse moved");
+    NSPoint locationInView = [self convertPoint:[theEvent locationInWindow]
+                                       fromView:nil];
+    NSInteger row, column;
+    VideoClipLayer *layer = [self findLayerForLocationInView:locationInView
+                                                       atRow:&row
+                                                    atColumn:&column];
+    if (currentLayer != layer) {
+        [currentLayer mouseExited];
+        [layer mouseEntered];
+        currentLayer = layer;
+    }
+    
+    if (layer == nil) {
+        return;
+    }
+    
+    CGPoint locationInLayer;
+    CGPoint layerPosition = [layer position];
+    
+    locationInLayer.x = locationInView.x - layerPosition.x;
+    locationInLayer.y = locationInView.y - layerPosition.y;
+    [layer mouseMoved:locationInLayer];
 }
 
 - (void)mouseDragged:(NSEvent *)theEvent

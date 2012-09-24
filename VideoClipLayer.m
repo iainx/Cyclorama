@@ -143,4 +143,29 @@
     CGFloat imageHeight = (width / 4.0) * 3.0;
     [self setBounds:CGRectMake(0.0, 0.0, width, imageHeight + 2 + TEXT_BOX_HEIGHT)];
 }
+
+- (void)mouseEntered
+{
+    NSLog(@"Entered");
+}
+
+- (void)mouseExited
+{
+    NSLog(@"Exited");
+}
+
+- (void)mouseMoved:(CGPoint)pointInLayer
+{
+    NSLog(@"Moved");
+}
+
+- (void)mouseDown:(CGPoint)pointInLayer
+{
+    NSLog(@"Down");
+}
+
+- (void)mouseUp:(CGPoint)pointInLayer
+{
+    NSLog(@"Up");
+}
 @end
