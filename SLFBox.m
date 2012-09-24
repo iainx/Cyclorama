@@ -275,7 +275,7 @@
     NSSize contentMargins = [self contentViewMargins];
 
     if ([self hasToolbar]) {
-        toolbarHeight = SLF_BOX_TITLEBAR_HEIGHT + 1;
+        toolbarHeight = SLF_BOX_TITLEBAR_HEIGHT + 4;
     } else {
         toolbarHeight = 3.0;
     }
