@@ -36,7 +36,7 @@
     [self setClip:clip];
     
     // Disable the implicit animations whenever the position changes
-    NSDictionary *actions = @{@"position": [NSNull null]};
+    NSDictionary *actions = @{@"position": [NSNull null], @"bounds": [NSNull null]};
     [self setActions:actions];
     
     [self setBounds:CGRectMake(0.0, 0.0, DEFAULT_WIDTH, DEFAULT_HEIGHT)];
