@@ -182,14 +182,64 @@
     
     // Relayout
     //CGFloat bestTileWidth = [self calculateBestTileWidthForViewWidth:frameRect.size.width];
+    itemsPerRow = (frameRect.size.width - BROWSER_GUTTER_SIZE) / (tileWidth + BROWSER_SPACING_SIZE);
     [self layoutFromIndex:0 forWidth:frameRect.size.width forTileWidth:tileWidth];
 }
 
-#pragma mark - Tracking Areas
+#pragma mark - Mouse tracking
+
+- (VideoClipLayer *)findLayerForLocationInView:(NSPoint)locationInView
+                                         atRow:(NSInteger *)row
+                                      atColumn:(NSInteger *)column
+{
+    // Remove the gutter size so that all our calculations treat the top right corner of the 1st item as 0,0
+    CGFloat viewX = locationInView.x - BROWSER_GUTTER_SIZE;
+    CGFloat viewY = locationInView.y - BROWSER_GUTTER_SIZE;
+    
+    CGFloat widthOfItems = (152.0 + BROWSER_SPACING_SIZE) * itemsPerRow;
+    if (viewX > widthOfItems) {
+        // In the extra width at the right hand side
+        return nil;
+    }
+    
+    int maybeCol = (viewX / (152.0 + BROWSER_SPACING_SIZE));
+    if ((maybeCol * (152.0 + BROWSER_SPACING_SIZE)) + 152.0 < viewX) {
+        // In the spacing between columns
+        return nil;
+    }
+    
+    int maybeRow = (viewY / (134.0 + BROWSER_SPACING_SIZE));
+    if ((maybeRow * (134.0 * BROWSER_SPACING_SIZE)) + 134.0 < viewY) {
+        // In the spacing between rows
+        return nil;
+    }
+    
+    NSArray *arrangedObjects = [_videoClipController arrangedObjects];
+    
+    int index = (maybeRow * itemsPerRow) + maybeCol;
+    if (index >= [arrangedObjects count]) {
+        // In extra space after the last item
+        return nil;
+    }
+    
+    *row = maybeRow;
+    *column = maybeCol;
+    
+    return [_videoClipController arrangedObjects][index];
+}
 
 - (void)mouseDown:(NSEvent *)theEvent
 {
-    NSLog(@"Mouse down");
+    NSPoint locationInView = [self convertPoint:[theEvent locationInWindow] fromView:nil];
+    NSInteger row, column;
+    
+    VideoClipLayer *layer = [self findLayerForLocationInView:locationInView
+                                                       atRow:&row
+                                                    atColumn:&column];
+    
+    if (layer) {
+        NSLog(@"Mouse down in %p (%ld,%ld)", layer, row, column);
+    }
 }
 
 - (void)mouseUp:(NSEvent *)theEvent
