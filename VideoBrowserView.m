@@ -13,6 +13,7 @@
 
 @implementation VideoBrowserView {
     NSTrackingArea *trackingArea;
+    CGFloat tileWidth;
     int itemsPerRow;
 }
 
@@ -24,7 +25,11 @@
     [self setWantsLayer:YES];
     
     CGFloat width = [self frame].size.width;
-    itemsPerRow = (width - BROWSER_GUTTER_SIZE) / (150 + BROWSER_SPACING_SIZE);
+    
+    tileWidth = 152.0;
+    itemsPerRow = (width - BROWSER_GUTTER_SIZE) / (tileWidth + BROWSER_SPACING_SIZE);
+    
+    //[self calculateBestFitForWidth:width];
 
     [self createTrackingArea];
 }
@@ -70,6 +75,7 @@
 
 - (void)layoutFromIndex:(NSUInteger)index
                forWidth:(CGFloat)width
+           forTileWidth:(CGFloat)newTileWidth
 {
     NSArray *sublayers = [[self layer] sublayers];
     NSUInteger i;
@@ -78,12 +84,16 @@
     row = index / itemsPerRow;
     col = index % itemsPerRow;
     
-    float x = BROWSER_GUTTER_SIZE + (col * (150 + BROWSER_SPACING_SIZE));
-    float y = BROWSER_GUTTER_SIZE + (row * (150 + BROWSER_SPACING_SIZE));
+    float x = BROWSER_GUTTER_SIZE + (col * (152.0 + BROWSER_SPACING_SIZE));
+    float y = BROWSER_GUTTER_SIZE + (row * (134.0 + BROWSER_SPACING_SIZE));
 
     for (i = index; i  < [sublayers count]; i++) {
         VideoClipLayer *clipLayer = sublayers[i];
-        
+        /*
+        if (tileWidth != newTileWidth) {
+            [clipLayer setSizeForWidth:newTileWidth];
+        }
+        */
         if (x + [clipLayer bounds].size.width >= width - BROWSER_GUTTER_SIZE) {
             x = BROWSER_GUTTER_SIZE;
             y += (BROWSER_SPACING_SIZE + [clipLayer bounds].size.height);
@@ -92,7 +102,8 @@
         x += [clipLayer bounds].size.width + BROWSER_SPACING_SIZE;
     }
     
-    [self setFrameSize:NSMakeSize([self frame].size.width, y + 150 + BROWSER_GUTTER_SIZE)];
+    [self setFrameSize:NSMakeSize([self frame].size.width, y + 134.0 + BROWSER_GUTTER_SIZE)];
+    //tileWidth = newTileWidth;
 }
 
 - (void)videoClipAdded:(NSNotification *)note
@@ -105,7 +116,8 @@
     
     [[self layer] addSublayer:clipLayer];
     [self layoutFromIndex:[indexNumber unsignedIntegerValue]
-                 forWidth:[self bounds].size.width];
+                 forWidth:[self bounds].size.width
+             forTileWidth:tileWidth];
 }
 
 - (void)videoClipRemoved:(NSNotification *)note
@@ -139,64 +151,80 @@
         
         [[self layer] addSublayer:clipLayer];
     }
-    [self layoutFromIndex:0 forWidth:[self bounds].size.width];
+    [self layoutFromIndex:0 forWidth:[self bounds].size.width forTileWidth:tileWidth];
 }
 
+// Attempt to work out the best tile width to fit a good number of tiles per row
+// FIXME Not really working.
+/*
+- (CGFloat)calculateBestTileWidthForViewWidth:(CGFloat)width
+{
+    CGFloat bestWidth;
+    CGFloat availableWidth = (width - BROWSER_GUTTER_SIZE);
+    int oldItemsPerRow = availableWidth / (tileWidth + BROWSER_SPACING_SIZE);
+    CGFloat extraSpace = availableWidth - (oldItemsPerRow * tileWidth);
+    int newItemsPerRow = oldItemsPerRow;
+    
+    if (extraSpace < 0) {
+        newItemsPerRow = oldItemsPerRow - 1;
+    } else if (extraSpace > 0) {
+        newItemsPerRow = oldItemsPerRow + 1;
+    }
+    
+    bestWidth = (availableWidth / newItemsPerRow) - BROWSER_SPACING_SIZE;
+    
+    return bestWidth;
+}
+*/
 - (void)setFrame:(NSRect)frameRect
 {
     [super setFrame:frameRect];
     
     // Relayout
-    [self layoutFromIndex:0 forWidth:frameRect.size.width];
+    //CGFloat bestTileWidth = [self calculateBestTileWidthForViewWidth:frameRect.size.width];
+    [self layoutFromIndex:0 forWidth:frameRect.size.width forTileWidth:tileWidth];
 }
 
 #pragma mark - Tracking Areas
 
 - (void)mouseDown:(NSEvent *)theEvent
 {
-    
+    NSLog(@"Mouse down");
 }
 
 - (void)mouseUp:(NSEvent *)theEvent
 {
-    
+    NSLog(@"Mouse up");
 }
 
 - (void)mouseEntered:(NSEvent *)theEvent
 {
-    
+    NSLog(@"Mouse entered");
 }
 
 - (void)mouseExited:(NSEvent *)theEvent
 {
-    
+    NSLog(@"Mouse exited");
 }
 
 - (void)mouseMoved:(NSEvent *)theEvent
 {
-    
+    NSLog(@"Mouse moved");
 }
 
 - (void)mouseDragged:(NSEvent *)theEvent
 {
-    
+    NSLog(@"Mouse dragged");
 }
 
 - (void)createTrackingArea
 {
     NSLog(@"Create tracking area");
     trackingArea = [[NSTrackingArea alloc] initWithRect:[self frame]
-                                                options:NSTrackingMouseEnteredAndExited | NSTrackingMouseMoved |NSTrackingActiveInKeyWindow
+                                                options:NSTrackingMouseEnteredAndExited | NSTrackingMouseMoved |NSTrackingActiveInKeyWindow | NSTrackingInVisibleRect
                                                   owner:self
                                                userInfo:nil];
     [self addTrackingArea:trackingArea];
 }
 
-- (void)updateTrackingAreas
-{
-    [self removeTrackingArea:trackingArea];
-    [self createTrackingArea];
-    
-    [super updateTrackingAreas];
-}
 @end

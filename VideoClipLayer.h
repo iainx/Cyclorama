@@ -15,5 +15,6 @@
 @property (readwrite, strong) VideoClip *clip;
 
 - (id)initWithClip:(VideoClip *)clip;
+- (void)setSizeForWidth:(CGFloat)width;
 
 @end

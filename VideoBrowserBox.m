@@ -17,7 +17,7 @@
 - (void)doInit
 {
     [self setTitle:@"Video Browser"];
-    [self setHasToolbar:NO];
+    [self setHasToolbar:YES];
     [self setHasCloseButton:NO];
     
     _scrollView = [[NSScrollView alloc] initWithFrame:NSZeroRect];

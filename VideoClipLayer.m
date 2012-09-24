@@ -18,6 +18,13 @@
 
 @synthesize clip = _clip;
 
+#define DEFAULT_WIDTH 152.0
+#define DEFAULT_IMAGE_HEIGHT 114.0 // gives 4:3 format
+#define TEXT_BOX_HEIGHT 18.0
+#define FONT_SIZE 11.0
+#define SPACING 2.0
+#define DEFAULT_HEIGHT (DEFAULT_IMAGE_HEIGHT + SPACING + TEXT_BOX_HEIGHT)
+
 - (id)initWithClip:(VideoClip *)clip
 {
     self = [super init];
@@ -32,21 +39,21 @@
     NSDictionary *actions = @{@"position": [NSNull null]};
     [self setActions:actions];
     
-    [self setBounds:CGRectMake(0.0, 0.0, 150.0, 150.0)];
+    [self setBounds:CGRectMake(0.0, 0.0, DEFAULT_WIDTH, DEFAULT_HEIGHT)];
     [self setAnchorPoint:CGPointMake(0, 0)];
     
     _imageLayer = [CALayer layer];
     [_imageLayer setCornerRadius:5.0];
     [_imageLayer setMasksToBounds:YES];
-    [_imageLayer setBounds:CGRectMake(0.0, 0.0, 150.0, 130.0)];
+    [_imageLayer setBounds:CGRectMake(0.0, 0.0, DEFAULT_WIDTH, DEFAULT_IMAGE_HEIGHT)];
     [_imageLayer setAnchorPoint:CGPointMake(0.0, 0.0)];
     [self addSublayer:_imageLayer];
     
     _labelLayer = [CATextLayer layer];
-    [_labelLayer setBounds:CGRectMake(0.0, 0.0, 150.0, 18.0)];
+    [_labelLayer setBounds:CGRectMake(0.0, 0.0, DEFAULT_WIDTH, TEXT_BOX_HEIGHT)];
     [_labelLayer setAnchorPoint:CGPointZero];
-    [_labelLayer setPosition:CGPointMake(0.0, 132.0)];
-    [_labelLayer setFontSize:11.0];
+    [_labelLayer setPosition:CGPointMake(0.0, DEFAULT_IMAGE_HEIGHT + SPACING)];
+    [_labelLayer setFontSize:FONT_SIZE];
     [_labelLayer setContentsScale:[[NSScreen mainScreen] backingScaleFactor]];
     [_labelLayer setString:[clip title]];
     
@@ -55,6 +62,20 @@
     [self addSublayer:_labelLayer];
     
     return self;
+}
+
+- (void)layoutSublayers
+{
+    CGRect bounds = [self bounds];
+    CGFloat width = bounds.size.width;
+    
+    // Calculate the 4:3 height for a given width
+    // Resize the image and reposition the label
+    CGFloat imageHeight = (width / 4.0) * 3.0;
+    
+    [_imageLayer setBounds:CGRectMake(0, 0, width, imageHeight)];
+    [_labelLayer setBounds:CGRectMake(0, 0, width, TEXT_BOX_HEIGHT)];
+    [_labelLayer setPosition:CGPointMake(0.0, imageHeight + SPACING)];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath
@@ -117,4 +138,9 @@
     return _clip;
 }
 
+- (void)setSizeForWidth:(CGFloat)width
+{
+    CGFloat imageHeight = (width / 4.0) * 3.0;
+    [self setBounds:CGRectMake(0.0, 0.0, width, imageHeight + 2 + TEXT_BOX_HEIGHT)];
+}
 @end

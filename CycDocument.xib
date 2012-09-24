@@ -127,6 +127,7 @@
 													<string key="NSFrame">{{1, 1}, {244, 268}}</string>
 													<reference key="NSSuperview" ref="651837135"/>
 													<reference key="NSWindow"/>
+													<reference key="NSNextKeyView"/>
 													<string key="NSReuseIdentifierKey">_NS:11</string>
 												</object>
 											</array>
@@ -641,7 +642,7 @@
 								<int key="secondAttribute">0</int>
 								<float key="multiplier">1</float>
 								<object class="IBLayoutConstant" key="constant">
-									<double key="value">500</double>
+									<double key="value">506</double>
 								</object>
 								<float key="priority">1000</float>
 								<reference key="containingView" ref="661695800"/>
