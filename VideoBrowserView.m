@@ -84,7 +84,7 @@
 - (NSRect)rectForRow:(NSUInteger)row
 {
     CGFloat x = BROWSER_GUTTER_SIZE;
-    CGFloat y = BROWSER_GUTTER_SIZE + (row * 134.0 + BROWSER_SPACING_SIZE);
+    CGFloat y = BROWSER_GUTTER_SIZE + (row * (134.0 + BROWSER_SPACING_SIZE));
     
     return NSMakeRect(x, y, [self bounds].size.width - (BROWSER_GUTTER_SIZE * 2), 134.0);
 }
@@ -329,7 +329,13 @@
     [super resizeWithOldSuperviewSize:oldSize];
     
     itemsPerRow = ([self bounds].size.width - BROWSER_GUTTER_SIZE) / (tileWidth + BROWSER_SPACING_SIZE);
-    numberOfRows = [self calculateNumberOfRows];
+    NSUInteger newNumberOfRows = [self calculateNumberOfRows];
+    
+    if (newNumberOfRows != numberOfRows) {
+        numberOfRows = newNumberOfRows;
+        [self updateHeight];
+        return;
+    }
     
     [visibleRows removeAllObjects];
     [[self layer] setSublayers:[NSArray array]];
