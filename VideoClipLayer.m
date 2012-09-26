@@ -33,8 +33,6 @@
         return nil;
     }
     
-    [self setClip:clip];
-    
     // Disable the implicit animations whenever the position changes
     NSDictionary *actions = @{@"position": [NSNull null], @"bounds": [NSNull null]};
     [self setActions:actions];
@@ -60,8 +58,27 @@
     [_labelLayer setAlignmentMode:kCAAlignmentCenter];
     [_labelLayer setTruncationMode:kCATruncationEnd];
     [self addSublayer:_labelLayer];
-    
+
+    [self setClip:clip];
+
     return self;
+}
+
+- (NSString *)description
+{
+    if (_clip) {
+        return [_clip description];
+    }
+    
+    return [super description];
+}
+
+- (void)dealloc
+{
+    if (_isObserving) {
+        [_clip removeObserver:self
+                   forKeyPath:@"thumbnail"];
+    }
 }
 
 - (void)layoutSublayers
@@ -97,9 +114,11 @@
         });
     }
     
-    [_clip removeObserver:self
-               forKeyPath:@"thumbnail"];
-    _isObserving = NO;
+    if (_isObserving) {
+        [_clip removeObserver:self
+                   forKeyPath:@"thumbnail"];
+        _isObserving = NO;
+    }
 }
 
 - (void)setClip:(VideoClip *)clip
@@ -112,6 +131,7 @@
     if (_isObserving) {
         [_clip removeObserver:self
                    forKeyPath:@"thumbnail"];
+        _isObserving = NO;
     }
     
     _clip = clip;
@@ -122,6 +142,7 @@
     BOOL haveThumbnail = [clip requestThumbnail];
     if (haveThumbnail) {
         NSImage *thumbnail = [clip thumbnail];
+
         [_imageLayer setContents:thumbnail];
         _isObserving = NO;
     } else {
@@ -146,26 +167,26 @@
 
 - (void)mouseEntered
 {
-    NSLog(@"Entered");
+    //NSLog(@"Entered");
 }
 
 - (void)mouseExited
 {
-    NSLog(@"Exited");
+    //NSLog(@"Exited");
 }
 
 - (void)mouseMoved:(CGPoint)pointInLayer
 {
-    NSLog(@"Moved");
+    //NSLog(@"Moved");
 }
 
 - (void)mouseDown:(CGPoint)pointInLayer
 {
-    NSLog(@"Down");
+    //NSLog(@"Down");
 }
 
 - (void)mouseUp:(CGPoint)pointInLayer
 {
-    NSLog(@"Up");
+    //NSLog(@"Up");
 }
 @end
