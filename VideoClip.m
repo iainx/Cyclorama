@@ -50,18 +50,7 @@
                                   case AVKeyValueStatusLoaded:
                                       // Now we can get the thumbnail
                                       if ([[self asset] tracksWithMediaCharacteristic:AVMediaTypeVideo]) {
-                                          AVAssetImageGenerator *gen = [AVAssetImageGenerator assetImageGeneratorWithAsset:[self asset]];
-                                          
-                                          [gen setMaximumSize:CGSizeMake(150, 150)];
-                                          CMTime frameTime = CMTimeMakeWithSeconds(5.0, 600);
-                                          CMTime actualTime;
-                                          
-                                          CGImageRef t = [gen copyCGImageAtTime:frameTime
-                                                                     actualTime:&actualTime
-                                                                          error:&error];
-                                          NSImage *tn = [[NSImage alloc] initWithCGImage:t
-                                                                                    size:NSZeroSize];
-                                          [self setThumbnail:tn];
+                                          [self createThumbnailImage];
                                       }
                                       break;
                                       
@@ -83,6 +72,25 @@
     return [NSString stringWithFormat:@"%@", [self filePath]];
 }
 
+- (void)createThumbnailImage
+{
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
+    dispatch_async(queue, ^{
+        AVAssetImageGenerator *gen = [AVAssetImageGenerator assetImageGeneratorWithAsset:[self asset]];
+        NSError *error = nil;
+        
+        [gen setMaximumSize:CGSizeMake(150, 150)];
+        CMTime frameTime = CMTimeMakeWithSeconds(5.0, 600);
+        CMTime actualTime;
+        
+        CGImageRef t = [gen copyCGImageAtTime:frameTime
+                                   actualTime:&actualTime
+                                        error:&error];
+        NSImage *tn = [[NSImage alloc] initWithCGImage:t
+                                                  size:NSZeroSize];
+        [self setThumbnail:tn];
+    });
+}
 #pragma mark - Accessors
 
 - (void)setFilePath:(NSString *)path
@@ -111,7 +119,7 @@
         return YES;
     }
 
-    if ([self asset]) {
+    if ([self asset] == nil) {
         needThumbnailWhenValueLoaded = YES;
         return NO;
     }
@@ -127,19 +135,8 @@
     }
     
     if ([[self asset] tracksWithMediaCharacteristic:AVMediaTypeVideo]) {
-        AVAssetImageGenerator *gen = [AVAssetImageGenerator assetImageGeneratorWithAsset:[self asset]];
-        
-        [gen setMaximumSize:CGSizeMake(150, 150)];
-        CMTime frameTime = CMTimeMakeWithSeconds(5.0, 600);
-        CMTime actualTime;
-        
-        CGImageRef t = [gen copyCGImageAtTime:frameTime
-                                   actualTime:&actualTime
-                                        error:&error];
-        NSImage *tn = [[NSImage alloc] initWithCGImage:t
-                                                  size:NSZeroSize];
-        [self setThumbnail:tn];
-        return YES;
+        [self createThumbnailImage];
+        return NO;
     }
     
     // We have no thumbnail
