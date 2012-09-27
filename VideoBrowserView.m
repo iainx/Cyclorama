@@ -89,36 +89,6 @@
     return NSMakeRect(x, y, [self bounds].size.width - (BROWSER_GUTTER_SIZE * 2), 134.0);
 }
 
-- (NSRange)visibleRange
-{
-    NSRect visibleRect = [(NSClipView *)[self superview] documentVisibleRect];
-    NSUInteger firstRow = NSUIntegerMax;
-    NSUInteger lastRow = NSUIntegerMax;
-    
-    BOOL inRange = NO;
-    for (NSUInteger i = 0; i < numberOfRows; i++) {
-        NSRect rowRect = [self rectForRow:i];
-        
-        if (NSIntersectsRect(rowRect, visibleRect)) {
-            if (firstRow == NSUIntegerMax) {
-                firstRow = i;
-                inRange = YES;
-            }
-        } else {
-            if (inRange) {
-                lastRow = i;
-                break;
-            }
-        }
-    }
-    
-    if (lastRow == NSUIntegerMax) {
-        lastRow = numberOfRows;
-    }
-    
-    return NSMakeRange(firstRow, lastRow - firstRow);
-}
-
 - (void)layoutTile:(VideoClipLayer *)clipLayer
              atRow:(NSUInteger)row
             column:(NSUInteger)column
@@ -126,7 +96,6 @@
     CGPoint tilePosition = CGPointMake(BROWSER_GUTTER_SIZE + (column * (152 + BROWSER_SPACING_SIZE)),
                                        BROWSER_GUTTER_SIZE + (row * (134 + BROWSER_SPACING_SIZE)));
     
-//    NSLog(@"Laying out %lu,%lu -> %@", row, column, NSStringFromPoint(tilePosition));
     [clipLayer setPosition:tilePosition];
 }
 
@@ -142,8 +111,6 @@
     NSUInteger firstTile = row * itemsPerRow;
     NSUInteger lastTile = MIN (firstTile + itemsPerRow, [clips count]);
     
-//    NSLog(@"Adding tiles from %lu as row %lu (tile %lu -> %lu)", row, visibleRow, firstTile, lastTile);
-    
     NSMutableArray *rowTiles = [NSMutableArray arrayWithCapacity:itemsPerRow];
     if (visibleRow > [visibleRows count]) {
         [visibleRows addObject:rowTiles];
@@ -155,7 +122,6 @@
         VideoClip *clip = [clips objectAtIndex:i];
         
         VideoClipLayer *clipLayer = [[VideoClipLayer alloc] initWithClip:clip];
-//        NSLog(@"Created clipLayer: %@ for clip: %@", [clipLayer description], [clip description]);
         
         [rowTiles addObject:clipLayer];
         
@@ -185,6 +151,26 @@
     for (NSUInteger i = visibleRange.location, vi = 0; i < NSMaxRange(visibleRange); i++, vi++) {
         [self addTilesInRow:i asVisibleRow:vi];
     }
+}
+
+- (void)resizeWithOldSuperviewSize:(NSSize)oldSize
+{
+    [super resizeWithOldSuperviewSize:oldSize];
+    
+    itemsPerRow = ([self bounds].size.width - BROWSER_GUTTER_SIZE) / (tileWidth + BROWSER_SPACING_SIZE);
+    NSUInteger newNumberOfRows = [self calculateNumberOfRows];
+    
+    if (newNumberOfRows != numberOfRows) {
+        numberOfRows = newNumberOfRows;
+        [self updateHeight];
+        return;
+    }
+    
+    [visibleRows removeAllObjects];
+    [[self layer] setSublayers:[NSArray array]];
+    [self addTilesFromVisibleRange];
+    
+    currentRange = [self visibleRange];
 }
 
 - (void)updateTiles
@@ -232,6 +218,38 @@
     currentRange = visibleRange;
 }
 
+#pragma mark - Sizing
+
+- (NSRange)visibleRange
+{
+    NSRect visibleRect = [(NSClipView *)[self superview] documentVisibleRect];
+    NSUInteger firstRow = NSUIntegerMax;
+    NSUInteger lastRow = NSUIntegerMax;
+    
+    BOOL inRange = NO;
+    for (NSUInteger i = 0; i < numberOfRows; i++) {
+        NSRect rowRect = [self rectForRow:i];
+        
+        if (NSIntersectsRect(rowRect, visibleRect)) {
+            if (firstRow == NSUIntegerMax) {
+                firstRow = i;
+                inRange = YES;
+            }
+        } else {
+            if (inRange) {
+                lastRow = i;
+                break;
+            }
+        }
+    }
+    
+    if (lastRow == NSUIntegerMax) {
+        lastRow = numberOfRows;
+    }
+    
+    return NSMakeRange(firstRow, lastRow - firstRow);
+}
+
 - (NSUInteger)calculateNumberOfRows
 {
     NSArray *clips = [_videoClipController arrangedObjects];
@@ -248,11 +266,16 @@
 - (void)updateHeight
 {
     NSRect bounds = [self frame];
+    CGFloat newHeight;
 
-    bounds.size.height = numberOfRows * (134 + BROWSER_SPACING_SIZE) + (2 * BROWSER_GUTTER_SIZE);
-    
-    [self setFrame:bounds];
+    newHeight = numberOfRows * (134 + BROWSER_SPACING_SIZE) + (2 * BROWSER_GUTTER_SIZE);
+    if (newHeight != bounds.size.height) {
+        bounds.size.height = newHeight;
+        [self setFrame:bounds];
+    }
 }
+
+#pragma mark - Model handling
 
 - (void)videoClipAdded:(NSNotification *)note
 {
@@ -268,6 +291,7 @@
 - (void)videoClipRemoved:(NSNotification *)note
 {
     numberOfRows = [self calculateNumberOfRows];
+    [self updateHeight];
 }
 
 - (void)setVideoClipController:(VideoClipController *)videoClipController
@@ -288,71 +312,13 @@
              object:self];
     
     numberOfRows = [self calculateNumberOfRows];
-    
-    /*
-    NSArray *clips = [videoClipController arrangedObjects];
-    
-    for (VideoClip *clip in clips) {
-        VideoClipLayer *clipLayer = [[VideoClipLayer alloc] initWithClip:clip];
-        
-        [[self layer] addSublayer:clipLayer];
-    }
-    [self layoutFromIndex:0 forWidth:[self bounds].size.width forTileWidth:tileWidth];
-     */
-}
-
-// Attempt to work out the best tile width to fit a good number of tiles per row
-// FIXME Not really working.
-/*
-- (CGFloat)calculateBestTileWidthForViewWidth:(CGFloat)width
-{
-    CGFloat bestWidth;
-    CGFloat availableWidth = (width - BROWSER_GUTTER_SIZE);
-    int oldItemsPerRow = availableWidth / (tileWidth + BROWSER_SPACING_SIZE);
-    CGFloat extraSpace = availableWidth - (oldItemsPerRow * tileWidth);
-    int newItemsPerRow = oldItemsPerRow;
-    
-    if (extraSpace < 0) {
-        newItemsPerRow = oldItemsPerRow - 1;
-    } else if (extraSpace > 0) {
-        newItemsPerRow = oldItemsPerRow + 1;
-    }
-    
-    bestWidth = (availableWidth / newItemsPerRow) - BROWSER_SPACING_SIZE;
-    
-    return bestWidth;
-}
-*/
-
-- (void)resizeWithOldSuperviewSize:(NSSize)oldSize
-{
-    [super resizeWithOldSuperviewSize:oldSize];
-    
-    itemsPerRow = ([self bounds].size.width - BROWSER_GUTTER_SIZE) / (tileWidth + BROWSER_SPACING_SIZE);
-    NSUInteger newNumberOfRows = [self calculateNumberOfRows];
-    
-    if (newNumberOfRows != numberOfRows) {
-        numberOfRows = newNumberOfRows;
-        [self updateHeight];
-        return;
-    }
-    
-    [visibleRows removeAllObjects];
-    [[self layer] setSublayers:[NSArray array]];
-    [self addTilesFromVisibleRange];
-
-    currentRange = [self visibleRange];
+    [self updateHeight];
 }
 
 #pragma mark - Scrolling
 
 - (void)clipViewBoundsDidChange:(NSNotification *)note
 {
-    NSClipView *clipView = [note object];
-    
-    NSRect documentVisibleRect = [clipView documentVisibleRect];
-    //NSLog(@"Visible rows %@", NSStringFromRange(currentRange));
-    
     [self updateTiles];
 }
 
@@ -368,14 +334,6 @@
            selector:@selector(clipViewBoundsDidChange:)
                name:NSViewBoundsDidChangeNotification
              object:clipView];
-    
-    NSRect documentVisibleRect = [(NSClipView *) clipView documentVisibleRect];
-    
-    /*
-    firstVisibleRow = (documentVisibleRect.origin.y - BROWSER_GUTTER_SIZE) / (134.0 + BROWSER_SPACING_SIZE);
-    lastVisibleRow = ((documentVisibleRect.origin.y + documentVisibleRect.size.height) - BROWSER_GUTTER_SIZE) / (134.0 + BROWSER_SPACING_SIZE);
-    */
-    // Now we can do the initial layout correctly
 }
 
 #pragma mark - Mouse tracking
@@ -417,8 +375,10 @@
     *row = maybeRow;
     *column = maybeCol;
     
-    //return [[self layer] sublayers][index];
-    return nil;
+    NSRange visibleRange = [self visibleRange];
+    NSUInteger visibleRow = maybeRow - visibleRange.location;
+    
+    return visibleRows[visibleRow][maybeCol];
 }
 
 - (CGPoint)point:(CGPoint)p inLayer:(CALayer *)layer

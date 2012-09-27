@@ -34,7 +34,7 @@
     }
     
     // Disable the implicit animations whenever the position changes
-    NSDictionary *actions = @{@"position": [NSNull null], @"bounds": [NSNull null]};
+    NSDictionary *actions = @{@"position": [NSNull null], @"bounds": [NSNull null], @"hidden": [NSNull null], @"contents": [NSNull null]};
     [self setActions:actions];
     
     [self setBounds:CGRectMake(0.0, 0.0, DEFAULT_WIDTH, DEFAULT_HEIGHT)];
@@ -167,26 +167,27 @@
 
 - (void)mouseEntered
 {
-    //NSLog(@"Entered");
+    NSLog(@"Entered %@", [_clip description]);
 }
 
 - (void)mouseExited
 {
-    //NSLog(@"Exited");
+    NSLog(@"Exited %@", [_clip description]);
 }
 
 - (void)mouseMoved:(CGPoint)pointInLayer
 {
-    //NSLog(@"Moved");
+    NSLog(@"Moved %@", [_clip description]);
 }
 
 - (void)mouseDown:(CGPoint)pointInLayer
 {
-    //NSLog(@"Down");
+    NSLog(@"Down %@", [_clip description]);
 }
 
 - (void)mouseUp:(CGPoint)pointInLayer
 {
-    //NSLog(@"Up");
+    NSLog(@"Up %@", [_clip description]);
 }
+
 @end
