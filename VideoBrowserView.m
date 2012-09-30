@@ -20,8 +20,6 @@
     
     NSRange currentRange;
     NSMutableArray *visibleRows; // Contains NSMutableArray of the tiles in the row.
-    
-    BOOL _inResize;
 }
 
 #define BROWSER_GUTTER_SIZE 10
@@ -165,10 +163,6 @@
 - (void)resizeWithOldSuperviewSize:(NSSize)oldSize
 {
     [super resizeWithOldSuperviewSize:oldSize];
-    
-    if (_inResize) {
-        return;
-    }
     
     itemsPerRow = [self calculateItemsPerRow];
     NSUInteger newNumberOfRows = [self calculateNumberOfRows];
