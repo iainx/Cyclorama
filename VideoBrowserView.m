@@ -170,7 +170,6 @@
     if (newNumberOfRows != numberOfRows) {
         numberOfRows = newNumberOfRows;
         [self updateHeight];
-        return;
     }
     
     [visibleRows removeAllObjects];
