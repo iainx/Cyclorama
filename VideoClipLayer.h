@@ -13,6 +13,7 @@
 @interface VideoClipLayer : CALayer
 
 @property (readwrite, strong) VideoClip *clip;
+@property (readwrite, getter = isSelected) BOOL selected;
 
 - (id)initWithClip:(VideoClip *)clip;
 - (void)setSizeForWidth:(CGFloat)width;

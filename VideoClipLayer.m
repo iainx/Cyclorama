@@ -159,6 +159,15 @@
     return _clip;
 }
 
+- (void)setSelected:(BOOL)selected
+{
+    if (selected) {
+        [self setBackgroundColor:CGColorCreateGenericRGB(1.0, 0.0, 0.0, 1.0)];
+    } else {
+        [self setBackgroundColor:CGColorCreateGenericRGB(0.0, 0.0, 0.0, 0.0)];
+    }
+}
+
 - (void)setSizeForWidth:(CGFloat)width
 {
     CGFloat imageHeight = (width / 4.0) * 3.0;

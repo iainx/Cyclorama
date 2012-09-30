@@ -20,6 +20,8 @@
     
     NSRange currentRange;
     NSMutableArray *visibleRows; // Contains NSMutableArray of the tiles in the row.
+    
+    NSUInteger selectedIndex;
 }
 
 #define BROWSER_GUTTER_SIZE 10
@@ -32,6 +34,8 @@
     tileWidth = 152.0;
     itemsPerRow = [self calculateItemsPerRow];
     visibleRows = [[NSMutableArray alloc] init];
+    
+    selectedIndex = NSUIntegerMax;
     
     [self createTrackingArea];
 }
@@ -75,7 +79,7 @@
     // Drawing code here.
 }
 
-#pragma mark - Layout
+#pragma mark - Calculations
 
 - (NSUInteger)calculateItemsPerRow
 {
@@ -93,6 +97,13 @@
     
     return NSMakeRect(x, y, [self bounds].size.width - (BROWSER_GUTTER_SIZE * 2), 134.0);
 }
+
+- (NSUInteger)indexFromRow:(NSUInteger)row column:(NSUInteger)column
+{
+    return (row * itemsPerRow) + column;
+}
+
+#pragma mark - Layout
 
 - (void)layoutTile:(VideoClipLayer *)clipLayer
              atRow:(NSUInteger)row
@@ -128,6 +139,9 @@
         
         VideoClipLayer *clipLayer = [[VideoClipLayer alloc] initWithClip:clip];
         
+        if (i == selectedIndex) {
+            [clipLayer setSelected:YES];
+        }
         [rowTiles addObject:clipLayer];
         
         [[self layer] addSublayer:clipLayer];
@@ -177,6 +191,7 @@
     [self addTilesFromVisibleRange];
     
     currentRange = [self visibleRange];
+    NSLog(@"Current range: %@", NSStringFromRange(currentRange));
 }
 
 - (void)updateTiles
@@ -232,6 +247,23 @@
     currentRange = visibleRange;
 }
 
+- (VideoClipLayer *)visibleTileFromIndex:(NSUInteger)index
+{
+    NSUInteger row, column;
+    NSArray *rowTiles;
+    
+    row = index / itemsPerRow;
+    column = index % itemsPerRow;
+    
+    if (!NSLocationInRange(row, currentRange)) {
+        NSLog(@"Row %lu is not in %@", row, NSStringFromRange(currentRange));
+        return nil;
+    }
+    
+    rowTiles = visibleRows[row];
+    return rowTiles[column];
+}
+
 #pragma mark - Sizing
 
 - (NSRange)visibleRange
@@ -255,6 +287,10 @@
                 break;
             }
         }
+    }
+    
+    if (firstRow == NSUIntegerMax) {
+        return NSMakeRange(0, 0);
     }
     
     if (lastRow == NSUIntegerMax) {
@@ -290,9 +326,11 @@
         bounds.size.height = newHeight;
         [self setFrame:bounds];
     }
+    
+    currentRange = [self visibleRange];
 }
 
-#pragma mark - Model handling
+#pragma mark - Clip handling
 
 - (void)videoClipAdded:(NSNotification *)note
 {
@@ -341,6 +379,9 @@
     [self updateHeight];
     
     // FIXME: If there are clips in the model at this point, we should add them
+    if ([[_videoClipController arrangedObjects] count] != 0) {
+        NSLog(@"There are items in the clip controller");
+    }
 }
 
 #pragma mark - Scrolling
@@ -442,6 +483,7 @@
 {
     NSPoint locationInView = [self convertPoint:[theEvent locationInWindow] fromView:nil];
     NSInteger row, column;
+    NSUInteger newSelectedIndex;
     
     VideoClipLayer *layer = [self findLayerForLocationInView:locationInView
                                                        atRow:&row
@@ -452,6 +494,24 @@
     
     CGPoint pointInLayer = [self point:locationInView inLayer:layer];
     [layer mouseUp:pointInLayer];
+    
+    newSelectedIndex = [self indexFromRow:row column:column];
+    
+    // Deselect the old tile
+    if (selectedIndex != NSUIntegerMax) {
+        VideoClipLayer *selectedTile = [self visibleTileFromIndex:selectedIndex];
+        
+        [selectedTile setSelected:NO];
+    }
+    
+    if (newSelectedIndex == selectedIndex) {
+        selectedIndex = NSUIntegerMax;
+        [_videoClipController setSelectionIndexes:[NSIndexSet indexSet]];
+    } else {
+        [layer setSelected:YES];
+        selectedIndex = newSelectedIndex;
+        [_videoClipController setSelectionIndex:newSelectedIndex];
+    }
 }
 
 - (void)mouseEntered:(NSEvent *)theEvent
