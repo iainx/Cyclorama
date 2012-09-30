@@ -15,11 +15,13 @@
     NSTrackingArea *trackingArea;
     VideoClipLayer *currentLayer;
     CGFloat tileWidth;
-    int itemsPerRow;
+    NSUInteger itemsPerRow;
     NSUInteger numberOfRows;
     
     NSRange currentRange;
     NSMutableArray *visibleRows;
+    
+    BOOL _inResize;
 }
 
 #define BROWSER_GUTTER_SIZE 10
@@ -29,10 +31,8 @@
 {
     [self setWantsLayer:YES];
     
-    CGFloat width = [self frame].size.width;
-    
     tileWidth = 152.0;
-    itemsPerRow = (width - BROWSER_GUTTER_SIZE) / (tileWidth + BROWSER_SPACING_SIZE);
+    itemsPerRow = [self calculateItemsPerRow];
     
     //[self calculateBestFitForWidth:width];
     visibleRows = [[NSMutableArray alloc] init];
@@ -80,6 +80,14 @@
 }
 
 #pragma mark - Layout
+
+- (NSUInteger)calculateItemsPerRow
+{
+    CGFloat width = [self frame].size.width;
+    NSUInteger ipr = (width - BROWSER_GUTTER_SIZE) / (tileWidth + BROWSER_SPACING_SIZE);
+    
+    return MAX(ipr, 1);
+}
 
 - (NSRect)rectForRow:(NSUInteger)row
 {
@@ -157,7 +165,12 @@
 {
     [super resizeWithOldSuperviewSize:oldSize];
     
-    itemsPerRow = ([self bounds].size.width - BROWSER_GUTTER_SIZE) / (tileWidth + BROWSER_SPACING_SIZE);
+    if (_inResize) {
+        return;
+    }
+    
+    NSLog(@"Resize with old");
+    itemsPerRow = [self calculateItemsPerRow];
     NSUInteger newNumberOfRows = [self calculateNumberOfRows];
     
     if (newNumberOfRows != numberOfRows) {
@@ -286,12 +299,22 @@
     
     //NSLog(@"Added index %@ - %lu %@", [indexNumber description], numberOfRows, NSStringFromRect([self bounds]));
     [self updateHeight];
+    
+    // FIXME: Check if index > the visible range, because then we don't need to update.
+    [visibleRows removeAllObjects];
+    [[self layer] setSublayers:[NSArray array]];
+    [self addTilesFromVisibleRange];
 }
 
 - (void)videoClipRemoved:(NSNotification *)note
 {
     numberOfRows = [self calculateNumberOfRows];
     [self updateHeight];
+    
+    // FIXME: Check if index > the visible range, because then we don't need to update
+    [visibleRows removeAllObjects];
+    [[self layer] setSublayers:[NSArray array]];
+    [self addTilesFromVisibleRange];
 }
 
 - (void)setVideoClipController:(VideoClipController *)videoClipController

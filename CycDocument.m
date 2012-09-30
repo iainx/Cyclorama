@@ -20,6 +20,7 @@
 #import "FilterModel.h"
 #import "FilterBrowserBox.h"
 #import "VideoBrowserBox.h"
+#import "SLFHorizontalLayout.h"
 
 @implementation CycDocument
 
@@ -41,19 +42,20 @@
     return @"CycDocument";
 }
 
-- (void)observeValueForKeyPath:(NSString *)keyPath
-                      ofObject:(id)object
-                        change:(NSDictionary *)change
-                       context:(void *)context
-{
-}
-
 - (void)windowControllerDidLoadNib:(NSWindowController *)aController
 {
+    NSRect bottomBounds = [_bottomLayout bounds];
+    
     [super windowControllerDidLoadNib:aController];
     
     [_stageView setLayerController:_layerController];
     [_layerController setContent:_layers];
+    
+    _filterBrowserBox = [[FilterBrowserBox alloc] initWithFrame:NSMakeRect(0.0, 0.0, 236.0, bottomBounds.size.height)];
+    _videoBrowserBox = [[VideoBrowserBox alloc] initWithFrame:NSMakeRect(0.0, 0.0, 540.0, bottomBounds.size.height)];
+    
+    [_bottomLayout addChild:_videoBrowserBox withOptions:SLFHorizontalLayoutNone];
+    [_bottomLayout addChild:_filterBrowserBox withOptions:SLFHorizontalLayoutFixedWidth];
     
     FilterModel *model = [[NSApp delegate] filterModel];
     [_filterBrowserBox setFilterModel:model];

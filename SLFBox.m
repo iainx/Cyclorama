@@ -16,7 +16,7 @@
 @implementation SLFBox {
     BOOL _isClosed;
     NSButton *_closeButton;
-    NSRect _oldFrame;
+    NSSize _oldFrameSize;
 }
 
 #define SLF_BOX_TITLEBAR_HEIGHT 22.0
@@ -49,53 +49,6 @@
     return self;
 }
 
-- (void)closeAction:(id)sender
-{
-    BOOL shouldContinue = YES;
-    
-    if (_isClosed) {
-        if ([_delegate respondsToSelector:@selector(boxWillOpen)]) {
-            shouldContinue = [_delegate boxWillOpen];
-        }
-        
-        if (shouldContinue == NO) {
-            return;
-        }
-        
-        [_contentView setHidden:NO];
-        [[self animator] setFrame:_oldFrame];
-        
-        _isClosed = NO;
-        
-        if ([_delegate respondsToSelector:@selector(boxDidOpen)]) {
-            [_delegate boxDidOpen];
-        }
-    } else {
-        if ([_delegate respondsToSelector:@selector(boxWillClose)]) {
-            shouldContinue = [_delegate boxWillClose];
-        }
-        
-        if (shouldContinue == NO) {
-            return;
-        }
-        
-        NSRect newFrame = [self frame];
-        _oldFrame = newFrame;
-        newFrame.origin.x = newFrame.origin.x + newFrame.size.width - SLF_BOX_TITLEBAR_HEIGHT;
-        newFrame.size.width = SLF_BOX_TITLEBAR_HEIGHT;
-        
-        [[self animator] setFrame:newFrame];
-        
-        // Hide the contents
-        [[_contentView animator ]setHidden:YES];
-        
-        _isClosed = YES;
-        
-        if ([_delegate respondsToSelector:@selector(boxDidClose)]) {
-            [_delegate boxDidClose];
-        }
-    }
-}
 
 - (void)addCloseButton
 {
@@ -116,6 +69,7 @@
 
 - (void)drawRect:(NSRect)dirtyRect
 {
+    NSLog(@"New frame: %@", NSStringFromRect([self frame]));
     NSRect frame = NSInsetRect([self bounds], 2,2);
     
     NSShadow *shadow = [[NSShadow alloc] init];
@@ -259,6 +213,59 @@
     [NSGraphicsContext restoreGraphicsState];
 }
 
+- (void)closeAction:(id)sender
+{
+    BOOL shouldContinue = YES;
+    
+    if (_isClosed) {
+        NSRect oldFrame = NSMakeRect([self frame].origin.x - (_oldFrameSize.width - 22.0),
+                                     [self frame].origin.y,
+                                     _oldFrameSize.width, _oldFrameSize.height);
+
+        if ([_delegate respondsToSelector:@selector(box:willOpenToRect:)]) {
+            shouldContinue = [_delegate box:self willOpenToRect:oldFrame];
+        }
+        
+        if (shouldContinue == NO) {
+            return;
+        }
+        
+        [_contentView setHidden:NO];
+        [[self animator] setFrame:oldFrame];
+        
+        _isClosed = NO;
+        
+        if ([_delegate respondsToSelector:@selector(boxDidOpen:)]) {
+            [_delegate boxDidOpen:self];
+        }
+    } else {
+        NSRect newFrame = [self frame];
+        _oldFrameSize = newFrame.size;
+        
+        newFrame.origin.x = newFrame.origin.x + newFrame.size.width - SLF_BOX_TITLEBAR_HEIGHT;
+        newFrame.size.width = SLF_BOX_TITLEBAR_HEIGHT;
+        
+        if ([_delegate respondsToSelector:@selector(box:willCloseToRect:)]) {
+            shouldContinue = [_delegate box:self willCloseToRect:newFrame];
+        }
+        
+        if (shouldContinue == NO) {
+            return;
+        }
+        
+        [[self animator] setFrame:newFrame];
+        
+        // Hide the contents
+        [[_contentView animator ]setHidden:YES];
+        
+        _isClosed = YES;
+        
+        if ([_delegate respondsToSelector:@selector(boxDidClose:)]) {
+            [_delegate boxDidClose:self];
+        }
+    }
+}
+
 #pragma mark - Accessors
 
 - (void)setChildFrame
@@ -302,10 +309,22 @@
     [self setChildFrame];
 }
 
+- (void)resizeSubviewsWithOldSize:(NSSize)oldSize
+{
+    [self setChildFrame];
+    
+    // Now reposition the close button
+    if ([self hasCloseButton]) {
+        NSRect closeButtonRect = NSMakeRect(2.0, ([self bounds].size.height - SLF_BOX_TITLEBAR_HEIGHT),
+                                            CLOSE_BUTTON_SIZE, CLOSE_BUTTON_SIZE);
+        [_closeButton setFrame:closeButtonRect];
+    }
+}
+
 - (void)setFrame:(NSRect)frameRect
 {
     [super setFrame:frameRect];
-    
+    /*
     // Readjust the child layout
     [self setChildFrame];
     
@@ -315,6 +334,7 @@
                                             CLOSE_BUTTON_SIZE, CLOSE_BUTTON_SIZE);
         [_closeButton setFrame:closeButtonRect];
     }
+     */
 }
 
 - (void)setHasCloseButton:(BOOL)hasCloseButton

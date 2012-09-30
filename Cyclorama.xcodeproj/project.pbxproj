@@ -122,6 +122,7 @@
 		AEB9525815ED9D8200C00019 /* FilterBrowserWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB9525615ED9D8200C00019 /* FilterBrowserWindowController.m */; };
 		AEB9525915ED9D8200C00019 /* FilterBrowserWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEB9525715ED9D8200C00019 /* FilterBrowserWindowController.xib */; };
 		AEC028B515A24A0A0033BB3C /* FilterParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = AEC028B415A24A0A0033BB3C /* FilterParameter.m */; };
+		AEC3194F161765D40027F14C /* SLFHorizontalLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = AEC3194E161765D40027F14C /* SLFHorizontalLayout.m */; };
 		AEDE0C0015F53F6A0058578E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEDE0BFF15F53F6A0058578E /* AVFoundation.framework */; };
 		AEDE0C0215F562BD0058578E /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEDE0C0115F562BD0058578E /* CoreMedia.framework */; };
 		AEDE0C0515F79A780058578E /* CALayer+Images.m in Sources */ = {isa = PBXBuildFile; fileRef = AEDE0C0415F79A780058578E /* CALayer+Images.m */; };
@@ -313,6 +314,8 @@
 		AEB9525715ED9D8200C00019 /* FilterBrowserWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FilterBrowserWindowController.xib; sourceTree = "<group>"; };
 		AEC028B315A24A0A0033BB3C /* FilterParameter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterParameter.h; sourceTree = "<group>"; };
 		AEC028B415A24A0A0033BB3C /* FilterParameter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterParameter.m; sourceTree = "<group>"; };
+		AEC3194D161765D40027F14C /* SLFHorizontalLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLFHorizontalLayout.h; sourceTree = "<group>"; };
+		AEC3194E161765D40027F14C /* SLFHorizontalLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLFHorizontalLayout.m; sourceTree = "<group>"; };
 		AEDE0BFF15F53F6A0058578E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		AEDE0C0115F562BD0058578E /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		AEDE0C0315F79A780058578E /* CALayer+Images.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+Images.h"; sourceTree = "<group>"; };
@@ -854,6 +857,8 @@
 				AEFE46BC16052A7F006E4122 /* SLFBox.h */,
 				AEFE46BD16052A7F006E4122 /* SLFBox.m */,
 				AE86852C160DEE2000A5A3E1 /* SLFBoxDelegate.h */,
+				AEC3194D161765D40027F14C /* SLFHorizontalLayout.h */,
+				AEC3194E161765D40027F14C /* SLFHorizontalLayout.m */,
 			);
 			name = SLFKit;
 			sourceTree = "<group>";
@@ -1045,6 +1050,7 @@
 				AEE0228F160789D8009F4A9F /* FilterItemLayer.m in Sources */,
 				AEE0229316093F8C009F4A9F /* VideoBrowserView.m in Sources */,
 				AEE022961609400A009F4A9F /* VideoClipLayer.m in Sources */,
+				AEC3194F161765D40027F14C /* SLFHorizontalLayout.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

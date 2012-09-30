@@ -8,13 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
+@class SLFBox;
 @protocol SLFBoxDelegate <NSObject>
 
 @optional
-- (BOOL)boxWillClose;
-- (void)boxDidClose;
+- (BOOL)box:(SLFBox *)box willCloseToRect:(NSRect)newRect;
+- (void)boxDidClose:(SLFBox *)box;
 
-- (BOOL)boxWillOpen;
-- (BOOL)boxDidOpen;
+- (BOOL)box:(SLFBox *)box willOpenToRect:(NSRect)newRect;
+- (BOOL)boxDidOpen:(SLFBox *)box;
 
 @end
