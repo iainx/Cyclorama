@@ -31,8 +31,8 @@
 - (id)initWithFrame:(NSRect)frame
 {
     self = [super initWithFrame:frame];
-    if (self) {
-        // Initialization code here.
+    if (!self) {
+        return nil;
     }
     
     _containerSpacing = DEFAULT_CONTAINER_SPACING;
@@ -46,8 +46,8 @@
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     self = [super initWithCoder:aDecoder];
-    if (self) {
-        // Initialization code here.
+    if (!self) {
+        return nil;
     }
     
     _containerSpacing = DEFAULT_CONTAINER_SPACING;
@@ -55,11 +55,6 @@
     _children = [[NSMutableArray alloc] init];
     
     return self;
-}
-
-- (void)drawRect:(NSRect)dirtyRect
-{
-    // Drawing code here.
 }
 
 - (void)layoutChildrenWithAnimation:(BOOL)animate
@@ -75,6 +70,7 @@
     
     NSRect childFrame = childArea;
     
+    // Look for variable width children and distribute with allowedWidth between them
     for (SLFHorizontalLayoutChild *child in _children) {
         if ([child options] & SLFHorizontalLayoutFixedWidth) {
             childFrame.size.width = [[child child] bounds].size.width;
@@ -143,6 +139,7 @@
 
 - (BOOL)box:(SLFBox *)box willCloseToRect:(NSRect)newRect
 {
+    // Recalculate the width allocated to the fixed width children
     _fixedWidth = 0.0;
     for (SLFHorizontalLayoutChild *child in _children) {
         if ([child options] & SLFHorizontalLayoutFixedWidth) {
@@ -162,6 +159,7 @@
 
 - (BOOL)box:(SLFBox *)box willOpenToRect:(NSRect)newRect
 {
+    // Recalculate the width allocated to the fixed width children
     _fixedWidth = 0.0;
     for (SLFHorizontalLayoutChild *child in _children) {
         if ([child options] & SLFHorizontalLayoutFixedWidth) {
@@ -180,6 +178,8 @@
 }
 
 @end
+
+#pragma mark - SLFHorizontalLayoutChild
 
 @implementation SLFHorizontalLayoutChild
 

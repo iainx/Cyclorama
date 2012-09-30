@@ -69,7 +69,6 @@
 
 - (void)drawRect:(NSRect)dirtyRect
 {
-    NSLog(@"New frame: %@", NSStringFromRect([self frame]));
     NSRect frame = NSInsetRect([self bounds], 2,2);
     
     NSShadow *shadow = [[NSShadow alloc] init];
@@ -319,22 +318,6 @@
                                             CLOSE_BUTTON_SIZE, CLOSE_BUTTON_SIZE);
         [_closeButton setFrame:closeButtonRect];
     }
-}
-
-- (void)setFrame:(NSRect)frameRect
-{
-    [super setFrame:frameRect];
-    /*
-    // Readjust the child layout
-    [self setChildFrame];
-    
-    // Now reposition the close button
-    if ([self hasCloseButton]) {
-        NSRect closeButtonRect = NSMakeRect(2.0, ([self bounds].size.height - SLF_BOX_TITLEBAR_HEIGHT),
-                                            CLOSE_BUTTON_SIZE, CLOSE_BUTTON_SIZE);
-        [_closeButton setFrame:closeButtonRect];
-    }
-     */
 }
 
 - (void)setHasCloseButton:(BOOL)hasCloseButton

@@ -19,7 +19,7 @@
     NSUInteger numberOfRows;
     
     NSRange currentRange;
-    NSMutableArray *visibleRows;
+    NSMutableArray *visibleRows; // Contains NSMutableArray of the tiles in the row.
     
     BOOL _inResize;
 }
@@ -33,8 +33,6 @@
     
     tileWidth = 152.0;
     itemsPerRow = [self calculateItemsPerRow];
-    
-    //[self calculateBestFitForWidth:width];
     visibleRows = [[NSMutableArray alloc] init];
     
     [self createTrackingArea];
@@ -86,6 +84,7 @@
     CGFloat width = [self frame].size.width;
     NSUInteger ipr = (width - BROWSER_GUTTER_SIZE) / (tileWidth + BROWSER_SPACING_SIZE);
     
+    // Minimum items per row has to be 1
     return MAX(ipr, 1);
 }
 
@@ -144,6 +143,8 @@
     NSMutableArray *rowTiles = [visibleRows objectAtIndex:visibleRow];
     
     [visibleRows removeObjectAtIndex:visibleRow];
+    
+    // Remove all the tiles in the row
     for (NSInteger i = [rowTiles count] - 1; i >= 0; i--) {
         VideoClipLayer *tile = [rowTiles objectAtIndex:i];
         
@@ -169,7 +170,6 @@
         return;
     }
     
-    NSLog(@"Resize with old");
     itemsPerRow = [self calculateItemsPerRow];
     NSUInteger newNumberOfRows = [self calculateNumberOfRows];
     
@@ -191,10 +191,14 @@
     NSRange visibleRange = [self visibleRange];
     NSRange intersectionRange = NSIntersectionRange(visibleRange, currentRange);
     
+    // If the stored current range and the visible range are the same
+    // we don't need to do anything
     if (visibleRange.location == currentRange.location && NSMaxRange(visibleRange) == NSMaxRange(currentRange)) {
         return;
     }
     
+    // If there is no intersection between the stored range and the visible range then we just wipe all
+    // the tiles and add the new range
     if (intersectionRange.location == 0 && intersectionRange.length == 0) {
         [visibleRows removeAllObjects];
         [[self layer] setSublayers:[NSArray array]];
@@ -204,25 +208,29 @@
         return;
     }
     
-    if (visibleRange.location < currentRange.location) { // Add top
+    if (visibleRange.location < currentRange.location) {
+        // Add new rows of tiles along the top
         for (NSInteger i = ((NSInteger)currentRange.location) - 1; i >= (NSInteger)visibleRange.location; i--) {
             [self addTilesInRow:i asVisibleRow:0];
         }
     }
     
-    if (visibleRange.location > currentRange.location) { // Remove top
+    if (visibleRange.location > currentRange.location) {
+        // Remove old rows from the top
         for (NSInteger i = currentRange.location; i < visibleRange.location; i++) {
             [self removeTilesInRow:i asVisibleRow:0];
         }
     }
     
-    if (NSMaxRange(visibleRange) > NSMaxRange(currentRange)) { // Add bottom
+    if (NSMaxRange(visibleRange) > NSMaxRange(currentRange)) {
+        // Add new rows of tiles along the bottom
         for (NSInteger i = NSMaxRange(currentRange); i < NSMaxRange(visibleRange); i++) {
             [self addTilesInRow:i asVisibleRow:visibleRange.length];
         }
     }
     
-    if (NSMaxRange(visibleRange) < NSMaxRange(currentRange)) { // Remove bottom
+    if (NSMaxRange(visibleRange) < NSMaxRange(currentRange)) {
+        // Remove the bottom rows
         for (NSInteger i = NSMaxRange(currentRange); i < NSMaxRange(visibleRange); i--) {
             [self removeTilesInRow:i asVisibleRow:visibleRange.length];
         }
@@ -269,6 +277,8 @@
     NSUInteger clipCount = [clips count];
     NSUInteger rowCount = clipCount / itemsPerRow;
     
+    // rowCount is the number of complete rows at this point.
+    // If there is a partial row, then we need to count it as well
     if ((clipCount % itemsPerRow) > 0) {
         rowCount++;
     }
@@ -281,6 +291,7 @@
     NSRect bounds = [self frame];
     CGFloat newHeight;
 
+    // FIXME: It would be good to be able to not hard code the tile size here
     newHeight = numberOfRows * (134 + BROWSER_SPACING_SIZE) + (2 * BROWSER_GUTTER_SIZE);
     if (newHeight != bounds.size.height) {
         bounds.size.height = newHeight;
@@ -297,7 +308,6 @@
     
     numberOfRows = [self calculateNumberOfRows];
     
-    //NSLog(@"Added index %@ - %lu %@", [indexNumber description], numberOfRows, NSStringFromRect([self bounds]));
     [self updateHeight];
     
     // FIXME: Check if index > the visible range, because then we don't need to update.
@@ -336,6 +346,8 @@
     
     numberOfRows = [self calculateNumberOfRows];
     [self updateHeight];
+    
+    // FIXME: If there are clips in the model at this point, we should add them
 }
 
 #pragma mark - Scrolling
@@ -353,6 +365,7 @@
     NSNotificationCenter *nc;
     
     nc = [NSNotificationCenter defaultCenter];
+    // Track scrolling by listening to bounds changes
     [nc addObserver:self
            selector:@selector(clipViewBoundsDidChange:)
                name:NSViewBoundsDidChangeNotification
@@ -389,7 +402,7 @@
     
     NSArray *arrangedObjects = [_videoClipController arrangedObjects];
     
-    int index = (maybeRow * itemsPerRow) + maybeCol;
+    NSUInteger index = (maybeRow * itemsPerRow) + maybeCol;
     if (index >= [arrangedObjects count]) {
         // In extra space after the last item
         return nil;
@@ -404,7 +417,8 @@
     return visibleRows[visibleRow][maybeCol];
 }
 
-- (CGPoint)point:(CGPoint)p inLayer:(CALayer *)layer
+- (CGPoint)point:(CGPoint)p
+         inLayer:(CALayer *)layer
 {
     CGPoint locationInLayer;
     CGPoint layerPosition = [layer position];
@@ -509,7 +523,7 @@
 
 - (void)createTrackingArea
 {
-    NSLog(@"Create tracking area");
+    // NSTrackingInVisibleRect will match the tracking area to the bounds of the view when they change
     trackingArea = [[NSTrackingArea alloc] initWithRect:[self frame]
                                                 options:NSTrackingMouseEnteredAndExited | NSTrackingMouseMoved |NSTrackingActiveInKeyWindow | NSTrackingInVisibleRect
                                                   owner:self
