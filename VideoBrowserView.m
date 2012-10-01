@@ -260,7 +260,7 @@
         return nil;
     }
     
-    rowTiles = visibleRows[row];
+    rowTiles = visibleRows[row - currentRange.location];
     return rowTiles[column];
 }
 

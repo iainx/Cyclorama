@@ -164,7 +164,7 @@
     if (selected) {
         [self setBackgroundColor:CGColorCreateGenericRGB(1.0, 0.0, 0.0, 1.0)];
     } else {
-        [self setBackgroundColor:CGColorCreateGenericRGB(0.0, 0.0, 0.0, 0.0)];
+        [self setBackgroundColor:NULL];
     }
 }
 
@@ -176,27 +176,27 @@
 
 - (void)mouseEntered
 {
-    NSLog(@"Entered %@", [_clip description]);
+    //NSLog(@"Entered %@", [_clip description]);
 }
 
 - (void)mouseExited
 {
-    NSLog(@"Exited %@", [_clip description]);
+    //NSLog(@"Exited %@", [_clip description]);
 }
 
 - (void)mouseMoved:(CGPoint)pointInLayer
 {
-    NSLog(@"Moved %@", [_clip description]);
+    //NSLog(@"Moved %@", [_clip description]);
 }
 
 - (void)mouseDown:(CGPoint)pointInLayer
 {
-    NSLog(@"Down %@", [_clip description]);
+    //NSLog(@"Down %@", [_clip description]);
 }
 
 - (void)mouseUp:(CGPoint)pointInLayer
 {
-    NSLog(@"Up %@", [_clip description]);
+    //NSLog(@"Up %@", [_clip description]);
 }
 
 @end
