@@ -11,10 +11,12 @@
 #import "NSBezierPath+MCAdditions.h"
 
 @interface _SLFCloseButtonCell : NSButtonCell
+
+@property (readwrite) BOOL openButton;
+
 @end
 
 @implementation SLFBox {
-    BOOL _isClosed;
     NSButton *_closeButton;
     NSSize _oldFrameSize;
 }
@@ -26,7 +28,7 @@
 {
     _hasToolbar = YES;
     _hasCloseButton = NO;
-    _isClosed = NO;
+    _closed = NO;
 }
 
 - (id)initWithFrame:(NSRect)frame
@@ -216,7 +218,7 @@
 {
     BOOL shouldContinue = YES;
     
-    if (_isClosed) {
+    if ([self isClosed]) {
         NSRect oldFrame = NSMakeRect([self frame].origin.x - (_oldFrameSize.width - 22.0),
                                      [self frame].origin.y,
                                      _oldFrameSize.width, _oldFrameSize.height);
@@ -232,7 +234,9 @@
         [_contentView setHidden:NO];
         [[self animator] setFrame:oldFrame];
         
-        _isClosed = NO;
+        [self setClosed:NO];
+        [(_SLFCloseButtonCell *)[_closeButton cell] setOpenButton:NO];
+        [_closeButton setNeedsDisplay];
         
         if ([_delegate respondsToSelector:@selector(boxDidOpen:)]) {
             [_delegate boxDidOpen:self];
@@ -257,7 +261,9 @@
         // Hide the contents
         [[_contentView animator ]setHidden:YES];
         
-        _isClosed = YES;
+        [self setClosed:YES];
+        [(_SLFCloseButtonCell *)[_closeButton cell] setOpenButton:YES];
+        [_closeButton setNeedsDisplay];
         
         if ([_delegate respondsToSelector:@selector(boxDidClose:)]) {
             [_delegate boxDidClose:self];
@@ -395,20 +401,30 @@
     
     NSRect boxRect = NSMakeRect(1.f + origin, origin, boxDimension, boxDimension);
     
-    NSPoint bottomLeft = NSMakePoint(boxRect.origin.x, NSMaxY(boxRect));
-    NSPoint topRight = NSMakePoint(NSMaxX(boxRect), boxRect.origin.y);
-    NSPoint bottomRight = NSMakePoint(topRight.x, bottomLeft.y);
-    NSPoint topLeft = NSMakePoint(bottomLeft.x, topRight.y);
-    
-    [cross moveToPoint:bottomLeft];
-    [cross lineToPoint:topRight];
-    [cross moveToPoint:bottomRight];
-    [cross lineToPoint:topLeft];
+    if ([self openButton]) {
+        NSPoint topRight = NSMakePoint(NSMaxX(boxRect), boxRect.origin.y);
+        NSPoint bottomRight = NSMakePoint(topRight.x, NSMaxY(boxRect));
+        NSPoint midLeft = NSMakePoint(boxRect.origin.x, NSMidY(boxRect));
+        
+        [cross moveToPoint:bottomRight];
+        [cross lineToPoint:midLeft];
+        [cross lineToPoint:topRight];
+    } else {
+        NSPoint bottomLeft = NSMakePoint(boxRect.origin.x, NSMaxY(boxRect));
+        NSPoint topRight = NSMakePoint(NSMaxX(boxRect), boxRect.origin.y);
+        NSPoint bottomRight = NSMakePoint(topRight.x, bottomLeft.y);
+        NSPoint topLeft = NSMakePoint(bottomLeft.x, topRight.y);
+        
+        [cross moveToPoint:bottomLeft];
+        [cross lineToPoint:topRight];
+        [cross moveToPoint:bottomRight];
+        [cross lineToPoint:topLeft];
+    }
     
     [SNRWindowButtonCrossColor set];
     [cross setLineWidth:2.f];
     [cross stroke];
-    
+
     // Draw the inner shadow
     NSShadow *shadow = [[NSShadow alloc] init];
     [shadow setShadowColor:SNRWindowButtonInnerShadowColor];
