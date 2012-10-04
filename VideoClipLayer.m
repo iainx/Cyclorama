@@ -60,6 +60,10 @@
     [self addSublayer:_labelLayer];
 
     [self setClip:clip];
+    
+    // For debugging layout turn this on
+    // It allows us to see if multiple layers are laid out on top of each other
+    //[self setOpacity:0.25];
 
     return self;
 }

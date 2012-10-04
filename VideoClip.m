@@ -56,7 +56,7 @@
                                       
                                   case AVKeyValueStatusFailed:
                                       // Error out
-                                      NSLog(@"Error loading %@: %@", [self filePath], [error localizedDescription]);
+                                      //NSLog(@"Error loading %@: %@", [self filePath], [error localizedDescription]);
                                       break;
                                       
                                   default:
@@ -106,7 +106,7 @@
 - (AVAsset *)asset
 {
     if (_asset == nil) {
-        NSLog(@"No movie for %@", [self filePath]);
+        //NSLog(@"No movie for %@", [self filePath]);
         return nil;
     }
     

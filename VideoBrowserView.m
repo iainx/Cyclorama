@@ -191,7 +191,6 @@
     [self addTilesFromVisibleRange];
     
     currentRange = [self visibleRange];
-    NSLog(@"Current range: %@", NSStringFromRange(currentRange));
 }
 
 - (void)updateTiles
@@ -239,7 +238,7 @@
     
     if (NSMaxRange(visibleRange) < NSMaxRange(currentRange)) {
         // Remove the bottom rows
-        for (NSInteger i = NSMaxRange(currentRange); i < NSMaxRange(visibleRange); i--) {
+        for (NSInteger i = NSMaxRange(currentRange); i > NSMaxRange(visibleRange); i--) {
             [self removeTilesInRow:i asVisibleRow:visibleRange.length];
         }
     }
