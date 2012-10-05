@@ -15,8 +15,6 @@
     CATextLayer *_labelLayer;
     
     BOOL _isObserving;
-    CGColorRef normalBgColor;
-    CGColorRef selectedBgColor;
 }
 
 @synthesize clip = _clip;
@@ -27,6 +25,28 @@
 #define FONT_SIZE 11.0
 #define SPACING 0.0//2.0
 #define DEFAULT_HEIGHT (DEFAULT_IMAGE_HEIGHT + SPACING + TEXT_BOX_HEIGHT)
+
++ (CGColorRef)selectedBackgroundColor
+{
+    static CGColorRef selectedColor = NULL;
+    
+    if (selectedColor == NULL) {
+        selectedColor = CGColorCreateGenericGray(0.43, 1.0);
+    }
+    
+    return selectedColor;
+}
+
++ (CGColorRef)normalBackgroundColor
+{
+    static CGColorRef normalBackgroundColor = NULL;
+    
+    if (normalBackgroundColor == NULL) {
+        normalBackgroundColor = CGColorCreateGenericGray(0.26, 1.0);
+    }
+    
+    return normalBackgroundColor;
+}
 
 - (id)initWithClip:(VideoClip *)clip
 {
@@ -57,9 +77,6 @@
     [_imageLayer setAnchorPoint:CGPointMake(0.0, 0.0)];
     [_baseLayer addSublayer:_imageLayer];
     
-    normalBgColor = CGColorCreateGenericGray(0.25, 1.0);
-    selectedBgColor = CGColorCreateGenericGray(0.5, 1.0);
-    
     _labelLayer = [CATextLayer layer];
     [_labelLayer setBounds:CGRectMake(0.0, 0.0, DEFAULT_WIDTH, TEXT_BOX_HEIGHT)];
     [_labelLayer setAnchorPoint:CGPointZero];
@@ -67,7 +84,7 @@
     [_labelLayer setFontSize:FONT_SIZE];
     [_labelLayer setContentsScale:[[NSScreen mainScreen] backingScaleFactor]];
     [_labelLayer setString:[clip title]];
-    [_labelLayer setBackgroundColor:normalBgColor];
+    [_labelLayer setBackgroundColor:[VideoClipLayer normalBackgroundColor]];
     
     [_labelLayer setAlignmentMode:kCAAlignmentCenter];
     [_labelLayer setTruncationMode:kCATruncationEnd];
@@ -180,9 +197,9 @@
 - (void)setSelected:(BOOL)selected
 {
     if (selected) {
-        [_labelLayer setBackgroundColor:selectedBgColor];
+        [_labelLayer setBackgroundColor:[VideoClipLayer selectedBackgroundColor]];
     } else {
-        [_labelLayer setBackgroundColor:normalBgColor];
+        [_labelLayer setBackgroundColor:[VideoClipLayer normalBackgroundColor]];
     }
 }
 
