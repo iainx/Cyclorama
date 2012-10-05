@@ -10,10 +10,13 @@
 #import "VideoClip.h"
 
 @implementation VideoClipLayer {
+    CALayer *_baseLayer;
     CALayer *_imageLayer;
     CATextLayer *_labelLayer;
     
     BOOL _isObserving;
+    CGColorRef normalBgColor;
+    CGColorRef selectedBgColor;
 }
 
 @synthesize clip = _clip;
@@ -22,7 +25,7 @@
 #define DEFAULT_IMAGE_HEIGHT 114.0 // gives 4:3 format
 #define TEXT_BOX_HEIGHT 18.0
 #define FONT_SIZE 11.0
-#define SPACING 2.0
+#define SPACING 0.0//2.0
 #define DEFAULT_HEIGHT (DEFAULT_IMAGE_HEIGHT + SPACING + TEXT_BOX_HEIGHT)
 
 - (id)initWithClip:(VideoClip *)clip
@@ -39,13 +42,23 @@
     
     [self setBounds:CGRectMake(0.0, 0.0, DEFAULT_WIDTH, DEFAULT_HEIGHT)];
     [self setAnchorPoint:CGPointMake(0, 0)];
+    [self setShadowOpacity:0.34];
+    [self setShadowOffset:CGSizeMake(0.0, 3.0)];
+    
+    _baseLayer = [CALayer layer];
+    [_baseLayer setBounds:CGRectMake(0.0, 0.0, DEFAULT_WIDTH, DEFAULT_HEIGHT - 3)];
+    [_baseLayer setAnchorPoint:CGPointMake(0, 0)];
+    [_baseLayer setCornerRadius:5.0];
+    [_baseLayer setMasksToBounds:YES];
+    [self addSublayer:_baseLayer];
     
     _imageLayer = [CALayer layer];
-    [_imageLayer setCornerRadius:5.0];
-    [_imageLayer setMasksToBounds:YES];
     [_imageLayer setBounds:CGRectMake(0.0, 0.0, DEFAULT_WIDTH, DEFAULT_IMAGE_HEIGHT)];
     [_imageLayer setAnchorPoint:CGPointMake(0.0, 0.0)];
-    [self addSublayer:_imageLayer];
+    [_baseLayer addSublayer:_imageLayer];
+    
+    normalBgColor = CGColorCreateGenericGray(0.25, 1.0);
+    selectedBgColor = CGColorCreateGenericGray(0.5, 1.0);
     
     _labelLayer = [CATextLayer layer];
     [_labelLayer setBounds:CGRectMake(0.0, 0.0, DEFAULT_WIDTH, TEXT_BOX_HEIGHT)];
@@ -54,10 +67,11 @@
     [_labelLayer setFontSize:FONT_SIZE];
     [_labelLayer setContentsScale:[[NSScreen mainScreen] backingScaleFactor]];
     [_labelLayer setString:[clip title]];
+    [_labelLayer setBackgroundColor:normalBgColor];
     
     [_labelLayer setAlignmentMode:kCAAlignmentCenter];
     [_labelLayer setTruncationMode:kCATruncationEnd];
-    [self addSublayer:_labelLayer];
+    [_baseLayer addSublayer:_labelLayer];
 
     [self setClip:clip];
     
@@ -166,9 +180,9 @@
 - (void)setSelected:(BOOL)selected
 {
     if (selected) {
-        [self setBackgroundColor:CGColorCreateGenericRGB(1.0, 0.0, 0.0, 1.0)];
+        [_labelLayer setBackgroundColor:selectedBgColor];
     } else {
-        [self setBackgroundColor:NULL];
+        [_labelLayer setBackgroundColor:normalBgColor];
     }
 }
 
