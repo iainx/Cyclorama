@@ -19,6 +19,7 @@
     [self setTitle:@"Video Browser"];
     [self setHasToolbar:YES];
     [self setHasCloseButton:NO];
+    [self setSolidBackground:NO];
     
     _scrollView = [[NSScrollView alloc] initWithFrame:NSZeroRect];
     [_scrollView setDrawsBackground:NO];

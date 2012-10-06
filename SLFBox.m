@@ -29,6 +29,7 @@
     _hasToolbar = YES;
     _hasCloseButton = NO;
     _closed = NO;
+    _solidBackground = YES;
 }
 
 - (id)initWithFrame:(NSRect)frame
@@ -85,7 +86,18 @@
     [NSGraphicsContext saveGraphicsState];
     [shadow set];
 
-    NSColor *boxBGColour = [NSColor colorWithCalibratedWhite:0.16 alpha:1.0];
+    NSColor *boxBGColour;
+    
+    if (_solidBackground) {
+        boxBGColour = [NSColor colorWithCalibratedWhite:0.16 alpha:1.0];
+    } else {
+        NSString *filepath = [[NSBundle mainBundle] pathForResource:@"linen-tile"
+                                                             ofType:@"png"
+                                                        inDirectory:@"Resources/Images"];
+        NSImage *image = [[NSImage alloc] initWithContentsOfURL:[NSURL fileURLWithPath:filepath]];
+        
+        boxBGColour = [NSColor colorWithPatternImage:image];
+    }
     
     [boxBGColour setFill];
     [roundedPath fill];

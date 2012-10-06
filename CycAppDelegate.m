@@ -23,7 +23,8 @@
 - (id)init
 {
     self = [super init];
-    if (self) {
+    if (!self) {
+        return nil;
     }
 
     _filterModel = [[FilterModel alloc] init];

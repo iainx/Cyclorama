@@ -531,6 +531,10 @@
     currentLayer = layer;
     
     CGPoint locationInLayer;
+    CGPoint layerPosition = [layer position];
+    
+    locationInLayer.x = locationInView.x - layerPosition.x;
+    locationInLayer.y = locationInView.y - layerPosition.y;
     [layer mouseMoved:locationInLayer];
 }
 

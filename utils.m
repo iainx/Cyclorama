@@ -28,6 +28,7 @@ CGColorRef CGColorCreateFromNSColor (NSColor *c)
         CGColorSpaceRelease(space);
     } else {
         retColour = [c CGColor];
+        CGColorRetain (retColour);
     }
     
     return retColour;
