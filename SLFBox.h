@@ -17,7 +17,6 @@
 @property (readwrite, nonatomic) BOOL hasToolbar;
 @property (readwrite, nonatomic) BOOL hasCloseButton;
 @property (readwrite, getter = isClosed) BOOL closed;
-@property (readwrite) BOOL solidBackground;
 
 @property (readwrite, weak) id<SLFBoxDelegate> delegate;
 

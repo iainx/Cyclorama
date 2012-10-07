@@ -19,7 +19,6 @@
     [self setHasToolbar:NO];
     [self setHasCloseButton:YES];
     [self setTitle:@"Filter Browser"];
-    [self setSolidBackground:NO];
     
     _scrollView = [[NSScrollView alloc] initWithFrame:NSZeroRect];
     [_scrollView setDrawsBackground:NO];
