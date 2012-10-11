@@ -14,6 +14,7 @@
 @class CycFilterUIView;
 @class FilterBrowserBox;
 @class VideoBrowserBox;
+@class VideoPlayerBox;
 @class SLFHorizontalLayout;
 
 @interface CycDocument : NSDocument
@@ -21,12 +22,15 @@
 @property (readwrite, strong)NSMutableArray *layers;
 @property (readwrite, strong) FilterBrowserBox *filterBrowserBox;
 @property (readwrite, strong) VideoBrowserBox *videoBrowserBox;
+@property (readwrite, strong) VideoPlayerBox *videoPlayerBox;
+
 @property (readwrite, strong)IBOutlet CycArrayController *layerController;
 @property (readwrite, strong)IBOutlet CycArrayController *filterController;
 
 @property (readwrite, weak)IBOutlet StageView *stageView;
 @property (readwrite, weak)IBOutlet NSScrollView *filterScrollView;
 
+@property (readwrite, weak)IBOutlet SLFHorizontalLayout *topLayout;
 @property (readwrite, weak)IBOutlet SLFHorizontalLayout *bottomLayout;
 
 @end

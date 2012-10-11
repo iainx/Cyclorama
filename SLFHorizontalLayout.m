@@ -40,6 +40,8 @@
     _ignoreResizes = NO;
     _children = [[NSMutableArray alloc] init];
     
+    _debugDrawChildLayout = NO;
+    
     return self;
 }
 
@@ -61,7 +63,7 @@
 {
     NSRect bounds = [self bounds];
     NSRect childArea = NSInsetRect(bounds, 0.0, 0.0);
-    CGFloat allowedWidth = childArea.size.width - (_childSpacing * [_children count]);
+    CGFloat allowedWidth = childArea.size.width - (_childSpacing * ([_children count] - 1));
     CGFloat childWidth;
     
     allowedWidth -= _fixedWidth;
@@ -177,6 +179,19 @@
     return YES;
 }
 
+- (void)drawRect:(NSRect)dirtyRect
+{
+    if (_debugDrawChildLayout) {
+        [[NSColor blackColor] set];
+        
+        for (SLFHorizontalLayoutChild *child in _children) {
+            NSView *view = [child child];
+            NSBezierPath *path = [NSBezierPath bezierPathWithRect:[view frame]];
+            
+            [path stroke];
+        }
+    }
+}
 @end
 
 #pragma mark - SLFHorizontalLayoutChild

@@ -2,17 +2,15 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1080</int>
-		<string key="IBDocument.SystemVersion">12C54</string>
-		<string key="IBDocument.InterfaceBuilderVersion">2840</string>
+		<string key="IBDocument.SystemVersion">12C60</string>
+		<string key="IBDocument.InterfaceBuilderVersion">2843</string>
 		<string key="IBDocument.AppKitVersion">1187.34</string>
 		<string key="IBDocument.HIToolboxVersion">625.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
-			<string key="NS.object.0">2840</string>
+			<string key="NS.object.0">2843</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
-			<string>NSArrayController</string>
-			<string>NSCollectionViewItem</string>
 			<string>NSCustomObject</string>
 			<string>NSCustomView</string>
 			<string>NSSplitView</string>
@@ -54,11 +52,23 @@
 								<object class="NSCustomView" id="754053049">
 									<reference key="NSNextResponder" ref="709911563"/>
 									<int key="NSvFlags">256</int>
-									<array class="NSMutableArray" key="NSSubviews"/>
+									<array class="NSMutableArray" key="NSSubviews">
+										<object class="NSCustomView" id="73631101">
+											<reference key="NSNextResponder" ref="754053049"/>
+											<int key="NSvFlags">274</int>
+											<array class="NSMutableArray" key="NSSubviews"/>
+											<string key="NSFrame">{{4, 20}, {1076, 274}}</string>
+											<reference key="NSSuperview" ref="754053049"/>
+											<reference key="NSWindow"/>
+											<reference key="NSNextKeyView" ref="711385348"/>
+											<string key="NSReuseIdentifierKey">_NS:9</string>
+											<string key="NSClassName">SLFHorizontalLayout</string>
+										</object>
+									</array>
 									<string key="NSFrameSize">{1084, 299}</string>
 									<reference key="NSSuperview" ref="709911563"/>
 									<reference key="NSWindow"/>
-									<reference key="NSNextKeyView" ref="711385348"/>
+									<reference key="NSNextKeyView" ref="73631101"/>
 									<string key="NSReuseIdentifierKey">_NS:11</string>
 									<string key="NSClassName">NSView</string>
 								</object>
@@ -69,7 +79,7 @@
 										<object class="NSCustomView" id="1062377445">
 											<reference key="NSNextResponder" ref="711385348"/>
 											<int key="NSvFlags">274</int>
-											<string key="NSFrame">{{4, 4}, {1080, 284}}</string>
+											<string key="NSFrame">{{4, 4}, {1076, 284}}</string>
 											<reference key="NSSuperview" ref="711385348"/>
 											<reference key="NSWindow"/>
 											<reference key="NSNextKeyView"/>
@@ -107,27 +117,6 @@
 			<object class="NSCustomObject" id="796877042">
 				<string key="NSClassName">NSApplication</string>
 			</object>
-			<object class="NSArrayController" id="457723194">
-				<bool key="NSEditable">YES</bool>
-				<object class="_NSManagedProxy" key="_NSManagedProxy"/>
-				<bool key="NSAvoidsEmptySelection">YES</bool>
-				<bool key="NSPreservesSelection">YES</bool>
-				<bool key="NSSelectsInsertedObjects">YES</bool>
-				<bool key="NSFilterRestrictsInsertion">YES</bool>
-				<bool key="NSClearsFilterPredicateOnInsertion">YES</bool>
-			</object>
-			<object class="NSCollectionViewItem" id="1022267446"/>
-			<object class="NSView" id="525492626">
-				<nil key="NSNextResponder"/>
-				<int key="NSvFlags">256</int>
-				<string key="NSFrameSize">{100, 100}</string>
-			</object>
-			<object class="NSCollectionViewItem" id="693608065"/>
-			<object class="NSView" id="292831032">
-				<nil key="NSNextResponder"/>
-				<int key="NSvFlags">256</int>
-				<string key="NSFrameSize">{100, 100}</string>
-			</object>
 		</array>
 		<object class="IBObjectContainer" key="IBDocument.Objects">
 			<array class="NSMutableArray" key="connectionRecords">
@@ -141,14 +130,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
-						<string key="label">layerController</string>
-						<reference key="source" ref="512844837"/>
-						<reference key="destination" ref="457723194"/>
-					</object>
-					<int key="connectionID">100108</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
 						<string key="label">bottomLayout</string>
 						<reference key="source" ref="512844837"/>
 						<reference key="destination" ref="1062377445"/>
@@ -157,43 +138,19 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
+						<string key="label">topLayout</string>
+						<reference key="source" ref="512844837"/>
+						<reference key="destination" ref="73631101"/>
+					</object>
+					<int key="connectionID">100433</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
 						<string key="label">delegate</string>
 						<reference key="source" ref="275939982"/>
 						<reference key="destination" ref="512844837"/>
 					</object>
 					<int key="connectionID">17</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBBindingConnection" key="connection">
-						<string key="label">contentArray: layers</string>
-						<reference key="source" ref="457723194"/>
-						<reference key="destination" ref="512844837"/>
-						<object class="NSNibBindingConnector" key="connector">
-							<reference key="NSSource" ref="457723194"/>
-							<reference key="NSDestination" ref="512844837"/>
-							<string key="NSLabel">contentArray: layers</string>
-							<string key="NSBinding">contentArray</string>
-							<string key="NSKeyPath">layers</string>
-							<int key="NSNibBindingConnectorVersion">2</int>
-						</object>
-					</object>
-					<int key="connectionID">100162</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">view</string>
-						<reference key="source" ref="1022267446"/>
-						<reference key="destination" ref="525492626"/>
-					</object>
-					<int key="connectionID">100204</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">view</string>
-						<reference key="source" ref="693608065"/>
-						<reference key="destination" ref="292831032"/>
-					</object>
-					<int key="connectionID">100324</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -240,22 +197,6 @@
 						<string key="objectName">Application</string>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">100107</int>
-						<reference key="object" ref="457723194"/>
-						<reference key="parent" ref="0"/>
-						<string key="objectName">Layer Controller</string>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">100201</int>
-						<reference key="object" ref="1022267446"/>
-						<reference key="parent" ref="0"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">100202</int>
-						<reference key="object" ref="525492626"/>
-						<reference key="parent" ref="0"/>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">100216</int>
 						<reference key="object" ref="709911563"/>
 						<array class="NSMutableArray" key="children">
@@ -267,7 +208,9 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">100217</int>
 						<reference key="object" ref="754053049"/>
-						<array class="NSMutableArray" key="children"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="73631101"/>
+						</array>
 						<reference key="parent" ref="709911563"/>
 					</object>
 					<object class="IBObjectRecord">
@@ -279,19 +222,17 @@
 						<reference key="parent" ref="709911563"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">100321</int>
-						<reference key="object" ref="693608065"/>
-						<reference key="parent" ref="0"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">100322</int>
-						<reference key="object" ref="292831032"/>
-						<reference key="parent" ref="0"/>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">100408</int>
 						<reference key="object" ref="1062377445"/>
 						<reference key="parent" ref="711385348"/>
+						<string key="objectName">Bottom Layout</string>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">100432</int>
+						<reference key="object" ref="73631101"/>
+						<array class="NSMutableArray" key="children"/>
+						<reference key="parent" ref="754053049"/>
+						<string key="objectName">Top Layout</string>
 					</object>
 				</array>
 			</object>
@@ -299,16 +240,11 @@
 				<string key="-1.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="-2.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="-3.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="100107.CustomClassName">CycArrayController</string>
-				<string key="100107.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="100201.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="100202.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="100216.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="100217.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="100218.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="100321.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="100322.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="100408.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="100432.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="5.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="5.IBWindowTemplateEditedContentRect">{{133, 170}, {507, 413}}</string>
 				<string key="6.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -317,7 +253,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">100430</int>
+			<int key="maxID">100435</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -332,12 +268,27 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">CycDocument</string>
 					<string key="superclassName">NSDocument</string>
+					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="playSet:">id</string>
+						<string key="stopSet:">id</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="playSet:">
+							<string key="name">playSet:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="stopSet:">
+							<string key="name">stopSet:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="bottomLayout">SLFHorizontalLayout</string>
 						<string key="filterController">CycArrayController</string>
 						<string key="filterScrollView">NSScrollView</string>
 						<string key="layerController">CycArrayController</string>
 						<string key="stageView">StageView</string>
+						<string key="topLayout">SLFHorizontalLayout</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
 						<object class="IBToOneOutletInfo" key="bottomLayout">
@@ -359,6 +310,10 @@
 						<object class="IBToOneOutletInfo" key="stageView">
 							<string key="name">stageView</string>
 							<string key="candidateClassName">StageView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="topLayout">
+							<string key="name">topLayout</string>
+							<string key="candidateClassName">SLFHorizontalLayout</string>
 						</object>
 					</dictionary>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">

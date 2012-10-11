@@ -19,6 +19,7 @@ typedef enum {
 
 @property (readwrite) CGFloat containerSpacing;
 @property (readwrite) CGFloat childSpacing;
+@property (readwrite) BOOL debugDrawChildLayout;
 
 - (void)addChild:(SLFBox *)childView
      withOptions:(SLFHorizontalLayoutOptions)options;
