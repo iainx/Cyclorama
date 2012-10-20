@@ -8,6 +8,7 @@
 
 #import <QuartzCore/QuartzCore.h>
 #import "SLFBox.h"
+#import "SLFToolbarButton.h"
 #import "NSBezierPath+MCAdditions.h"
 
 @interface _SLFCloseButtonCell : NSButtonCell
@@ -19,16 +20,24 @@
 @implementation SLFBox {
     NSButton *_closeButton;
     NSSize _oldFrameSize;
+    NSMutableArray *_buttons;
 }
 
 #define SLF_BOX_TITLEBAR_HEIGHT 22.0
+#define SLF_BOX_TOOLBAR_HEIGHT 25.0
+#define SLF_BOX_TOOLBAR_BUTTON_HEIGHT 22.0
+#define SLF_BOX_TOOLBAR_Y_OFFSET 2.0
+#define SLF_BOX_TOOLBAR_X_OFFSET 4.0
 #define CLOSE_BUTTON_SIZE (SLF_BOX_TITLEBAR_HEIGHT - 4.0)
+#define TOOLBAR_BUTTON_GAP 2.0
 
 - (void)doSLFBoxInit
 {
     _hasToolbar = YES;
     _hasCloseButton = NO;
     _closed = NO;
+    
+    _buttons = [[NSMutableArray alloc] init];
 }
 
 - (id)initWithFrame:(NSRect)frame
@@ -185,8 +194,6 @@
 
     [NSGraphicsContext restoreGraphicsState];
 }
-
-#define SLF_BOX_TOOLBAR_HEIGHT 25.0
 
 - (void)drawToolbarInRect:(NSRect)dirtyRect
 {
@@ -364,6 +371,22 @@
     [self setNeedsDisplay:YES];
 }
 
+#pragma mark - Toolbar Buttons
+
+- (void)addToolbarButtonWithLabel:(NSString *)text
+                           action:(SEL)action
+                           target:(id)target
+{
+    /*
+    SLFToolbarButton *button = [[SLFToolbarButton alloc] initWithFrame:NSMakeRect(SLF_BOX_TOOLBAR_X_OFFSET,
+                                                                                  SLF_BOX_TOOLBAR_Y_OFFSET,
+                                                                                  100.0, SLF_BOX_TOOLBAR_BUTTON_HEIGHT)];
+     */
+    SLFToolbarButton *button = [[SLFToolbarButton alloc] initWithTitle:@"Test" action:action target:target];
+    
+    [button setFrameOrigin:NSMakePoint(SLF_BOX_TOOLBAR_X_OFFSET, SLF_BOX_TOOLBAR_Y_OFFSET)];
+    [self addSubview:button];
+}
 @end
 
 #pragma mark - _SLFCloseButtonCell

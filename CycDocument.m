@@ -105,12 +105,12 @@
 #pragma mark - UI Actions
 - (IBAction)playSet:(id)sender
 {
-    
+    NSLog(@"play clicked");
 }
 
 - (IBAction)stopSet:(id)sender
 {
-
+    NSLog(@"Stop clicked");
 }
 
 #pragma mark - Filter table methods

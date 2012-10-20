@@ -53,14 +53,14 @@
 									<reference key="NSNextResponder" ref="709911563"/>
 									<int key="NSvFlags">256</int>
 									<array class="NSMutableArray" key="NSSubviews">
-										<object class="NSCustomView" id="73631101">
+										<object class="NSCustomView" id="192450063">
 											<reference key="NSNextResponder" ref="754053049"/>
 											<int key="NSvFlags">274</int>
 											<array class="NSMutableArray" key="NSSubviews"/>
 											<string key="NSFrame">{{4, 20}, {1076, 274}}</string>
 											<reference key="NSSuperview" ref="754053049"/>
 											<reference key="NSWindow"/>
-											<reference key="NSNextKeyView" ref="711385348"/>
+											<reference key="NSNextKeyView"/>
 											<string key="NSReuseIdentifierKey">_NS:9</string>
 											<string key="NSClassName">SLFHorizontalLayout</string>
 										</object>
@@ -68,7 +68,7 @@
 									<string key="NSFrameSize">{1084, 299}</string>
 									<reference key="NSSuperview" ref="709911563"/>
 									<reference key="NSWindow"/>
-									<reference key="NSNextKeyView" ref="73631101"/>
+									<reference key="NSNextKeyView" ref="192450063"/>
 									<string key="NSReuseIdentifierKey">_NS:11</string>
 									<string key="NSClassName">NSView</string>
 								</object>
@@ -140,7 +140,7 @@
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">topLayout</string>
 						<reference key="source" ref="512844837"/>
-						<reference key="destination" ref="73631101"/>
+						<reference key="destination" ref="192450063"/>
 					</object>
 					<int key="connectionID">100433</int>
 				</object>
@@ -209,7 +209,7 @@
 						<int key="objectID">100217</int>
 						<reference key="object" ref="754053049"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="73631101"/>
+							<reference ref="192450063"/>
 						</array>
 						<reference key="parent" ref="709911563"/>
 					</object>
@@ -229,7 +229,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">100432</int>
-						<reference key="object" ref="73631101"/>
+						<reference key="object" ref="192450063"/>
 						<array class="NSMutableArray" key="children"/>
 						<reference key="parent" ref="754053049"/>
 						<string key="objectName">Top Layout</string>
@@ -253,7 +253,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">100435</int>
+			<int key="maxID">100445</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -268,20 +268,6 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">CycDocument</string>
 					<string key="superclassName">NSDocument</string>
-					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="playSet:">id</string>
-						<string key="stopSet:">id</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="playSet:">
-							<string key="name">playSet:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="stopSet:">
-							<string key="name">stopSet:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="bottomLayout">SLFHorizontalLayout</string>
 						<string key="filterController">CycArrayController</string>

@@ -124,6 +124,8 @@
 		AEC028B515A24A0A0033BB3C /* FilterParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = AEC028B415A24A0A0033BB3C /* FilterParameter.m */; };
 		AEC3194F161765D40027F14C /* SLFHorizontalLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = AEC3194E161765D40027F14C /* SLFHorizontalLayout.m */; };
 		AED13EEC1623965500E9E897 /* VideoPlayerBox.m in Sources */ = {isa = PBXBuildFile; fileRef = AED13EEB1623965500E9E897 /* VideoPlayerBox.m */; };
+		AED13EF016278A7D00E9E897 /* SLFButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AED13EEF16278A7D00E9E897 /* SLFButtonCell.m */; };
+		AED13EF3162B2B1500E9E897 /* SLFToolbarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = AED13EF2162B2B1500E9E897 /* SLFToolbarButton.m */; };
 		AEDE0C0015F53F6A0058578E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEDE0BFF15F53F6A0058578E /* AVFoundation.framework */; };
 		AEDE0C0215F562BD0058578E /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEDE0C0115F562BD0058578E /* CoreMedia.framework */; };
 		AEDE0C0515F79A780058578E /* CALayer+Images.m in Sources */ = {isa = PBXBuildFile; fileRef = AEDE0C0415F79A780058578E /* CALayer+Images.m */; };
@@ -317,6 +319,10 @@
 		AEC3194E161765D40027F14C /* SLFHorizontalLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLFHorizontalLayout.m; sourceTree = "<group>"; };
 		AED13EEA1623965500E9E897 /* VideoPlayerBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoPlayerBox.h; sourceTree = "<group>"; };
 		AED13EEB1623965500E9E897 /* VideoPlayerBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoPlayerBox.m; sourceTree = "<group>"; };
+		AED13EEE16278A7D00E9E897 /* SLFButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLFButtonCell.h; sourceTree = "<group>"; };
+		AED13EEF16278A7D00E9E897 /* SLFButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLFButtonCell.m; sourceTree = "<group>"; };
+		AED13EF1162B2B1500E9E897 /* SLFToolbarButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLFToolbarButton.h; sourceTree = "<group>"; };
+		AED13EF2162B2B1500E9E897 /* SLFToolbarButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLFToolbarButton.m; sourceTree = "<group>"; };
 		AEDE0BFF15F53F6A0058578E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		AEDE0C0115F562BD0058578E /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		AEDE0C0315F79A780058578E /* CALayer+Images.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+Images.h"; sourceTree = "<group>"; };
@@ -856,6 +862,10 @@
 				AE86852C160DEE2000A5A3E1 /* SLFBoxDelegate.h */,
 				AEC3194D161765D40027F14C /* SLFHorizontalLayout.h */,
 				AEC3194E161765D40027F14C /* SLFHorizontalLayout.m */,
+				AED13EF1162B2B1500E9E897 /* SLFToolbarButton.h */,
+				AED13EF2162B2B1500E9E897 /* SLFToolbarButton.m */,
+				AED13EEE16278A7D00E9E897 /* SLFButtonCell.h */,
+				AED13EEF16278A7D00E9E897 /* SLFButtonCell.m */,
 			);
 			name = SLFKit;
 			sourceTree = "<group>";
@@ -1047,6 +1057,8 @@
 				AEE022961609400A009F4A9F /* VideoClipLayer.m in Sources */,
 				AEC3194F161765D40027F14C /* SLFHorizontalLayout.m in Sources */,
 				AED13EEC1623965500E9E897 /* VideoPlayerBox.m in Sources */,
+				AED13EF016278A7D00E9E897 /* SLFButtonCell.m in Sources */,
+				AED13EF3162B2B1500E9E897 /* SLFToolbarButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -15,7 +15,9 @@ do_init (VideoPlayerBox *box)
 {
     [box setHasCloseButton:NO];
     [box setHasToolbar:YES];
-    [box setTitle:@"Player"];
+    [box setTitle:@"Preview"];
+    
+    [box addToolbarButtonWithLabel:@"Test 1" action:@selector(testAction:) target:box];
 }
 
 - (id)initWithFrame:(NSRect)frame
@@ -42,4 +44,8 @@ do_init (VideoPlayerBox *box)
     return self;
 }
 
+- (void)testAction:(id)sender
+{
+    NSLog(@"Test clicked");
+}
 @end

@@ -20,4 +20,9 @@
 
 @property (readwrite, weak) id<SLFBoxDelegate> delegate;
 
+
+- (void)addToolbarButtonWithLabel:(NSString *)text
+                           action:(SEL)action
+                           target:(id)target;
+
 @end
