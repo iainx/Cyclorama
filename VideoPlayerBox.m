@@ -7,8 +7,11 @@
 //
 
 #import "VideoPlayerBox.h"
+#import "VideoPlayerView.h"
 
 @implementation VideoPlayerBox
+
+@synthesize playerView = _playerView;
 
 static void
 do_init (VideoPlayerBox *box)
@@ -16,6 +19,9 @@ do_init (VideoPlayerBox *box)
     [box setHasCloseButton:NO];
     [box setHasToolbar:YES];
     [box setTitle:@"Preview"];
+    
+    box->_playerView = [[VideoPlayerView alloc] init];
+    [box setContentView:box->_playerView];
     
     [box addToolbarButtonWithLabel:@"Test 1" action:@selector(testAction:) target:box];
 }

@@ -15,6 +15,7 @@
 		AE051C40149972B900A8FB07 /* CycParameterXYViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE051C37149972B900A8FB07 /* CycParameterXYViewController.m */; };
 		AE051C41149972B900A8FB07 /* CycParameterXYViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE051C38149972B900A8FB07 /* CycParameterXYViewController.xib */; };
 		AE051C42149972B900A8FB07 /* CycXYView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE051C3A149972B900A8FB07 /* CycXYView.m */; };
+		AE0A98D81635FE110058FB16 /* VideoPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0A98D71635FE110058FB16 /* VideoPlayerView.m */; };
 		AE0FDBF2160642BA0000BB9F /* VideoBrowserBox.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0FDBF1160642BA0000BB9F /* VideoBrowserBox.m */; };
 		AE0FDBF7160655960000BB9F /* NSBezierPath+MCAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0FDBF6160655960000BB9F /* NSBezierPath+MCAdditions.m */; };
 		AE1B441B15E6A1F200E20A6F /* FilterItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1B441A15E6A1F200E20A6F /* FilterItem.m */; };
@@ -163,6 +164,8 @@
 		AE051C38149972B900A8FB07 /* CycParameterXYViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CycParameterXYViewController.xib; sourceTree = "<group>"; };
 		AE051C39149972B900A8FB07 /* CycXYView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CycXYView.h; sourceTree = "<group>"; };
 		AE051C3A149972B900A8FB07 /* CycXYView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CycXYView.m; sourceTree = "<group>"; };
+		AE0A98D61635FE110058FB16 /* VideoPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoPlayerView.h; sourceTree = "<group>"; };
+		AE0A98D71635FE110058FB16 /* VideoPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoPlayerView.m; sourceTree = "<group>"; };
 		AE0FDBF0160642BA0000BB9F /* VideoBrowserBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoBrowserBox.h; sourceTree = "<group>"; };
 		AE0FDBF1160642BA0000BB9F /* VideoBrowserBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoBrowserBox.m; sourceTree = "<group>"; };
 		AE0FDBF5160655960000BB9F /* NSBezierPath+MCAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBezierPath+MCAdditions.h"; sourceTree = "<group>"; };
@@ -848,6 +851,8 @@
 			children = (
 				AED13EEA1623965500E9E897 /* VideoPlayerBox.h */,
 				AED13EEB1623965500E9E897 /* VideoPlayerBox.m */,
+				AE0A98D61635FE110058FB16 /* VideoPlayerView.h */,
+				AE0A98D71635FE110058FB16 /* VideoPlayerView.m */,
 			);
 			name = "Video Player";
 			sourceTree = "<group>";
@@ -1059,6 +1064,7 @@
 				AED13EEC1623965500E9E897 /* VideoPlayerBox.m in Sources */,
 				AED13EF016278A7D00E9E897 /* SLFButtonCell.m in Sources */,
 				AED13EF3162B2B1500E9E897 /* SLFToolbarButton.m in Sources */,
+				AE0A98D81635FE110058FB16 /* VideoPlayerView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

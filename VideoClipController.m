@@ -21,6 +21,8 @@
 {
     self = [super initWithContent:content];
     
+    [self setSelectsInsertedObjects:NO];
+    
     videoQuery = [[NSMetadataQuery alloc] init];
     filesForThumbnailing = [[NSMutableArray alloc] init];
     

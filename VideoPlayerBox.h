@@ -8,6 +8,8 @@
 
 #import "SLFBox.h"
 
+@class VideoPlayerView;
 @interface VideoPlayerBox : SLFBox
 
+@property (readonly, strong) VideoPlayerView *playerView;
 @end

@@ -21,6 +21,7 @@
 #import "FilterBrowserBox.h"
 #import "VideoBrowserBox.h"
 #import "VideoPlayerBox.h"
+#import "VideoPlayerView.h"
 #import "SLFHorizontalLayout.h"
 
 @implementation CycDocument
@@ -67,6 +68,38 @@
     
     VideoClipController *clipController = [[NSApp delegate] clipController];
     [_videoBrowserBox setClipController:clipController];
+    
+    [clipController addObserver:self
+                     forKeyPath:@"selectionIndex"
+                        options:NSKeyValueObservingOptionNew
+                        context:NULL];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary *)change
+                       context:(void *)context
+{
+    if (object == [[NSApp delegate] clipController] && [keyPath isEqualToString:@"selectionIndex"]) {
+        VideoClipController *clipController = (VideoClipController *)object;
+        
+        NSUInteger selectedIndex = [clipController selectionIndex];
+        if (selectedIndex > 100) {
+            return;
+        }
+        VideoClip *selectedClip = [[clipController arrangedObjects] objectAtIndex:selectedIndex];
+        
+        VideoPlayerView *playerView = [_videoPlayerBox playerView];
+        [playerView setClip:selectedClip];
+        
+        NSLog(@"%@: %@", keyPath, [change description]);
+        return;
+    }
+    
+    [super observeValueForKeyPath:keyPath
+                         ofObject:object
+                           change:change
+                          context:context];
 }
 
 - (NSData *)dataOfType:(NSString *)typeName error:(NSError **)outError
