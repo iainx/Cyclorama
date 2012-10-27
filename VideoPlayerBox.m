@@ -9,7 +9,9 @@
 #import "VideoPlayerBox.h"
 #import "VideoPlayerView.h"
 
-@implementation VideoPlayerBox
+@implementation VideoPlayerBox {
+    NSSlider *_rateSlider;
+}
 
 @synthesize playerView = _playerView;
 
@@ -23,7 +25,15 @@ do_init (VideoPlayerBox *box)
     box->_playerView = [[VideoPlayerView alloc] init];
     [box setContentView:box->_playerView];
     
-    [box addToolbarButtonWithLabel:@"Test 1" action:@selector(testAction:) target:box];
+    [box addToolbarButtonWithLabel:@"Test 1"
+                           options:SLFToolbarItemLayoutNone
+                            action:@selector(testAction:)
+                            target:box];
+    
+    box->_rateSlider = [[NSSlider alloc] initWithFrame:NSMakeRect(0.0, 0.0, 100.0, 18.0)];
+    [box addToolbarItem:box->_rateSlider
+            withOptions:SLFToolbarItemLayoutPackEnd];
+    
 }
 
 - (id)initWithFrame:(NSRect)frame
