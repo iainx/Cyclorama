@@ -112,8 +112,9 @@ initSelf (VideoPlayerView *self)
     AVPlayerItem *playerItem = [AVPlayerItem playerItemWithAsset:asset];
     AVPlayer *player = [AVPlayer playerWithPlayerItem:playerItem];
     
+    [player setVolume:0.0];
+    
     [_childLayer setPlayer:player];
-    [player setMuted:YES];
     [player play];
 }
 
