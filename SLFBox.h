@@ -11,6 +11,11 @@
 
 @interface SLFBox : NSView
 
+typedef enum {
+    SLFToolbarItemLayoutNone = 0x0,
+    SLFToolbarItemLayoutPackEnd = 0x1
+} SLFToolbarItemLayoutOptions;
+
 @property (readwrite, copy) NSString *title;
 @property (readwrite, strong, nonatomic) NSView *contentView;
 @property (readwrite) NSSize contentViewMargins;
@@ -20,8 +25,10 @@
 
 @property (readwrite, weak) id<SLFBoxDelegate> delegate;
 
-
+- (void)addToolbarItem:(NSView *)view
+           withOptions:(SLFToolbarItemLayoutOptions)options;
 - (void)addToolbarButtonWithLabel:(NSString *)text
+                          options:(SLFToolbarItemLayoutOptions)options
                            action:(SEL)action
                            target:(id)target;
 

@@ -20,7 +20,8 @@
 @implementation SLFBox {
     NSButton *_closeButton;
     NSSize _oldFrameSize;
-    NSMutableArray *_buttons;
+    NSMutableArray *_startToolbarItems;
+    NSMutableArray *_endToolbarItems;
 }
 
 #define SLF_BOX_TITLEBAR_HEIGHT 22.0
@@ -37,7 +38,8 @@
     _hasCloseButton = NO;
     _closed = NO;
     
-    _buttons = [[NSMutableArray alloc] init];
+    _startToolbarItems = [[NSMutableArray alloc] init];
+    _endToolbarItems = [[NSMutableArray alloc] init];
 }
 
 - (id)initWithFrame:(NSRect)frame
@@ -371,22 +373,61 @@
     [self setNeedsDisplay:YES];
 }
 
-#pragma mark - Toolbar Buttons
+#pragma mark - Toolbar Items
+
+- (void)layoutItemInToolbar:(NSView *)item
+                withOptions:(SLFToolbarItemLayoutOptions)options
+{
+    NSView *lastItem;
+    CGFloat x;
+    
+    if (options == SLFToolbarItemLayoutNone) {
+        lastItem = [_startToolbarItems lastObject];
+        
+        if (lastItem) {
+            NSRect lastViewFrame = [lastItem frame];
+            x = NSMaxX(lastViewFrame);
+        } else {
+            x = 0.0;
+        }
+        
+        [_startToolbarItems addObject:item];
+        x += SLF_BOX_TOOLBAR_X_OFFSET;
+    } else {
+        lastItem = [_endToolbarItems lastObject];
+        
+        if (lastItem) {
+            NSRect lastViewFrame = [lastItem frame];
+            x = NSMinX(lastViewFrame);
+        } else {
+            x = NSMaxX([self bounds]) - SLF_BOX_TOOLBAR_X_OFFSET;
+        }
+        
+        [_endToolbarItems addObject:item];
+        x -= (SLF_BOX_TOOLBAR_X_OFFSET + [item bounds].size.width);
+        
+    }
+    
+    [item setFrameOrigin:NSMakePoint(x, SLF_BOX_TOOLBAR_Y_OFFSET)];
+}
+
+- (void)addToolbarItem:(NSView *)view
+           withOptions:(SLFToolbarItemLayoutOptions)options
+{
+    [self layoutItemInToolbar:view withOptions:options];
+    [self addSubview:view];
+}
 
 - (void)addToolbarButtonWithLabel:(NSString *)text
+                          options:(SLFToolbarItemLayoutOptions)options
                            action:(SEL)action
                            target:(id)target
 {
-    /*
-    SLFToolbarButton *button = [[SLFToolbarButton alloc] initWithFrame:NSMakeRect(SLF_BOX_TOOLBAR_X_OFFSET,
-                                                                                  SLF_BOX_TOOLBAR_Y_OFFSET,
-                                                                                  100.0, SLF_BOX_TOOLBAR_BUTTON_HEIGHT)];
-     */
     SLFToolbarButton *button = [[SLFToolbarButton alloc] initWithTitle:@"Test" action:action target:target];
-    
-    [button setFrameOrigin:NSMakePoint(SLF_BOX_TOOLBAR_X_OFFSET, SLF_BOX_TOOLBAR_Y_OFFSET)];
-    [self addSubview:button];
+    [self addToolbarItem:button
+             withOptions:options];
 }
+
 @end
 
 #pragma mark - _SLFCloseButtonCell
