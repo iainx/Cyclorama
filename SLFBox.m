@@ -379,7 +379,7 @@
                 withOptions:(SLFToolbarItemLayoutOptions)options
 {
     NSView *lastItem;
-    CGFloat x;
+    CGFloat x, y;
     
     if (options == SLFToolbarItemLayoutNone) {
         lastItem = [_startToolbarItems lastObject];
@@ -408,7 +408,8 @@
         
     }
     
-    [item setFrameOrigin:NSMakePoint(x, SLF_BOX_TOOLBAR_Y_OFFSET)];
+    y = ((SLF_BOX_TITLEBAR_HEIGHT  - [item bounds].size.height) / 2.0) + 2.0;
+    [item setFrameOrigin:NSMakePoint(x, y)];
 }
 
 - (void)addToolbarItem:(NSView *)view

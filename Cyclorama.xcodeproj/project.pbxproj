@@ -19,6 +19,7 @@
 		AE0FDBF2160642BA0000BB9F /* VideoBrowserBox.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0FDBF1160642BA0000BB9F /* VideoBrowserBox.m */; };
 		AE0FDBF7160655960000BB9F /* NSBezierPath+MCAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0FDBF6160655960000BB9F /* NSBezierPath+MCAdditions.m */; };
 		AE1B441B15E6A1F200E20A6F /* FilterItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1B441A15E6A1F200E20A6F /* FilterItem.m */; };
+		AE317DD0163F425600F2239C /* SLFLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = AE317DCF163F425600F2239C /* SLFLabel.m */; };
 		AE48C43E15E6D26B00733AAC /* FilterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AE48C43D15E6D26B00733AAC /* FilterModel.m */; };
 		AE5DB0B315E9734D00C4C720 /* FilterItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5DB0B215E9734D00C4C720 /* FilterItemView.m */; };
 		AE6861031606174C009C9694 /* FilterBrowserBox.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6861021606174C009C9694 /* FilterBrowserBox.m */; };
@@ -172,6 +173,8 @@
 		AE0FDBF6160655960000BB9F /* NSBezierPath+MCAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBezierPath+MCAdditions.m"; sourceTree = "<group>"; };
 		AE1B441915E6A1F200E20A6F /* FilterItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterItem.h; sourceTree = "<group>"; };
 		AE1B441A15E6A1F200E20A6F /* FilterItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterItem.m; sourceTree = "<group>"; };
+		AE317DCE163F425600F2239C /* SLFLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLFLabel.h; sourceTree = "<group>"; };
+		AE317DCF163F425600F2239C /* SLFLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLFLabel.m; sourceTree = "<group>"; };
 		AE48C43C15E6D26B00733AAC /* FilterModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterModel.h; sourceTree = "<group>"; };
 		AE48C43D15E6D26B00733AAC /* FilterModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterModel.m; sourceTree = "<group>"; };
 		AE5DB0B115E9734D00C4C720 /* FilterItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterItemView.h; sourceTree = "<group>"; };
@@ -867,6 +870,8 @@
 				AE86852C160DEE2000A5A3E1 /* SLFBoxDelegate.h */,
 				AEC3194D161765D40027F14C /* SLFHorizontalLayout.h */,
 				AEC3194E161765D40027F14C /* SLFHorizontalLayout.m */,
+				AE317DCE163F425600F2239C /* SLFLabel.h */,
+				AE317DCF163F425600F2239C /* SLFLabel.m */,
 				AED13EF1162B2B1500E9E897 /* SLFToolbarButton.h */,
 				AED13EF2162B2B1500E9E897 /* SLFToolbarButton.m */,
 				AED13EEE16278A7D00E9E897 /* SLFButtonCell.h */,
@@ -1065,6 +1070,7 @@
 				AED13EF016278A7D00E9E897 /* SLFButtonCell.m in Sources */,
 				AED13EF3162B2B1500E9E897 /* SLFToolbarButton.m in Sources */,
 				AE0A98D81635FE110058FB16 /* VideoPlayerView.m in Sources */,
+				AE317DD0163F425600F2239C /* SLFLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

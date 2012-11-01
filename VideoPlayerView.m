@@ -112,6 +112,7 @@ initSelf (VideoPlayerView *self)
     AVPlayerItem *playerItem = [AVPlayerItem playerItemWithAsset:asset];
     AVPlayer *player = [AVPlayer playerWithPlayerItem:playerItem];
     
+    // setMute:NO doesn't appear to do anything
     [player setVolume:0.0];
     
     [_childLayer setPlayer:player];
@@ -121,5 +122,12 @@ initSelf (VideoPlayerView *self)
 - (VideoClip *)clip
 {
     return _clip;
+}
+
+- (void)setRate:(float)rate
+{
+    AVPlayer *player = [_childLayer player];
+    
+    [player setRate:rate];
 }
 @end

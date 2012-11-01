@@ -14,5 +14,6 @@
 @property (readwrite, strong) VideoClip *clip;
 
 - (void)resizeAndPositionVideoLayer;
+- (void)setRate:(float)rate;
 
 @end
