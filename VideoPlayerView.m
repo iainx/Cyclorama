@@ -13,6 +13,9 @@
 @implementation VideoPlayerView {
     VideoLayer *_childLayer;
     CGFloat _scale;
+    
+    AVPlayer *_currentPlayer;
+    AVPlayerItem *_currentPlayerItem;
 }
 
 @synthesize clip = _clip;
@@ -102,21 +105,45 @@ initSelf (VideoPlayerView *self)
 }
  */
 
+- (void)itemFinished:(NSNotification *)note
+{
+    AVPlayerItem *item = [note object];
+    
+    [item seekToTime:kCMTimeZero];
+}
+
 - (void)setClip:(VideoClip *)clip
 {
     if (clip == _clip) {
         return;
     }
     
+    if (_currentPlayer) {
+        [_currentPlayer pause];
+    }
+
+    NSNotificationCenter *ns = [NSNotificationCenter defaultCenter];
+    if (_currentPlayerItem) {
+        [ns removeObserver:self
+                      name:AVPlayerItemDidPlayToEndTimeNotification
+                    object:_currentPlayerItem];
+    }
+    
     AVAsset *asset = [clip asset];
-    AVPlayerItem *playerItem = [AVPlayerItem playerItemWithAsset:asset];
-    AVPlayer *player = [AVPlayer playerWithPlayerItem:playerItem];
+    _currentPlayerItem = [AVPlayerItem playerItemWithAsset:asset];
+    _currentPlayer = [AVPlayer playerWithPlayerItem:_currentPlayerItem];
+    
+    [_currentPlayer setActionAtItemEnd:AVPlayerActionAtItemEndNone];
+    [ns addObserver:self
+           selector:@selector(itemFinished:)
+               name:AVPlayerItemDidPlayToEndTimeNotification
+             object:_currentPlayerItem];
     
     // setMute:NO doesn't appear to do anything
-    [player setVolume:0.0];
+    [_currentPlayer setVolume:0.0];
     
-    [_childLayer setPlayer:player];
-    [player play];
+    [_childLayer setPlayer:_currentPlayer];
+    [_currentPlayer play];
 }
 
 - (VideoClip *)clip
