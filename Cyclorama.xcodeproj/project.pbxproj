@@ -123,6 +123,7 @@
 		AEB9525415ED74D000C00019 /* FilterBrowserView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB9525315ED74D000C00019 /* FilterBrowserView.m */; };
 		AEB9525815ED9D8200C00019 /* FilterBrowserWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB9525615ED9D8200C00019 /* FilterBrowserWindowController.m */; };
 		AEB9525915ED9D8200C00019 /* FilterBrowserWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEB9525715ED9D8200C00019 /* FilterBrowserWindowController.xib */; };
+		AEBAE8401645CD3F00AEC152 /* SwizzleStick.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBAE83F1645CD3F00AEC152 /* SwizzleStick.m */; };
 		AEC028B515A24A0A0033BB3C /* FilterParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = AEC028B415A24A0A0033BB3C /* FilterParameter.m */; };
 		AEC3194F161765D40027F14C /* SLFHorizontalLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = AEC3194E161765D40027F14C /* SLFHorizontalLayout.m */; };
 		AED13EEC1623965500E9E897 /* VideoPlayerBox.m in Sources */ = {isa = PBXBuildFile; fileRef = AED13EEB1623965500E9E897 /* VideoPlayerBox.m */; };
@@ -319,6 +320,8 @@
 		AEB9525515ED9D8200C00019 /* FilterBrowserWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterBrowserWindowController.h; sourceTree = "<group>"; };
 		AEB9525615ED9D8200C00019 /* FilterBrowserWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterBrowserWindowController.m; sourceTree = "<group>"; };
 		AEB9525715ED9D8200C00019 /* FilterBrowserWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FilterBrowserWindowController.xib; sourceTree = "<group>"; };
+		AEBAE83E1645CD3F00AEC152 /* SwizzleStick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwizzleStick.h; sourceTree = "<group>"; };
+		AEBAE83F1645CD3F00AEC152 /* SwizzleStick.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwizzleStick.m; sourceTree = "<group>"; };
 		AEC028B315A24A0A0033BB3C /* FilterParameter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterParameter.h; sourceTree = "<group>"; };
 		AEC028B415A24A0A0033BB3C /* FilterParameter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterParameter.m; sourceTree = "<group>"; };
 		AEC3194D161765D40027F14C /* SLFHorizontalLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLFHorizontalLayout.h; sourceTree = "<group>"; };
@@ -549,6 +552,8 @@
 				AE7D66B4147562080099875F /* VideoClipController.m */,
 				AE7D66B9147562080099875F /* VideoLayer.h */,
 				AE7D66BA147562080099875F /* VideoLayer.m */,
+				AEBAE83E1645CD3F00AEC152 /* SwizzleStick.h */,
+				AEBAE83F1645CD3F00AEC152 /* SwizzleStick.m */,
 				AE7D66DD147566380099875F /* CycDocument.xib */,
 				AE7D66DE147566380099875F /* MainMenu.xib */,
 				AEFE46BF16052C9C006E4122 /* SLFKit */,
@@ -1071,6 +1076,7 @@
 				AED13EF3162B2B1500E9E897 /* SLFToolbarButton.m in Sources */,
 				AE0A98D81635FE110058FB16 /* VideoPlayerView.m in Sources */,
 				AE317DD0163F425600F2239C /* SLFLabel.m in Sources */,
+				AEBAE8401645CD3F00AEC152 /* SwizzleStick.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
