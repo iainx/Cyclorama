@@ -25,7 +25,10 @@ initSelf (VideoPlayerView *self)
 {
     self->_childLayer = [[VideoLayer alloc] init];
     [self->_childLayer setBackgroundColor:[[NSColor redColor] CGColor]];
-    
+    // Disable the implicit animations whenever the position changes
+    NSDictionary *actions = @{@"position": [NSNull null], @"bounds": [NSNull null], @"hidden": [NSNull null], @"contents": [NSNull null]};
+    [self->_childLayer setActions:actions];
+
     [self resizeAndPositionVideoLayer];
     
     [self setWantsLayer:YES];
