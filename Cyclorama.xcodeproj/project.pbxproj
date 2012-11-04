@@ -126,6 +126,7 @@
 		AEBAE8401645CD3F00AEC152 /* SwizzleStick.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBAE83F1645CD3F00AEC152 /* SwizzleStick.m */; };
 		AEC028B515A24A0A0033BB3C /* FilterParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = AEC028B415A24A0A0033BB3C /* FilterParameter.m */; };
 		AEC3194F161765D40027F14C /* SLFHorizontalLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = AEC3194E161765D40027F14C /* SLFHorizontalLayout.m */; };
+		AEC5F3AA1645DF7B008CCE9E /* FilterControlBox.m in Sources */ = {isa = PBXBuildFile; fileRef = AEC5F3A91645DF7B008CCE9E /* FilterControlBox.m */; };
 		AED13EEC1623965500E9E897 /* VideoPlayerBox.m in Sources */ = {isa = PBXBuildFile; fileRef = AED13EEB1623965500E9E897 /* VideoPlayerBox.m */; };
 		AED13EF016278A7D00E9E897 /* SLFButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AED13EEF16278A7D00E9E897 /* SLFButtonCell.m */; };
 		AED13EF3162B2B1500E9E897 /* SLFToolbarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = AED13EF2162B2B1500E9E897 /* SLFToolbarButton.m */; };
@@ -326,6 +327,8 @@
 		AEC028B415A24A0A0033BB3C /* FilterParameter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterParameter.m; sourceTree = "<group>"; };
 		AEC3194D161765D40027F14C /* SLFHorizontalLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLFHorizontalLayout.h; sourceTree = "<group>"; };
 		AEC3194E161765D40027F14C /* SLFHorizontalLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLFHorizontalLayout.m; sourceTree = "<group>"; };
+		AEC5F3A81645DF7B008CCE9E /* FilterControlBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterControlBox.h; sourceTree = "<group>"; };
+		AEC5F3A91645DF7B008CCE9E /* FilterControlBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterControlBox.m; sourceTree = "<group>"; };
 		AED13EEA1623965500E9E897 /* VideoPlayerBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoPlayerBox.h; sourceTree = "<group>"; };
 		AED13EEB1623965500E9E897 /* VideoPlayerBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoPlayerBox.m; sourceTree = "<group>"; };
 		AED13EEE16278A7D00E9E897 /* SLFButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLFButtonCell.h; sourceTree = "<group>"; };
@@ -559,7 +562,8 @@
 				AEFE46BF16052C9C006E4122 /* SLFKit */,
 				AED13EED1623966100E9E897 /* Video Player */,
 				AE8ACBC815FE133700063F7B /* Video Browser */,
-				AEB9525115ED72FF00C00019 /* FilterBrowser */,
+				AEB9525115ED72FF00C00019 /* Filter Browser */,
+				AEC5F3AC1645DF82008CCE9E /* Filter Control */,
 				AE051C081498EA0500A8FB07 /* FilterUIView */,
 			);
 			name = Classes;
@@ -834,7 +838,7 @@
 			path = ..;
 			sourceTree = "<group>";
 		};
-		AEB9525115ED72FF00C00019 /* FilterBrowser */ = {
+		AEB9525115ED72FF00C00019 /* Filter Browser */ = {
 			isa = PBXGroup;
 			children = (
 				AE5DB0B115E9734D00C4C720 /* FilterItemView.h */,
@@ -851,7 +855,16 @@
 				AE6861011606174C009C9694 /* FilterBrowserBox.h */,
 				AE6861021606174C009C9694 /* FilterBrowserBox.m */,
 			);
-			name = FilterBrowser;
+			name = "Filter Browser";
+			sourceTree = "<group>";
+		};
+		AEC5F3AC1645DF82008CCE9E /* Filter Control */ = {
+			isa = PBXGroup;
+			children = (
+				AEC5F3A81645DF7B008CCE9E /* FilterControlBox.h */,
+				AEC5F3A91645DF7B008CCE9E /* FilterControlBox.m */,
+			);
+			name = "Filter Control";
 			sourceTree = "<group>";
 		};
 		AED13EED1623966100E9E897 /* Video Player */ = {
@@ -1077,6 +1090,7 @@
 				AE0A98D81635FE110058FB16 /* VideoPlayerView.m in Sources */,
 				AE317DD0163F425600F2239C /* SLFLabel.m in Sources */,
 				AEBAE8401645CD3F00AEC152 /* SwizzleStick.m in Sources */,
+				AEC5F3AA1645DF7B008CCE9E /* FilterControlBox.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,9 +7,9 @@
 //
 
 #import <Quartz/Quartz.h>
+#import "CALayer+Images.h"
 #import "FilterBrowserView.h"
 #import "FilterItem.h"
-//#import "FilterItemView.h"
 #import "FilterItemLayer.h"
 #import "FilterModel.h"
 #import "utils.h"
@@ -17,6 +17,7 @@
 @implementation FilterBrowserView {
     NSMutableArray *_filterItemLayers;
     FilterItemLayer *_currentLayer;
+    BOOL _isDragging;
 }
 
 - (id)initWithFrame:(NSRect)frame
@@ -36,6 +37,7 @@
     _filterItemLayers = [[NSMutableArray alloc] init];
     [self setWantsLayer:YES];
     [self setModel:model];
+    _isDragging = NO;
     
     return self;
 }
@@ -82,20 +84,6 @@
             rowCount++;
         }
         
-        /*
-        NSTextField *label = [[NSTextField alloc] initWithFrame:NSMakeRect(BROWSER_GUTTER_SIZE * 2,
-                                                                           yOffset + (BROWSER_CATEGORY_GAP - BROWSER_LABEL_HEIGHT),
-                                                                           frameWidth - (BROWSER_GUTTER_SIZE * 4),
-                                                                           BROWSER_LABEL_HEIGHT)];
-        [label setStringValue:[CIFilter localizedNameForCategory:key]];
-        [label setBezeled:NO];
-        [label setBordered:NO];
-        [label setDrawsBackground:NO];
-        [label setEditable:NO];
-        [label setTextColor:[NSColor whiteColor]];
-        
-        [self addSubview:label];
-         */
         CATextLayer *label = [CATextLayer layer];
         [label setFrame:NSMakeRect(BROWSER_GUTTER_SIZE * 2,
                                    yOffset + (BROWSER_CATEGORY_GAP - BROWSER_LABEL_HEIGHT),
@@ -111,15 +99,12 @@
         yOffset += BROWSER_CATEGORY_GAP;
 
         for (FilterItem *item in categoryArray) {
-            //FilterItemView *itemView = [[FilterItemView alloc] initWithFilterItem:item];
             FilterItemLayer *itemLayer = [[FilterItemLayer alloc] initWithFilterItem:item];
             int x;
             
             x = BROWSER_GUTTER_SIZE + (column * 74.0) + ((column - 1) * BROWSER_SPACING_SIZE);
             
-            //[itemView setFrameOrigin:NSMakePoint(x, yOffset)];
             [itemLayer setPosition:NSMakePoint(x, yOffset)];
-            //[self addSubview:itemView];
             [[self layer] addSublayer:itemLayer];
             
             i++;
@@ -224,4 +209,36 @@
     [layer mouseMoved:locationInLayer];
 }
 
+- (void)mouseDragged:(NSEvent *)theEvent
+{
+    NSPoint pointInView = [self convertPoint:[theEvent locationInWindow] fromView:nil];
+    FilterItemLayer *layer = [self findLayerForPoint:pointInView];
+    
+    if (layer == nil) {
+        return;
+    }
+    
+    FilterItem *filterItem = [layer filterItem];
+    
+    NSPasteboard *pb = [NSPasteboard pasteboardWithName:NSDragPboard];
+    NSArray *pbTypes = @[ CycFilterPasteboardType ];
+    [pb declareTypes:pbTypes owner:nil];
+    
+    NSLog(@"Dragging %@", [filterItem filterName]);
+    // We just put the filter name on the pasteboard
+    [pb setData:[[filterItem filterName] dataUsingEncoding:NSUTF8StringEncoding]
+        forType:CycFilterPasteboardType];
+    
+    // Start the drag
+    NSPoint location = NSMakePoint([layer position].x, [layer position].y + [layer bounds].size.height);
+    NSImage *layerImage = [layer draggingImage];
+    [self dragImage:layerImage
+                 at:location
+             offset:NSZeroSize
+              event:theEvent
+         pasteboard:pb
+             source:self
+          slideBack:YES];
+
+}
 @end

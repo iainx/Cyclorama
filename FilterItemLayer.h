@@ -12,7 +12,11 @@
 
 @interface FilterItemLayer : CALayer
 
+@property (readonly, strong) FilterItem *filterItem;
 - (id)initWithFilterItem:(FilterItem *)filterItem;
+
+- (NSImage *)draggingImage;
+
 - (void)mouseEntered:(NSPoint)locationInLayer;
 - (void)mouseExited:(NSPoint)locationInLayer;
 - (void)mouseMoved:(NSPoint)locationInLayer;

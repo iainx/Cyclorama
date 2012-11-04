@@ -7,12 +7,12 @@
 //
 
 #import "FilterItemLayer.h"
+#import "CALayer+Images.h"
 #import "FilterItem.h"
 #import "CursorLayer.h"
 #import "utils.h"
 
 @implementation FilterItemLayer {
-    FilterItem *_filterItem;
     CALayer *_imageLayer;
     CATextLayer *_labelLayer;
     CursorLayer *_cursorLayer;
@@ -79,6 +79,13 @@
                          [_filterItem filterName],
                          [_filterItem previewKey]];
     [_imageLayer setValue:@(filterValue) forKeyPath:keyPath];
+}
+
+#pragma mark - Dragging
+
+- (NSImage *)draggingImage
+{
+    return [_imageLayer createImageForLayer];
 }
 
 #pragma mark - Tracking Area methods
