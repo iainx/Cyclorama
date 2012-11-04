@@ -43,6 +43,7 @@
     CGColorRef blackColor = CGColorCreateFromNSColor([NSColor blackColor]);
     [bgLayer setBackgroundColor:blackColor];
     [rootLayer addSublayer:bgLayer];
+    CGColorRelease(blackColor);
     
     _imageLayer = [CALayer layer];
     [_imageLayer setFrame:CGRectMake(2.0, 12.0, 69.0, 39.0)];

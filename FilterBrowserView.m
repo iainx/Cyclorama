@@ -90,7 +90,10 @@
                                    frameWidth - (BROWSER_GUTTER_SIZE * 4),
                                    BROWSER_LABEL_HEIGHT)];
         [label setString:[CIFilter localizedNameForCategory:key]];
-        [label setForegroundColor:CGColorCreateFromNSColor([NSColor whiteColor])];
+        CGColorRef white = CGColorCreateFromNSColor([NSColor whiteColor]);
+        [label setForegroundColor:white];
+        CGColorRelease(white);
+        
         [label setFontSize:12.0];
         [label setContentsScale:[[NSScreen mainScreen] backingScaleFactor]];
 
