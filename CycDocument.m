@@ -23,6 +23,7 @@
 #import "VideoPlayerBox.h"
 #import "VideoPlayerView.h"
 #import "SLFHorizontalLayout.h"
+#import "FilterControlBox.h"
 
 @implementation CycDocument
 
@@ -57,8 +58,10 @@
     _filterBrowserBox = [[FilterBrowserBox alloc] initWithFrame:NSMakeRect(0.0, 0.0, 236.0, bottomBounds.size.height)];
     _videoBrowserBox = [[VideoBrowserBox alloc] initWithFrame:NSMakeRect(0.0, 0.0, 540.0, bottomBounds.size.height)];
     _videoPlayerBox = [[VideoPlayerBox alloc] initWithFrame:NSMakeRect(0.0, 0.0, 540.0, topBounds.size.height)];
+    _filterControlBox = [[FilterControlBox alloc] initWithFrame:NSMakeRect(0.0, 0.0, 0.0, bottomBounds.size.height)];
     
     [_topLayout addChild:_videoPlayerBox withOptions:SLFHorizontalLayoutFixedWidth];
+    [_topLayout addChild:_filterControlBox withOptions:SLFHorizontalLayoutNone];
     
     [_bottomLayout addChild:_videoBrowserBox withOptions:SLFHorizontalLayoutNone];
     [_bottomLayout addChild:_filterBrowserBox withOptions:SLFHorizontalLayoutFixedWidth];
