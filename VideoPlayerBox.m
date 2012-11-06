@@ -12,6 +12,7 @@
 
 @implementation VideoPlayerBox {
     NSSlider *_rateSlider;
+    CGFloat _videoRate;
 }
 
 @synthesize playerView = _playerView;
@@ -36,7 +37,9 @@ do_init (VideoPlayerBox *box)
             withOptions:SLFToolbarItemLayoutPackEnd];
     [box->_rateSlider setAction:@selector(rateChanged:)];
     [box->_rateSlider setTarget:box];
-    [box->_rateSlider setIntegerValue:1];
+    
+    box->_videoRate = 1.0;
+    [box->_rateSlider setFloatValue:box->_videoRate];
     [box->_rateSlider setMaxValue:2.0];
     [box->_rateSlider setMinValue:0.0];
     
@@ -76,6 +79,7 @@ do_init (VideoPlayerBox *box)
 
 - (void)rateChanged:(id)sender
 {
-    [_playerView setRate:[_rateSlider floatValue]];
+    _videoRate = [_rateSlider floatValue];
+    [_playerView setRate:_videoRate];
 }
 @end

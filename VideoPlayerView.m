@@ -16,6 +16,7 @@
     
     AVPlayer *_currentPlayer;
     AVPlayerItem *_currentPlayerItem;
+    CGFloat _videoRate;
 }
 
 @synthesize clip = _clip;
@@ -30,6 +31,8 @@ initSelf (VideoPlayerView *self)
     [self->_childLayer setActions:actions];
 
     [self resizeAndPositionVideoLayer];
+    
+    self->_videoRate = 1.0;
     
     [self setWantsLayer:YES];
     [[self layer] addSublayer:self->_childLayer];
@@ -144,9 +147,10 @@ initSelf (VideoPlayerView *self)
     
     // setMute:NO doesn't appear to do anything
     [_currentPlayer setVolume:0.0];
-    
+
     [_childLayer setPlayer:_currentPlayer];
     [_currentPlayer play];
+    [_currentPlayer setRate:_videoRate];
 }
 
 - (VideoClip *)clip
@@ -158,6 +162,7 @@ initSelf (VideoPlayerView *self)
 {
     AVPlayer *player = [_childLayer player];
     
+    _videoRate = rate;
     [player setRate:rate];
 }
 @end

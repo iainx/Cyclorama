@@ -8,6 +8,7 @@
 
 #import "FilterItemLayer.h"
 #import "CALayer+Images.h"
+#import "NSImage+FlippedDrawing.h"
 #import "FilterItem.h"
 #import "CursorLayer.h"
 #import "utils.h"
@@ -86,7 +87,24 @@
 
 - (NSImage *)draggingImage
 {
-    return [_imageLayer createImageForLayer];
+    NSImage *image = [_imageLayer createImageForLayer];
+    
+    NSImage *unflipped = [[NSImage alloc] initWithSize:[image size]];
+    [unflipped lockFocus];
+
+    NSAffineTransform *t = [NSAffineTransform transform];
+    [t scaleXBy:1.0 yBy:-1.0];
+    [t translateXBy:0.0 yBy:-[image size].height];
+    [t concat];
+    
+    [image drawAtPoint:NSZeroPoint
+              fromRect:NSZeroRect
+             operation:NSCompositeCopy
+              fraction:1.0];
+    
+    [unflipped unlockFocus];
+    
+    return unflipped;
 }
 
 #pragma mark - Tracking Area methods
