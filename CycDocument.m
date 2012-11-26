@@ -24,6 +24,7 @@
 #import "VideoPlayerView.h"
 #import "SLFHorizontalLayout.h"
 #import "FilterControlBox.h"
+#import "FilterItem.h"
 
 @implementation CycDocument
 
@@ -68,6 +69,7 @@
     
     FilterModel *model = [[NSApp delegate] filterModel];
     [_filterBrowserBox setFilterModel:model];
+    [_filterBrowserBox setViewDelegate:self];
     
     VideoClipController *clipController = [[NSApp delegate] clipController];
     [_videoBrowserBox setClipController:clipController];
@@ -76,6 +78,11 @@
                      forKeyPath:@"selectionIndex"
                         options:NSKeyValueObservingOptionNew
                         context:NULL];
+}
+
+- (void)addFilter:(FilterItem *)item
+{
+    NSLog(@"Add Filter: %@", [item description]);
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath

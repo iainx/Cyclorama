@@ -7,12 +7,14 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "FilterBrowserDelegate.h"
 
 @class FilterModel;
 
 @interface FilterBrowserView : NSView
 
 @property (readwrite, strong, nonatomic) FilterModel *model;
+@property (readwrite, weak) id<FilterBrowserDelegate> delegate;
 
 - (id)initWithFilterModel:(FilterModel *)model;
 @end

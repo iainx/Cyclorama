@@ -55,4 +55,8 @@
     [_filterBrowserView setModel:model];
 }
 
+- (void)setViewDelegate:(id<FilterBrowserDelegate>)viewDelegate
+{
+    [_filterBrowserView setDelegate:viewDelegate];
+}
 @end

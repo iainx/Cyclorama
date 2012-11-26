@@ -175,6 +175,7 @@
 		AE0FDBF6160655960000BB9F /* NSBezierPath+MCAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBezierPath+MCAdditions.m"; sourceTree = "<group>"; };
 		AE1B441915E6A1F200E20A6F /* FilterItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterItem.h; sourceTree = "<group>"; };
 		AE1B441A15E6A1F200E20A6F /* FilterItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterItem.m; sourceTree = "<group>"; };
+		AE2F925B16489B8800C18B1E /* FilterBrowserDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FilterBrowserDelegate.h; sourceTree = "<group>"; };
 		AE317DCE163F425600F2239C /* SLFLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLFLabel.h; sourceTree = "<group>"; };
 		AE317DCF163F425600F2239C /* SLFLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLFLabel.m; sourceTree = "<group>"; };
 		AE48C43C15E6D26B00733AAC /* FilterModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterModel.h; sourceTree = "<group>"; };
@@ -854,6 +855,7 @@
 				AEB9525315ED74D000C00019 /* FilterBrowserView.m */,
 				AE6861011606174C009C9694 /* FilterBrowserBox.h */,
 				AE6861021606174C009C9694 /* FilterBrowserBox.m */,
+				AE2F925B16489B8800C18B1E /* FilterBrowserDelegate.h */,
 			);
 			name = "Filter Browser";
 			sourceTree = "<group>";

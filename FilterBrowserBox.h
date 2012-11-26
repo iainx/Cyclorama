@@ -7,10 +7,12 @@
 //
 
 #import "SLFBox.h"
+#import "FilterBrowserDelegate.h"
 
 @class FilterModel;
 @interface FilterBrowserBox : SLFBox
 
 - (void)setFilterModel:(FilterModel *)model;
+- (void)setViewDelegate:(id<FilterBrowserDelegate>)viewDelegate;
 
 @end

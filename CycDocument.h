@@ -7,6 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "FilterBrowserDelegate.h"
 
 @class CycArrayController;
 @class StageView;
@@ -18,7 +19,7 @@
 @class VideoPlayerBox;
 @class SLFHorizontalLayout;
 
-@interface CycDocument : NSDocument
+@interface CycDocument : NSDocument <FilterBrowserDelegate>
 
 @property (readwrite, strong)NSMutableArray *layers;
 @property (readwrite, strong) FilterBrowserBox *filterBrowserBox;

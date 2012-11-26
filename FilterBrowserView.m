@@ -244,4 +244,24 @@
           slideBack:YES];
 
 }
+
+- (void)mouseDown:(NSEvent *)theEvent
+{
+    if ([theEvent clickCount] != 2) {
+        return;
+    }
+    
+    NSPoint pointInView = [self convertPoint:[theEvent locationInWindow] fromView:nil];
+    FilterItemLayer *layer = [self findLayerForPoint:pointInView];
+    
+    if (layer == nil) {
+        return;
+    }
+    
+    FilterItem *filterItem = [layer filterItem];
+    
+    if ([self delegate]) {
+        [[self delegate] addFilter:filterItem];
+    }
+}
 @end

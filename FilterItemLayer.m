@@ -8,7 +8,6 @@
 
 #import "FilterItemLayer.h"
 #import "CALayer+Images.h"
-#import "NSImage+FlippedDrawing.h"
 #import "FilterItem.h"
 #import "CursorLayer.h"
 #import "utils.h"
