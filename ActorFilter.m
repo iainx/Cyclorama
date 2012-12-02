@@ -38,14 +38,12 @@
     return self;
 }
 
-/*
 - (id)initWithFilterItem:(FilterItem *)filterItem
 {
     self = [self initWithName:[filterItem localizedName]
                forFilterNamed:[filterItem filterName]];
     return self;
 }
-*/
 
 - (id)initWithCoder:(NSCoder *)decoder
 {

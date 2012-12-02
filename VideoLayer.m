@@ -11,37 +11,68 @@
 #import "CycArrayController.h"
 
 @implementation VideoLayer {
-    NSMutableArray *filters;
+    NSMutableArray *_filterInstances;
+    CycArrayController *_filterController;
+    NSMutableArray *_filters;
 }
-
-@synthesize videoController;
 
 - (id)init
 {
     self = [super init];
     
     // array to hold the CIFilters to apply to the layer
-    filters = [[NSMutableArray alloc] init];
+    _filterInstances = [[NSMutableArray alloc] init];
+
+    _filters = [[NSMutableArray alloc] init];
+    _filterController = [[CycArrayController alloc] initWithContent:_filters];
+    
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc addObserver:self
+           selector:@selector(filterAdded:)
+               name:@"ObjectAdded"
+             object:_filterController];
+    [nc addObserver:self
+           selector:@selector(filterRemoved:)
+               name:@"ObjectRemoved"
+             object:_filterController];
 
     return self;
 }
 
+- (void)filterRemoved:(NSNotification *)note
+{
+    NSDictionary *userInfo = [note userInfo];
+    NSNumber *index = userInfo[@"index"];
+    
+    [_filterInstances removeObjectAtIndex:[index unsignedIntegerValue]];
+    [self setFilters:_filterInstances];
+}
 
-- (void)addFilter:(CIFilter *)filter
+- (void)filterAdded:(NSNotification *)note
+{
+    NSDictionary *userInfo = [note userInfo];
+    NSNumber *index = userInfo[@"index"];
+    ActorFilter *af = userInfo[@"object"];
+    
+    [_filterInstances insertObject:[af filter]
+                           atIndex:[index unsignedIntegerValue]];
+    [self setFilters:_filterInstances];
+}
+
+- (void)addFilter:(ActorFilter *)filter
           atIndex:(NSUInteger)index
 {
-    [filters insertObject:filter atIndex:index];
-    [self setFilters:filters];
+    [_filterController insertObject:filter atArrangedObjectIndex:index];
 }
 
 - (void)removeFilterAtIndex:(NSUInteger)index
 {
-    [filters removeObjectAtIndex:index];
-    [self setFilters:filters];
+    [_filterController removeObjectAtArrangedObjectIndex:index];
 }
 
-- (CIFilter *)filterAtIndex:(NSUInteger)index
+- (CIFilter *)filterInstanceAtIndex:(NSUInteger)index
 {
-    return filters[index];
+    return _filterInstances[index];
 }
+
 @end

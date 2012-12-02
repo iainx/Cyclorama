@@ -165,4 +165,9 @@ initSelf (VideoPlayerView *self)
     _videoRate = rate;
     [player setRate:rate];
 }
+
+- (VideoLayer *)currentLayer
+{
+    return _childLayer;
+}
 @end

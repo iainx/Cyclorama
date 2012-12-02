@@ -190,8 +190,6 @@
 
     int idx = 0;
     for (ActorFilter *af in [_filterController arrangedObjects]) {
-        CIFilter *filter;
-        
         NSDictionary *params = [af parameters];
         
         [params enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
@@ -202,10 +200,8 @@
                        options:NSKeyValueObservingOptionNew
                        context:NULL];
         }];
-
-        filter = [af filter];
         
-        [currentLayer addFilter:filter atIndex:idx];
+        [currentLayer addFilter:af atIndex:idx];
         idx++;
     }
 }
@@ -241,6 +237,6 @@
         return nil;
     }
     
-    return [currentLayer filterAtIndex:index];
+    return [currentLayer filterInstanceAtIndex:index];
 }
 @end

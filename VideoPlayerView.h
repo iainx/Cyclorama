@@ -9,11 +9,13 @@
 #import <Cocoa/Cocoa.h>
 
 @class VideoClip;
+@class VideoLayer;
 @interface VideoPlayerView : NSView
 
 @property (readwrite, strong) VideoClip *clip;
 
 - (void)resizeAndPositionVideoLayer;
 - (void)setRate:(float)rate;
+- (VideoLayer *)currentLayer;
 
 @end

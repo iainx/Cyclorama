@@ -26,16 +26,20 @@
 #import "FilterControlBox.h"
 #import "FilterItem.h"
 
-@implementation CycDocument
+@implementation CycDocument {
+}
 
 - (id)init
 {
     self = [super init];
-    if (self) {
-        _layers = [[NSMutableArray alloc] init];
-        [_layers addObject:[[VideoLayer alloc] init]];
+    if (!self) {
+        return nil;
     }
     
+    /*
+    _filters = [[NSMutableArray alloc] init];
+    _filterController = [[CycArrayController alloc] initWithContent:_filters];
+    */
     return self;
 }
 
@@ -52,9 +56,6 @@
     NSRect topBounds = [_topLayout bounds];
     
     [super windowControllerDidLoadNib:aController];
-    
-    [_stageView setLayerController:_layerController];
-    [_layerController setContent:_layers];
     
     _filterBrowserBox = [[FilterBrowserBox alloc] initWithFrame:NSMakeRect(0.0, 0.0, 236.0, bottomBounds.size.height)];
     _videoBrowserBox = [[VideoBrowserBox alloc] initWithFrame:NSMakeRect(0.0, 0.0, 540.0, bottomBounds.size.height)];
@@ -82,6 +83,12 @@
 
 - (void)addFilter:(FilterItem *)item
 {
+    VideoPlayerView *playerView = [_videoPlayerBox playerView];
+    VideoLayer *layer = [playerView currentLayer];
+    
+    ActorFilter *af = [[ActorFilter alloc] initWithFilterItem:item];
+    
+    [layer addFilter:af atIndex:0];
     NSLog(@"Add Filter: %@", [item description]);
 }
 
