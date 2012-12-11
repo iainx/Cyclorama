@@ -10,9 +10,12 @@
 
 @class VideoClip;
 @class VideoLayer;
+@class CycArrayController;
+
 @interface VideoPlayerView : NSView
 
 @property (readwrite, strong) VideoClip *clip;
+@property (readwrite, strong) CycArrayController *layerController;
 
 - (void)resizeAndPositionVideoLayer;
 - (void)setRate:(float)rate;
