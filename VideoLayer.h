@@ -9,12 +9,14 @@
 #import <AVFoundation/AVFoundation.h>
 
 @class ActorFilter;
+@class CycArrayController;
 
 @interface VideoLayer : AVPlayerLayer
+
+@property (readonly, strong) CycArrayController *filterController;
 
 - (void)addFilter:(ActorFilter *)filter atIndex:(NSUInteger)index;
 - (void)removeFilterAtIndex:(NSUInteger)index;
 - (CIFilter *)filterInstanceAtIndex:(NSUInteger)index;
-- (NSArray *)filters;
 
 @end

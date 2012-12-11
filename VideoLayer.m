@@ -12,7 +12,6 @@
 
 @implementation VideoLayer {
     NSMutableArray *_filterInstances;
-    CycArrayController *_filterController;
     NSMutableArray *_filters;
 }
 
