@@ -15,5 +15,6 @@
 - (void)addFilter:(ActorFilter *)filter atIndex:(NSUInteger)index;
 - (void)removeFilterAtIndex:(NSUInteger)index;
 - (CIFilter *)filterInstanceAtIndex:(NSUInteger)index;
+- (NSArray *)filters;
 
 @end
