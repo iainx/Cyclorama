@@ -27,6 +27,8 @@
 #import "FilterItem.h"
 
 @implementation CycDocument {
+    NSMutableArray *_layers;
+    CycArrayController *_layerController;
 }
 
 - (id)init
@@ -35,11 +37,10 @@
     if (!self) {
         return nil;
     }
+
+    _layers = [[NSMutableArray alloc] init];
+    _layerController = [[CycArrayController alloc] initWithContent:_layers];
     
-    /*
-    _filters = [[NSMutableArray alloc] init];
-    _filterController = [[CycArrayController alloc] initWithContent:_filters];
-    */
     return self;
 }
 
@@ -61,6 +62,9 @@
     _videoBrowserBox = [[VideoBrowserBox alloc] initWithFrame:NSMakeRect(0.0, 0.0, 540.0, bottomBounds.size.height)];
     _videoPlayerBox = [[VideoPlayerBox alloc] initWithFrame:NSMakeRect(0.0, 0.0, 540.0, topBounds.size.height)];
     _filterControlBox = [[FilterControlBox alloc] initWithFrame:NSMakeRect(0.0, 0.0, 0.0, bottomBounds.size.height)];
+    
+    VideoPlayerView *playerView = [_videoPlayerBox playerView];
+    [playerView setLayerController:_layerController];
     
     [_topLayout addChild:_videoPlayerBox withOptions:SLFHorizontalLayoutFixedWidth];
     [_topLayout addChild:_filterControlBox withOptions:SLFHorizontalLayoutNone];
