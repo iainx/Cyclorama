@@ -20,6 +20,10 @@
 {
     self = [super init];
     
+    // Disable the implicit animations whenever the position changes
+    NSDictionary *actions = @{@"position": [NSNull null], @"bounds": [NSNull null], @"hidden": [NSNull null], @"contents": [NSNull null]};
+    [self setActions:actions];
+
     // array to hold the CIFilters to apply to the layer
     _filterInstances = [[NSMutableArray alloc] init];
 
