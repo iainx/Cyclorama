@@ -155,7 +155,7 @@
     
     VideoLayer *currentLayer = [_layerController arrangedObjects][0];
     NSLog(@"Setting filter on %p", currentLayer);
-    [currentLayer addFilter:filter atIndex:[index unsignedIntValue]];
+    [currentLayer addFilter:af atIndex:[index unsignedIntValue]];
 }
 
 - (void)objectRemoved:(NSNotification *)note

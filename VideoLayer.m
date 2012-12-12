@@ -78,9 +78,9 @@
     return _filterInstances[index];
 }
 
-- (NSArray *)filters
+/*- (NSArray *)filters
 {
     return [_filterController arrangedObjects];
-}
+}*/
 
 @end
