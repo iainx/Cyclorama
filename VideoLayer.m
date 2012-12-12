@@ -19,6 +19,8 @@
 {
     self = [super init];
     
+    [self setBackgroundColor:[[NSColor redColor] CGColor]];
+    
     // Disable the implicit animations whenever the position changes
     NSDictionary *actions = @{@"position": [NSNull null], @"bounds": [NSNull null], @"hidden": [NSNull null], @"contents": [NSNull null]};
     [self setActions:actions];

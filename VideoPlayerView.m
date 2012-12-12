@@ -25,7 +25,6 @@ static void
 initSelf (VideoPlayerView *self)
 {
     self->_childLayer = [[VideoLayer alloc] init];
-    [self->_childLayer setBackgroundColor:[[NSColor redColor] CGColor]];
     
     [self resizeAndPositionVideoLayer];
     
