@@ -17,7 +17,7 @@
 @property (readwrite, strong) VideoClip *clip;
 @property (readwrite, strong) CycArrayController *layerController;
 
-- (void)resizeAndPositionVideoLayer;
+- (void)resizeAndPositionVideoLayer:(VideoLayer *)videoLayer;
 - (void)setRate:(float)rate;
 - (VideoLayer *)currentLayer;
 

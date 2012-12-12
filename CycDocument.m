@@ -66,6 +66,8 @@
     VideoPlayerView *playerView = [_videoPlayerBox playerView];
     [playerView setLayerController:_layerController];
     
+    [_layerController addObject:[[VideoLayer alloc] init]];
+    
     [_topLayout addChild:_videoPlayerBox withOptions:SLFHorizontalLayoutFixedWidth];
     [_topLayout addChild:_filterControlBox withOptions:SLFHorizontalLayoutNone];
     

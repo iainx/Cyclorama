@@ -7,11 +7,11 @@
 //
 
 #import "VideoPlayerView.h"
+#import "CycArrayController.h"
 #import "VideoLayer.h"
 #import "VideoClip.h"
 
 @implementation VideoPlayerView {
-    VideoLayer *_childLayer;
     CGFloat _scale;
     
     AVPlayer *_currentPlayer;
@@ -20,18 +20,14 @@
 }
 
 @synthesize clip = _clip;
+@synthesize layerController = _layerController;
 
 static void
 initSelf (VideoPlayerView *self)
 {
-    self->_childLayer = [[VideoLayer alloc] init];
-    
-    [self resizeAndPositionVideoLayer];
-    
     self->_videoRate = 1.0;
     
     [self setWantsLayer:YES];
-    [[self layer] addSublayer:self->_childLayer];
 }
 
 - (id)initWithFrame:(NSRect)frame
@@ -46,7 +42,7 @@ initSelf (VideoPlayerView *self)
 }
 
 // FIXME: Size is based on 720p screen. Should use actual screen size
-- (void)resizeAndPositionVideoLayer
+- (void)resizeAndPositionVideoLayer:(VideoLayer *)videoLayer
 {
     NSRect frameRect;
     NSRect bounds;
@@ -85,18 +81,22 @@ initSelf (VideoPlayerView *self)
         }
         
         //NSLog(@"Setting bounds to %@ for %@", NSStringFromRect(layerFrame), NSStringFromRect(frameRect));
-        [_childLayer setContentsScale:_scale];
-        [_childLayer setBounds:layerFrame];
-        [_childLayer setPosition:CGPointMake(NSMidX(frameRect), NSMidY(frameRect))];
+        [videoLayer setContentsScale:_scale];
+        [videoLayer setBounds:layerFrame];
+        [videoLayer setPosition:CGPointMake(NSMidX(frameRect), NSMidY(frameRect))];
     }
     
-    [_childLayer setContentsScale:scale];
+    [videoLayer setContentsScale:scale];
 }
 
 - (void)setFrame:(NSRect)frameRect
 {
     [super setFrame:frameRect];
-    [self resizeAndPositionVideoLayer];
+    
+    NSArray *layers = [_layerController arrangedObjects];
+    for (VideoLayer *layer in layers) {
+        [self resizeAndPositionVideoLayer:layer];
+    }
 }
 
 /*
@@ -106,6 +106,13 @@ initSelf (VideoPlayerView *self)
     NSRectFill(NSInsetRect([self bounds], 0.0, 10.0));
 }
  */
+
+- (VideoLayer *)currentLayer
+{
+    NSArray *selectedLayers = [_layerController selectedObjects];
+    
+    return selectedLayers[0];
+}
 
 - (void)itemFinished:(NSNotification *)note
 {
@@ -144,7 +151,9 @@ initSelf (VideoPlayerView *self)
     // setMute:NO doesn't appear to do anything
     [_currentPlayer setVolume:0.0];
 
-    [_childLayer setPlayer:_currentPlayer];
+    VideoLayer *currentLayer = [self currentLayer];
+    
+    [currentLayer setPlayer:_currentPlayer];
     [_currentPlayer play];
     [_currentPlayer setRate:_videoRate];
 }
@@ -156,14 +165,41 @@ initSelf (VideoPlayerView *self)
 
 - (void)setRate:(float)rate
 {
-    AVPlayer *player = [_childLayer player];
+    VideoLayer *currentLayer = [self currentLayer];
+    AVPlayer *player = [currentLayer player];
     
     _videoRate = rate;
     [player setRate:rate];
 }
 
-- (VideoLayer *)currentLayer
+- (void)layerAdded:(NSNotification *)note
 {
-    return _childLayer;
+    NSDictionary *userInfo = [note userInfo];
+    VideoLayer *layer = userInfo[@"object"];
+    
+    [self resizeAndPositionVideoLayer:layer];
+    [[self layer] addSublayer:layer];
 }
+
+- (void)setLayerController:(CycArrayController *)layerController
+{
+    if (_layerController != nil) {
+        NSLog(@"Trying to set layerController more than once");
+        return;
+    }
+    
+    _layerController = layerController;
+    
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc addObserver:self
+           selector:@selector(layerAdded:)
+               name:@"ObjectAdded"
+             object:layerController];
+}
+
+- (CycArrayController *)layerController
+{
+    return _layerController;
+}
+
 @end
