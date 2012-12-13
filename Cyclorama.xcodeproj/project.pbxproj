@@ -19,6 +19,7 @@
 		AE0FDBF2160642BA0000BB9F /* VideoBrowserBox.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0FDBF1160642BA0000BB9F /* VideoBrowserBox.m */; };
 		AE0FDBF7160655960000BB9F /* NSBezierPath+MCAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0FDBF6160655960000BB9F /* NSBezierPath+MCAdditions.m */; };
 		AE1B441B15E6A1F200E20A6F /* FilterItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1B441A15E6A1F200E20A6F /* FilterItem.m */; };
+		AE2D29771678EB770001FA1A /* FilterControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE2D29761678EB770001FA1A /* FilterControlView.m */; };
 		AE317DD0163F425600F2239C /* SLFLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = AE317DCF163F425600F2239C /* SLFLabel.m */; };
 		AE48C43E15E6D26B00733AAC /* FilterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AE48C43D15E6D26B00733AAC /* FilterModel.m */; };
 		AE5DB0B315E9734D00C4C720 /* FilterItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5DB0B215E9734D00C4C720 /* FilterItemView.m */; };
@@ -175,6 +176,8 @@
 		AE0FDBF6160655960000BB9F /* NSBezierPath+MCAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBezierPath+MCAdditions.m"; sourceTree = "<group>"; };
 		AE1B441915E6A1F200E20A6F /* FilterItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterItem.h; sourceTree = "<group>"; };
 		AE1B441A15E6A1F200E20A6F /* FilterItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterItem.m; sourceTree = "<group>"; };
+		AE2D29751678EB770001FA1A /* FilterControlView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterControlView.h; sourceTree = "<group>"; };
+		AE2D29761678EB770001FA1A /* FilterControlView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterControlView.m; sourceTree = "<group>"; };
 		AE2F925B16489B8800C18B1E /* FilterBrowserDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FilterBrowserDelegate.h; sourceTree = "<group>"; };
 		AE317DCE163F425600F2239C /* SLFLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLFLabel.h; sourceTree = "<group>"; };
 		AE317DCF163F425600F2239C /* SLFLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLFLabel.m; sourceTree = "<group>"; };
@@ -865,6 +868,8 @@
 			children = (
 				AEC5F3A81645DF7B008CCE9E /* FilterControlBox.h */,
 				AEC5F3A91645DF7B008CCE9E /* FilterControlBox.m */,
+				AE2D29751678EB770001FA1A /* FilterControlView.h */,
+				AE2D29761678EB770001FA1A /* FilterControlView.m */,
 			);
 			name = "Filter Control";
 			sourceTree = "<group>";
@@ -1093,6 +1098,7 @@
 				AE317DD0163F425600F2239C /* SLFLabel.m in Sources */,
 				AEBAE8401645CD3F00AEC152 /* SwizzleStick.m in Sources */,
 				AEC5F3AA1645DF7B008CCE9E /* FilterControlBox.m in Sources */,
+				AE2D29771678EB770001FA1A /* FilterControlView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

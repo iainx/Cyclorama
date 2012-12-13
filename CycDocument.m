@@ -24,6 +24,7 @@
 #import "VideoPlayerView.h"
 #import "SLFHorizontalLayout.h"
 #import "FilterControlBox.h"
+#import "FilterControlView.h"
 #import "FilterItem.h"
 
 @implementation CycDocument {
@@ -67,6 +68,9 @@
     [playerView setLayerController:_layerController];
     
     [_layerController addObject:[[VideoLayer alloc] init]];
+    
+    FilterControlView *_filterView = [_filterControlBox filterControlView];
+    [_filterView setLayerController:_layerController];
     
     [_topLayout addChild:_videoPlayerBox withOptions:SLFHorizontalLayoutFixedWidth];
     [_topLayout addChild:_filterControlBox withOptions:SLFHorizontalLayoutNone];

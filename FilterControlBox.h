@@ -8,6 +8,8 @@
 
 #import "SLFBox.h"
 
+@class FilterControlView;
 @interface FilterControlBox : SLFBox
 
+@property (readwrite, strong) FilterControlView *filterControlView;
 @end

@@ -11,8 +11,8 @@
 #import "CycArrayController.h"
 
 @implementation VideoLayer {
-    NSMutableArray *_filterInstances;
-    NSMutableArray *_filters;
+    NSMutableArray *_filterInstances; // CIFilter instances
+    NSMutableArray *_actorFilters; // ActorFilters
 }
 
 - (id)init
@@ -28,8 +28,8 @@
     // array to hold the CIFilters to apply to the layer
     _filterInstances = [[NSMutableArray alloc] init];
 
-    _filters = [[NSMutableArray alloc] init];
-    _filterController = [[CycArrayController alloc] initWithContent:_filters];
+    _actorFilters = [[NSMutableArray alloc] init];
+    _filterController = [[CycArrayController alloc] initWithContent:_actorFilters];
     
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     [nc addObserver:self
@@ -80,9 +80,9 @@
     return _filterInstances[index];
 }
 
-/*- (NSArray *)filters
+- (NSArray *)actorFilters
 {
     return [_filterController arrangedObjects];
-}*/
+}
 
 @end

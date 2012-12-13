@@ -7,6 +7,7 @@
 //
 
 #import "FilterControlBox.h"
+#import "FilterControlView.h"
 
 @implementation FilterControlBox
 
@@ -17,6 +18,9 @@
         [self setHasToolbar:NO];
         [self setHasCloseButton:NO];
         [self setTitle:@"Filter Control"];
+        
+        _filterControlView = [[FilterControlView alloc] init];
+        [self setContentView:_filterControlView];
     }
     
     return self;
