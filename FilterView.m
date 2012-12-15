@@ -23,7 +23,6 @@
 
 - (void)drawRect:(NSRect)dirtyRect
 {
-    NSLog(@"Draw %f", [self bounds].size.height);
     NSRect innerRect = NSMakeRect(0.5, 0.5, [self bounds].size.width - 1, [self bounds].size.height - 1);
     NSBezierPath *path = [NSBezierPath bezierPathWithRoundedRect:innerRect
                                                          xRadius:5.0 yRadius:5.0];

@@ -30,11 +30,13 @@
     return self;
 }
 
+/*
 - (void)drawRect:(NSRect)dirtyRect
 {
     [[NSColor blueColor] set];
     NSRectFill([self bounds]);
 }
+*/
 
 - (void)resizeSubviewsWithOldSize:(NSSize)oldSize
 {
@@ -72,8 +74,6 @@ static int selectionIndexContext;
     
     NSRect viewBounds = [newView bounds];
     viewBounds.origin = insertPoint;
-    NSLog(@"viewBounds height: %f", [self bounds].size.height);
-    
     viewBounds.size.height = [self bounds].size.height - 10.0;
     
     [newView setFrame:viewBounds];
