@@ -292,9 +292,23 @@
 
 #pragma mark - Accessors
 
+- (NSSize)contentViewMargins
+{
+    NSRect bounds = [self bounds];
+    CGFloat toolbarheight, height;
+    
+    if ([self hasToolbar]) {
+        toolbarheight = SLF_BOX_TOOLBAR_HEIGHT;
+    } else {
+        toolbarheight = 0.0;
+    }
+    height = bounds.size.height - (toolbarheight + SLF_BOX_TITLEBAR_HEIGHT);
+    
+    return NSMakeSize(bounds.size.width, height);
+}
+
 - (void)setChildFrame
 {
-    NSRect boxBounds = [self bounds];
     NSView *childView = [self contentView];
     CGFloat toolbarHeight;
     
@@ -306,15 +320,16 @@
     NSSize contentMargins = [self contentViewMargins];
 
     if ([self hasToolbar]) {
-        toolbarHeight = SLF_BOX_TITLEBAR_HEIGHT + 4;
+        toolbarHeight = SLF_BOX_TOOLBAR_HEIGHT + 4.0;
     } else {
-        toolbarHeight = 3.0;
+        toolbarHeight = 4.0;
     }
-    
+    /*
     childFrame = NSMakeRect(3.0 + contentMargins.width, toolbarHeight + contentMargins.height,
                             boxBounds.size.width - (3.0 * 2) - (contentMargins.width * 2),
                             boxBounds.size.height - (toolbarHeight + SLF_BOX_TITLEBAR_HEIGHT + (contentMargins.height * 2)));
-    
+    */
+    childFrame = NSMakeRect(3.0, toolbarHeight, contentMargins.width - (3.0 * 2), contentMargins.height - (3.0 * 2));
     [childView setFrame:childFrame];
 }
 

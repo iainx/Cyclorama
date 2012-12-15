@@ -18,7 +18,6 @@ typedef enum {
 
 @property (readwrite, copy) NSString *title;
 @property (readwrite, strong, nonatomic) NSView *contentView;
-@property (readwrite) NSSize contentViewMargins;
 @property (readwrite, nonatomic) BOOL hasToolbar;
 @property (readwrite, nonatomic) BOOL hasCloseButton;
 @property (readwrite, getter = isClosed) BOOL closed;
