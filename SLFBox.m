@@ -330,6 +330,8 @@
                             boxBounds.size.height - (toolbarHeight + SLF_BOX_TITLEBAR_HEIGHT + (contentMargins.height * 2)));
     */
     childFrame = NSMakeRect(3.0, toolbarHeight, contentMargins.width - (3.0 * 2), contentMargins.height - (3.0 * 2));
+    
+    NSLog(@"Setting child frame for %@ to %f", [self title], contentMargins.height - 6.0);
     [childView setFrame:childFrame];
 }
 

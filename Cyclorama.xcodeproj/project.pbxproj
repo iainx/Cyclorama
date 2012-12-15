@@ -128,6 +128,7 @@
 		AEC028B515A24A0A0033BB3C /* FilterParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = AEC028B415A24A0A0033BB3C /* FilterParameter.m */; };
 		AEC3194F161765D40027F14C /* SLFHorizontalLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = AEC3194E161765D40027F14C /* SLFHorizontalLayout.m */; };
 		AEC5F3AA1645DF7B008CCE9E /* FilterControlBox.m in Sources */ = {isa = PBXBuildFile; fileRef = AEC5F3A91645DF7B008CCE9E /* FilterControlBox.m */; };
+		AED0C89B167BC0B60056E078 /* FilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = AED0C89A167BC0B60056E078 /* FilterView.m */; };
 		AED13EEC1623965500E9E897 /* VideoPlayerBox.m in Sources */ = {isa = PBXBuildFile; fileRef = AED13EEB1623965500E9E897 /* VideoPlayerBox.m */; };
 		AED13EF016278A7D00E9E897 /* SLFButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AED13EEF16278A7D00E9E897 /* SLFButtonCell.m */; };
 		AED13EF3162B2B1500E9E897 /* SLFToolbarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = AED13EF2162B2B1500E9E897 /* SLFToolbarButton.m */; };
@@ -333,6 +334,8 @@
 		AEC3194E161765D40027F14C /* SLFHorizontalLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLFHorizontalLayout.m; sourceTree = "<group>"; };
 		AEC5F3A81645DF7B008CCE9E /* FilterControlBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterControlBox.h; sourceTree = "<group>"; };
 		AEC5F3A91645DF7B008CCE9E /* FilterControlBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterControlBox.m; sourceTree = "<group>"; };
+		AED0C899167BC0B60056E078 /* FilterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterView.h; sourceTree = "<group>"; };
+		AED0C89A167BC0B60056E078 /* FilterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterView.m; sourceTree = "<group>"; };
 		AED13EEA1623965500E9E897 /* VideoPlayerBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoPlayerBox.h; sourceTree = "<group>"; };
 		AED13EEB1623965500E9E897 /* VideoPlayerBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoPlayerBox.m; sourceTree = "<group>"; };
 		AED13EEE16278A7D00E9E897 /* SLFButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLFButtonCell.h; sourceTree = "<group>"; };
@@ -870,6 +873,8 @@
 				AEC5F3A91645DF7B008CCE9E /* FilterControlBox.m */,
 				AE2D29751678EB770001FA1A /* FilterControlView.h */,
 				AE2D29761678EB770001FA1A /* FilterControlView.m */,
+				AED0C899167BC0B60056E078 /* FilterView.h */,
+				AED0C89A167BC0B60056E078 /* FilterView.m */,
 			);
 			name = "Filter Control";
 			sourceTree = "<group>";
@@ -1099,6 +1104,7 @@
 				AEBAE8401645CD3F00AEC152 /* SwizzleStick.m in Sources */,
 				AEC5F3AA1645DF7B008CCE9E /* FilterControlBox.m in Sources */,
 				AE2D29771678EB770001FA1A /* FilterControlView.m in Sources */,
+				AED0C89B167BC0B60056E078 /* FilterView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

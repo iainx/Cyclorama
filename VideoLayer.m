@@ -80,9 +80,4 @@
     return _filterInstances[index];
 }
 
-- (NSArray *)actorFilters
-{
-    return [_filterController arrangedObjects];
-}
-
 @end
