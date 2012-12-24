@@ -50,6 +50,11 @@
     return self;
 }
 
+- (NSSize)intrinsicContentSize
+{
+    return NSMakeSize(236.0, NSViewNoInstrinsicMetric);
+}
+
 - (void)setFilterModel:(FilterModel *)model
 {
     [_filterBrowserView setModel:model];
