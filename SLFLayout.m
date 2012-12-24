@@ -36,11 +36,13 @@
     return self;
 }
 
+/*
 - (void)drawRect:(NSRect)dirtyRect
 {
     [[NSColor purpleColor] set];
     NSRectFill([self bounds]);
 }
+*/
 
 #pragma mark - Constraints
 
@@ -76,7 +78,7 @@
             viewsDict[@"currentView"] = currentView;
             
             if (previousView == nil) {
-                vf = [self visualFormatOrientationWithString:@"|-[currentView]" inverted:NO];
+                vf = [self visualFormatOrientationWithString:@"|[currentView]" inverted:NO];
                 [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:vf
                                                                                          options:0
                                                                                          metrics:nil
@@ -91,7 +93,7 @@
                                                                                            views:viewsDict]];
             }
             
-            vf = [self visualFormatOrientationWithString:@"|-[currentView]-|" inverted:YES];
+            vf = [self visualFormatOrientationWithString:@"|[currentView]|" inverted:YES];
             [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:vf
                                                                                      options:0
                                                                                      metrics:nil
@@ -100,7 +102,7 @@
         }
         
         if ([[self subviews] count] > 0) {
-            vf = [self visualFormatOrientationWithString:@"[currentView]-|" inverted:NO];
+            vf = [self visualFormatOrientationWithString:@"[currentView]|" inverted:NO];
             [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:vf
                                                                                      options:0
                                                                                      metrics:nil
