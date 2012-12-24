@@ -72,6 +72,13 @@ do_init (VideoPlayerBox *box)
     return self;
 }
 
+- (NSSize)intrinsicContentSize
+{
+    return NSMakeSize(540.0, NSViewNoInstrinsicMetric);
+}
+
+#pragma mark - Stuff
+
 - (void)testAction:(id)sender
 {
     NSLog(@"Test clicked");
