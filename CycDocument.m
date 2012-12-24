@@ -23,6 +23,7 @@
 #import "VideoPlayerBox.h"
 #import "VideoPlayerView.h"
 #import "SLFHorizontalLayout.h"
+#import "SLFLayout.h"
 #import "FilterControlBox.h"
 #import "FilterControlView.h"
 #import "FilterItem.h"
@@ -72,12 +73,11 @@
     FilterControlView *_filterView = [_filterControlBox filterControlView];
     [_filterView setLayerController:_layerController];
     
-    [_topLayout addChild:_videoPlayerBox withOptions:SLFHorizontalLayoutFixedWidth];
-    [_topLayout addChild:_filterControlBox withOptions:SLFHorizontalLayoutNone];
-    
-    [_bottomLayout addChild:_videoBrowserBox withOptions:SLFHorizontalLayoutNone];
-    [_bottomLayout addChild:_filterBrowserBox withOptions:SLFHorizontalLayoutFixedWidth];
-    
+    [_topLayout addSubview:_videoPlayerBox];
+    [_topLayout addSubview:_filterControlBox];
+    [_bottomLayout addSubview:_videoBrowserBox];
+    [_bottomLayout addSubview:_filterBrowserBox];
+
     FilterModel *model = [[NSApp delegate] filterModel];
     [_filterBrowserBox setFilterModel:model];
     [_filterBrowserBox setViewDelegate:self];
