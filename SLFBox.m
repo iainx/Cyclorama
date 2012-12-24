@@ -290,6 +290,14 @@
     }
 }
 
+#pragma mark - Constraints
+
+- (NSSize)intrinsicContentSize
+{
+    // By default the box's width is set by the child, and the height is set by the parent
+    return NSMakeSize(NSViewNoInstrinsicMetric, NSViewNoInstrinsicMetric);
+}
+
 #pragma mark - Accessors
 
 - (NSSize)contentViewMargins
