@@ -294,7 +294,7 @@
 
 - (NSSize)intrinsicContentSize
 {
-    // By default the box's width is set by the child, and the height is set by the parent
+    // By default the box has no intrinsic size
     return NSMakeSize(NSViewNoInstrinsicMetric, NSViewNoInstrinsicMetric);
 }
 
