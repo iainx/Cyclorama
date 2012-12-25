@@ -22,6 +22,7 @@
     NSSize _oldFrameSize;
     NSMutableArray *_startToolbarItems;
     NSMutableArray *_endToolbarItems;
+    NSLayoutConstraint *_widthConstraint;
 }
 
 #define SLF_BOX_TITLEBAR_HEIGHT 22.0
@@ -177,7 +178,8 @@
     // Outside the clipping
     
     [NSGraphicsContext saveGraphicsState];
-    if (bounds.size.width == 22 && [_contentView isHidden]) {
+    //if (bounds.size.width == 22 && [_contentView isHidden]) {
+    if ([self isClosed]) {
         NSAffineTransform *tr = [NSAffineTransform transform];
         float dx, dy;
         
@@ -235,58 +237,32 @@
 
 - (void)closeAction:(id)sender
 {
-    BOOL shouldContinue = YES;
-    
     if ([self isClosed]) {
-        NSRect oldFrame = NSMakeRect([self frame].origin.x - (_oldFrameSize.width - 22.0),
-                                     [self frame].origin.y,
-                                     _oldFrameSize.width, _oldFrameSize.height);
-
-        if ([_delegate respondsToSelector:@selector(box:willOpenToRect:)]) {
-            shouldContinue = [_delegate box:self willOpenToRect:oldFrame];
-        }
-        
-        if (shouldContinue == NO) {
-            return;
-        }
-        
-        [_contentView setHidden:NO];
-        [[self animator] setFrame:oldFrame];
-        
         [self setClosed:NO];
+        [_contentView setHidden:NO];
         [(_SLFCloseButtonCell *)[_closeButton cell] setOpenButton:NO];
         [_closeButton setNeedsDisplay];
-        
-        if ([_delegate respondsToSelector:@selector(boxDidOpen:)]) {
-            [_delegate boxDidOpen:self];
-        }
+
+        [self.superview removeConstraint:_widthConstraint];
+        _widthConstraint = nil;
     } else {
-        NSRect newFrame = [self frame];
-        _oldFrameSize = newFrame.size;
-        
-        newFrame.origin.x = newFrame.origin.x + newFrame.size.width - SLF_BOX_TITLEBAR_HEIGHT;
-        newFrame.size.width = SLF_BOX_TITLEBAR_HEIGHT;
-        
-        if ([_delegate respondsToSelector:@selector(box:willCloseToRect:)]) {
-            shouldContinue = [_delegate box:self willCloseToRect:newFrame];
-        }
-        
-        if (shouldContinue == NO) {
-            return;
-        }
-        
-        [[self animator] setFrame:newFrame];
-        
+        NSLayoutConstraint *widthConstraint = [NSLayoutConstraint constraintWithItem:self
+                                                                           attribute:NSLayoutAttributeWidth
+                                                                           relatedBy:NSLayoutRelationEqual
+                                                                              toItem:nil
+                                                                           attribute:NSLayoutAttributeNotAnAttribute
+                                                                          multiplier:1.0
+                                                                            constant:22.0];
+        [self.superview addConstraint:widthConstraint];
+        _widthConstraint = widthConstraint;
+
         // Hide the contents
-        [[_contentView animator ]setHidden:YES];
-        
+        [_contentView setHidden:YES];
+
         [self setClosed:YES];
         [(_SLFCloseButtonCell *)[_closeButton cell] setOpenButton:YES];
         [_closeButton setNeedsDisplay];
-        
-        if ([_delegate respondsToSelector:@selector(boxDidClose:)]) {
-            [_delegate boxDidClose:self];
-        }
+        [self setNeedsDisplay:YES];
     }
 }
 

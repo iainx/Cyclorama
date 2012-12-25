@@ -10,6 +10,8 @@
 
 @implementation SLFLayout {
     NSArray *_constraints;
+    NSMapTable *_widthConstraints;
+    NSLayoutConstraint *_widthConstraint;
 }
 
 @synthesize horizontal = _horizontal;
@@ -21,6 +23,7 @@
         return nil;
     }
     
+    //[self setWantsLayer:YES];
     _horizontal = YES;
     return self;
 }
@@ -129,6 +132,39 @@
     }
 }
 
+#pragma mark - Opening/Closing subviews
+
+- (void)closeBox:(NSNotification *)note
+{
+    NSView *view = [note object];
+    NSLayoutConstraint *widthConstraint = [NSLayoutConstraint constraintWithItem:view
+                                                                       attribute:NSLayoutAttributeWidth
+                                                                       relatedBy:NSLayoutRelationEqual
+                                                                          toItem:nil
+                                                                       attribute:NSLayoutAttributeNotAnAttribute
+                                                                      multiplier:1.0
+                                                                        constant:22.0];
+    [self addConstraint:widthConstraint];
+    [NSAnimationContext runAnimationGroup:^(NSAnimationContext* context) {
+        context.duration = 2;
+        context.allowsImplicitAnimation = YES ;
+        [self layoutSubtreeIfNeeded];
+    } completionHandler:nil];
+    
+    _widthConstraint = widthConstraint;
+}
+
+- (void)openBox:(NSNotification *)note
+{
+    NSView *view = [note object];
+    [self removeConstraint:_widthConstraint];
+    [NSAnimationContext runAnimationGroup:^(NSAnimationContext* context) {
+        context.duration = 2;
+        context.allowsImplicitAnimation = YES ;
+        [self layoutSubtreeIfNeeded];
+    } completionHandler:nil];
+}
+
 #pragma mark - Subviews
 
 - (void)didAddSubview:(NSView *)subview
@@ -136,11 +172,29 @@
     [subview setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self setUpdateConstraints:nil];
     
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc addObserver:self
+           selector:@selector(closeBox:)
+               name:@"SLFBoxCloseRequested"
+             object:subview];
+    [nc addObserver:self
+           selector:@selector(openBox:)
+               name:@"SLFBoxOpenRequested"
+             object:subview];
+    
     [super didAddSubview:subview];
 }
 
 - (void)willRemoveSubview:(NSView *)subview
 {
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc removeObserver:self
+                  name:@"SLFBoxCloseRequested"
+                object:subview];
+    [nc removeObserver:self
+                  name:@"SLFBoxOpenRequested"
+                object:subview];
+    
     [super willRemoveSubview:subview];
     [self setUpdateConstraints:nil];
 }
