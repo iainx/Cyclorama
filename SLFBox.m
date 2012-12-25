@@ -330,8 +330,28 @@
     }
     
     _contentView = aView;
+    [_contentView setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self addSubview:_contentView];
-    [self setChildFrame];
+    //[self setChildFrame];
+    
+    float toolbarHeight = 0.0;
+    if ([self hasToolbar]) {
+        toolbarHeight = SLF_BOX_TOOLBAR_HEIGHT;
+    }
+    
+    NSDictionary *metricsDict = @{@"toolbarHeight": @(toolbarHeight)};
+    NSDictionary *viewDict = @{@"childView": _contentView};
+    NSMutableArray *constraints = [NSMutableArray array];
+    
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-22-[childView]-toolbarHeight-|"
+                                                                                options:0
+                                                                                metrics:metricsDict
+                                                                                  views:viewDict]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-3-[childView]-3-|"
+                                                                             options:0
+                                                                             metrics:nil
+                                                                               views:viewDict]];
+    [self addConstraints:constraints];
 }
 
 - (void)resizeSubviewsWithOldSize:(NSSize)oldSize
