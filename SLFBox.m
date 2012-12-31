@@ -309,6 +309,11 @@
 
 #pragma mark - Constraints
 
++ (BOOL)requiresConstraintBasedLayout
+{
+    return YES;
+}
+
 - (NSSize)intrinsicContentSize
 {
     // By default the box has no intrinsic size
