@@ -7,6 +7,7 @@
 //
 
 #import "CycArrayController.h"
+#import "Constants.h"
 
 @implementation CycArrayController
 
@@ -16,7 +17,7 @@
     
     NSDictionary *userInfo = @{@"object": object, @"index": @(index)};
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-    [nc postNotificationName:@"ObjectAdded"
+    [nc postNotificationName:CycArrayControllerObjectAdded
                       object:self
                     userInfo:userInfo];
 }
@@ -27,7 +28,7 @@
     id object = [self content][index];
     
     NSDictionary *userInfo = @{@"object":object, @"index": @(index)};
-    [nc postNotificationName:@"ObjectRemoved"
+    [nc postNotificationName:CycArrayControllerObjectRemoved
                       object:self
                     userInfo:userInfo];
     

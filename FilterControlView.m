@@ -11,6 +11,7 @@
 #import "VideoLayer.h"
 #import "ActorFilter.h"
 #import "FilterView.h"
+#import "Constants.h"
 
 @implementation FilterControlView {
     NSMutableArray *_filterViews;
@@ -30,25 +31,39 @@
     return self;
 }
 
+/*
 - (void)drawRect:(NSRect)dirtyRect
 {
     [[NSColor blueColor] set];
     NSRectFill([self bounds]);
 }
+*/
+
+- (void)observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary *)change
+                       context:(void *)context
+{
+    if (context == &selectionIndexContext) {
+        VideoLayer *selectedLayer = [_layerController selectedObjects][0];
+        
+        [self setupFilterController:[selectedLayer filterController]];
+    } else {
+        [super observeValueForKeyPath:keyPath
+                             ofObject:object
+                               change:change
+                              context:context];
+    }
+}
+
+#pragma mark - Constraints
 
 - (NSSize)intrinsicContentSize
 {
     return NSMakeSize(250.0, 250.0);
 }
-/*
-- (void)resizeSubviewsWithOldSize:(NSSize)oldSize
-{
-    CGFloat height = [self bounds].size.height - 10.0;
-    for (NSView *view in _filterViews) {
-        NSSize size = NSMakeSize([view bounds].size.width, height);
-        [view setFrameSize:size];
-    }
-}
+
+#pragma mark - Filter controls
 
 static int selectionIndexContext;
 
@@ -89,7 +104,6 @@ static int selectionIndexContext;
     NSNumber *index = userInfo[@"index"];
     
     [_filterViews removeObjectAtIndex:[index unsignedIntegerValue]];
-    // Relayout views
 }
 
 - (void)setUIForFilters:(NSArray *)filters
@@ -117,21 +131,26 @@ static int selectionIndexContext;
         return;
     }
     
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     if (_currentLayerFilterController) {
-        // FIXME Disconnect the observers
+        [nc removeObserver:self
+                      name:CycArrayControllerObjectAdded
+                    object:_currentLayerFilterController];
+        [nc removeObserver:self
+                      name:CycArrayControllerObjectRemoved
+                    object:_currentLayerFilterController];
     }
 
     NSLog(@"Setting up filter controller");
 
     _currentLayerFilterController = filterController;
-    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     [nc addObserver:self
            selector:@selector(filterAdded:)
-               name:@"ObjectAdded"
+               name:CycArrayControllerObjectAdded
              object:_currentLayerFilterController];
     [nc addObserver:self
            selector:@selector(filterRemoved:)
-               name:@"ObjectRemoved"
+               name:CycArrayControllerObjectRemoved
              object:_currentLayerFilterController];
     
     NSArray *filters = [_currentLayerFilterController arrangedObjects];
@@ -139,22 +158,7 @@ static int selectionIndexContext;
     [self setUIForFilters:filters];
 }
 
-- (void)observeValueForKeyPath:(NSString *)keyPath
-                      ofObject:(id)object
-                        change:(NSDictionary *)change
-                       context:(void *)context
-{
-    if (context == &selectionIndexContext) {
-        VideoLayer *selectedLayer = [_layerController selectedObjects][0];
-        
-        [self setupFilterController:[selectedLayer filterController]];
-    } else {
-        [super observeValueForKeyPath:keyPath
-                             ofObject:object
-                               change:change
-                              context:context];
-    }
-}
+#pragma mark - Property accessors
 
 - (void)setLayerController:(CycArrayController *)layerController
 {
@@ -182,5 +186,5 @@ static int selectionIndexContext;
 {
     return _layerController;
 }
-*/
+
 @end

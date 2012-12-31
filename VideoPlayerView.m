@@ -10,6 +10,7 @@
 #import "CycArrayController.h"
 #import "VideoLayer.h"
 #import "VideoClip.h"
+#import "Constants.h"
 
 @implementation VideoPlayerView {
     CGFloat _scale;
@@ -192,7 +193,7 @@ initSelf (VideoPlayerView *self)
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     [nc addObserver:self
            selector:@selector(layerAdded:)
-               name:@"ObjectAdded"
+               name:CycArrayControllerObjectAdded
              object:layerController];
 }
 

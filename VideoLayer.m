@@ -9,6 +9,7 @@
 #import "ActorFilter.h"
 #import "VideoLayer.h"
 #import "CycArrayController.h"
+#import "Constants.h"
 
 @implementation VideoLayer {
     NSMutableArray *_filterInstances; // CIFilter instances
@@ -34,11 +35,11 @@
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     [nc addObserver:self
            selector:@selector(filterAdded:)
-               name:@"ObjectAdded"
+               name:CycArrayControllerObjectAdded
              object:_filterController];
     [nc addObserver:self
            selector:@selector(filterRemoved:)
-               name:@"ObjectRemoved"
+               name:CycArrayControllerObjectRemoved
              object:_filterController];
 
     return self;

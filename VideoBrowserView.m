@@ -10,6 +10,7 @@
 #import "VideoClipLayer.h"
 #import "VideoClipController.h"
 #import "VideoClip.h"
+#import "Constants.h"
 
 @implementation VideoBrowserView {
     NSTrackingArea *trackingArea;
@@ -367,11 +368,11 @@
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     [nc addObserver:self
            selector:@selector(videoClipAdded:)
-               name:@"ObjectAdded"
+               name:CycArrayControllerObjectAdded
              object:videoClipController];
     [nc addObserver:self
            selector:@selector(videoClipRemoved:)
-               name:@"ObjectRemoved"
+               name:CycArrayControllerObjectRemoved
              object:self];
     
     numberOfRows = [self calculateNumberOfRows];
