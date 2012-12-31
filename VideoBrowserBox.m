@@ -52,8 +52,19 @@
     return self;
 }
 
+#pragma mark - Property accessors
+
 - (void)setClipController:(VideoClipController *)clipController
 {
     [_videoBrowserView setVideoClipController:clipController];
 }
+
+#pragma mark - Constraints
+
+- (NSSize)intrinsicContentSize
+{
+    // Set a minimum height for the box.
+    return NSMakeSize(NSViewNoInstrinsicMetric, 200.0);
+}
+
 @end
