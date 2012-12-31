@@ -27,6 +27,7 @@
     [self setContentView:_scrollView];
     
     _filterBrowserView = [[FilterBrowserView alloc] initWithFilterModel:nil];
+    [_filterBrowserView setTranslatesAutoresizingMaskIntoConstraints:NO];
     [_scrollView setDocumentView:_filterBrowserView];
 }
 

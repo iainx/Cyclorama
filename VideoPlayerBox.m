@@ -27,12 +27,27 @@ do_init (VideoPlayerBox *box)
     box->_playerView = [[VideoPlayerView alloc] init];
     [box setContentView:box->_playerView];
     
+    [box setContentHuggingPriority:NSLayoutPriorityDefaultHigh
+                    forOrientation:NSLayoutConstraintOrientationHorizontal];
+    
     [box addToolbarButtonWithLabel:@"Test 1"
                            options:SLFToolbarItemLayoutNone
                             action:@selector(testAction:)
                             target:box];
+
+    NSTextField *label = [[NSTextField alloc] initWithFrame:NSZeroRect];
+    [label setStringValue:@"Rate:"];
+    [label setBezeled:NO];
+    [label setDrawsBackground:NO];
+    [label setEditable:NO];
+    [label setSelectable:NO];
+    [label setTextColor:[NSColor whiteColor]];
+    [label setFont:[NSFont systemFontOfSize:[NSFont systemFontSizeForControlSize:[[label cell] controlSize]]]];
+
+    [box addToolbarItem:label
+            withOptions:SLFToolbarItemLayoutPackEnd];
     
-    box->_rateSlider = [[NSSlider alloc] initWithFrame:NSMakeRect(0.0, 0.0, 100.0, 18.0)];
+    box->_rateSlider = [[NSSlider alloc] initWithFrame:NSZeroRect];//NSMakeRect(0.0, 0.0, 100.0, 18.0)];
     [box addToolbarItem:box->_rateSlider
             withOptions:SLFToolbarItemLayoutPackEnd];
     [box->_rateSlider setAction:@selector(rateChanged:)];
@@ -42,10 +57,6 @@ do_init (VideoPlayerBox *box)
     [box->_rateSlider setFloatValue:box->_videoRate];
     [box->_rateSlider setMaxValue:2.0];
     [box->_rateSlider setMinValue:0.0];
-    
-    SLFLabel *label = [[SLFLabel alloc] initWithString:@"Rate:"];
-    [box addToolbarItem:label
-            withOptions:SLFToolbarItemLayoutPackEnd];
 }
 
 - (id)initWithFrame:(NSRect)frame

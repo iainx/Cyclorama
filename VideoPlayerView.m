@@ -105,8 +105,7 @@ initSelf (VideoPlayerView *self)
     [[NSColor blueColor] setFill];
     NSRectFill(NSInsetRect([self bounds], 0.0, 10.0));
 }
- */
-
+*/
 - (VideoLayer *)currentLayer
 {
     NSArray *selectedLayers = [_layerController selectedObjects];

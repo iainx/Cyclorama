@@ -18,6 +18,7 @@
     NSMutableArray *_filterItemLayers;
     FilterItemLayer *_currentLayer;
     BOOL _isDragging;
+    NSSize _intrinsicSize;
 }
 
 - (id)initWithFrame:(NSRect)frame
@@ -38,6 +39,7 @@
     [self setWantsLayer:YES];
     [self setModel:model];
     _isDragging = NO;
+    _intrinsicSize = NSZeroSize;
     
     return self;
 }
@@ -127,7 +129,9 @@
     // yOffset still needs the bottom gutter added to it
     frameHeight = yOffset + BROWSER_GUTTER_SIZE;
     
-    [self setFrameSize:NSMakeSize(frameWidth, frameHeight)];
+    _intrinsicSize = NSMakeSize(frameWidth, frameHeight);
+    NSLog(@"Setting intrinsic size: %@", NSStringFromSize(_intrinsicSize));
+    [self invalidateIntrinsicContentSize];
     
     NSTrackingArea *area;
     area = [[NSTrackingArea alloc] initWithRect:[self frame]
@@ -135,6 +139,12 @@
                                           owner:self
                                        userInfo:nil];
     [self addTrackingArea:area];
+}
+
+- (NSSize)intrinsicContentSize
+{
+    NSLog(@"intrinsic content is %@", NSStringFromSize(_intrinsicSize));
+    return _intrinsicSize;
 }
 
 #pragma mark - Tracking Area methods
@@ -263,5 +273,10 @@
     if ([self delegate]) {
         [[self delegate] addFilter:filterItem];
     }
+}
+
+- (void)updateConstraints
+{
+    [super updateConstraints];
 }
 @end

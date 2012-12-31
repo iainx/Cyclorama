@@ -20,17 +20,28 @@
              action:(SEL)action
              target:(id)target
 {
-    // FIXME: Work out what size toolbar buttons should be
-    self = [super initWithFrame:NSMakeRect(0.0, 0.0, 80.0, 22.0)];
+    self = [super initWithFrame:NSZeroRect];
     
+    [self setTitle:title];
     [self setTarget:target];
     [self setAction:action];
     
     [self setButtonType:6];
     [self setBordered:YES];
     [self setBezelStyle:NSRegularSquareBezelStyle];
-    
+  
+    [self setContentCompressionResistancePriority:NSLayoutPriorityDefaultLow
+                                   forOrientation:NSLayoutConstraintOrientationVertical];
     return self;
 }
 
+/*
+- (NSSize)intrinsicContentSize
+{
+    NSSize parentSize = [super intrinsicContentSize];
+    parentSize.height = 18.0;
+    
+    return parentSize;
+}
+*/
 @end

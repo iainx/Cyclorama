@@ -37,6 +37,8 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)notification
 {
+    //[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"NSConstraintBasedLayoutVisualizeMutuallyExclusiveConstraints"];
+    
     /*
     _filterBrowserController = [[FilterBrowserWindowController alloc] init];
     FilterBrowserView *filterBrowser = [[FilterBrowserView alloc] initWithFilterModel:_filterModel];

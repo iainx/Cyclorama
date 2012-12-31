@@ -8,13 +8,9 @@
 
 #import <Cocoa/Cocoa.h>
 #import "SLFBoxDelegate.h"
+#import "SLFBoxToolbar.h"
 
 @interface SLFBox : NSView
-
-typedef enum {
-    SLFToolbarItemLayoutNone = 0x0,
-    SLFToolbarItemLayoutPackEnd = 0x1
-} SLFToolbarItemLayoutOptions;
 
 @property (readwrite, copy) NSString *title;
 @property (readwrite, strong, nonatomic) NSView *contentView;

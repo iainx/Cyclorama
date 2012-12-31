@@ -8,6 +8,7 @@
 
 #import <QuartzCore/QuartzCore.h>
 #import "SLFBox.h"
+#import "SLFBoxToolbar.h"
 #import "SLFToolbarButton.h"
 #import "NSBezierPath+MCAdditions.h"
 
@@ -20,10 +21,14 @@
 @implementation SLFBox {
     NSButton *_closeButton;
     NSSize _oldFrameSize;
-    NSMutableArray *_startToolbarItems;
-    NSMutableArray *_endToolbarItems;
+
+    NSArray *_viewConstraints;
     NSLayoutConstraint *_widthConstraint;
+        
+    SLFBoxToolbar *_toolbarView;
 }
+
+@synthesize hasToolbar = _hasToolbar;
 
 #define SLF_BOX_TITLEBAR_HEIGHT 22.0
 #define SLF_BOX_TOOLBAR_HEIGHT 25.0
@@ -39,8 +44,7 @@
     _hasCloseButton = NO;
     _closed = NO;
     
-    _startToolbarItems = [[NSMutableArray alloc] init];
-    _endToolbarItems = [[NSMutableArray alloc] init];
+    [self addToolbar];
 }
 
 - (id)initWithFrame:(NSRect)frame
@@ -63,23 +67,7 @@
     return self;
 }
 
-
-- (void)addCloseButton
-{
-    NSRect bounds = [self bounds];
-    
-    NSRect closeButtonRect = NSMakeRect(2.0, (bounds.size.height - SLF_BOX_TITLEBAR_HEIGHT),
-                                        CLOSE_BUTTON_SIZE, CLOSE_BUTTON_SIZE);
-
-    _closeButton = [[NSButton alloc] initWithFrame:closeButtonRect];
-    [_closeButton setCell:[[_SLFCloseButtonCell alloc] init]];
-    [_closeButton setButtonType:NSMomentaryChangeButton];
-    [_closeButton setAutoresizingMask:NSViewMaxXMargin | NSViewMinYMargin];
-    [_closeButton setTarget:self];
-    [_closeButton setAction:@selector(closeAction:)];
-    
-    [self addSubview:_closeButton];
-}
+#pragma mark - Drawing
 
 - (void)drawRect:(NSRect)dirtyRect
 {
@@ -235,6 +223,21 @@
     [NSGraphicsContext restoreGraphicsState];
 }
 
+#pragma mark - Close button
+
+- (void)addCloseButton
+{
+    _closeButton = [[NSButton alloc] initWithFrame:NSZeroRect];
+    [_closeButton setCell:[[_SLFCloseButtonCell alloc] init]];
+    [_closeButton setButtonType:NSMomentaryChangeButton];
+    [_closeButton setAutoresizingMask:NSViewMaxXMargin | NSViewMinYMargin];
+    [_closeButton setTarget:self];
+    [_closeButton setAction:@selector(closeAction:)];
+    [_closeButton setTranslatesAutoresizingMaskIntoConstraints:NO];
+    
+    [self addSubview:_closeButton];
+}
+
 - (void)closeAction:(id)sender
 {
     if ([self isClosed]) {
@@ -266,104 +269,27 @@
     }
 }
 
-#pragma mark - Constraints
-
-- (NSSize)intrinsicContentSize
-{
-    // By default the box has no intrinsic size
-    return NSMakeSize(NSViewNoInstrinsicMetric, NSViewNoInstrinsicMetric);
-}
-
 #pragma mark - Accessors
 
-- (NSSize)contentViewMargins
+- (void)setHasToolbar:(BOOL)hasToolbar
 {
-    NSRect bounds = [self bounds];
-    CGFloat toolbarheight, height;
-    
-    if ([self hasToolbar]) {
-        toolbarheight = SLF_BOX_TOOLBAR_HEIGHT;
-    } else {
-        toolbarheight = 0.0;
-    }
-    height = bounds.size.height - (toolbarheight + SLF_BOX_TITLEBAR_HEIGHT);
-    
-    return NSMakeSize(bounds.size.width, height);
-}
-
-- (void)setChildFrame
-{
-    NSView *childView = [self contentView];
-    CGFloat toolbarHeight;
-    
-    if (childView == nil) {
+    if (_hasToolbar == hasToolbar) {
         return;
     }
     
-    NSRect childFrame;
-    NSSize contentMargins = [self contentViewMargins];
-
-    if ([self hasToolbar]) {
-        toolbarHeight = SLF_BOX_TOOLBAR_HEIGHT + 4.0;
+    _hasToolbar = hasToolbar;
+    if (_hasToolbar) {
+        [self addToolbar];
     } else {
-        toolbarHeight = 4.0;
+        [self removeToolbar];
     }
-    /*
-    childFrame = NSMakeRect(3.0 + contentMargins.width, toolbarHeight + contentMargins.height,
-                            boxBounds.size.width - (3.0 * 2) - (contentMargins.width * 2),
-                            boxBounds.size.height - (toolbarHeight + SLF_BOX_TITLEBAR_HEIGHT + (contentMargins.height * 2)));
-    */
-    childFrame = NSMakeRect(3.0, toolbarHeight, contentMargins.width - (3.0 * 2), contentMargins.height - (3.0 * 2));
     
-    NSLog(@"Setting child frame for %@ to %f", [self title], contentMargins.height - 6.0);
-    [childView setFrame:childFrame];
+    [self setNeedsDisplay:YES];
 }
 
-- (void)setContentView:(NSView *)aView
+- (BOOL)hasToolbar
 {
-    if (aView == _contentView) {
-        return;
-    }
-    
-    if (_contentView) {
-        [_contentView removeFromSuperviewWithoutNeedingDisplay];
-    }
-    
-    _contentView = aView;
-    [_contentView setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [self addSubview:_contentView];
-    //[self setChildFrame];
-    
-    float toolbarHeight = 0.0;
-    if ([self hasToolbar]) {
-        toolbarHeight = SLF_BOX_TOOLBAR_HEIGHT;
-    }
-    
-    NSDictionary *metricsDict = @{@"toolbarHeight": @(toolbarHeight)};
-    NSDictionary *viewDict = @{@"childView": _contentView};
-    NSMutableArray *constraints = [NSMutableArray array];
-    
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-22-[childView]-toolbarHeight-|"
-                                                                                options:0
-                                                                                metrics:metricsDict
-                                                                                  views:viewDict]];
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-3-[childView]-3-|"
-                                                                             options:0
-                                                                             metrics:nil
-                                                                               views:viewDict]];
-    [self addConstraints:constraints];
-}
-
-- (void)resizeSubviewsWithOldSize:(NSSize)oldSize
-{
-    [self setChildFrame];
-    
-    // Now reposition the close button
-    if ([self hasCloseButton]) {
-        NSRect closeButtonRect = NSMakeRect(2.0, ([self bounds].size.height - SLF_BOX_TITLEBAR_HEIGHT),
-                                            CLOSE_BUTTON_SIZE, CLOSE_BUTTON_SIZE);
-        [_closeButton setFrame:closeButtonRect];
-    }
+    return _hasToolbar;
 }
 
 - (void)setHasCloseButton:(BOOL)hasCloseButton
@@ -382,20 +308,126 @@
     _hasCloseButton = hasCloseButton;
 }
 
-- (void)setHasToolbar:(BOOL)hasToolbar
+#pragma mark - Constraints
+
+- (NSSize)intrinsicContentSize
 {
-    if (_hasToolbar == hasToolbar) {
+    // By default the box has no intrinsic size
+    return NSMakeSize(NSViewNoInstrinsicMetric, NSViewNoInstrinsicMetric);
+}
+
+- (void)updateConstraints
+{
+    [super updateConstraints];
+    
+    float toolbarHeight = 3.0;
+    if ([self hasToolbar]) {
+        toolbarHeight = SLF_BOX_TOOLBAR_HEIGHT + 1.0;
+    }
+    
+    NSMutableDictionary *viewDict = [NSMutableDictionary dictionaryWithObject:_contentView
+                                                                       forKey:@"childView"];
+    NSMutableArray *constraints = [NSMutableArray array];
+    
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-22-[childView]"
+                                                                             options:0
+                                                                             metrics:nil
+                                                                               views:viewDict]];
+    if ([self hasToolbar]) {
+        [viewDict setObject:_toolbarView forKey:@"toolbar"];
+        [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[childView]-[toolbar]-2-|"
+                                                                                 options:0
+                                                                                 metrics:nil
+                                                                                   views:viewDict]];
+    } else {
+        [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[childView]-3-|"
+                                                                                 options:0
+                                                                                 metrics:nil
+                                                                                   views:viewDict]];
+    }
+    
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-3-[childView]-3-|"
+                                                                             options:0
+                                                                             metrics:nil
+                                                                               views:viewDict]];
+    
+    if ([self hasCloseButton]) {
+        NSDictionary *closeViewDict = @{@"button":_closeButton};
+        [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-4-[button(==18)]-(>=4)-|"
+                                                                                 options:0
+                                                                                 metrics:nil
+                                                                                   views:closeViewDict]];
+        [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"|-2-[button(==18)]-(>=2)-|"
+                                                                                 options:0
+                                                                                 metrics:nil
+                                                                                   views:closeViewDict]];
+    }
+    
+    if ([self hasToolbar]) {
+        [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"|-3-[toolbar]-3-|"
+                                                                                 options:0
+                                                                                 metrics:nil
+                                                                                   views:viewDict]];
+    }
+    
+    [self setUpdateConstraints:constraints];
+    //[[self window] visualizeConstraints:[self constraints]];
+}
+
+- (void)setUpdateConstraints:(NSArray *)constraints
+{
+    if (constraints != _viewConstraints) {
+        if (_viewConstraints) {
+            [self removeConstraints:_viewConstraints];
+        }
+        _viewConstraints = constraints;
+        
+        if (_viewConstraints) {
+            [self addConstraints:_viewConstraints];
+        } else {
+            [self setNeedsUpdateConstraints:YES];
+        }
+    }
+}
+
+#pragma mark - Content view
+
+- (void)setContentView:(NSView *)aView
+{
+    if (aView == _contentView) {
         return;
     }
     
-    _hasToolbar = hasToolbar;
+    if (_contentView) {
+        [_contentView removeFromSuperviewWithoutNeedingDisplay];
+    }
     
-    [self setChildFrame];
-    [self setNeedsDisplay:YES];
+    _contentView = aView;
+    [_contentView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [self addSubview:_contentView];
+    
+    [self setUpdateConstraints:nil];
 }
 
-#pragma mark - Toolbar Items
+#pragma mark - Toolbar
 
+- (void)addToolbar
+{    
+    _toolbarView = [[SLFBoxToolbar alloc] initWithFrame:NSZeroRect];
+    [_toolbarView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    
+    [self addSubview:_toolbarView];
+    
+    [self setUpdateConstraints:nil];
+}
+
+- (void)removeToolbar
+{
+    [_toolbarView removeFromSuperview];
+    [self setUpdateConstraints:nil];
+}
+
+/*
 - (void)layoutItemInToolbar:(NSView *)item
                 withOptions:(SLFToolbarItemLayoutOptions)options
 {
@@ -432,12 +464,31 @@
     y = ((SLF_BOX_TITLEBAR_HEIGHT  - [item bounds].size.height) / 2.0) + 2.0;
     [item setFrameOrigin:NSMakePoint(x, y)];
 }
+*/
 
 - (void)addToolbarItem:(NSView *)view
            withOptions:(SLFToolbarItemLayoutOptions)options
 {
-    [self layoutItemInToolbar:view withOptions:options];
-    [self addSubview:view];
+    if (![self hasToolbar]){
+        return;
+    }
+ 
+    [_toolbarView addToolbarItem:view
+                     withOptions:options];
+    
+    /*
+    if (options == SLFToolbarItemLayoutNone) {
+        [_startToolbarItems addObject:view];
+    } else {
+        [_endToolbarItems addObject:view];
+    }
+
+    [_toolbarView addSubview:view];
+    [view setTranslatesAutoresizingMaskIntoConstraints:NO];
+
+    [_toolbarView removeConstraints:_toolbarViewConstraints];
+
+     */
 }
 
 - (void)addToolbarButtonWithLabel:(NSString *)text
@@ -445,7 +496,12 @@
                            action:(SEL)action
                            target:(id)target
 {
-    SLFToolbarButton *button = [[SLFToolbarButton alloc] initWithTitle:@"Test" action:action target:target];
+    if (![self hasToolbar]) {
+        return;
+    }
+    
+    SLFToolbarButton *button = [[SLFToolbarButton alloc] initWithTitle:text action:action target:target];
+    
     [self addToolbarItem:button
              withOptions:options];
 }

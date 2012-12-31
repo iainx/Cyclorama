@@ -60,11 +60,18 @@
     
     [super windowControllerDidLoadNib:aController];
     
+    /*
     _filterBrowserBox = [[FilterBrowserBox alloc] initWithFrame:NSMakeRect(0.0, 0.0, 236.0, bottomBounds.size.height)];
     _videoBrowserBox = [[VideoBrowserBox alloc] initWithFrame:NSMakeRect(0.0, 0.0, 540.0, bottomBounds.size.height)];
     _videoPlayerBox = [[VideoPlayerBox alloc] initWithFrame:NSMakeRect(0.0, 0.0, 540.0, topBounds.size.height)];
     _filterControlBox = [[FilterControlBox alloc] initWithFrame:NSMakeRect(0.0, 0.0, 0.0, bottomBounds.size.height)];
-    
+    */
+
+    _filterBrowserBox = [[FilterBrowserBox alloc] initWithFrame:NSZeroRect];
+    _videoBrowserBox = [[VideoBrowserBox alloc] initWithFrame:NSZeroRect];
+    _videoPlayerBox = [[VideoPlayerBox alloc] initWithFrame:NSZeroRect];
+    _filterControlBox = [[FilterControlBox alloc] initWithFrame:NSZeroRect];
+
     VideoPlayerView *playerView = [_videoPlayerBox playerView];
     [playerView setLayerController:_layerController];
     
@@ -72,7 +79,7 @@
     
     FilterControlView *_filterView = [_filterControlBox filterControlView];
     [_filterView setLayerController:_layerController];
-    
+
     [_topLayout addSubview:_videoPlayerBox];
     [_topLayout addSubview:_filterControlBox];
     [_bottomLayout addSubview:_videoBrowserBox];
@@ -81,7 +88,7 @@
     FilterModel *model = [[NSApp delegate] filterModel];
     [_filterBrowserBox setFilterModel:model];
     [_filterBrowserBox setViewDelegate:self];
-    
+
     VideoClipController *clipController = [[NSApp delegate] clipController];
     [_videoBrowserBox setClipController:clipController];
     

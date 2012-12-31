@@ -50,6 +50,7 @@
 		AE7D66D6147563910099875F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE7D66D4147563910099875F /* QuartzCore.framework */; };
 		AE7D66DF147566380099875F /* CycDocument.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE7D66DD147566380099875F /* CycDocument.xib */; };
 		AE7D66E0147566380099875F /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE7D66DE147566380099875F /* MainMenu.xib */; };
+		AE7F872A16911FA20041AD9B /* SLFBoxToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7F872916911FA20041AD9B /* SLFBoxToolbar.m */; };
 		AE8ACBBC15FD0D0200063F7B /* SLFBlackWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8ACBBB15FD0D0200063F7B /* SLFBlackWindow.m */; };
 		AE8ACBC115FD3AD700063F7B /* VideoBrowserWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8ACBBF15FD3AD700063F7B /* VideoBrowserWindowController.m */; };
 		AE8ACBC215FD3AD700063F7B /* VideoBrowserWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE8ACBC015FD3AD700063F7B /* VideoBrowserWindowController.xib */; };
@@ -238,6 +239,8 @@
 		AE7D66D4147563910099875F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		AE7D66DD147566380099875F /* CycDocument.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CycDocument.xib; sourceTree = "<group>"; };
 		AE7D66DE147566380099875F /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
+		AE7F872816911FA20041AD9B /* SLFBoxToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLFBoxToolbar.h; sourceTree = "<group>"; };
+		AE7F872916911FA20041AD9B /* SLFBoxToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLFBoxToolbar.m; sourceTree = "<group>"; };
 		AE86852C160DEE2000A5A3E1 /* SLFBoxDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SLFBoxDelegate.h; sourceTree = "<group>"; };
 		AE8ACBBA15FD0D0200063F7B /* SLFBlackWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLFBlackWindow.h; sourceTree = "<group>"; };
 		AE8ACBBB15FD0D0200063F7B /* SLFBlackWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLFBlackWindow.m; sourceTree = "<group>"; };
@@ -900,6 +903,8 @@
 				AE8ACBBB15FD0D0200063F7B /* SLFBlackWindow.m */,
 				AEFE46BC16052A7F006E4122 /* SLFBox.h */,
 				AEFE46BD16052A7F006E4122 /* SLFBox.m */,
+				AE7F872816911FA20041AD9B /* SLFBoxToolbar.h */,
+				AE7F872916911FA20041AD9B /* SLFBoxToolbar.m */,
 				AE86852C160DEE2000A5A3E1 /* SLFBoxDelegate.h */,
 				AEC3194D161765D40027F14C /* SLFHorizontalLayout.h */,
 				AEC3194E161765D40027F14C /* SLFHorizontalLayout.m */,
@@ -1111,6 +1116,7 @@
 				AE2D29771678EB770001FA1A /* FilterControlView.m in Sources */,
 				AED0C89B167BC0B60056E078 /* FilterView.m in Sources */,
 				AE07270B1688EE2C006B605B /* SLFLayout.m in Sources */,
+				AE7F872A16911FA20041AD9B /* SLFBoxToolbar.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

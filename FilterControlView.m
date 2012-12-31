@@ -30,14 +30,17 @@
     return self;
 }
 
-/*
 - (void)drawRect:(NSRect)dirtyRect
 {
     [[NSColor blueColor] set];
     NSRectFill([self bounds]);
 }
-*/
 
+- (NSSize)intrinsicContentSize
+{
+    return NSMakeSize(250.0, 250.0);
+}
+/*
 - (void)resizeSubviewsWithOldSize:(NSSize)oldSize
 {
     CGFloat height = [self bounds].size.height - 10.0;
@@ -179,5 +182,5 @@ static int selectionIndexContext;
 {
     return _layerController;
 }
-
+*/
 @end
