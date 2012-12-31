@@ -166,7 +166,6 @@
     // Outside the clipping
     
     [NSGraphicsContext saveGraphicsState];
-    //if (bounds.size.width == 22 && [_contentView isHidden]) {
     if ([self isClosed]) {
         NSAffineTransform *tr = [NSAffineTransform transform];
         float dx, dy;
@@ -371,7 +370,6 @@
     }
     
     [self setUpdateConstraints:constraints];
-    //[[self window] visualizeConstraints:[self constraints]];
 }
 
 - (void)setUpdateConstraints:(NSArray *)constraints
@@ -427,45 +425,6 @@
     [self setUpdateConstraints:nil];
 }
 
-/*
-- (void)layoutItemInToolbar:(NSView *)item
-                withOptions:(SLFToolbarItemLayoutOptions)options
-{
-    NSView *lastItem;
-    CGFloat x, y;
-    
-    if (options == SLFToolbarItemLayoutNone) {
-        lastItem = [_startToolbarItems lastObject];
-        
-        if (lastItem) {
-            NSRect lastViewFrame = [lastItem frame];
-            x = NSMaxX(lastViewFrame);
-        } else {
-            x = 0.0;
-        }
-        
-        [_startToolbarItems addObject:item];
-        x += SLF_BOX_TOOLBAR_X_OFFSET;
-    } else {
-        lastItem = [_endToolbarItems lastObject];
-        
-        if (lastItem) {
-            NSRect lastViewFrame = [lastItem frame];
-            x = NSMinX(lastViewFrame);
-        } else {
-            x = NSMaxX([self bounds]) - SLF_BOX_TOOLBAR_X_OFFSET;
-        }
-        
-        [_endToolbarItems addObject:item];
-        x -= (SLF_BOX_TOOLBAR_X_OFFSET + [item bounds].size.width);
-        
-    }
-    
-    y = ((SLF_BOX_TITLEBAR_HEIGHT  - [item bounds].size.height) / 2.0) + 2.0;
-    [item setFrameOrigin:NSMakePoint(x, y)];
-}
-*/
-
 - (void)addToolbarItem:(NSView *)view
            withOptions:(SLFToolbarItemLayoutOptions)options
 {
@@ -475,20 +434,6 @@
  
     [_toolbarView addToolbarItem:view
                      withOptions:options];
-    
-    /*
-    if (options == SLFToolbarItemLayoutNone) {
-        [_startToolbarItems addObject:view];
-    } else {
-        [_endToolbarItems addObject:view];
-    }
-
-    [_toolbarView addSubview:view];
-    [view setTranslatesAutoresizingMaskIntoConstraints:NO];
-
-    [_toolbarView removeConstraints:_toolbarViewConstraints];
-
-     */
 }
 
 - (void)addToolbarButtonWithLabel:(NSString *)text
