@@ -35,10 +35,10 @@
                                  options:nil];
 
     // FIXME: Should we be using a weak ref self here?
-    
     NSArray *keys = @[ @"tracks", @"duration" ];
     [_asset loadValuesAsynchronouslyForKeys:keys
                           completionHandler:^{
+                              
                               if (needThumbnailWhenValueLoaded == NO) {
                                   return;
                               }
@@ -48,21 +48,33 @@
                                                                                     error:&error];
                               switch (status) {
                                   case AVKeyValueStatusLoaded:
+                                  {
                                       // Now we can get the thumbnail
                                       if ([[self asset] tracksWithMediaCharacteristic:AVMediaTypeVideo]) {
                                           [self createThumbnailImage];
                                       }
-                                      break;
                                       
+                                      break;
+                                  }
+
                                   case AVKeyValueStatusFailed:
-                                      // Error out
-                                      //NSLog(@"Error loading %@: %@", [self filePath], [error localizedDescription]);
-                                      break;
+                                  {
+                                      NSImage *image = [[NSImage alloc] initWithSize:NSMakeSize(1.0, 1.0)];
+                                      [image lockFocus];
+                                      [[NSColor greenColor] setFill];
+                                      NSRectFill(NSMakeRect(0, 0, 1, 1));
+                                      [image unlockFocus];
                                       
-                                  default:
+                                      [self updateThumbnailOnMainThread:image];
                                       break;
+                                  }
+
+                                  default:
+                                  {
+                                      NSLog(@"Default error: %ld", status);
+                                      break;
+                                  }
                               }
-                              
                           }];
 }
 
@@ -70,6 +82,13 @@
 - (NSString *)description
 {
     return [NSString stringWithFormat:@"%@", [self filePath]];
+}
+
+- (void)updateThumbnailOnMainThread:(NSImage *)tn
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self setThumbnail:tn];
+    });
 }
 
 - (void)createThumbnailImage
@@ -88,7 +107,7 @@
                                         error:&error];
         NSImage *tn = [[NSImage alloc] initWithCGImage:t
                                                   size:NSZeroSize];
-        [self setThumbnail:tn];
+        [self updateThumbnailOnMainThread:tn];
     });
 }
 #pragma mark - Accessors

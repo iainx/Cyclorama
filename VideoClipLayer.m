@@ -130,14 +130,27 @@
     [_labelLayer setPosition:CGPointMake(0.0, imageHeight + SPACING)];
 }
 
+static void *thumbnailContextPointer = &thumbnailContextPointer;
+
 - (void)observeValueForKeyPath:(NSString *)keyPath
                       ofObject:(id)object
                         change:(NSDictionary *)change
                        context:(void *)context
 {
-    if (object != _clip || [keyPath isEqualToString:@"thumbnail"] == NO) {
+    if (context != thumbnailContextPointer) {
+        [super observeValueForKeyPath:keyPath
+                             ofObject:object
+                               change:change
+                              context:context];
         return;
     }
+    
+    //NSLog(@"Observed %p", self);
+    //NSLog(@"   _clip: %p", _clip);
+    //NSLog(@"     keyPath: %@", keyPath);
+    //NSLog(@"     context: %p", context);
+    //NSLog(@"     _isObserving: %@", _isObserving ? @"YES" : @"NO");
+    //NSLog(@"     self: %p", self);
     
     NSImage *thumbnail = [_clip thumbnail];
     
@@ -164,6 +177,7 @@
     
     // Remove the old observer because we no longer care about it being updated
     if (_isObserving) {
+        //NSLog(@"Removing %p - %p", self, _clip);
         [_clip removeObserver:self
                    forKeyPath:@"thumbnail"];
         _isObserving = NO;
@@ -181,10 +195,11 @@
         [_imageLayer setContents:thumbnail];
         _isObserving = NO;
     } else {
+        //NSLog(@"Adding observer: %p - %p (_isObserving: %@)", self, _clip, _isObserving ? @"YES" : @"NO");
         [clip addObserver:self
                forKeyPath:@"thumbnail"
                   options:NSKeyValueObservingOptionNew
-                  context:NULL];
+                  context:&thumbnailContextPointer];
         _isObserving = YES;
     }
 }

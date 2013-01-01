@@ -135,6 +135,7 @@
         [visibleRows insertObject:rowTiles atIndex:visibleRow];
     }
     
+    //NSLog(@"Clips %d -> %d", firstTile, lastTile);
     for (NSUInteger i = firstTile, column = 0; i < lastTile; i++, column++) {
         VideoClip *clip = [clips objectAtIndex:i];
         
@@ -341,7 +342,13 @@
     
     [self updateHeight];
     
-    // FIXME: Check if index > the visible range, because then we don't need to update.
+    // If the newly added index is greater than the visible range we don't need to update anything.
+    //NSLog(@"Adding %ld: Visible Range: %ld", [indexNumber integerValue], NSMaxRange([self visibleRange]) * itemsPerRow);
+    if ((NSMaxRange([self visibleRange]) * itemsPerRow) - 1 < [indexNumber integerValue]) {
+        //NSLog(@"Don't need to update");
+        return;
+    }
+    
     [visibleRows removeAllObjects];
     [[self layer] setSublayers:[NSArray array]];
     [self addTilesFromVisibleRange];
