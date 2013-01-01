@@ -21,10 +21,22 @@
     
     [self setFilePath:filePath];
     [self setTitle:title];
-
-    //[self openMovie];
+    
+    needThumbnailWhenValueLoaded = YES;
     
     return self;
+}
+
+- (NSImage *)createFailImage
+{
+    NSImage *image = [[NSImage alloc] initWithSize:NSMakeSize(1.0, 1.0)];
+    
+    [image lockFocus];
+    [[NSColor greenColor] setFill];
+    NSRectFill(NSMakeRect(0, 0, 1, 1));
+    [image unlockFocus];
+
+    return image;
 }
 
 - (void)openMovie
@@ -40,6 +52,7 @@
                           completionHandler:^{
                               
                               if (needThumbnailWhenValueLoaded == NO) {
+                                  NSLog(@"%@ didn't need thumbnail", url);
                                   return;
                               }
                               
@@ -52,6 +65,10 @@
                                       // Now we can get the thumbnail
                                       if ([[self asset] tracksWithMediaCharacteristic:AVMediaTypeVideo]) {
                                           [self createThumbnailImage];
+                                      } else {
+                                          NSImage *image = [self createFailImage];
+                                          NSLog(@"%@ didn't have video track", url);
+                                          [self updateThumbnailOnMainThread:image];
                                       }
                                       
                                       break;
@@ -59,19 +76,15 @@
 
                                   case AVKeyValueStatusFailed:
                                   {
-                                      NSImage *image = [[NSImage alloc] initWithSize:NSMakeSize(1.0, 1.0)];
-                                      [image lockFocus];
-                                      [[NSColor greenColor] setFill];
-                                      NSRectFill(NSMakeRect(0, 0, 1, 1));
-                                      [image unlockFocus];
-                                      
+                                      NSImage *image = [self createFailImage];
+                                      NSLog(@"%@ KV status failed", url);
                                       [self updateThumbnailOnMainThread:image];
                                       break;
                                   }
 
                                   default:
                                   {
-                                      NSLog(@"Default error: %ld", status);
+                                      NSLog(@"%@ Default error: %ld", url, status);
                                       break;
                                   }
                               }
@@ -105,8 +118,15 @@
         CGImageRef t = [gen copyCGImageAtTime:frameTime
                                    actualTime:&actualTime
                                         error:&error];
-        NSImage *tn = [[NSImage alloc] initWithCGImage:t
-                                                  size:NSZeroSize];
+        
+        NSImage *tn;
+        if (error != nil) {
+            tn = [self createFailImage];
+            NSLog(@"%@ error from Image Generator: %@", [[self asset] URL], [error localizedDescription]);
+        } else {
+            tn = [[NSImage alloc] initWithCGImage:t
+                                             size:NSZeroSize];
+        }
         [self updateThumbnailOnMainThread:tn];
     });
 }
@@ -158,9 +178,10 @@
         return NO;
     }
     
-    // We have no thumbnail
-    // FIXME: should return a status to say whether we're waiting for the thumbnail
-    // or we can't provide a thumbnail
-    return NO;
+    NSLog(@"%@ thumbnail create fail", [_asset URL]);
+    // We have no thumbnail so set a broken image
+    _thumbnail = [self createFailImage];
+    
+    return YES;
 }
 @end
