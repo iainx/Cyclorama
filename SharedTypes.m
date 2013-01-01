@@ -8,8 +8,8 @@
 
 #import "SharedTypes.h"
 
-NSString * const FlareVideoClipType = @"FlareVideoClipType";
-NSString * const FlareVideoClipArrayType = @"FlareVideoClipArrayType";
-NSString * const CYCVideoClipReady = @"CYCVideoClipReady";
+NSString * const CycArrayControllerObjectAdded = @"ObjectAdded";
+NSString * const CycArrayControllerObjectRemoved = @"ObjectRemoved";
+
 NSString * const CycFilterValueChangedNotification = @"CycFilterValueChangedNotification";
 NSString * const CycFilterPasteboardType = @"CycFilterPasteboardType";

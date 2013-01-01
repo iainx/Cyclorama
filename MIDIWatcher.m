@@ -22,7 +22,7 @@ midiInputCallback (const MIDIPacketList *list,
         NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
         UInt16 nBytes;
         const MIDIPacket *packet = &list->packet[0];
-        MIDIMessageType type;
+        CycMIDIMessageType type;
         
         for (unsigned int i = 0; i < list->numPackets; i++) {
             UInt16 iByte, size;

@@ -9,7 +9,7 @@
 #import "ActorFilter.h"
 #import "VideoLayer.h"
 #import "CycArrayController.h"
-#import "Constants.h"
+#import "SharedTypes.h"
 
 @implementation VideoLayer {
     NSMutableArray *_filterInstances; // CIFilter instances

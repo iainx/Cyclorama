@@ -11,7 +11,7 @@
 #import "VideoLayer.h"
 #import "ActorFilter.h"
 #import "FilterView.h"
-#import "Constants.h"
+#import "SharedTypes.h"
 
 @implementation FilterControlView {
     NSMutableArray *_filterViews;

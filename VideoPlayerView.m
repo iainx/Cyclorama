@@ -10,7 +10,7 @@
 #import "CycArrayController.h"
 #import "VideoLayer.h"
 #import "VideoClip.h"
-#import "Constants.h"
+#import "SharedTypes.h"
 
 @implementation VideoPlayerView {
     CGFloat _scale;

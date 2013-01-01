@@ -7,7 +7,7 @@
 //
 
 #import "CycArrayController.h"
-#import "Constants.h"
+#import "SharedTypes.h"
 
 @implementation CycArrayController
 

@@ -6,12 +6,11 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-extern NSString * const FlareMIDIMessageNotification;
-extern NSString * const CycFilterValueChangedNotification;
-extern NSString * const CYCVideoClipReady;
-extern NSString * const FlareVideoClipType;
-extern NSString * const FlareVideoClipArrayType;
-extern NSString * const CycFilterPasteboardType;
+FOUNDATION_EXPORT NSString *const CycArrayControllerObjectAdded;
+FOUNDATION_EXPORT NSString *const CycArrayControllerObjectRemoved;
+
+FOUNDATION_EXPORT NSString * const CycFilterValueChangedNotification;
+FOUNDATION_EXPORT NSString * const CycFilterPasteboardType;
 
 typedef enum {
     kNoteOff,
@@ -19,5 +18,5 @@ typedef enum {
     kControlChange,
     kProgrammeChange,
     kOtherMessage
-} MIDIMessageType;
+} CycMIDIMessageType;
 

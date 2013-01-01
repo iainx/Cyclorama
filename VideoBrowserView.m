@@ -10,7 +10,7 @@
 #import "VideoClipLayer.h"
 #import "VideoClipController.h"
 #import "VideoClip.h"
-#import "Constants.h"
+#import "SharedTypes.h"
 
 @implementation VideoBrowserView {
     NSTrackingArea *trackingArea;
