@@ -27,17 +27,12 @@
     return self;
 }
 
-- (NSImage *)createFailImage
+- (NSString *)description
 {
-    NSImage *image = [[NSImage alloc] initWithSize:NSMakeSize(1.0, 1.0)];
-    
-    [image lockFocus];
-    [[NSColor greenColor] setFill];
-    NSRectFill(NSMakeRect(0, 0, 1, 1));
-    [image unlockFocus];
-
-    return image;
+    return [NSString stringWithFormat:@"%@", [self filePath]];
 }
+
+#pragma mark - Movie handler
 
 - (void)openMovie
 {
@@ -91,10 +86,18 @@
                           }];
 }
 
+#pragma mark - Thumbnailing
 
-- (NSString *)description
+- (NSImage *)createFailImage
 {
-    return [NSString stringWithFormat:@"%@", [self filePath]];
+    NSImage *image = [[NSImage alloc] initWithSize:NSMakeSize(1.0, 1.0)];
+    
+    [image lockFocus];
+    [[NSColor greenColor] setFill];
+    NSRectFill(NSMakeRect(0, 0, 1, 1));
+    [image unlockFocus];
+    
+    return image;
 }
 
 - (void)updateThumbnailOnMainThread:(NSImage *)tn
@@ -130,34 +133,13 @@
         [self updateThumbnailOnMainThread:tn];
     });
 }
-#pragma mark - Accessors
-
-- (void)setFilePath:(NSString *)path
-{
-    if (path == _filePath) {
-        return;
-    }
-    
-    
-    _filePath = path;
-}
-
-- (AVAsset *)asset
-{
-    if (_asset == nil) {
-        //NSLog(@"No movie for %@", [self filePath]);
-        return nil;
-    }
-    
-    return _asset;
-}
 
 - (BOOL)requestThumbnail
 {
     if (_thumbnail) {
         return YES;
     }
-
+    
     if ([self asset] == nil) {
         needThumbnailWhenValueLoaded = YES;
         return NO;
@@ -184,4 +166,27 @@
     
     return YES;
 }
+
+#pragma mark - Accessors
+
+- (void)setFilePath:(NSString *)path
+{
+    if (path == _filePath) {
+        return;
+    }
+    
+    
+    _filePath = path;
+}
+
+- (AVAsset *)asset
+{
+    if (_asset == nil) {
+        //NSLog(@"No movie for %@", [self filePath]);
+        return nil;
+    }
+    
+    return _asset;
+}
+
 @end
