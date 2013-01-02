@@ -64,7 +64,7 @@
 
 #pragma mark - Filter controls
 
-static int selectionIndexContext;
+static void *selectionIndexContext = &selectionIndexContext;
 
 - (void)filterAdded:(NSNotification *)note
 {
@@ -91,7 +91,7 @@ static int selectionIndexContext;
 {
     // Remove all the old filters
     for (FilterView *view in _filterViews) {
-        // FIXME: Do stuff
+        [view removeFromSuperviewWithoutNeedingDisplay];
     }
     
     for (ActorFilter *af in filters) {
