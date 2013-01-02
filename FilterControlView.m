@@ -27,7 +27,9 @@
         return nil;
     }
     
-    _filterViews = [[NSMutableArray alloc] init];
+    [self setHorizontal:NO];
+    
+    _filterViews = [NSMutableArray array];
     return self;
 }
 
@@ -56,13 +58,6 @@
     }
 }
 
-#pragma mark - Constraints
-
-- (NSSize)intrinsicContentSize
-{
-    return NSMakeSize(250.0, 250.0);
-}
-
 #pragma mark - Filter controls
 
 static int selectionIndexContext;
@@ -74,27 +69,9 @@ static int selectionIndexContext;
     NSNumber *index = userInfo[@"index"];
 
     FilterView *newView = [[FilterView alloc] initWithFilter:af];
-    NSPoint insertPoint;
-
-    if ([_filterViews count] > 0) {
-        FilterView *view = _filterViews[[index unsignedIntegerValue]];
-
-        insertPoint = [view frame].origin;
-
-        for (NSUInteger i = [index unsignedIntegerValue]; i < [_filterViews count]; i++) {
-            // Move all these views up
-        }
-    } else {
-        insertPoint = NSMakePoint(5.0, 5.0);
-    }
 
     [_filterViews insertObject:newView atIndex:[index unsignedIntegerValue]];
     
-    NSRect viewBounds = [newView bounds];
-    viewBounds.origin = insertPoint;
-    viewBounds.size.height = [self bounds].size.height - 10.0;
-    
-    [newView setFrame:viewBounds];
     [self addSubview:newView];
 }
 
@@ -116,11 +93,7 @@ static int selectionIndexContext;
     for (ActorFilter *af in filters) {
         FilterView *view = [[FilterView alloc] initWithFilter:af];
         
-        NSLog(@"Hello! %@", [af filterName]);
-        // Set position
-        [view setFrameOrigin:NSMakePoint(5.0, 5.0)];
         [self addSubview:view];
-        
         [_filterViews addObject:view];
     }
 }
@@ -140,8 +113,6 @@ static int selectionIndexContext;
                       name:CycArrayControllerObjectRemoved
                     object:_currentLayerFilterController];
     }
-
-    NSLog(@"Setting up filter controller");
 
     _currentLayerFilterController = filterController;
     [nc addObserver:self

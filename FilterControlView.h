@@ -7,9 +7,10 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "SLFLayout.h"
 
 @class CycArrayController;
-@interface FilterControlView : NSView
+@interface FilterControlView : SLFLayout
 
 @property (readwrite, strong) CycArrayController *layerController;
 @end

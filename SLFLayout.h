@@ -12,4 +12,5 @@
 
 @property (readwrite, getter = isHorizontal) BOOL horizontal;
 
+- (void)dumpConstraints;
 @end

@@ -13,7 +13,7 @@
 
 - (id)initWithFilter:(ActorFilter *)filter
 {
-    self = [super initWithFrame:NSMakeRect(0.0, 0.0, 100.0, 0.0)];
+    self = [super initWithFrame:NSZeroRect];
     if (!self) {
         return nil;
     }
@@ -29,6 +29,13 @@
     
     [[NSColor lightGrayColor] set];
     [path stroke];
+    
+    [[NSColor darkGrayColor] setFill];
+    [path fill];
 }
 
+- (NSSize)intrinsicContentSize
+{
+    return NSMakeSize(100.0, 100.0);
+}
 @end

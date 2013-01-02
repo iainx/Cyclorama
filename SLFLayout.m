@@ -165,4 +165,11 @@
 {
     return _horizontal;
 }
+
+#pragma mark - Debug
+- (void)dumpConstraints
+{
+    NSLog(@"Dump Constraints\n%@", _constraints);
+    [[self window] visualizeConstraints:_constraints];
+}
 @end

@@ -26,6 +26,8 @@
     
     [self setContentView:_scrollView];
     
+    
+    // FIXME: This shouldn't set the width here
     _videoBrowserView = [[VideoBrowserView alloc] initWithVideoClipController:nil
                                                                         width:[_scrollView frame].size.width];
     [_videoBrowserView setAutoresizingMask:NSViewWidthSizable];
