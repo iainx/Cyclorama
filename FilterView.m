@@ -27,7 +27,7 @@
     NSBezierPath *path = [NSBezierPath bezierPathWithRoundedRect:innerRect
                                                          xRadius:5.0 yRadius:5.0];
     
-    [[NSColor lightGrayColor] set];
+    [[NSColor blackColor] set];
     [path stroke];
     
     [[NSColor darkGrayColor] setFill];
@@ -36,6 +36,6 @@
 
 - (NSSize)intrinsicContentSize
 {
-    return NSMakeSize(100.0, 100.0);
+    return NSMakeSize(NSViewNoInstrinsicMetric, 100.0);
 }
 @end

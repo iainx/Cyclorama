@@ -11,6 +11,7 @@
 @interface SLFLayout : NSView
 
 @property (readwrite, getter = isHorizontal) BOOL horizontal;
+@property (readwrite) float borderSize;
 
 - (void)dumpConstraints;
 @end

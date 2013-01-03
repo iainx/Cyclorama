@@ -15,6 +15,7 @@
 }
 
 @synthesize horizontal = _horizontal;
+@synthesize borderSize = _borderSize;
 
 - (id)initWithFrame:(NSRect)frame
 {
@@ -24,6 +25,9 @@
     }
     
     //[self setWantsLayer:YES];
+    
+    _borderSize = 0.0;
+    
     _horizontal = YES;
     return self;
 }
@@ -73,6 +77,7 @@
     if (_constraints == nil) {
         NSMutableArray *constraints = [NSMutableArray array];
         NSMutableDictionary *viewsDict = [NSMutableDictionary dictionary];
+        NSDictionary *metrics = @{@"offset": @(_borderSize)};
         
         NSView *previousView = nil;
         NSString *vf;
@@ -80,10 +85,10 @@
             viewsDict[@"currentView"] = currentView;
             
             if (previousView == nil) {
-                vf = [self visualFormatOrientationWithString:@"|[currentView]" inverted:NO];
+                vf = [self visualFormatOrientationWithString:@"|-(offset)-[currentView]" inverted:NO];
                 [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:vf
                                                                                          options:0
-                                                                                         metrics:nil
+                                                                                         metrics:metrics
                                                                                            views:viewsDict]];
             } else {
                 viewsDict[@"previousView"] = previousView;
@@ -91,23 +96,23 @@
                 vf = [self visualFormatOrientationWithString:@"[previousView]-[currentView]" inverted:NO];
                 [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:vf
                                                                                          options:0
-                                                                                         metrics:nil
+                                                                                         metrics:metrics
                                                                                            views:viewsDict]];
             }
             
-            vf = [self visualFormatOrientationWithString:@"|[currentView]|" inverted:YES];
+            vf = [self visualFormatOrientationWithString:@"|-(offset)-[currentView]-(offset)-|" inverted:YES];
             [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:vf
                                                                                      options:0
-                                                                                     metrics:nil
+                                                                                     metrics:metrics
                                                                                        views:viewsDict]];
             previousView = currentView;
         }
         
         if ([[self subviews] count] > 0) {
-            vf = [self visualFormatOrientationWithString:@"[currentView]|" inverted:NO];
+            vf = [self visualFormatOrientationWithString:@"[currentView]-(offset)-|" inverted:NO];
             [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:vf
                                                                                      options:0
-                                                                                     metrics:nil
+                                                                                     metrics:metrics
                                                                                        views:viewsDict]];
         }
         
@@ -164,6 +169,23 @@
 - (BOOL)isHorizontal
 {
     return _horizontal;
+}
+
+- (void)setBorderSize:(float)borderSize
+{
+    if (_borderSize == borderSize) {
+        return;
+    }
+    
+    _borderSize = borderSize;
+    
+    // Invalidate the constraints
+    [self setUpdateConstraints:nil];
+}
+
+- (float)borderSize
+{
+    return _borderSize;
 }
 
 #pragma mark - Debug

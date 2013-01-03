@@ -28,6 +28,7 @@
     }
     
     [self setHorizontal:NO];
+    [self setBorderSize:10.0];
     
     _filterViews = [NSMutableArray array];
     return self;

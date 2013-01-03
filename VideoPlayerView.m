@@ -42,6 +42,12 @@ initSelf (VideoPlayerView *self)
     return self;
 }
 
+- (void)drawRect:(NSRect)dirtyRect
+{
+    [[NSColor blueColor] setFill];
+    NSRectFill(NSInsetRect([self bounds], 0.0, 10.0));
+}
+
 // FIXME: Size is based on 720p screen. Should use actual screen size
 - (void)resizeAndPositionVideoLayer:(VideoLayer *)videoLayer
 {
@@ -100,13 +106,6 @@ initSelf (VideoPlayerView *self)
     }
 }
 
-/*
-- (void)drawRect:(NSRect)dirtyRect
-{
-    [[NSColor blueColor] setFill];
-    NSRectFill(NSInsetRect([self bounds], 0.0, 10.0));
-}
-*/
 - (VideoLayer *)currentLayer
 {
     NSArray *selectedLayers = [_layerController selectedObjects];
