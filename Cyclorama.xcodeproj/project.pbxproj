@@ -16,6 +16,7 @@
 		AE051C41149972B900A8FB07 /* CycParameterXYViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE051C38149972B900A8FB07 /* CycParameterXYViewController.xib */; };
 		AE051C42149972B900A8FB07 /* CycXYView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE051C3A149972B900A8FB07 /* CycXYView.m */; };
 		AE07270B1688EE2C006B605B /* SLFLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = AE07270A1688EE2C006B605B /* SLFLayout.m */; };
+		AE07D1C4169B9F5E00E7C33D /* SLFCloseButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE07D1C3169B9F5E00E7C33D /* SLFCloseButtonCell.m */; };
 		AE0A98D81635FE110058FB16 /* VideoPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0A98D71635FE110058FB16 /* VideoPlayerView.m */; };
 		AE0FDBF2160642BA0000BB9F /* VideoBrowserBox.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0FDBF1160642BA0000BB9F /* VideoBrowserBox.m */; };
 		AE0FDBF7160655960000BB9F /* NSBezierPath+MCAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0FDBF6160655960000BB9F /* NSBezierPath+MCAdditions.m */; };
@@ -173,6 +174,8 @@
 		AE051C3A149972B900A8FB07 /* CycXYView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CycXYView.m; sourceTree = "<group>"; };
 		AE0727091688EE2C006B605B /* SLFLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLFLayout.h; sourceTree = "<group>"; };
 		AE07270A1688EE2C006B605B /* SLFLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLFLayout.m; sourceTree = "<group>"; };
+		AE07D1C2169B9F5E00E7C33D /* SLFCloseButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLFCloseButtonCell.h; sourceTree = "<group>"; };
+		AE07D1C3169B9F5E00E7C33D /* SLFCloseButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLFCloseButtonCell.m; sourceTree = "<group>"; };
 		AE0A98D61635FE110058FB16 /* VideoPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoPlayerView.h; sourceTree = "<group>"; };
 		AE0A98D71635FE110058FB16 /* VideoPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoPlayerView.m; sourceTree = "<group>"; };
 		AE0FDBF0160642BA0000BB9F /* VideoBrowserBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoBrowserBox.h; sourceTree = "<group>"; };
@@ -903,6 +906,8 @@
 				AE8ACBBB15FD0D0200063F7B /* SLFBlackWindow.m */,
 				AEFE46BC16052A7F006E4122 /* SLFBox.h */,
 				AEFE46BD16052A7F006E4122 /* SLFBox.m */,
+				AE07D1C2169B9F5E00E7C33D /* SLFCloseButtonCell.h */,
+				AE07D1C3169B9F5E00E7C33D /* SLFCloseButtonCell.m */,
 				AE7F872816911FA20041AD9B /* SLFBoxToolbar.h */,
 				AE7F872916911FA20041AD9B /* SLFBoxToolbar.m */,
 				AE86852C160DEE2000A5A3E1 /* SLFBoxDelegate.h */,
@@ -1117,6 +1122,7 @@
 				AED0C89B167BC0B60056E078 /* FilterView.m in Sources */,
 				AE07270B1688EE2C006B605B /* SLFLayout.m in Sources */,
 				AE7F872A16911FA20041AD9B /* SLFBoxToolbar.m in Sources */,
+				AE07D1C4169B9F5E00E7C33D /* SLFCloseButtonCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

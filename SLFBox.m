@@ -9,14 +9,9 @@
 #import <QuartzCore/QuartzCore.h>
 #import "SLFBox.h"
 #import "SLFBoxToolbar.h"
+#import "SLFCloseButtonCell.h"
 #import "SLFToolbarButton.h"
 #import "NSBezierPath+MCAdditions.h"
-
-@interface _SLFCloseButtonCell : NSButtonCell
-
-@property (readwrite) BOOL openButton;
-
-@end
 
 @implementation SLFBox {
     NSButton *_closeButton;
@@ -227,7 +222,11 @@
 - (void)addCloseButton
 {
     _closeButton = [[NSButton alloc] initWithFrame:NSZeroRect];
-    [_closeButton setCell:[[_SLFCloseButtonCell alloc] init]];
+    
+    SLFCloseButtonCell *cell = [[SLFCloseButtonCell alloc] init];
+    [cell setType:SLFButtonCellTypeClose];
+    
+    [_closeButton setCell:cell];
     [_closeButton setButtonType:NSMomentaryChangeButton];
     [_closeButton setAutoresizingMask:NSViewMaxXMargin | NSViewMinYMargin];
     [_closeButton setTarget:self];
@@ -242,7 +241,7 @@
     if ([self isClosed]) {
         [self setClosed:NO];
         [_contentView setHidden:NO];
-        [(_SLFCloseButtonCell *)[_closeButton cell] setOpenButton:NO];
+        [(SLFCloseButtonCell *)[_closeButton cell] setType:SLFButtonCellTypeClose];
         [_closeButton setNeedsDisplay];
 
         [self.superview removeConstraint:_widthConstraint];
@@ -262,7 +261,7 @@
         [_contentView setHidden:YES];
 
         [self setClosed:YES];
-        [(_SLFCloseButtonCell *)[_closeButton cell] setOpenButton:YES];
+        [(SLFCloseButtonCell *)[_closeButton cell] setType:SLFButtonCellTypeOpen];
         [_closeButton setNeedsDisplay];
         [self setNeedsDisplay:YES];
     }
@@ -454,96 +453,6 @@
     
     [self addToolbarItem:button
              withOptions:options];
-}
-
-@end
-
-#pragma mark - _SLFCloseButtonCell
-
-@implementation _SLFCloseButtonCell
-
-// Code from SNRHUDKit https://github.com/indragiek/SNRHUDKit
-
-#define SNRWindowButtonBorderColor      [NSColor colorWithDeviceWhite:0.040 alpha:1.000]
-#define SNRWindowButtonGradientBottomColor  [NSColor colorWithDeviceWhite:0.070 alpha:1.000]
-#define SNRWindowButtonGradientTopColor     [NSColor colorWithDeviceWhite:0.220 alpha:1.000]
-#define SNRWindowButtonDropShadowColor  [NSColor colorWithDeviceWhite:1.000 alpha:0.100]
-#define SNRWindowButtonCrossColor       [NSColor colorWithDeviceWhite:0.450 alpha:1.000]
-#define SNRWindowButtonCrossInset       1.f
-#define SNRWindowButtonHighlightOverlayColor [NSColor colorWithDeviceWhite:0.000 alpha:0.300]
-#define SNRWindowButtonInnerShadowColor [NSColor colorWithDeviceWhite:1.000 alpha:0.100]
-#define SNRWindowButtonInnerShadowOffset NSMakeSize(0.f, 0.f)
-#define SNRWindowButtonInnerShadowBlurRadius    1.f
-
-- (void)drawWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
-{
-    NSRect drawingRect = NSInsetRect(cellFrame, 1.5f, 1.5f);
-    drawingRect.origin.y = 0.5f;
-    NSRect dropShadowRect = drawingRect;
-    dropShadowRect.origin.y += 1.f;
-    
-    // Draw the drop shadow so that the bottom edge peeks through
-    NSBezierPath *dropShadow = [NSBezierPath bezierPathWithOvalInRect:dropShadowRect];
-    [SNRWindowButtonDropShadowColor set];
-    [dropShadow stroke];
-
-    // Draw the main circle w/ gradient & border on top of it
-    NSBezierPath *circle = [NSBezierPath bezierPathWithOvalInRect:drawingRect];
-    NSGradient *gradient = [[NSGradient alloc] initWithStartingColor:SNRWindowButtonGradientBottomColor
-                                                         endingColor:SNRWindowButtonGradientTopColor];
-    [gradient drawInBezierPath:circle angle:270.f];
-    [SNRWindowButtonBorderColor set];
-    [circle stroke];
-    
-    // Draw the cross
-    NSBezierPath *cross = [NSBezierPath bezierPath];
-    
-    CGFloat boxDimension = floor(drawingRect.size.width * cos(45.f)) - SNRWindowButtonCrossInset;
-    CGFloat origin = round((drawingRect.size.width - boxDimension) / 2.f);
-    
-    NSRect boxRect = NSMakeRect(1.f + origin, origin, boxDimension, boxDimension);
-    
-    if ([self openButton]) {
-        NSPoint topRight = NSMakePoint(NSMaxX(boxRect), boxRect.origin.y);
-        NSPoint bottomRight = NSMakePoint(topRight.x, NSMaxY(boxRect));
-        NSPoint midLeft = NSMakePoint(boxRect.origin.x, NSMidY(boxRect));
-        
-        [cross moveToPoint:bottomRight];
-        [cross lineToPoint:midLeft];
-        [cross lineToPoint:topRight];
-    } else {
-        NSPoint bottomLeft = NSMakePoint(boxRect.origin.x, NSMaxY(boxRect));
-        NSPoint topRight = NSMakePoint(NSMaxX(boxRect), boxRect.origin.y);
-        NSPoint bottomRight = NSMakePoint(topRight.x, bottomLeft.y);
-        NSPoint topLeft = NSMakePoint(bottomLeft.x, topRight.y);
-        
-        [cross moveToPoint:bottomLeft];
-        [cross lineToPoint:topRight];
-        [cross moveToPoint:bottomRight];
-        [cross lineToPoint:topLeft];
-    }
-    
-    [SNRWindowButtonCrossColor set];
-    [cross setLineWidth:2.f];
-    [cross stroke];
-
-    // Draw the inner shadow
-    NSShadow *shadow = [[NSShadow alloc] init];
-    [shadow setShadowColor:SNRWindowButtonInnerShadowColor];
-    [shadow setShadowBlurRadius:SNRWindowButtonInnerShadowBlurRadius];
-    [shadow setShadowOffset:SNRWindowButtonInnerShadowOffset];
-    NSRect shadowRect = drawingRect;
-    shadowRect.size.height = origin;
-    
-    [NSGraphicsContext saveGraphicsState];
-    [NSBezierPath clipRect:shadowRect];
-    
-    [circle fillWithInnerShadow:shadow];
-    [NSGraphicsContext restoreGraphicsState];
-    if ([self isHighlighted]) {
-        [SNRWindowButtonHighlightOverlayColor set];
-        [circle fill];
-    }
 }
 
 @end
